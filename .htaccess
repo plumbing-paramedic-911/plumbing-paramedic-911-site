@@ -65,16 +65,44 @@ Options -Indexes
 </IfModule>
 
 <IfModule mod_headers.c>
+  # MIME-sniffing / type confusion protection
   Header set X-Content-Type-Options "nosniff"
+  # Clickjacking protection — only allow framing from same origin
+  Header set X-Frame-Options "SAMEORIGIN"
+  # Referrer policy — keep origin on cross-origin requests but never full URL
   Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" "expr=%{HTTPS} == 'on'"
+  # Lock down powerful browser APIs (we use none of these)
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=()"
+  # Cross-origin isolation hardening
+  Header set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+  Header set Cross-Origin-Resource-Policy "same-site"
+  # HSTS — 2 years, includeSubDomains, preload-ready (only over HTTPS)
+  Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" "expr=%{HTTPS} == 'on'"
+  # CSP — minimum-viable: upgrade any accidental http:// references; allow self + Google Fonts + GA4
+  Header set Content-Security-Policy "upgrade-insecure-requests; default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+
   <FilesMatch "\.(html|htm)$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
   <FilesMatch "\.(css|js|png|jpg|jpeg|webp|avif|svg|ico|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
+
+  # Don't leak server identity / version
+  Header unset X-Powered-By
+  Header unset Server
+</IfModule>
+
+# Reduce server fingerprinting in Apache responses
+ServerSignature Off
+
+# Block direct access to source / docs / config files that shouldn't be served
+<FilesMatch "(^\.|\.(env|git|gitignore|gitattributes|md|py|sh|bak|swp|log|sql|toml|yml|yaml|lock|ini|conf|htaccess|htpasswd)$)">
+  Require all denied
+</FilesMatch>
+# Block any path starting with a dot (e.g. .git/, .env), except .well-known/
+<IfModule mod_alias.c>
+  RedirectMatch 403 (?i)/\.(?!well-known/)
 </IfModule>
 
 # Custom MIME types
