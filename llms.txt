@@ -1,0 +1,47 @@
+# Plumbing Paramedic 911 — Abbeville, SC
+
+> Plumbing Paramedic 911 is a licensed, insured, family-owned 24/7 emergency plumbing company serving Abbeville, Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, and Due West, South Carolina. Owner Eric Callaway is a South Carolina Master Plumber; he has worked in the plumbing trade since 1996 and founded the company in 2015. Call (864) 446-8911 — available 24 hours a day, 365 days a year. Address: 13 Callaway Dr, Abbeville, SC 29620.
+
+## Core Pages
+- [Home](https://plumbingparamedic911.com/): 24/7 emergency plumber in Abbeville SC, services overview, service area, licensing, reviews.
+- [About](https://plumbingparamedic911.com/about/): Eric Callaway SC Master Plumber credentials, company history since 2015, family-owned story.
+- [Contact](https://plumbingparamedic911.com/contact/): Phone (864) 446-8911, email plumbingparamedic911@gmail.com, dispatch form, service area map.
+- [Pricing](https://plumbingparamedic911.com/pricing/): Flat-rate pricing calculator with starting prices for every common service.
+- [FAQ](https://plumbingparamedic911.com/faq/): Common questions about pricing, licensing, warranty, service areas, financing.
+- [Reviews](https://plumbingparamedic911.com/reviews/): Customer testimonials from Abbeville, Greenwood, McCormick and surrounding cities.
+- [Financing](https://plumbingparamedic911.com/financing/): In-house financing options for jobs over $500.
+
+## Services
+- [24/7 Emergency Plumbing](https://plumbingparamedic911.com/services/24-7-emergency-plumbing/)
+- [Drain Cleaning](https://plumbingparamedic911.com/services/drain-cleaning/)
+- [Water Heater Repair & Replacement](https://plumbingparamedic911.com/services/water-heater-repair-replacement/)
+- [Leak Detection](https://plumbingparamedic911.com/services/leak-detection/)
+- [Plumbing Fixture Installation & Repair](https://plumbingparamedic911.com/services/plumbing-fixture-installation-repair/)
+- [Well Pump Repair](https://plumbingparamedic911.com/services/well-pump-repair/)
+- [Backflow Prevention Testing](https://plumbingparamedic911.com/services/backflow-prevention-testing/)
+- [Commercial Plumbing](https://plumbingparamedic911.com/services/commercial-plumbing/)
+
+## Service Areas
+- [Abbeville, SC](https://plumbingparamedic911.com/service-areas/abbeville-sc/)
+- [Greenwood, SC](https://plumbingparamedic911.com/service-areas/greenwood-sc/)
+- [Anderson, SC](https://plumbingparamedic911.com/service-areas/anderson-sc/)
+- [Laurens, SC](https://plumbingparamedic911.com/service-areas/laurens-sc/)
+- [McCormick, SC](https://plumbingparamedic911.com/service-areas/mccormick-sc/)
+- [Ninety Six, SC](https://plumbingparamedic911.com/service-areas/ninety-six-sc/)
+- [Calhoun Falls, SC](https://plumbingparamedic911.com/service-areas/calhoun-falls-sc/)
+- [Due West, SC](https://plumbingparamedic911.com/service-areas/due-west-sc/)
+
+## Key Facts
+- **Name:** Plumbing Paramedic 911
+- **Phone:** (864) 446-8911
+- **Email:** plumbingparamedic911@gmail.com
+- **Address:** 13 Callaway Dr, Abbeville, SC 29620
+- **Hours:** 24/7 / 365 days a year (Monday–Sunday, 00:00–23:59)
+- **Owner:** Eric Callaway, South Carolina Master Plumber
+- **Trade experience:** Since 1996
+- **Founded:** 2015
+- **BBB Rating:** A+
+- **Warranty:** 2-year parts and labor warranty on all work
+- **Pricing:** Flat-rate, upfront pricing — no hourly billing
+- **Financing:** In-house financing available on jobs over $500
+- **Discounts:** Military, senior (65+), police, fire, EMS — $50 off
