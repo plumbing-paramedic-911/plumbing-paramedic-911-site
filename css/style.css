@@ -263,7 +263,29 @@ footer h4{font-family:var(--ff-head);font-weight:800;font-size:.88rem;letter-spa
 
 .speakable-headline,.speakable-summary,.speakable-phone{}
 
+/* ── Mascot section ── */
+.mascot-section{background:linear-gradient(160deg,#070f20 0%,#0d2b6b 55%,#0a2860 100%);color:var(--white);overflow:hidden}
+.mascot-section .label{color:var(--green-lt)}
+.mascot-section h2{color:var(--white)}
+.mascot-subtitle{font-style:normal;color:var(--green-lt);font-size:.72em;display:block;margin-top:4px;font-weight:700;letter-spacing:.5px}
+.mascot-section .lead{color:rgba(255,255,255,.82)}
+.mascot-section p{color:rgba(255,255,255,.72)}
+.mascot-section .check-list li{color:rgba(255,255,255,.8)}
+.mascot-section .check-list li::before{color:var(--green-lt)}
+.mascot-section .divider{background:linear-gradient(90deg,var(--green-lt),var(--blue-lt))}
+.mascot-inner{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
+.mascot-images{position:relative;min-height:380px}
+.mascot-img-wrap{border-radius:var(--r3);overflow:hidden;box-shadow:var(--sh3)}
+.mascot-img-primary{position:relative;z-index:2;border:3px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+.mascot-img-primary img{width:100%;height:auto;display:block}
+.mascot-img-secondary{position:absolute;bottom:-24px;right:-24px;z-index:3;width:160px;border:3px solid rgba(67,160,71,.5);background:rgba(0,0,0,.4);box-shadow:0 8px 32px rgba(67,160,71,.25)}
+.mascot-img-secondary img{width:100%;height:auto;display:block}
+.mascot-img-placeholder{display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:2px dashed rgba(255,255,255,.2);border-radius:var(--r3);min-height:300px;color:rgba(255,255,255,.3);font-size:.82rem;text-align:center;padding:24px}
+.mascot-img-placeholder::after{content:'Image coming soon';display:block}
+.mascot-img-placeholder img{display:none}
+
 @media(max-width:1024px){
+  .mascot-inner{gap:40px}
   .grid-4{grid-template-columns:repeat(2,1fr)}
   .grid-5{grid-template-columns:repeat(3,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr}
@@ -271,6 +293,9 @@ footer h4{font-family:var(--ff-head);font-weight:800;font-size:.88rem;letter-spa
   .nav-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
+  .mascot-inner{grid-template-columns:1fr;gap:32px}
+  .mascot-images{min-height:220px}
+  .mascot-img-secondary{width:110px;bottom:-16px;right:-10px}
   .hero-inner,.grid-2{grid-template-columns:1fr}
   .hero-card{display:none}
   .stats-row{grid-template-columns:1fr 1fr}

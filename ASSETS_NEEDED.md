@@ -44,6 +44,20 @@ Drop these in `/images/og/`. If a per-page OG image is missing, the default `/og
 | `/images/og/calhoun-falls-1200x630.jpg` | /service-areas/calhoun-falls-sc/ |
 | `/images/og/due-west-1200x630.jpg` | /service-areas/due-west-sc/ |
 
+## Mascot images (required for the "Meet Cutter Jax" homepage section)
+
+Drop these in `/images/`. The section displays a placeholder box until the files are present.
+
+| File | Size | Purpose |
+| --- | --- | --- |
+| `/images/cutter-jax.png` | ~420 × 520 px, transparent PNG preferred | Primary Cutter Jax portrait — homepage mascot section |
+| `/images/prime-snake.png` | ~180 × 220 px, transparent PNG preferred | Prime snake sidekick — overlaid in bottom-right corner |
+
+**Tips for best results:**
+- Export from your AI image generator with a transparent background (PNG).
+- Portrait / vertical orientation works best for `cutter-jax.png`.
+- Prime should be on a transparent or dark background so the glow pops.
+
 ## Photos referenced in schema (recommended for Google Business + AI engines)
 
 Drop in `/images/`. Use real, original photos of the truck, team, and completed work.
