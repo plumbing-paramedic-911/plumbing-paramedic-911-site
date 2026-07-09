@@ -21,6 +21,7 @@ BASE_URL = "https://plumbingparamedic911.com"
 PHONE_DISPLAY = "(864) 446-8911"
 PHONE_TEL = "+18644468911"
 GA_ID = "G-54J49X5XJP"
+GTM_ID = "GTM-T33LBNF"
 
 # ─── Shared HTML chunks ────────────────────────────────────────────────────
 NAV_HTML = """\
@@ -133,6 +134,13 @@ def head(title: str, description: str, path: str, og_image: str = "/og-image.jpg
     return f"""<!DOCTYPE html>
 <html lang="en-US">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
+new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+}})(window,document,'script','dataLayer','{GTM_ID}');</script>
+<!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>{title}</title>
@@ -184,6 +192,9 @@ def head(title: str, description: str, path: str, og_image: str = "/og-image.jpg
 {jsonld}
 </head>
 <body data-page="{body_page}">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 """
 
 
