@@ -39,6 +39,11 @@ Notes:
 - [ ] Service areas (up to 20): Abbeville, Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, Due West, Donalds, Hodges, Antreville, Bradley, Cokesbury, Honea Path, Iva, Promised Land
 - [ ] Paste the GBP description from the playbook (≤ 750 chars)
 - [ ] Add every service in the Services section so they match the on-site `/services/*` pages exactly
+- [ ] **Fill the 5 blank service descriptions** flagged in the July 2026 profile audit — Garbage Disposal Repair, Pool Plumbing Repair, Sewer Cleaning, Shower Repair, Sump Pump Installation. Copy-paste text lives in the `8911` repo at `/gbp/index.html`, Section 4. Every service needs a description or the Profile Strength meter stays below 100%.
+- [ ] **Add the appointment/booking Action Link**: `https://plumbingparamedic911.com/contact` (GBP → Edit profile → Booking / Appointment links). Currently empty — one of the items holding the profile at ~82%.
+- [ ] **Turn on Chat/Messaging** and set a welcome message (template in `8911` `/gbp/index.html`, Section 5). Enable notifications in the Google Maps app — Google auto-disables chat after 24 hrs of no response.
+- [ ] **Clear the Google Ads / Local Services Ads setup prompts** — complete or explicitly dismiss each "get started with ads" card in the profile manager; Google holds the completion bar at ~80–85% until these are addressed. No ad spend required. (LSA + Google Guaranteed badge is worth a real look later — the SC Master Plumber license qualifies.)
+- [ ] Re-check the Profile Strength meter 24–48 hrs after the above — Google recalculates on a delay
 - [ ] Attributes: 24-hour service, Small business, Online estimates, Onsite services, Credit cards / Debit / Cash / Checks / Financing, Language: English
 - [ ] Upload 10+ photo categories: logo (720×720), cover (1080×608), truck, team, at-work, before/after
 - [ ] Seed 10–15 Q&As from the owner's Google account
