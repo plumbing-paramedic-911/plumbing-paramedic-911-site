@@ -2,44 +2,66 @@
 # Plumbing Paramedic 911 — Apache config (Namecheap / cPanel)
 # ────────────────────────────────────────────────────────────
 
-# Default doc + directory index
 DirectoryIndex index.html
-
-# Charset
 AddDefaultCharset UTF-8
-
-# Disable directory listing
 Options -Indexes
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # 1. Force HTTPS
-  RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # 2. Strip "www." so the canonical host is the apex
+  # Force one canonical origin in a single hop: HTTPS + non-www.
+  RewriteCond %{HTTPS} off [OR]
   RewriteCond %{HTTP_HOST} ^www\.plumbingparamedic911\.com$ [NC]
-  RewriteRule ^(.*)$ https://plumbingparamedic911.com/$1 [L,R=301]
+  RewriteRule ^ https://plumbingparamedic911.com%{REQUEST_URI} [L,R=301]
 
-  # 3. Force trailing slash on directory-style URLs (skip files with extensions)
+  # Remove explicit index.html from directory URLs.
+  RewriteRule ^(.+/)index\.html$ /$1 [L,R=301]
+  RewriteRule ^index\.html$ / [L,R=301]
+
+  # Exact legacy flat HTML URLs still appearing in search indexes.
+  RewriteRule ^about\.html$ /about/ [L,R=301,NC]
+  RewriteRule ^contact\.html$ /contact/ [L,R=301,NC]
+  RewriteRule ^services\.html$ /services/ [L,R=301,NC]
+  RewriteRule ^reviews\.html$ /reviews/ [L,R=301,NC]
+  RewriteRule ^financing\.html$ /financing/ [L,R=301,NC]
+  RewriteRule ^pricing\.html$ /pricing/ [L,R=301,NC]
+  RewriteRule ^faq\.html$ /faq/ [L,R=301,NC]
+
+  RewriteRule ^services/emergency-plumbing\.html$ /services/24-7-emergency-plumbing/ [L,R=301,NC]
+  RewriteRule ^services/water-heater-repair\.html$ /services/water-heater-repair-replacement/ [L,R=301,NC]
+  RewriteRule ^services/fixture-installation\.html$ /services/plumbing-fixture-installation-repair/ [L,R=301,NC]
+  RewriteRule ^services/backflow-testing\.html$ /services/backflow-prevention-testing/ [L,R=301,NC]
+  RewriteRule ^services/well-pump-repair\.html$ /services/well-pump-repair/ [L,R=301,NC]
+  RewriteRule ^services/drain-cleaning\.html$ /services/drain-cleaning/ [L,R=301,NC]
+  RewriteRule ^services/leak-detection\.html$ /services/leak-detection/ [L,R=301,NC]
+  RewriteRule ^services/commercial-plumbing\.html$ /services/commercial-plumbing/ [L,R=301,NC]
+
+  RewriteRule ^service-areas/abbeville-sc\.html$ /service-areas/abbeville-sc/ [L,R=301,NC]
+  RewriteRule ^service-areas/greenwood-sc\.html$ /service-areas/greenwood-sc/ [L,R=301,NC]
+  RewriteRule ^service-areas/anderson-sc\.html$ /service-areas/anderson-sc/ [L,R=301,NC]
+  RewriteRule ^service-areas/laurens-sc\.html$ /service-areas/laurens-sc/ [L,R=301,NC]
+  RewriteRule ^service-areas/mccormick-sc\.html$ /service-areas/mccormick-sc/ [L,R=301,NC]
+  RewriteRule ^service-areas/ninety-six-sc\.html$ /service-areas/ninety-six-sc/ [L,R=301,NC]
+  RewriteRule ^service-areas/calhoun-falls-sc\.html$ /service-areas/calhoun-falls-sc/ [L,R=301,NC]
+  RewriteRule ^service-areas/due-west-sc\.html$ /service-areas/due-west-sc/ [L,R=301,NC]
+
+  # Old query-string navigation routes.
+  RewriteCond %{QUERY_STRING} ^page=pricing$ [NC]
+  RewriteRule ^$ /pricing/? [L,R=301]
+  RewriteCond %{QUERY_STRING} ^page=about$ [NC]
+  RewriteRule ^$ /about/? [L,R=301]
+  RewriteCond %{QUERY_STRING} ^page=contact$ [NC]
+  RewriteRule ^$ /contact/? [L,R=301]
+  RewriteCond %{QUERY_STRING} ^page=services-index$ [NC]
+  RewriteRule ^$ /services/? [L,R=301]
+  RewriteCond %{QUERY_STRING} ^page=areas-index$ [NC]
+  RewriteRule ^$ /service-areas/? [L,R=301]
+
+  # Add trailing slash to directory-style URLs, but never to real files.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{1,5}$
   RewriteCond %{REQUEST_URI} !/$
-  RewriteRule ^(.*)$ /$1/ [L,R=301]
-
-  # 4. Legacy / old SPA hash routes → real URLs (best-effort; hash isn't sent to server,
-  #    but if any link uses ?page= parameters they redirect here)
-  RewriteCond %{QUERY_STRING} ^page=pricing$
-  RewriteRule ^$ /pricing/? [L,R=301]
-  RewriteCond %{QUERY_STRING} ^page=about$
-  RewriteRule ^$ /about/? [L,R=301]
-  RewriteCond %{QUERY_STRING} ^page=contact$
-  RewriteRule ^$ /contact/? [L,R=301]
-  RewriteCond %{QUERY_STRING} ^page=services-index$
-  RewriteRule ^$ /services/? [L,R=301]
-  RewriteCond %{QUERY_STRING} ^page=areas-index$
-  RewriteRule ^$ /service-areas/? [L,R=301]
+  RewriteRule ^ /%{REQUEST_URI}/ [L,R=301,NE]
 </IfModule>
 
 # ────────────────────────────────────────────────────────────
@@ -65,20 +87,13 @@ Options -Indexes
 </IfModule>
 
 <IfModule mod_headers.c>
-  # MIME-sniffing / type confusion protection
   Header set X-Content-Type-Options "nosniff"
-  # Clickjacking protection — only allow framing from same origin
   Header set X-Frame-Options "SAMEORIGIN"
-  # Referrer policy — keep origin on cross-origin requests but never full URL
   Header set Referrer-Policy "strict-origin-when-cross-origin"
-  # Lock down powerful browser APIs (we use none of these)
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=()"
-  # Cross-origin isolation hardening
   Header set Cross-Origin-Opener-Policy "same-origin-allow-popups"
   Header set Cross-Origin-Resource-Policy "same-site"
-  # HSTS — 2 years, includeSubDomains, preload-ready (only over HTTPS)
   Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" "expr=%{HTTPS} == 'on'"
-  # CSP — minimum-viable: upgrade any accidental http:// references; allow self + Google Fonts + GA4
   Header set Content-Security-Policy "upgrade-insecure-requests; default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
 
   <FilesMatch "\.(html|htm)$">
@@ -88,28 +103,22 @@ Options -Indexes
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
-  # Don't leak server identity / version
   Header unset X-Powered-By
   Header unset Server
 </IfModule>
 
-# Reduce server fingerprinting in Apache responses
 ServerSignature Off
 
-# Block direct access to source / docs / config files that shouldn't be served
 <FilesMatch "(^\.|\.(env|git|gitignore|gitattributes|md|py|sh|bak|swp|log|sql|toml|yml|yaml|lock|ini|conf|htaccess|htpasswd)$)">
   Require all denied
 </FilesMatch>
-# Block any path starting with a dot (e.g. .git/, .env), except .well-known/
 <IfModule mod_alias.c>
   RedirectMatch 403 (?i)/\.(?!well-known/)
 </IfModule>
 
-# Custom MIME types
 AddType application/manifest+json .webmanifest
 AddType image/svg+xml             .svg
 AddType image/webp                .webp
 AddType image/avif                .avif
 
-# 404
 ErrorDocument 404 /404.html
