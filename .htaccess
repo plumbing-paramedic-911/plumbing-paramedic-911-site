@@ -61,7 +61,7 @@ Options -Indexes
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{1,5}$
   RewriteCond %{REQUEST_URI} !/$
-  RewriteRule ^ /%{REQUEST_URI}/ [L,R=301,NE]
+  RewriteRule ^(.+[^/])$ /$1/ [L,R=301]
 </IfModule>
 
 # ────────────────────────────────────────────────────────────
