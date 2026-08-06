@@ -1,0 +1,60 @@
+name: Deploy SEO Repair to Namecheap
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-namecheap-seo-repair
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Verify required FTP secrets
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: |
+          set -eu
+          test -n "$FTP_SERVER" || { echo "Missing FTP_SERVER"; exit 1; }
+          test -n "$FTP_USERNAME" || { echo "Missing FTP_USERNAME"; exit 1; }
+          test -n "$FTP_PASSWORD" || { echo "Missing FTP_PASSWORD"; exit 1; }
+          test -n "$FTP_SERVER_DIR" || { echo "Missing FTP_SERVER_DIR"; exit 1; }
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Upload only repaired files
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: |
+          set -eu
+          lftp <<EOF
+          set cmd:fail-exit yes
+          set net:max-retries 2
+          set net:timeout 30
+          set ftp:ssl-force yes
+          set ftp:ssl-protect-data no
+          set ssl:verify-certificate no
+          open "ftp://${FTP_SERVER}${FTP_SERVER_DIR}"
+          user "${FTP_USERNAME}" "${FTP_PASSWORD}"
+          put -O . .htaccess
+          mkdir -p js
+          put -O js js/app.js
+          bye
+          EOF
+
+      - name: Confirm deployment scope
+        run: echo "Uploaded only .htaccess and js/app.js. No other website files were deleted or replaced."
