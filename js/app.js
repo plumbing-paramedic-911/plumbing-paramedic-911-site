@@ -88,6 +88,8 @@
         source_page:window.location.pathname||"/",
         form_id:form.id||"lead_form"
       };
+      if(/^select/i.test(payload.service))payload.service="";
+      if(!payload.service&&!payload.message)payload.message="Callback requested from website";
 
       const submitButton=form.querySelector('button[type="submit"]');
       const originalButtonText=submitButton?submitButton.textContent:"";
