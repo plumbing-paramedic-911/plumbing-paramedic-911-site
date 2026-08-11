@@ -28,25 +28,20 @@ jobs:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
           set -euo pipefail
           test -n "$FTP_SERVER" || { echo "Missing FTP_SERVER"; exit 1; }
           test -n "$FTP_USERNAME" || { echo "Missing FTP_USERNAME"; exit 1; }
           test -n "$FTP_PASSWORD" || { echo "Missing FTP_PASSWORD"; exit 1; }
-          test -n "$FTP_SERVER_DIR" || { echo "Missing FTP_SERVER_DIR"; exit 1; }
 
           FTP_HOST_CLEAN="$(printf '%s' "$FTP_SERVER" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
           FTP_USER_CLEAN="$(printf '%s' "$FTP_USERNAME" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
-          FTP_DIR_CLEAN="$(printf '%s' "$FTP_SERVER_DIR" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//;s#/*$##')"
 
           test -n "$FTP_HOST_CLEAN" || { echo "FTP_SERVER contains only whitespace"; exit 1; }
           test -n "$FTP_USER_CLEAN" || { echo "FTP_USERNAME contains only whitespace"; exit 1; }
-          test -n "$FTP_DIR_CLEAN" || { echo "FTP_SERVER_DIR contains only whitespace"; exit 1; }
 
           echo "FTP_HOST_CLEAN=$FTP_HOST_CLEAN" >> "$GITHUB_ENV"
           echo "FTP_USER_CLEAN=$FTP_USER_CLEAN" >> "$GITHUB_ENV"
-          echo "FTP_DIR_CLEAN=$FTP_DIR_CLEAN" >> "$GITHUB_ENV"
 
       - name: Install lftp
         run: sudo apt-get update -y && sudo apt-get install -y lftp
@@ -66,7 +61,6 @@ jobs:
             set net:timeout 30;
             set net:max-retries 3;
             open -u '$FTP_USER_CLEAN','$FTP_PASS' 'ftp://$FTP_HOST_CLEAN';
-            cd '$FTP_DIR_CLEAN';
             pwd;
             put -O . .htaccess;
             mkdir -p js;
@@ -75,4 +69,4 @@ jobs:
           "
 
       - name: Confirm deployment scope
-        run: echo "Uploaded only .htaccess and js/app.js to the configured website directory using verified FTPS."
+        run: echo "Uploaded only .htaccess and js/app.js from the FTP account's assigned website root using verified FTPS."
