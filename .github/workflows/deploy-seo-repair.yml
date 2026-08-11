@@ -63,7 +63,6 @@ jobs:
             open -u '$FTP_USER_CLEAN','$FTP_PASS' 'ftp://$FTP_HOST_CLEAN';
             pwd;
             put -O . .htaccess;
-            mkdir -p js;
             put -O js js/app.js;
             bye
           "
