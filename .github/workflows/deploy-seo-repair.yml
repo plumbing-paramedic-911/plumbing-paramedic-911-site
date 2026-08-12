@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   deploy:
-    name: Upload repaired files to Namecheap
+    name: Upload approved website updates to Namecheap
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -46,7 +46,7 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update -y && sudo apt-get install -y lftp
 
-      - name: Upload only repaired files over verified FTPS
+      - name: Upload approved files over verified FTPS
         env:
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
@@ -64,8 +64,13 @@ jobs:
             pwd;
             put -O . .htaccess;
             put -O js js/app.js;
+            put -O . sitemap.xml;
+            mkdir -p service-areas/iva-lake-secession-sc;
+            put -O service-areas/iva-lake-secession-sc service-areas/iva-lake-secession-sc/index.html;
+            mkdir -p service-areas/savannah-lakes-village-sc;
+            put -O service-areas/savannah-lakes-village-sc service-areas/savannah-lakes-village-sc/index.html;
             bye
           "
 
       - name: Confirm deployment scope
-        run: echo "Uploaded only .htaccess and js/app.js from the FTP account's assigned website root using verified FTPS."
+        run: echo "Uploaded only .htaccess, js/app.js, sitemap.xml, and the two approved lake-area service pages. No other website files were deleted or mirrored."
