@@ -77,7 +77,11 @@ jobs:
                 --exclude-glob tools/ \
                 --exclude-glob '*.md' \
                 --exclude-glob '__pycache__/' \
+                --exclude-glob '_noop.txt' \
+                --exclude-glob '_branch_marker.tmp' \
                 ./ .;
+              rm -f _noop.txt;
+              rm -f _branch_marker.tmp;
               bye
             "; then
               echo "Namecheap FTPS upload completed on attempt ${attempt}."
@@ -153,6 +157,11 @@ jobs:
           printf '%s' "$llms" | grep -Fq 'Iva & Lake Secession, SC'
           echo 'Verified current AI-readable business and pricing facts.'
 
+          guides="$(fetch "${BASE_URL}/guides/?deploy=${GITHUB_SHA}")"
+          printf '%s' "$guides" | grep -Fq 'Homeowner Plumbing Guides by Eric Callaway'
+          printf '%s' "$guides" | grep -Fq 'Get the Complete Bundle'
+          echo 'Verified paid homeowner guide storefront remains live.'
+
           headers="$(curl --silent --show-error --head \
             -H 'Cache-Control: no-cache' "${BASE_URL}/?deploy=${GITHUB_SHA}" | tr -d '\r')"
           printf '%s' "$headers" | grep -i 'content-security-policy:' | \
@@ -162,6 +171,8 @@ jobs:
           assert_redirect '/blog/signs-water-heater-failing/' \
             'https://plumbingparamedic911.com/services/water-heater-repair-replacement/'
           assert_redirect '/costs/' \
+            'https://plumbingparamedic911.com/pricing/'
+          assert_redirect '/costs/emergency-plumber-cost/' \
             'https://plumbingparamedic911.com/pricing/'
           assert_redirect '/service-areas/iva-sc/' \
             'https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/'
@@ -173,10 +184,16 @@ jobs:
           grep -Fq 'Looks like this page needs a rescue.' /tmp/pp911-404.html
           echo 'Verified branded 404 response.'
 
+          for junk in '/_noop.txt' '/_branch_marker.tmp'; do
+            junk_status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "${BASE_URL}${junk}")"
+            [ "$junk_status" = '404' ] || { echo "Unexpected temporary file remains live: ${junk} (${junk_status})"; exit 1; }
+          done
+          echo 'Verified temporary deployment files are absent.'
+
           echo 'Live production verification passed.'
 
       - name: Confirm production deployment scope
         run: |
           echo "Validated, uploaded, and live-verified the full public website tree."
           echo "Source/build files (.git, .github, tools, Markdown) were excluded."
-          echo "No remote delete/mirror-delete option was used."
+          echo "No remote mirror-delete was used; obsolete indexed URLs are handled by explicit redirects."
