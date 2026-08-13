@@ -2,8 +2,9 @@
 """Production release builder for Plumbing Paramedic 911.
 
 Loads the existing generator, applies production SEO/AEO overrides, regenerates
-all generator-owned pages, strengthens static internal linking, and validates
-critical search requirements before deployment.
+all generator-owned pages, builds high-intent local service pages, strengthens
+static internal linking, and validates critical search requirements before
+deployment.
 
 Run:
     python3 tools/release_build.py
@@ -20,6 +21,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD_FILE = ROOT / "tools" / "build.py"
+MONEY_FILE = ROOT / "tools" / "local_money_pages.py"
 BASE_URL = "https://plumbingparamedic911.com"
 
 TITLE_OVERRIDES = {
@@ -36,6 +38,20 @@ DESCRIPTION_OVERRIDES = {
     ("SERVICES", "backflow-prevention-testing"): "Certified backflow testing, repair and installation for irrigation, fire and commercial systems across Upstate SC. Call (864) 446-8911.",
     ("CITIES", "mccormick-sc"): "24/7 plumber in McCormick SC for well pumps, lake homes, water heaters, drains and leaks. Upfront pricing. Call (864) 446-8911.",
     ("CITIES", "calhoun-falls-sc"): "24/7 plumber in Calhoun Falls SC for well pumps, lake homes, water heaters, drains and leaks. Upfront pricing. Call (864) 446-8911.",
+}
+
+CRITICAL_TITLE_PATHS = {
+    "services/well-pump-repair/index.html",
+    "services/plumbing-fixture-installation-repair/index.html",
+    "services/backflow-prevention-testing/index.html",
+    "service-areas/mccormick-sc/index.html",
+    "service-areas/calhoun-falls-sc/index.html",
+    "well-pump-repair-mccormick-sc/index.html",
+    "well-pump-repair-iva-lake-secession-sc/index.html",
+    "drain-cleaning-greenwood-sc/index.html",
+    "water-heater-repair-greenwood-sc/index.html",
+    "water-heater-repair-anderson-sc/index.html",
+    "emergency-plumber-abbeville-sc/index.html",
 }
 
 LAKE_AREA_LINKS = (
@@ -76,13 +92,21 @@ WELL_PUMP_MARKET_BLOCK = '''\
 '''
 
 
-def load_build_module():
-    spec = importlib.util.spec_from_file_location("pp911_build", BUILD_FILE)
+def load_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, path)
     if spec is None or spec.loader is None:
-        raise RuntimeError("Could not load tools/build.py")
+        raise RuntimeError(f"Could not load {path}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def load_build_module():
+    return load_module(BUILD_FILE, "pp911_build")
+
+
+def load_money_module():
+    return load_module(MONEY_FILE, "pp911_money_pages")
 
 
 def apply_overrides(build) -> None:
@@ -192,14 +216,8 @@ def validate_release() -> None:
         else:
             title = html.unescape(re.sub(r"\s+", " ", title_match.group(1))).strip()
             title_to_files.setdefault(title, []).append(rel)
-            if rel in {
-                "services/well-pump-repair/index.html",
-                "services/plumbing-fixture-installation-repair/index.html",
-                "services/backflow-prevention-testing/index.html",
-                "service-areas/mccormick-sc/index.html",
-                "service-areas/calhoun-falls-sc/index.html",
-            } and len(title) > 62:
-                errors.append(f"{rel}: corrected title is still too long ({len(title)} chars): {title}")
+            if rel in CRITICAL_TITLE_PATHS and len(title) > 62:
+                errors.append(f"{rel}: critical title is too long ({len(title)} chars): {title}")
 
         desc_match = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', text, re.I)
         if not desc_match:
@@ -231,7 +249,6 @@ def validate_release() -> None:
         if len(files) > 1:
             errors.append(f"duplicate title {title!r}: {', '.join(files)}")
 
-    # Legal pages may intentionally use short descriptions, but duplicates should still be avoided.
     for desc, files in desc_to_files.items():
         if len(files) > 1:
             errors.append(f"duplicate meta description: {', '.join(files)}")
@@ -246,6 +263,18 @@ def validate_release() -> None:
         if path != "/" and incoming.get(path, 0) == 0:
             errors.append(f"orphaned sitemap page (no static internal link): {url}")
 
+    pricing = (ROOT / "pricing" / "index.html").read_text(encoding="utf-8")
+    if 'id="current-service-call-pricing"' not in pricing:
+        errors.append("pricing/index.html: missing current service-call disclosure")
+    if "service call fee is waived" in pricing.lower():
+        errors.append("pricing/index.html: stale waived-service-call wording remains")
+    if "$150 after-hours surcharge" in pricing:
+        errors.append("pricing/index.html: stale after-hours surcharge wording remains")
+
+    llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
+    if "## High-Intent Local Service Pages" not in llms:
+        errors.append("llms.txt: local money-page index missing")
+
     if errors:
         print("SEO/AEO RELEASE VALIDATION FAILED", file=sys.stderr)
         for error in errors:
@@ -257,9 +286,11 @@ def validate_release() -> None:
 
 def main() -> None:
     build = load_build_module()
+    money = load_money_module()
     apply_overrides(build)
     build.main()
     strengthen_internal_links()
+    money.generate(build)
     ensure_sitemap()
     validate_release()
 
