@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   validate-and-deploy:
-    name: Validate SEO/AEO and upload production site
+    name: Validate SEO/AEO, deploy, and verify production
     runs-on: ubuntu-latest
     timeout-minutes: 25
 
@@ -81,17 +81,102 @@ jobs:
               bye
             "; then
               echo "Namecheap FTPS upload completed on attempt ${attempt}."
-              exit 0
+              break
             fi
-            if [ "$attempt" -lt 3 ]; then
-              sleep $((attempt * 15))
+            if [ "$attempt" -eq 3 ]; then
+              echo "Namecheap FTPS upload failed after 3 attempts."
+              exit 1
             fi
+            sleep $((attempt * 15))
           done
-          echo "Namecheap FTPS upload failed after 3 attempts."
-          exit 1
+
+      - name: Verify live production
+        env:
+          BASE_URL: https://plumbingparamedic911.com
+        run: |
+          set -euo pipefail
+
+          fetch() {
+            curl --fail --silent --show-error --location \
+              --retry 3 --retry-delay 2 --retry-all-errors \
+              -H 'Cache-Control: no-cache' \
+              "$1"
+          }
+
+          assert_title() {
+            path="$1"
+            expected="$2"
+            body="$(fetch "${BASE_URL}${path}?deploy=${GITHUB_SHA}")"
+            printf '%s' "$body" | grep -Fq "<title>${expected}</title>" || {
+              echo "Live title mismatch on ${path}. Expected: ${expected}"
+              exit 1
+            }
+            echo "Verified title: ${path}"
+          }
+
+          assert_redirect() {
+            path="$1"
+            expected="$2"
+            result="$(curl --silent --show-error --output /dev/null \
+              --write-out '%{http_code} %{redirect_url}' \
+              -H 'Cache-Control: no-cache' \
+              "${BASE_URL}${path}")"
+            [ "$result" = "301 ${expected}" ] || {
+              echo "Redirect mismatch for ${path}: ${result}"
+              exit 1
+            }
+            echo "Verified redirect: ${path} -> ${expected}"
+          }
+
+          assert_title '/services/well-pump-repair/' \
+            'Well Pump Repair Abbeville SC | Plumbing Paramedic 911'
+          assert_title '/services/plumbing-fixture-installation-repair/' \
+            'Fixture Repair Abbeville SC | Plumbing Paramedic 911'
+          assert_title '/services/backflow-prevention-testing/' \
+            'Backflow Testing Upstate SC | Plumbing Paramedic 911'
+          assert_title '/service-areas/mccormick-sc/' \
+            'McCormick SC Plumber & Well Pumps | Plumbing Paramedic 911'
+          assert_title '/service-areas/calhoun-falls-sc/' \
+            'Calhoun Falls SC Plumber | Plumbing Paramedic 911'
+
+          areas="$(fetch "${BASE_URL}/service-areas/?deploy=${GITHUB_SHA}")"
+          printf '%s' "$areas" | grep -Fq '/service-areas/iva-lake-secession-sc/'
+          printf '%s' "$areas" | grep -Fq '/service-areas/savannah-lakes-village-sc/'
+          echo 'Verified static lake/rural service-area links.'
+
+          well="$(fetch "${BASE_URL}/services/well-pump-repair/?deploy=${GITHUB_SHA}")"
+          printf '%s' "$well" | grep -Fq 'id="lake-area-well-pump-focus"'
+          echo 'Verified well-pump market authority block.'
+
+          llms="$(fetch "${BASE_URL}/llms.txt?deploy=${GITHUB_SHA}")"
+          printf '%s' "$llms" | grep -Fq 'Service / diagnostic call: **$79**'
+          printf '%s' "$llms" | grep -Fq 'Iva & Lake Secession, SC'
+          echo 'Verified current AI-readable business and pricing facts.'
+
+          headers="$(curl --silent --show-error --head \
+            -H 'Cache-Control: no-cache' "${BASE_URL}/?deploy=${GITHUB_SHA}" | tr -d '\r')"
+          printf '%s' "$headers" | grep -i 'content-security-policy:' | \
+            grep -Fq 'https://wuwgvtjktppjueiykcww.supabase.co'
+          echo 'Verified Supabase lead-capture CSP allowance.'
+
+          assert_redirect '/blog/signs-water-heater-failing/' \
+            'https://plumbingparamedic911.com/services/water-heater-repair-replacement/'
+          assert_redirect '/costs/' \
+            'https://plumbingparamedic911.com/pricing/'
+          assert_redirect '/service-areas/iva-sc/' \
+            'https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/'
+
+          not_found_url="${BASE_URL}/seo-verification-page-that-does-not-exist-${GITHUB_SHA}/"
+          status="$(curl --silent --show-error --output /tmp/pp911-404.html \
+            --write-out '%{http_code}' "$not_found_url")"
+          [ "$status" = '404' ] || { echo "Expected live 404 status, got ${status}"; exit 1; }
+          grep -Fq 'Looks like this page needs a rescue.' /tmp/pp911-404.html
+          echo 'Verified branded 404 response.'
+
+          echo 'Live production verification passed.'
 
       - name: Confirm production deployment scope
         run: |
-          echo "Validated and uploaded the full public website tree."
+          echo "Validated, uploaded, and live-verified the full public website tree."
           echo "Source/build files (.git, .github, tools, Markdown) were excluded."
           echo "No remote delete/mirror-delete option was used."
