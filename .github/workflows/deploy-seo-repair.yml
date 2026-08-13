@@ -1,4 +1,4 @@
-name: Deploy SEO Repair to Namecheap
+name: Deploy Plumbing Paramedic 911 to Namecheap
 
 on:
   push:
@@ -10,18 +10,24 @@ permissions:
   contents: read
 
 concurrency:
-  group: deploy-namecheap-seo-repair
+  group: deploy-namecheap-production
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    name: Upload approved website updates to Namecheap
+  validate-and-deploy:
+    name: Validate SEO/AEO and upload production site
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Check out website
         uses: actions/checkout@v5
+
+      - name: Build and validate SEO/AEO release
+        run: |
+          set -euo pipefail
+          python3 tools/release_build.py
+          python3 tools/check_internal_links.py
 
       - name: Verify and normalize deployment secrets
         env:
@@ -46,7 +52,7 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update -y && sudo apt-get install -y lftp
 
-      - name: Upload approved files over verified FTPS
+      - name: Upload validated production site over FTPS
         env:
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
@@ -63,14 +69,18 @@ jobs:
             open -u '$FTP_USER_CLEAN','$FTP_PASS' 'ftp://$FTP_HOST_CLEAN';
             pwd;
             put -O . .htaccess;
-            put -O js js/app.js;
-            put -O . sitemap.xml;
-            mkdir -p service-areas/iva-lake-secession-sc;
-            put -O service-areas/iva-lake-secession-sc service-areas/iva-lake-secession-sc/index.html;
-            mkdir -p service-areas/savannah-lakes-village-sc;
-            put -O service-areas/savannah-lakes-village-sc service-areas/savannah-lakes-village-sc/index.html;
+            mirror -R --verbose --parallel=2 \
+              --exclude-glob .git/ \
+              --exclude-glob .github/ \
+              --exclude-glob tools/ \
+              --exclude-glob '*.md' \
+              --exclude-glob '__pycache__/' \
+              ./ .;
             bye
           "
 
-      - name: Confirm deployment scope
-        run: echo "Uploaded only .htaccess, js/app.js, sitemap.xml, and the two approved lake-area service pages. No other website files were deleted or mirrored."
+      - name: Confirm production deployment scope
+        run: |
+          echo "Validated and uploaded the full public website tree."
+          echo "Source/build files (.git, .github, tools, Markdown) were excluded."
+          echo "No remote delete/mirror-delete option was used."
