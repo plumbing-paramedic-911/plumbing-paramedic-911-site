@@ -45,18 +45,17 @@ Options -Indexes
   RewriteRule ^service-areas/calhoun-falls-sc\.html$ /service-areas/calhoun-falls-sc/ [L,R=301,NC]
   RewriteRule ^service-areas/due-west-sc\.html$ /service-areas/due-west-sc/ [L,R=301,NC]
 
-  # Consolidate pages from the older production build into the current
-  # authoritative service, area, pricing and FAQ pages. These redirects keep
-  # old links/backlinks useful and prevent stale duplicate pages from competing.
+  # Consolidate duplicate/obsolete pages from the older production build.
+  # Paid homeowner guides are intentionally preserved as live authority and
+  # passive-income assets; only stale/duplicative content is redirected here.
   RewriteRule ^blog/signs-water-heater-failing/?$ /services/water-heater-repair-replacement/ [L,R=301,NC]
   RewriteRule ^blog/how-to-shut-off-water-in-emergency/?$ /services/24-7-emergency-plumbing/ [L,R=301,NC]
   RewriteRule ^blog/?$ /faq/ [L,R=301,NC]
-  RewriteRule ^guides/well-pump-owners-manual-upstate-sc/?$ /services/well-pump-repair/ [L,R=301,NC]
-  RewriteRule ^guides/water-heater-buyers-guide-sc/?$ /services/water-heater-repair-replacement/ [L,R=301,NC]
-  RewriteRule ^guides/sc-homeowner-plumbing-survival-guide/?$ /faq/ [L,R=301,NC]
-  RewriteRule ^guides/drain-maintenance-playbook/?$ /services/drain-cleaning/ [L,R=301,NC]
-  RewriteRule ^guides/?$ /faq/ [L,R=301,NC]
-  RewriteRule ^costs/?$ /pricing/ [L,R=301,NC]
+
+  # Old cost articles contain pricing that may no longer match the live price
+  # book. Consolidate the entire section to the current pricing calculator.
+  RewriteRule ^costs(?:/.*)?$ /pricing/ [L,R=301,NC]
+
   RewriteRule ^backflow-testing-abbeville-sc/?$ /services/backflow-prevention-testing/ [L,R=301,NC]
   RewriteRule ^well-pump-repair-mccormick-sc/?$ /service-areas/mccormick-sc/ [L,R=301,NC]
   RewriteRule ^water-heater-repair-anderson-sc/?$ /service-areas/anderson-sc/ [L,R=301,NC]
