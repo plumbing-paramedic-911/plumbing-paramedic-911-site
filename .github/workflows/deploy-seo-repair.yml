@@ -132,6 +132,7 @@ jobs:
             echo "Verified redirect: ${path} -> ${expected}"
           }
 
+          # Technical SEO repairs from the first production pass.
           assert_title '/services/well-pump-repair/' \
             'Well Pump Repair Abbeville SC | Plumbing Paramedic 911'
           assert_title '/services/plumbing-fixture-installation-repair/' \
@@ -143,19 +144,51 @@ jobs:
           assert_title '/service-areas/calhoun-falls-sc/' \
             'Calhoun Falls SC Plumber | Plumbing Paramedic 911'
 
+          # Six high-intent service × market pages.
+          assert_title '/well-pump-repair-mccormick-sc/' \
+            'Well Pump Repair McCormick SC | Plumbing Paramedic 911'
+          assert_title '/well-pump-repair-iva-lake-secession-sc/' \
+            'Well Pump Repair Iva & Lake Secession SC | PP911'
+          assert_title '/drain-cleaning-greenwood-sc/' \
+            'Drain Cleaning Greenwood SC | Plumbing Paramedic 911'
+          assert_title '/water-heater-repair-greenwood-sc/' \
+            'Water Heater Repair Greenwood SC | Plumbing Paramedic 911'
+          assert_title '/water-heater-repair-anderson-sc/' \
+            'Water Heater Repair Anderson SC | Plumbing Paramedic 911'
+          assert_title '/emergency-plumber-abbeville-sc/' \
+            'Emergency Plumber Abbeville SC | Plumbing Paramedic 911'
+
           areas="$(fetch "${BASE_URL}/service-areas/?deploy=${GITHUB_SHA}")"
           printf '%s' "$areas" | grep -Fq '/service-areas/iva-lake-secession-sc/'
           printf '%s' "$areas" | grep -Fq '/service-areas/savannah-lakes-village-sc/'
           echo 'Verified static lake/rural service-area links.'
 
+          services="$(fetch "${BASE_URL}/services/?deploy=${GITHUB_SHA}")"
+          printf '%s' "$services" | grep -Fq '/well-pump-repair-mccormick-sc/'
+          printf '%s' "$services" | grep -Fq '/drain-cleaning-greenwood-sc/'
+          printf '%s' "$services" | grep -Fq '/water-heater-repair-anderson-sc/'
+          printf '%s' "$services" | grep -Fq '/emergency-plumber-abbeville-sc/'
+          echo 'Verified local money pages are statically linked from the services hub.'
+
           well="$(fetch "${BASE_URL}/services/well-pump-repair/?deploy=${GITHUB_SHA}")"
           printf '%s' "$well" | grep -Fq 'id="lake-area-well-pump-focus"'
-          echo 'Verified well-pump market authority block.'
+          printf '%s' "$well" | grep -Fq '/well-pump-repair-mccormick-sc/'
+          printf '%s' "$well" | grep -Fq '/well-pump-repair-iva-lake-secession-sc/'
+          echo 'Verified well-pump authority cluster.'
+
+          pricing="$(fetch "${BASE_URL}/pricing/?deploy=${GITHUB_SHA}")"
+          printf '%s' "$pricing" | grep -Fq 'id="current-service-call-pricing"'
+          printf '%s' "$pricing" | grep -Fq '$79 weekday · $99 after-hours/weekend · $158 after midnight/holiday'
+          ! printf '%s' "$pricing" | grep -Fqi 'service call fee is waived'
+          ! printf '%s' "$pricing" | grep -Fq '$150 after-hours surcharge'
+          echo 'Verified current service-call disclosure on pricing page.'
 
           llms="$(fetch "${BASE_URL}/llms.txt?deploy=${GITHUB_SHA}")"
           printf '%s' "$llms" | grep -Fq 'Service / diagnostic call: **$79**'
           printf '%s' "$llms" | grep -Fq 'Iva & Lake Secession, SC'
-          echo 'Verified current AI-readable business and pricing facts.'
+          printf '%s' "$llms" | grep -Fq '## High-Intent Local Service Pages'
+          printf '%s' "$llms" | grep -Fq '/water-heater-repair-greenwood-sc/'
+          echo 'Verified current AI-readable business, pricing and local-service facts.'
 
           guides="$(fetch "${BASE_URL}/guides/?deploy=${GITHUB_SHA}")"
           printf '%s' "$guides" | grep -Fq 'Homeowner Plumbing Guides by Eric Callaway'
