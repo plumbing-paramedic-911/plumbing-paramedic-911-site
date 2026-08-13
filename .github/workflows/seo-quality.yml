@@ -1,6 +1,9 @@
 name: SEO AEO Quality Gate
 
 on:
+  push:
+    branches:
+      - claude/seo-aeo-authority-20260813
   pull_request:
     branches:
       - main
