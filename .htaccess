@@ -56,11 +56,11 @@ Options -Indexes
   # book. Consolidate the entire section to the current pricing calculator.
   RewriteRule ^costs(?:/.*)?$ /pricing/ [L,R=301,NC]
 
+  # These older pages remain consolidated. The six priority local service URLs
+  # (well-pump McCormick/Iva, drain Greenwood, water-heater Greenwood/Anderson,
+  # emergency Abbeville) are now first-class generated pages and are NOT
+  # redirected here.
   RewriteRule ^backflow-testing-abbeville-sc/?$ /services/backflow-prevention-testing/ [L,R=301,NC]
-  RewriteRule ^well-pump-repair-mccormick-sc/?$ /service-areas/mccormick-sc/ [L,R=301,NC]
-  RewriteRule ^water-heater-repair-anderson-sc/?$ /service-areas/anderson-sc/ [L,R=301,NC]
-  RewriteRule ^emergency-plumber-abbeville-sc/?$ /services/24-7-emergency-plumbing/ [L,R=301,NC]
-  RewriteRule ^drain-cleaning-greenwood-sc/?$ /service-areas/greenwood-sc/ [L,R=301,NC]
   RewriteRule ^commercial-plumber-greenwood-sc/?$ /services/commercial-plumbing/ [L,R=301,NC]
   RewriteRule ^service-areas/iva-sc/?$ /service-areas/iva-lake-secession-sc/ [L,R=301,NC]
   RewriteRule ^service-areas/starr-sc/?$ /service-areas/anderson-sc/ [L,R=301,NC]
