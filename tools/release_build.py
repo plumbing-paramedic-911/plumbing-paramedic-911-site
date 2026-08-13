@@ -2,9 +2,9 @@
 """Production release builder for Plumbing Paramedic 911.
 
 Loads the existing generator, applies production SEO/AEO overrides, regenerates
-all generator-owned pages, builds high-intent local service pages, strengthens
-static internal linking, and validates critical search requirements before
-deployment.
+all generator-owned pages, builds high-intent local service pages, applies the
+current pricing policy, strengthens static internal linking, and validates
+critical search requirements before deployment.
 
 Run:
     python3 tools/release_build.py
@@ -22,6 +22,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 BUILD_FILE = ROOT / "tools" / "build.py"
 MONEY_FILE = ROOT / "tools" / "local_money_pages.py"
+PRICING_POLICY_FILE = ROOT / "tools" / "current_pricing_overrides.py"
 BASE_URL = "https://plumbingparamedic911.com"
 
 TITLE_OVERRIDES = {
@@ -109,6 +110,10 @@ def load_money_module():
     return load_module(MONEY_FILE, "pp911_money_pages")
 
 
+def load_pricing_policy_module():
+    return load_module(PRICING_POLICY_FILE, "pp911_pricing_policy")
+
+
 def apply_overrides(build) -> None:
     for (group_name, slug), title in TITLE_OVERRIDES.items():
         group = getattr(build, group_name)
@@ -117,7 +122,6 @@ def apply_overrides(build) -> None:
         group[slug]["title"] = title
         group[slug]["description"] = DESCRIPTION_OVERRIDES[(group_name, slug)]
 
-    # Make the two lake/rural pages statically discoverable from every generated page.
     desktop_needle = '<a href="/service-areas/due-west-sc/">📍 Due West, SC</a></div></li>'
     if desktop_needle in build.NAV_HTML and "/service-areas/iva-lake-secession-sc/" not in build.NAV_HTML:
         build.NAV_HTML = build.NAV_HTML.replace(
@@ -270,6 +274,14 @@ def validate_release() -> None:
         errors.append("pricing/index.html: stale waived-service-call wording remains")
     if "$150 after-hours surcharge" in pricing:
         errors.append("pricing/index.html: stale after-hours surcharge wording remains")
+    if "−$50" in pricing or "selectOption(this,'discount','military',-50)" in pricing:
+        errors.append("pricing/index.html: stale fixed-$50 discount calculator remains")
+
+    faq = (ROOT / "faq" / "index.html").read_text(encoding="utf-8")
+    if "We offer $50 off" in faq:
+        errors.append("faq/index.html: stale fixed-$50 discount wording remains")
+    if "gives free up-front estimates" in faq:
+        errors.append("faq/index.html: stale free-estimate wording remains")
 
     llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
     if "## High-Intent Local Service Pages" not in llms:
@@ -287,10 +299,12 @@ def validate_release() -> None:
 def main() -> None:
     build = load_build_module()
     money = load_money_module()
+    pricing_policy = load_pricing_policy_module()
     apply_overrides(build)
     build.main()
     strengthen_internal_links()
     money.generate(build)
+    pricing_policy.apply()
     ensure_sitemap()
     validate_release()
 
