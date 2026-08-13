@@ -1,0 +1,29 @@
+name: SEO AEO Quality Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate technical SEO and crawlability
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v5
+
+      - name: Build production output
+        run: python3 tools/release_build.py
+
+      - name: Check sitemap and static internal links
+        run: python3 tools/check_internal_links.py
+
+      - name: Check Python syntax
+        run: python3 -m py_compile tools/build.py tools/release_build.py tools/check_internal_links.py
