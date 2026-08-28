@@ -46,7 +46,7 @@ NAV_HTML = """\
       </a>
       <ul class="nav-links">
         <li><a href="/"{HOME_ACTIVE}>Home</a></li>
-        <li class="has-dropdown"><a href="/services/"{SERVICES_ACTIVE}>Services ▾</a><div class="dropdown"><a href="/services/24-7-emergency-plumbing/">🚨 Emergency Plumbing</a><a href="/services/drain-cleaning/">🚿 Drain Cleaning</a><a href="/services/water-heater-repair-replacement/">🔥 Water Heater Services</a><a href="/services/leak-detection/">💦 Leak Detection</a><a href="/services/plumbing-fixture-installation-repair/">🚰 Fixture Install &amp; Repair</a><a href="/services/well-pump-repair/">💧 Well Pump Repair</a><a href="/services/backflow-prevention-testing/">🛡️ Backflow Testing</a><a href="/services/commercial-plumbing/">🏢 Commercial Plumbing</a></div></li>
+        <li class="has-dropdown"><a href="/services/"{SERVICES_ACTIVE}>Services ▾</a><div class="dropdown"><a href="/services/24-7-emergency-plumbing/">🚨 Emergency Plumbing</a><a href="/services/drain-cleaning/">🚿 Drain Cleaning</a><a href="/services/water-heater-repair-replacement/">🔥 Water Heater Services</a><a href="/services/tankless-water-heater-installation-repair/">🔥 Tankless Water Heaters</a><a href="/services/leak-detection/">💦 Leak Detection</a><a href="/services/slab-leak-repair/">💦 Slab Leak Repair</a><a href="/services/plumbing-fixture-installation-repair/">🚰 Fixture Install &amp; Repair</a><a href="/services/water-filtration-softener-systems/">💧 Water Filtration &amp; Softeners</a><a href="/services/well-pump-repair/">💧 Well Pump Repair</a><a href="/services/backflow-prevention-testing/">🛡️ Backflow Testing</a><a href="/services/commercial-plumbing/">🏢 Commercial Plumbing</a></div></li>
         <li class="has-dropdown"><a href="/service-areas/"{AREAS_ACTIVE}>Service Areas ▾</a><div class="dropdown"><a href="/service-areas/abbeville-sc/">📍 Abbeville, SC</a><a href="/service-areas/greenwood-sc/">📍 Greenwood, SC</a><a href="/service-areas/anderson-sc/">📍 Anderson, SC</a><a href="/service-areas/laurens-sc/">📍 Laurens, SC</a><a href="/service-areas/mccormick-sc/">📍 McCormick, SC</a><a href="/service-areas/ninety-six-sc/">📍 Ninety Six, SC</a><a href="/service-areas/calhoun-falls-sc/">📍 Calhoun Falls, SC</a><a href="/service-areas/due-west-sc/">📍 Due West, SC</a></div></li>
         <li><a href="/pricing/"{PRICING_ACTIVE}>💰 Pricing</a></li>
         <li><a href="/about/"{ABOUT_ACTIVE}>About</a></li>
@@ -64,8 +64,11 @@ NAV_HTML = """\
   <a href="/services/24-7-emergency-plumbing/">🚨 Emergency Plumbing</a>
   <a href="/services/drain-cleaning/">🚿 Drain Cleaning</a>
   <a href="/services/water-heater-repair-replacement/">🔥 Water Heater Services</a>
+  <a href="/services/tankless-water-heater-installation-repair/">🔥 Tankless Water Heaters</a>
   <a href="/services/leak-detection/">💦 Leak Detection</a>
+  <a href="/services/slab-leak-repair/">💦 Slab Leak Repair</a>
   <a href="/services/plumbing-fixture-installation-repair/">🚰 Fixtures</a>
+  <a href="/services/water-filtration-softener-systems/">💧 Water Filtration &amp; Softeners</a>
   <a href="/services/well-pump-repair/">💧 Well Pump Repair</a>
   <a href="/services/backflow-prevention-testing/">🛡️ Backflow Testing</a>
   <a href="/services/commercial-plumbing/">🏢 Commercial</a>
@@ -97,7 +100,7 @@ FOOTER_HTML = """\
         <div class="footer-tagline">When emergencies happen, we respond.</div>
         <address class="footer-addr">13 Callaway Dr<br>Abbeville, SC 29620<br><a href="mailto:plumbingparamedic911@gmail.com" style="color:rgba(255,255,255,.6)">plumbingparamedic911@gmail.com</a></address>
       </div>
-      <div><h4>Services</h4><ul class="footer-links"><li><a href="/services/24-7-emergency-plumbing/">Emergency Plumbing</a></li><li><a href="/services/drain-cleaning/">Drain Cleaning</a></li><li><a href="/services/water-heater-repair-replacement/">Water Heater Services</a></li><li><a href="/services/leak-detection/">Leak Detection</a></li><li><a href="/services/plumbing-fixture-installation-repair/">Fixture Install &amp; Repair</a></li><li><a href="/services/well-pump-repair/">Well Pump Repair</a></li><li><a href="/services/backflow-prevention-testing/">Backflow Testing</a></li><li><a href="/services/commercial-plumbing/">Commercial Plumbing</a></li></ul></div>
+      <div><h4>Services</h4><ul class="footer-links"><li><a href="/services/24-7-emergency-plumbing/">Emergency Plumbing</a></li><li><a href="/services/drain-cleaning/">Drain Cleaning</a></li><li><a href="/services/water-heater-repair-replacement/">Water Heater Services</a></li><li><a href="/services/tankless-water-heater-installation-repair/">Tankless Water Heaters</a></li><li><a href="/services/leak-detection/">Leak Detection</a></li><li><a href="/services/slab-leak-repair/">Slab Leak Repair</a></li><li><a href="/services/plumbing-fixture-installation-repair/">Fixture Install &amp; Repair</a></li><li><a href="/services/water-filtration-softener-systems/">Water Filtration &amp; Softeners</a></li><li><a href="/services/well-pump-repair/">Well Pump Repair</a></li><li><a href="/services/backflow-prevention-testing/">Backflow Testing</a></li><li><a href="/services/commercial-plumbing/">Commercial Plumbing</a></li></ul></div>
       <div><h4>Service Areas</h4><ul class="footer-links"><li><a href="/service-areas/abbeville-sc/">Abbeville, SC</a></li><li><a href="/service-areas/greenwood-sc/">Greenwood, SC</a></li><li><a href="/service-areas/anderson-sc/">Anderson, SC</a></li><li><a href="/service-areas/laurens-sc/">Laurens, SC</a></li><li><a href="/service-areas/mccormick-sc/">McCormick, SC</a></li><li><a href="/service-areas/ninety-six-sc/">Ninety Six, SC</a></li><li><a href="/service-areas/calhoun-falls-sc/">Calhoun Falls, SC</a></li><li><a href="/service-areas/due-west-sc/">Due West, SC</a></li></ul></div>
       <div><h4>Company</h4><ul class="footer-links"><li><a href="/about/">About Eric Callaway</a></li><li><a href="/pricing/">Pricing Calculator</a></li><li><a href="/financing/">Financing</a></li><li><a href="/reviews/">Reviews</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul></div>
     </div>
@@ -273,6 +276,22 @@ SERVICES = {
 </ul>
 <h3>Why drains in Upstate SC clog the way they do</h3>
 <p>Abbeville and Greenwood have a lot of older housing stock — pre-1960 homes still on galvanized supply and cast-iron drain stacks. As cast iron ages, its inside surface gets rougher; everything that goes down a drain catches on it. That's why a 70-year-old house seems to clog twice a year and a brand-new build never does. Out in rural Abbeville and McCormick counties, septic systems mean that a clog can also be a full tank — we'll tell you before you spend on a snake.</p>
+<h3>How much does drain cleaning cost?</h3>
+<p>A single drain clear (sink, tub, shower, or toilet) starts at $149 with our flat-rate pricing. Main sewer line cleaning runs $249 to $449 depending on access and severity. Hydro jetting for stubborn grease or root intrusion is $399 to $699. You get the exact price in writing before we start — see our <a href="/pricing/">pricing page</a> for more detail.</p>
+<h3>What causes a clogged drain?</h3>
+<p>The cause depends on which drain is clogged. Kitchen sinks clog from grease and food particles that coat the inside of the pipe over months. Bathroom sinks and showers clog from hair and soap residue. Toilets clog from excessive paper, wipes marketed as "flushable" (they aren't), or foreign objects. Main sewer lines clog from tree roots that infiltrate pipe joints — especially in older clay or Orangeburg pipes — or from accumulated grease that hardens along the line.</p>
+<h3>Signs you need a plumber vs. a DIY fix</h3>
+<p>A single slow drain that clears with a plunger or a $5 drain snake from the hardware store is usually fine to handle yourself. Call a plumber when:</p>
+<ul>
+  <li>More than one drain is slow at the same time — that means the clog is in a shared line or the main</li>
+  <li>A plunger or store-bought snake didn't fix it — the clog is deeper than you can reach</li>
+  <li>Chemical drain cleaner didn't work (and stop using it — it corrodes pipes)</li>
+  <li>Water backs up into a different fixture when you flush or run a sink</li>
+  <li>You smell sewer gas inside the house</li>
+  <li>The drain clears but clogs again within a week or two — that pattern means a deeper problem</li>
+</ul>
+<h3>Where we clear drains</h3>
+<p>We provide drain cleaning across Abbeville, Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, and Due West — same-day service in most cases, 24/7 for emergencies.</p>
 """,
         "faqs": [
             ("How much does drain cleaning cost in Abbeville SC?",
@@ -611,6 +630,147 @@ SERVICES = {
              "Yes. We sub on new commercial construction and tenant build-outs across Upstate SC, including restaurants, retail, and office space. We work to plans, pull permits, and schedule inspections directly with the municipality."),
         ],
     },
+
+    "tankless-water-heater-installation-repair": {
+        "title": "Tankless Water Heater Install &amp; Repair | Abbeville SC | Plumbing Paramedic 911",
+        "description": "Tankless water heater installation and repair across Upstate SC. Flat-rate pricing, 2-year warranty, SC Master Plumber licensed. Call (864) 446-8911.",
+        "h1": "Tankless Water Heater Installation &amp; Repair",
+        "badge": "● Endless Hot Water, Lower Energy Bills",
+        "intro": "Running out of hot water halfway through a shower gets old fast. A tankless (on-demand) water heater heats water only when you need it — which means endless hot water and lower energy bills compared to a traditional tank.",
+        "schema_id": "https://plumbingparamedic911.com/#service-tankless",
+        "service_type": "Tankless Water Heater Installation and Repair",
+        "schema_desc": "Tankless water heater installation, repair, and maintenance across Abbeville, Greenwood, Anderson, Laurens, and McCormick counties. Gas and electric models.",
+        "price_range": "$199 – $3,500+",
+        "price_note": "Repair from $199. New tankless install from $2,200 (unit + labor). Tank-to-tankless conversion quoted on-site.",
+        "og": "/images/og/tankless-water-heater-1200x630.jpg",
+        "body": """
+<h3>Why go tankless?</h3>
+<p>A traditional tank heater keeps 40 to 80 gallons of water hot around the clock — even at 3 AM when nobody's using it. A tankless unit fires only when you open a hot-water tap, heats the water on demand, and shuts off when you close the tap. The result: you never run out of hot water, and your energy bill for water heating drops 20 to 40 percent depending on the model and your usage.</p>
+<p>Tankless units also last longer — 20 years is typical with annual maintenance, versus 8 to 12 for a traditional tank. They take up far less space (wall-mounted, about the size of a carry-on suitcase), and they eliminate the risk of a 50-gallon tank rupture flooding your utility room.</p>
+<h3>What we handle</h3>
+<ul>
+  <li><strong>New tankless water heater installation</strong> — gas or electric, whole-house or point-of-use</li>
+  <li><strong>Tankless repair</strong> — no hot water, error codes, flow sensor issues, ignition failure, temperature fluctuation</li>
+  <li><strong>Annual descaling and flushing</strong> — removes mineral buildup and keeps your unit running at peak efficiency, especially important in Greenwood and other hard-water areas</li>
+  <li><strong>Tank-to-tankless conversion</strong> — replacing an old tank-style heater with a tankless system, including any gas line, venting, or electrical upgrades needed</li>
+</ul>
+<h3>Where we install</h3>
+<p>We install and repair tankless water heaters across Abbeville, Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, and Due West. Whether you're building new, replacing a failed tank heater, or upgrading for efficiency, we'll walk you through gas vs. electric, sizing for your household, and what the install involves — before you commit to anything.</p>
+<h3>What to expect</h3>
+<p>Like everything we do, you get a flat-rate price in writing before we start — no surprise charges — and a 2-year warranty on parts and labor. Most tankless installs are completed in a single day. Repairs are typically same-day.</p>
+""",
+        "faqs": [
+            ("How much does a tankless water heater cost to install?",
+             "A new tankless water heater installation typically runs $2,200 to $3,500+ depending on the unit, whether it's gas or electric, and whether your home needs gas line or venting upgrades. We give you a flat-rate written quote before any work begins."),
+            ("Is a tankless water heater worth it?",
+             "For most households, yes. You'll save 20 to 40 percent on water-heating energy costs, never run out of hot water, and the unit lasts about twice as long as a tank. The upfront cost is higher, but the lifetime cost is usually lower."),
+            ("Do tankless water heaters need maintenance?",
+             "Yes — annual descaling (flushing with vinegar solution) is recommended, especially in hard-water areas like Greenwood. Without it, mineral buildup reduces efficiency and can trigger error codes. We offer annual maintenance service."),
+            ("Can you convert my tank water heater to tankless?",
+             "Yes. We handle the full conversion — removing the old tank, installing the tankless unit, and upgrading gas lines, venting, or electrical as needed. We'll quote the complete job upfront so there are no surprises."),
+            ("What brands of tankless water heaters do you install?",
+             "We install major brands including Rinnai, Navien, Noritz, and Rheem. We'll recommend a unit based on your household size, water usage, and whether you want gas or electric."),
+            ("How long does a tankless water heater last?",
+             "With annual maintenance, a quality tankless unit lasts 20 years or more — roughly double the lifespan of a traditional tank water heater."),
+        ],
+    },
+
+    "slab-leak-repair": {
+        "title": "Slab Leak Repair | Abbeville &amp; Upstate SC | Plumbing Paramedic 911",
+        "description": "Slab leak detection and repair in Abbeville, Greenwood, Anderson &amp; Upstate SC. Locate and fix leaks under your foundation without tearing up your whole yard. Call (864) 446-8911.",
+        "h1": "Slab Leak Repair",
+        "badge": "● Pinpoint Accuracy, Minimal Disruption",
+        "intro": "A slab leak — a leak in the water line running under your home's concrete foundation — is one of the trickiest plumbing problems to catch early. We use leak detection equipment to pinpoint exactly where a slab leak is before we start any repair, which means less digging, less mess, and a lower bill.",
+        "schema_id": "https://plumbingparamedic911.com/#service-slableak",
+        "service_type": "Slab Leak Repair",
+        "schema_desc": "Slab leak detection and repair services across Abbeville, Greenwood, Anderson, Laurens, and McCormick counties. Non-invasive detection, minimal-disruption repair.",
+        "price_range": "$399 – $2,500+",
+        "price_note": "Detection from $399. Spot repair from $799. Re-route from $1,500. Quoted in writing before work begins.",
+        "og": "/images/og/slab-leak-repair-1200x630.jpg",
+        "body": """
+<h3>Warning signs of a slab leak</h3>
+<ul>
+  <li><strong>A warm or wet spot on an otherwise dry floor</strong> — hot-water slab leaks heat the concrete above them</li>
+  <li><strong>Your water bill jumped with no explanation</strong> — a steady leak under the slab runs 24/7</li>
+  <li><strong>Low water pressure throughout the house</strong> — water escaping before it reaches your fixtures</li>
+  <li><strong>The sound of running water when every fixture is off</strong> — listen near the floor in a quiet house</li>
+  <li><strong>Cracks appearing in your flooring or foundation</strong> — water undermining the soil beneath the slab</li>
+  <li><strong>Mold or mildew smell with no visible source</strong> — moisture wicking up through the slab</li>
+</ul>
+<h3>How we find slab leaks</h3>
+<p>Guessing where a slab leak is means tearing up concrete until you find it — expensive and destructive. We use acoustic detection, pressure testing, and thermal imaging to pinpoint the exact location of the leak before we cut a single inch of concrete. In most cases, we can locate the leak within a few square feet, which means the repair opening is small and the cost stays down.</p>
+<h3>Repair options</h3>
+<p>Once we've located the leak, we'll walk you through your options and give you a flat-rate price in writing before any work begins:</p>
+<ul>
+  <li><strong>Spot repair</strong> — open the slab at the leak point, repair or replace the damaged section of pipe, patch the concrete. Best when the rest of the line is in good condition.</li>
+  <li><strong>Re-route</strong> — run a new water line through the wall or attic to bypass the under-slab line entirely. Best when the under-slab pipe is old or has leaked before, since it avoids future slab cuts.</li>
+  <li><strong>Full repipe</strong> — replace all under-slab supply lines. Recommended when the original plumbing is deteriorated system-wide (common in homes with copper supply lines from the 1960s–1980s that have thinned from the inside).</li>
+</ul>
+<h3>Don't wait on a slab leak</h3>
+<p>A slab leak that goes untreated can undermine your foundation, cause mold growth, and run your water bill up hundreds of dollars a month. If you're seeing any of the warning signs above, call us. We serve Abbeville, Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, and Due West — 24/7 for emergencies.</p>
+""",
+        "faqs": [
+            ("How much does slab leak repair cost?",
+             "Detection runs $399 to $599. A spot repair (opening the slab, fixing the pipe, patching) typically costs $799 to $1,500. A re-route to bypass the under-slab line runs $1,500 to $2,500+. We give you a flat-rate written quote before any work begins."),
+            ("How do you detect a slab leak without tearing up the floor?",
+             "We use acoustic leak detection equipment, pressure testing, and thermal imaging to pinpoint the leak location through the concrete — no guessing, no exploratory demolition. In most cases, we can locate the leak within a few square feet."),
+            ("Can a slab leak damage my foundation?",
+             "Yes. Water leaking under a concrete slab erodes the soil that supports the foundation. Over time, this can cause the slab to settle unevenly, crack, and shift — leading to structural damage that's far more expensive to repair than the leak itself."),
+            ("Should I repair or re-route a slab leak?",
+             "If the pipe is otherwise in good condition and this is a first-time leak, a spot repair is usually the most cost-effective fix. If the pipe has leaked before, is old copper that's thinning, or is in a hard-to-reach location, a re-route through the wall or attic avoids future slab cuts."),
+            ("How long does slab leak repair take?",
+             "Detection typically takes 1 to 3 hours. A spot repair can often be completed the same day. A re-route usually takes a full day. We'll give you a timeline along with your quote."),
+            ("Is slab leak repair covered by homeowners insurance?",
+             "Many homeowners insurance policies cover sudden and accidental water damage from a slab leak, though they typically don't cover the plumbing repair itself. We recommend contacting your insurance company as soon as you suspect a slab leak — we can provide documentation of the damage for your claim."),
+        ],
+    },
+
+    "water-filtration-softener-systems": {
+        "title": "Water Filtration &amp; Softener Systems | Abbeville SC | Plumbing Paramedic 911",
+        "description": "Whole-house water filtration and water softener installation in Abbeville, Greenwood, Anderson &amp; Upstate SC. Flat-rate pricing, 2-year warranty. Call (864) 446-8911.",
+        "h1": "Water Filtration &amp; Softener Systems",
+        "badge": "● Cleaner Water, Longer Appliance Life",
+        "intro": "Hard water and well water can mean scale buildup on your fixtures, spotty dishes, dry skin, and shorter appliance life. A whole-house filtration or softener system fixes that at the source, before water ever reaches a faucet.",
+        "schema_id": "https://plumbingparamedic911.com/#service-filtration",
+        "service_type": "Water Filtration and Softener Installation",
+        "schema_desc": "Whole-house water filtration and water softener installation, repair, and maintenance for homes on city water and private wells across Abbeville, Greenwood, Anderson, Laurens, and McCormick counties.",
+        "price_range": "$899 – $3,500+",
+        "price_note": "Basic softener install from $899. Softener + filtration combo from $1,800. Well-water treatment systems quoted on-site.",
+        "og": "/images/og/water-filtration-1200x630.jpg",
+        "body": """
+<h3>Why your water matters</h3>
+<p>Greenwood's municipal water is moderately hard — we replace water heater elements there twice as often as in Abbeville. Hard water also shortens the life of dishwashers, washing machines, and ice makers by coating their internal parts with mineral scale. On private wells across Abbeville, McCormick, and Laurens counties, we see iron staining, sulfur smell, sediment, and low pH — all fixable with the right filtration.</p>
+<p>A whole-house system treats water at the point of entry so every tap, shower, and appliance in your home gets clean, softened water. No more white film on shower doors, no more scale in the coffee maker, and your water heater lasts years longer.</p>
+<h3>What we install and service</h3>
+<ul>
+  <li><strong>Whole-house water softener</strong> — removes calcium and magnesium (hardness) from city or well water, protecting fixtures and appliances</li>
+  <li><strong>Sediment and carbon filtration</strong> — for well water or city water with taste, odor, or particulate issues</li>
+  <li><strong>Iron and sulfur filters</strong> — for well water with rotten-egg smell or orange/brown staining</li>
+  <li><strong>Combination softener + filtration systems</strong> — the most common install for well-water homes</li>
+  <li><strong>UV disinfection</strong> — for well water that tests positive for bacteria</li>
+  <li><strong>Reverse osmosis (under-sink)</strong> — for drinking-water quality at a single tap</li>
+  <li><strong>Repair and maintenance of existing systems</strong> — resin replacement, media change, valve repair, salt delivery setup</li>
+</ul>
+<h3>Where we install</h3>
+<p>We install and service water filtration and softener systems for homes on both city water and private wells throughout Abbeville, Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, and Due West.</p>
+<h3>No-pressure approach</h3>
+<p>We'll walk your water quality concerns through with you honestly — test your water if you'd like, explain what's actually in it and what (if anything) needs treatment. You'll get a flat-rate price and a 2-year warranty on the install, no pressure. Not every home needs a system, and we'll tell you that too.</p>
+""",
+        "faqs": [
+            ("How much does a water softener cost to install?",
+             "A basic whole-house water softener installation runs $899 to $1,800 depending on the unit capacity and your home's plumbing. A combination softener + filtration system for well water runs $1,800 to $3,500+. We provide a flat-rate written quote before any work begins."),
+            ("Do I need a water softener in Greenwood, SC?",
+             "Greenwood's municipal water is moderately hard. We see significantly more water heater element failures, faucet aerator clogs, and fixture scale in Greenwood than in areas with softer water. A softener is a good investment if you want to protect your appliances and fixtures."),
+            ("What's the difference between a water softener and a water filter?",
+             "A softener removes hardness minerals (calcium and magnesium) using ion exchange. A filter removes sediment, chlorine, iron, sulfur, or other contaminants using physical or chemical media. Many well-water homes need both."),
+            ("How often does a water softener need maintenance?",
+             "Salt-based softeners need salt refilled every 4 to 8 weeks depending on usage. The resin bed should be inspected annually and replaced every 10 to 15 years. We can set up a maintenance schedule for you."),
+            ("Can you treat well water with a sulfur smell?",
+             "Yes. Sulfur smell (rotten-egg odor) in well water is caused by hydrogen sulfide gas. An oxidizing iron/sulfur filter or an aeration system removes it effectively. We'll test your water to determine the right approach."),
+            ("Will a water softener affect my septic system?",
+             "Modern high-efficiency water softeners produce minimal brine discharge and are generally considered safe for septic systems. If you have concerns about your specific septic system, we'll discuss options during the quote."),
+        ],
+    },
 }
 
 
@@ -770,32 +930,37 @@ CITIES = {
         "wiki":"https://en.wikipedia.org/wiki/Greenwood,_South_Carolina",
         "lat":34.196601,"lng":-82.161262,
         "response":"~45 min",
-        "title":"Plumber in Greenwood, SC | 24/7 Service | Plumbing Paramedic 911",
-        "description":"SC Master Plumber serving Greenwood, SC 24/7. Drain cleaning, water heaters, well pumps, leak detection, hard-water solutions. Flat-rate pricing. Call (864) 446-8911.",
+        "title":"Plumber in Greenwood, SC | 24/7 Emergency &amp; Scheduled Service | Plumbing Paramedic 911",
+        "description":"Licensed SC Master Plumber serving Greenwood, SC and Greenwood County 24/7. Drain cleaning, water heaters, well pumps, slab leaks, water softeners, tankless installs. Flat-rate pricing, 2-year warranty. Call (864) 446-8911.",
         "og":"/images/og/greenwood-1200x630.jpg",
-        "intro":"Greenwood is our biggest neighboring city — about a 30-minute drive from our Abbeville shop. We service Greenwood city limits and the surrounding Greenwood County area for everything from same-day drain calls to full bathroom remodels, with a typical emergency response time of around 45 minutes.",
+        "intro":"Greenwood is our biggest neighboring city — about a 30-minute drive from our Abbeville shop via US 178 and SC 72. We service Greenwood city limits and the surrounding Greenwood County area for everything from same-day drain calls to full bathroom remodels, with a typical emergency response time of around 45 minutes.",
         "body":"""
-<h3>Local plumbing problems specific to Greenwood</h3>
-<p>Greenwood's municipal water is moderately hard, and we see the consequences on water heaters and fixtures. Scale builds up on heating elements (electric heaters) and shortens tank life from a 12-year average to 6 or 7. Faucet aerators and showerheads clog faster. Pressure-balanced shower valves develop intermittent function. The fix is usually a softener or scale-inhibiting filter on the main supply line — something we install regularly here and almost never need to install in Abbeville (which has different source water chemistry).</p>
-<p>Greenwood also has a wide mix of housing stock — from 1920s-era homes near Uptown to 1970s subdivisions to brand-new construction in the Lake Greenwood area. We do everything from cast-iron drain stack work in the older parts of town to slab leak detection in newer builds. Lakeside properties around Lake Greenwood often have well water and septic systems, even though they're close to the city — we handle both.</p>
-<h3>Common services in Greenwood</h3>
+<h3>Greenwood plumbing problems we see every week</h3>
+<p>Greenwood's municipal water is moderately hard, and we see the consequences on water heaters and fixtures. Scale builds up on heating elements (electric heaters) and shortens tank life from a 12-year average to 6 or 7. Faucet aerators and showerheads clog faster. Pressure-balanced shower valves develop intermittent function. The fix is usually a <a href="/services/water-filtration-softener-systems/">softener or scale-inhibiting filter</a> on the main supply line — something we install regularly in Greenwood and almost never need to install in Abbeville (which has different source water chemistry).</p>
+<p>Greenwood also has a wide mix of housing stock. We work in the 1920s-era homes near Uptown Greenwood and along Main Street, the mid-century neighborhoods around Lander University and Self Regional Healthcare, the 1970s subdivisions off Bypass 25 and Montague Avenue, and the newer construction around the Lake Greenwood area. We do everything from cast-iron drain stack work in the older parts of town to <a href="/services/slab-leak-repair/">slab leak detection</a> in newer slab-on-grade builds.</p>
+<p>Out near Lake Greenwood — along SC 702 and the marina roads — homes often have well water and septic systems even though they're close to the city. We handle both, and we install <a href="/services/water-filtration-softener-systems/">well-water filtration systems</a> for the iron and sulfur issues common in that area.</p>
+<h3>Common services in Greenwood, SC</h3>
 <ul>
-  <li><strong>Same-day service</strong> — typical response 45 minutes</li>
+  <li><strong>Same-day service across Greenwood</strong> — typical response 45 minutes</li>
   <li><strong>Water heater repair and replacement</strong> — hard-water-related failures are our #1 Greenwood call</li>
-  <li><strong>Water softeners and filtration</strong> — to extend fixture and heater life</li>
-  <li><strong>Drain cleaning and sewer service</strong> — including main line clearing for older neighborhoods</li>
-  <li><strong>Leak detection</strong> — acoustic, thermal, and slab leak locating</li>
+  <li><strong><a href="/services/tankless-water-heater-installation-repair/">Tankless water heater installation</a></strong> — popular upgrade for Greenwood homeowners tired of running out of hot water</li>
+  <li><strong><a href="/services/water-filtration-softener-systems/">Water softeners and filtration</a></strong> — to extend fixture and heater life in Greenwood's hard water</li>
+  <li><strong><a href="/services/drain-cleaning/">Drain cleaning and sewer service</a></strong> — including main line clearing for Uptown, Montague, and older Greenwood neighborhoods</li>
+  <li><strong><a href="/services/slab-leak-repair/">Slab leak detection and repair</a></strong> — for newer Greenwood subdivisions on slab foundations</li>
+  <li><strong><a href="/services/leak-detection/">Leak detection</a></strong> — acoustic, thermal, and slab leak locating</li>
   <li><strong>Well pump work</strong> — for Lake Greenwood and rural Greenwood County properties</li>
   <li><strong>Backflow testing</strong> — annual compliance for Greenwood CPW</li>
-  <li><strong>Commercial plumbing</strong> — restaurants on Main and Uptown, multi-family, retail</li>
+  <li><strong>Commercial plumbing</strong> — restaurants on Main Street and Uptown, Lander University area businesses, multi-family, retail along Bypass 25</li>
 </ul>
+<h3>Neighborhoods and areas we serve in Greenwood</h3>
+<p>We work across all of Greenwood — from Uptown and the Main Street corridor, to the neighborhoods around Lander University, to Self Regional Healthcare and the medical campus area, to the residential streets off Montague Avenue and Bypass 25 (US 25), to the subdivisions near Greenwood Mall, to the lakefront and rural properties along SC 702 toward Lake Greenwood. If you're in Greenwood County, we'll come to you.</p>
 <h3>About Greenwood</h3>
-<p>Greenwood is the seat of Greenwood County and home to about 23,000 people in the city limits and 70,000+ in the county. Lander University is here; so is the headquarters of Self Regional Healthcare. Municipal water comes from Greenwood Commissioners of Public Works (CPW), which sources from Lake Greenwood. We're roughly 20 miles east of our Abbeville shop on US 178 / SC 72.</p>
+<p>Greenwood is the seat of Greenwood County and home to about 23,000 people in the city limits and 70,000+ in the county. Lander University is here; so is the headquarters of Self Regional Healthcare. The Uptown district, centered on Main Street, has seen significant revitalization in recent years. Municipal water comes from Greenwood Commissioners of Public Works (CPW), which sources from Lake Greenwood. We're roughly 20 miles east of our Abbeville shop on US 178 / SC 72.</p>
 <h3>Why Greenwood homeowners call us</h3>
 <ul>
   <li>We bring the same flat-rate pricing and same 24/7 response to Greenwood as we do to Abbeville</li>
-  <li>Licensed SC Master Plumber on every job</li>
-  <li>BBB A+ rated</li>
+  <li>Licensed SC Master Plumber on every job — Eric Callaway personally on most Greenwood calls</li>
+  <li>BBB A+ rated, 32+ Google reviews, 4.9-star average</li>
   <li>2-year warranty on every repair and installation</li>
   <li>In-house financing on jobs over $500</li>
   <li>Military, senior, and first-responder discounts</li>
@@ -1196,8 +1361,11 @@ def render_services_hub():
         ("24-7-emergency-plumbing","🚨","24/7 Emergency Plumbing","Burst pipes, sewer backups, flooding — dispatched 24/7."),
         ("drain-cleaning","🚿","Drain Cleaning","Augering, hydro jetting, camera inspection."),
         ("water-heater-repair-replacement","🔥","Water Heater Services","Tank, tankless, heat-pump — repair &amp; install."),
+        ("tankless-water-heater-installation-repair","🔥","Tankless Water Heaters","Endless hot water, lower energy bills. Install &amp; repair."),
         ("leak-detection","💦","Leak Detection","Slab, wall, underground — find &amp; fix hidden leaks."),
+        ("slab-leak-repair","💦","Slab Leak Repair","Pinpoint &amp; fix leaks under your foundation."),
         ("plumbing-fixture-installation-repair","🚰","Fixture Install &amp; Repair","Toilets, faucets, sinks, disposals, showers."),
+        ("water-filtration-softener-systems","💧","Water Filtration &amp; Softeners","Whole-house softeners, filters, well-water treatment."),
         ("well-pump-repair","💧","Well Pump Repair","Pumps, tanks, filtration, water testing."),
         ("backflow-prevention-testing","🛡️","Backflow Testing","Annual SC-certified testing &amp; repair."),
         ("commercial-plumbing","🏢","Commercial Plumbing","Restaurants, offices, retail, multi-family."),
@@ -1845,7 +2013,7 @@ def write(path_rel: str, html: str):
 
 
 def main():
-    # Services (7 — the 8th, emergency-plumbing, is hand-authored)
+    # Services (10 — the 11th, emergency-plumbing, is hand-authored)
     for slug, s in SERVICES.items():
         write(f"services/{slug}/index.html", render_service_page(slug, s))
     # Cities
