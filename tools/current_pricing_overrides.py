@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Patch generator output with current Plumbing Paramedic 911 pricing policy.
 
-The legacy calculator still contained an old $150 after-hours adjustment,
-waived-service-call wording, and fixed $50 discount copy. Keep the calculator's
-repair ranges as planning estimates, while publishing the current service-call
-schedule separately and preventing stale policy claims from reaching search or
-AI answer engines.
+The legacy site still contains an old $150 after-hours adjustment,
+waived/free-service-call wording, and fixed $50 discount copy in a few places.
+Keep repair ranges as planning estimates while publishing the current service-call
+schedule consistently and preventing stale policy claims from reaching customers,
+search engines, or AI answer engines.
 """
 from __future__ import annotations
 
@@ -23,6 +23,48 @@ CURRENT_AFTER_HOURS_ANSWER = (
     "After-hours and weekend service / diagnostic calls are $99. After-midnight and holiday service / "
     "diagnostic calls are $158. Repair or installation work is quoted separately before it begins."
 )
+
+
+def patch_homepage() -> None:
+    """Keep hand-authored homepage pricing/FAQ copy aligned with the current policy."""
+    file = ROOT / "index.html"
+    text = file.read_text(encoding="utf-8")
+
+    text = text.replace(
+        '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--blue-dk);border-radius:0 0 8px 8px"><span style="font-weight:700;font-size:.9rem;color:white">Emergency (after hours)</span><span style="font-family:var(--ff-head);font-weight:800;color:var(--green-lt)">+$150 surcharge</span></div>',
+        '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--blue-dk);border-radius:0 0 8px 8px;gap:12px;flex-wrap:wrap"><span style="font-weight:700;font-size:.9rem;color:white">Service / diagnostic call</span><span style="font-family:var(--ff-head);font-weight:800;color:var(--green-lt)">$79 weekday · $99 after hours · $158 midnight/holiday</span></div>',
+    )
+
+    text = text.replace(
+        "No extra charge for nights, weekends, or holidays — only the upfront flat after-hours surcharge. Military, senior, police, fire &amp; EMS discounts always available.",
+        "Service / diagnostic calls are $79 weekdays, $99 after hours and weekends, and $158 after midnight or on holidays. Repair pricing is approved before work begins. Military, senior, police, fire &amp; EMS discounts are available where applicable.",
+    )
+
+    stale_home_faq = (
+        "Plumbing Paramedic 911 gives free up-front estimates before any work begins. Standard service visits are quoted at flat-rate prices; "
+        "emergency dispatch fees apply for after-hours calls. Call (864) 446-8911 for a no-obligation quote."
+    )
+    current_home_faq = (
+        "The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. "
+        "Repair work is priced separately and approved before it begins. Call (864) 446-8911 for current dispatch availability."
+    )
+    text = text.replace(stale_home_faq, current_home_faq)
+
+    stale_fragments = (
+        "+$150 surcharge",
+        "upfront flat after-hours surcharge",
+        "gives free up-front estimates before any work begins",
+    )
+    remaining = [fragment for fragment in stale_fragments if fragment.lower() in text.lower()]
+    if remaining:
+        raise RuntimeError(f"Homepage still contains stale pricing policy: {remaining}")
+
+    required = ("$79", "$99", "$158")
+    missing = [price for price in required if price not in text]
+    if missing:
+        raise RuntimeError(f"Homepage is missing current service-call pricing: {missing}")
+
+    file.write_text(text, encoding="utf-8")
 
 
 def patch_pricing() -> None:
@@ -92,5 +134,6 @@ def patch_faq() -> None:
 
 
 def apply() -> None:
+    patch_homepage()
     patch_pricing()
     patch_faq()
