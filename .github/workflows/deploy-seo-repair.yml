@@ -191,9 +191,9 @@ jobs:
           echo 'Verified current AI-readable business, pricing and local-service facts.'
 
           guides="$(fetch "${BASE_URL}/guides/?deploy=${GITHUB_SHA}")"
-          printf '%s' "$guides" | grep -Fq 'Homeowner Plumbing Guides by Eric Callaway'
+          printf '%s' "$guides" | grep -Fq 'Plumbing Guides for South Carolina Homeowners'
           printf '%s' "$guides" | grep -Fq 'Get the Complete Bundle'
-          echo 'Verified paid homeowner guide storefront remains live.'
+          echo 'Verified canonical paid homeowner guide storefront remains live.'
 
           headers="$(curl --silent --show-error --head \
             -H 'Cache-Control: no-cache' "${BASE_URL}/?deploy=${GITHUB_SHA}" | tr -d '\r')"
