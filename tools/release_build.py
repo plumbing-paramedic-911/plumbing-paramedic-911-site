@@ -31,6 +31,7 @@ TITLE_OVERRIDES = {
     ("SERVICES", "well-pump-repair"): "Well Pump Repair Abbeville SC | Plumbing Paramedic 911",
     ("SERVICES", "plumbing-fixture-installation-repair"): "Fixture Repair Abbeville SC | Plumbing Paramedic 911",
     ("SERVICES", "backflow-prevention-testing"): "Backflow Testing Upstate SC | Plumbing Paramedic 911",
+    ("SERVICES", "sewer-line-repair"): "Sewer Line Repair Upstate SC | Plumbing Paramedic 911",
     ("CITIES", "mccormick-sc"): "McCormick SC Plumber & Well Pumps | Plumbing Paramedic 911",
     ("CITIES", "calhoun-falls-sc"): "Calhoun Falls SC Plumber | Plumbing Paramedic 911",
 }
@@ -38,6 +39,7 @@ DESCRIPTION_OVERRIDES = {
     ("SERVICES", "well-pump-repair"): "Same-day well pump repair, pressure tanks and no-water service in Abbeville, McCormick and Upstate SC. Upfront pricing. Call (864) 446-8911.",
     ("SERVICES", "plumbing-fixture-installation-repair"): "Faucet, toilet, sink, disposal and fixture repair or installation in Abbeville and Upstate SC. Upfront flat-rate pricing. Call (864) 446-8911.",
     ("SERVICES", "backflow-prevention-testing"): "Certified backflow testing, repair and installation for irrigation, fire and commercial systems across Upstate SC. Call (864) 446-8911.",
+    ("SERVICES", "sewer-line-repair"): "Sewer line diagnosis, camera inspection, repair and replacement planning across Abbeville, Greenwood and Upstate SC. Call (864) 446-8911.",
     ("CITIES", "mccormick-sc"): "24/7 plumber in McCormick SC for well pumps, lake homes, water heaters, drains and leaks. Upfront pricing. Call (864) 446-8911.",
     ("CITIES", "calhoun-falls-sc"): "24/7 plumber in Calhoun Falls SC for well pumps, lake homes, water heaters, drains and leaks. Upfront pricing. Call (864) 446-8911.",
 }
