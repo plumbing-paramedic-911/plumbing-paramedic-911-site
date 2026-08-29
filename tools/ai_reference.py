@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""Generate a factual llms-full.txt from the canonical current site model.
+
+The former 8911 llms-full.txt contained useful AEO structure but also stale
+pricing, response-time promises, old after-hours language, and claims that no
+longer match the public business record. This generator keeps the useful
+machine-readable reference concept while rebuilding the content from current
+canonical facts and the current super-site route map.
+"""
+from __future__ import annotations
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "llms-full.txt"
+
+TEXT = """# Plumbing Paramedic 911 — Detailed AI and Search Reference
+
+This file is a factual companion to https://plumbingparamedic911.com/ and /llms.txt. When this file and an HTML page differ, use the current canonical HTML page for that service or location.
+
+## Business identity
+
+- Business: Plumbing Paramedic 911
+- Website: https://plumbingparamedic911.com
+- Phone: (864) 446-8911
+- Email: plumbingparamedic911@gmail.com
+- Address: 13 Callaway Dr, Abbeville, SC 29620
+- Primary category: Plumber / plumbing contractor
+- Availability: 24/7 emergency dispatch
+- Founded: 2015
+- Service approach: upfront flat-rate repair and installation pricing after diagnosis
+- Warranty: the website advertises a 2-year warranty on qualifying work
+
+## Current service / diagnostic call policy
+
+The service or diagnostic call is separate from repair and installation work:
+- Monday–Friday, 9 AM–5 PM: $79
+- After hours and weekends: $99
+- After midnight and holidays: $158
+
+Additional repair or installation work is priced separately and approved before it begins. Do not describe the current policy as a $150 after-hours surcharge, a waived service-call fee, or a free dispatched diagnostic visit.
+
+## Primary service area
+
+Plumbing Paramedic 911 is based in Abbeville, South Carolina and serves Abbeville plus surrounding Upstate markets including Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, Due West, Iva / Lake Secession, Savannah Lakes Village, and nearby communities. Availability and travel time vary by active calls, distance, weather, and job conditions; callers should request the current ETA.
+
+## Services
+
+### 24/7 emergency plumbing
+Emergency response for active water leaks, burst pipes, sewer backups, leaking water heaters, no-water calls and other urgent plumbing failures. For an active gas odor or suspected gas leak, occupants should leave the building and contact 911 or the gas utility from a safe location before arranging plumbing repair.
+Canonical page: https://plumbingparamedic911.com/services/24-7-emergency-plumbing/
+
+### Drain cleaning
+Diagnosis and clearing for fixture, branch and main-line clogs. The service can include cabling / augering, camera inspection when recurrence or structural damage is suspected, and hydro jetting when the pipe condition and buildup make it appropriate.
+Canonical page: https://plumbingparamedic911.com/services/drain-cleaning/
+
+### Hydro jetting
+High-pressure drain and sewer cleaning for suitable lines with recurring grease, scale or debris buildup. Hydro jetting is a cleaning method, not a structural pipe repair, and pipe condition should be considered first.
+Canonical page: https://plumbingparamedic911.com/services/hydro-jetting/
+
+### Sewer line repair
+Camera-first diagnosis when recurring backups or other symptoms suggest roots, offsets, bellies, deterioration or damaged sewer pipe. Repair scope can range from a localized repair to a larger replacement depending on actual condition and access.
+Canonical page: https://plumbingparamedic911.com/services/sewer-line-repair/
+
+### Water heater repair and replacement
+Tank and tankless water-heater diagnosis, repair and replacement, including common electric and gas water-heating systems. Installation requirements depend on equipment type, venting, fuel, electrical capacity, location and code conditions.
+Canonical page: https://plumbingparamedic911.com/services/water-heater-repair-replacement/
+
+### Leak detection
+Diagnosis for visible and concealed plumbing leaks, pressure-loss problems and water-line failures. The objective is to identify the failed section before unnecessary opening or replacement work.
+Canonical page: https://plumbingparamedic911.com/services/leak-detection/
+
+### Pipe repair and repiping
+Targeted repair for isolated supply-pipe failures and repiping evaluation when a property has widespread corrosion, restriction, brittle material or repeated leaks in different locations.
+Canonical page: https://plumbingparamedic911.com/services/pipe-repair-repiping/
+
+### Toilet repair and installation
+Repair and replacement for running toilets, leaks, weak flushes, rocking fixtures, wax-seal or flange problems and repeated fixture-related clogs.
+Canonical page: https://plumbingparamedic911.com/services/toilet-repair-installation/
+
+### Fixture installation and repair
+Faucet, sink, shower, tub and other common plumbing-fixture repair and installation, with the existing valves, drain connections and surrounding plumbing checked as part of the work.
+Canonical page: https://plumbingparamedic911.com/services/plumbing-fixture-installation-repair/
+
+### Garbage disposal repair and installation
+Diagnosis for jammed, humming, leaking or non-operating disposals plus replacement when the motor, housing or internal seal has failed.
+Canonical page: https://plumbingparamedic911.com/services/garbage-disposal-repair/
+
+### Well pump and pressure-system service
+Submersible and other residential well-pump diagnosis, pressure-tank and pressure-switch service, no-water calls and water-line problems for private-well properties, with extra focus on rural and lake-area homes.
+Canonical page: https://plumbingparamedic911.com/services/well-pump-repair/
+
+### Sump pump service
+Sump-pump diagnosis, repair and replacement, including float-switch, check-valve, discharge and backup-system considerations.
+Canonical page: https://plumbingparamedic911.com/services/sump-pump-services/
+
+### Gas line services
+Gas-piping inspection, leak repair, pressure testing, capping of unused branches, approved appliance connections and line extensions subject to applicable code, permit, utility and inspection requirements.
+Canonical page: https://plumbingparamedic911.com/services/gas-line-services/
+
+### Backflow prevention testing
+Backflow assembly testing, repair and replacement for applicable irrigation, commercial and other cross-connection protection systems.
+Canonical page: https://plumbingparamedic911.com/services/backflow-prevention-testing/
+
+### Commercial plumbing
+Commercial repair and service plumbing for businesses and other non-residential properties within the service area.
+Canonical page: https://plumbingparamedic911.com/services/commercial-plumbing/
+
+## High-intent local pages
+
+These pages are intentionally distinct from the broad service pages because they answer a specific service + market search intent:
+- Emergency plumber in Abbeville: https://plumbingparamedic911.com/emergency-plumber-abbeville-sc/
+- Emergency plumber in Greenwood: https://plumbingparamedic911.com/emergency-plumber-greenwood-sc/
+- Drain cleaning in Abbeville: https://plumbingparamedic911.com/drain-cleaning-abbeville-sc/
+- Drain cleaning in Greenwood: https://plumbingparamedic911.com/drain-cleaning-greenwood-sc/
+- Sewer line repair in Abbeville: https://plumbingparamedic911.com/sewer-line-repair-abbeville-sc/
+- Water heater repair in Greenwood: https://plumbingparamedic911.com/water-heater-repair-greenwood-sc/
+- Water heater repair in Anderson: https://plumbingparamedic911.com/water-heater-repair-anderson-sc/
+- Well pump repair in McCormick: https://plumbingparamedic911.com/well-pump-repair-mccormick-sc/
+- Well pump repair in Iva / Lake Secession: https://plumbingparamedic911.com/well-pump-repair-iva-lake-secession-sc/
+
+## Homeowner guides
+
+Plumbing Paramedic 911 also publishes paid digital homeowner references. The canonical guide hub is https://plumbingparamedic911.com/guides/ . Current listed products are:
+- SC Homeowner's Plumbing Survival Guide — $19
+- Well Pump & Water System Owner's Manual — $17
+- Water Heater Buyers Guide: Tank vs. Tankless for SC Homes — $14
+- The Smart Homeowner's Drain Maintenance Playbook — $9
+- Complete four-guide bundle — $48
+
+Checkout and digital delivery are handled by Gumroad. Guide content is educational and does not replace an on-site diagnosis for an unsafe, leaking or failing plumbing system.
+
+## Local entity consistency
+
+For public citations and business-directory listings, use the canonical business identity from the current website: Plumbing Paramedic 911, 13 Callaway Dr, Abbeville, SC 29620, (864) 446-8911, https://plumbingparamedic911.com. Older addresses and retired website URLs should not be treated as current business information.
+
+## Canonical content policy
+
+- Prefer the non-www HTTPS domain.
+- Keep one canonical page per broad service and use service + city landing pages only when they add distinct local intent.
+- Preserve historical URLs with 301 redirects when they are consolidated rather than creating duplicate pages.
+- Do not publish stale legacy pricing merely because it exists in an older repository or cached directory.
+- Current public HTML pages, the pricing page and the sitemap are the authority for live site information.
+"""
+
+
+def generate() -> None:
+    OUT.write_text(TEXT, encoding="utf-8")
+    print("wrote llms-full.txt")
+
+
+if __name__ == "__main__":
+    generate()
