@@ -67,6 +67,63 @@ def patch_homepage() -> None:
     file.write_text(text, encoding="utf-8")
 
 
+def patch_emergency_page() -> None:
+    """Remove the obsolete $150 surcharge/waived-diagnostic claims from the emergency page."""
+    file = ROOT / "services" / "24-7-emergency-plumbing" / "index.html"
+    text = file.read_text(encoding="utf-8")
+
+    stale_after_hours_faq = (
+        "There is a flat $150 after-hours surcharge on emergency calls outside of business hours "
+        "(Monday through Friday, 8 AM to 6 PM). The exact total is disclosed before we leave for your home — "
+        "no hidden weekend, evening, or holiday markups."
+    )
+    current_after_hours_faq = (
+        "The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 "
+        "after midnight or on holidays. Repair work is priced separately and approved before it begins, so you "
+        "know the repair price before authorizing the work."
+    )
+    text = text.replace(stale_after_hours_faq, current_after_hours_faq)
+
+    text = text.replace(
+        "Includes after-hours surcharge, labor, standard parts &amp; 2-year warranty. Larger repairs quoted on-site.",
+        "Typical repair range only; the service / diagnostic call is separate: $99 after hours/weekends and $158 after midnight/holidays. Final repair price is approved before work begins.",
+    )
+    text = text.replace(
+        "<h3 style=\"margin-bottom:6px;font-size:1.1rem\">Typical Emergency Price</h3>",
+        "<h3 style=\"margin-bottom:6px;font-size:1.1rem\">Typical Emergency Repair</h3>",
+    )
+    text = text.replace(
+        "<h3>What's included in our flat-rate emergency dispatch</h3>",
+        "<h3>What happens after emergency dispatch</h3>",
+    )
+    text = text.replace(
+        "You will never be billed by the hour. You will never see a separate \"diagnostic fee\" tacked on after the fact. You will never get a surprise on the invoice — the quoted price is the final price. If we discover something hidden mid-repair (rusted pipe behind drywall, a second leak upstream), we stop, explain, and re-quote before continuing. You sign off in writing on every dollar.",
+        "Repair work is not billed by the hour. The service / diagnostic call is disclosed separately at $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Before repair work begins, we provide the repair price for approval. If we discover something hidden mid-repair (rusted pipe behind drywall, a second leak upstream), we stop, explain, and re-quote before continuing. You approve any additional work before we proceed.",
+    )
+    text = text.replace(
+        "We dispatch around the clock, 365 days a year, with upfront flat-rate pricing disclosed before we leave the shop.",
+        "We dispatch around the clock, 365 days a year, with the service-call charge disclosed upfront and repair pricing approved before work begins.",
+    )
+
+    stale_fragments = (
+        "$150 after-hours surcharge",
+        "flat $150 after-hours surcharge",
+        "Includes after-hours surcharge",
+        'never see a separate "diagnostic fee" tacked on',
+        "Monday through Friday, 8 AM to 6 PM",
+    )
+    remaining = [fragment for fragment in stale_fragments if fragment.lower() in text.lower()]
+    if remaining:
+        raise RuntimeError(f"Emergency page still contains stale pricing policy: {remaining}")
+
+    required = ("$79", "$99", "$158")
+    missing = [price for price in required if price not in text]
+    if missing:
+        raise RuntimeError(f"Emergency page is missing current service-call pricing: {missing}")
+
+    file.write_text(text, encoding="utf-8")
+
+
 def patch_pricing() -> None:
     file = ROOT / "pricing" / "index.html"
     text = file.read_text(encoding="utf-8")
@@ -135,5 +192,6 @@ def patch_faq() -> None:
 
 def apply() -> None:
     patch_homepage()
+    patch_emergency_page()
     patch_pricing()
     patch_faq()
