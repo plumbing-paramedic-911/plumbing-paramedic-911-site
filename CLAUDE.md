@@ -1,267 +1,178 @@
-# CLAUDE.md — Plumbing Paramedic 911 (site build)
+# CLAUDE.md — Plumbing Paramedic 911 canonical production site
 
-Codebase reference for AI assistants working on this repository.
+Codebase instructions for AI assistants and developers working in this repository.
 
----
+## Canonical repository — read this first
 
-## Project Overview
+This repository, `plumbing-paramedic-911/plumbing-paramedic-911-site`, is the **single source of truth for the live website at https://plumbingparamedic911.com**.
 
-**Plumbing Paramedic 911** — a static HTML website for a licensed SC Master
-Plumber based in Abbeville, SC. This repository is a **generator-based** static
-site: most pages are produced by a single Python script from a source-of-truth
-dict, then committed alongside the generated output.
+- Production branch: `main`
+- Production host: Namecheap shared hosting
+- Production deploy: `.github/workflows/deploy-seo-repair.yml`
+- PR quality gate: `.github/workflows/seo-quality.yml`
+- A push to `main` builds, validates, uploads over FTPS, and verifies production.
 
-- **Build tool** — `tools/build.py` (single-file Python 3, stdlib only)
-- **Runtime** — pure static HTML/CSS/JS served by Apache
-- **No CSS/JS framework** — hand-crafted CSS, vanilla JS
-- **No backend or database** — everything is static
-- **Deployment** — no CI workflow yet; deploy by uploading the repo contents to
-  Namecheap shared hosting via FTP/SFTP
+The private repository `plumbing-paramedic-911/8911` is a **legacy website archive**. It was the former production site, but its automatic Namecheap and Cloudflare Pages deployment workflows were disabled on 2026-08-29. Do not treat `8911` as production truth and do not make new production website changes there.
 
-There is a companion repository (`8911`) that carries the currently-shipped,
-richer, hand-authored version of this site. **This repo is the newer
-generator-driven implementation**; if the two disagree, treat `8911` as the
-production truth unless the user says otherwise.
+Useful legacy content may be migrated selectively from `8911`, but it must be normalized to current business facts, pricing, schema and URL rules and merged here through a PR. Never merge the legacy repository wholesale.
 
-### Business Facts (canonical NAP — see `SEO_EXTERNAL_ACTIONS.md`)
+Other repositories in the account are not production website sources:
+- `plumbing-paramedic-911/plumbing-paramedic-911` — GitHub profile/config repository.
+- `plumbing-paramedic-911/github-slideshow` — old GitHub training repository.
+
+## Project overview
+
+Plumbing Paramedic 911 is a generator-assisted static HTML/CSS/JS website for a plumbing contractor based in Abbeville, South Carolina.
+
+- Main build source: `tools/build.py`
+- Production release builder: `tools/release_build.py`
+- Current pricing normalization: `tools/current_pricing_overrides.py`
+- Local high-intent page generation: `tools/local_money_pages.py`
+- Internal-link validation: `tools/check_internal_links.py`
+- Runtime: static HTML/CSS/vanilla JS on Apache
+- No npm/webpack/framework build is required.
+
+Most generator-owned pages are recreated during the production release. The homepage and some richer pages are hand-authored but may be patched by the release builder before deployment. Make source changes in the correct source layer so a future build does not restore stale content.
+
+## Canonical business facts
 
 ```
-Name:    Plumbing Paramedic 911
-Owner:   Eric Callaway, SC Master Plumber (in the trade since 1996, LLC since 2015)
+Business: Plumbing Paramedic 911
 Address: 13 Callaway Dr, Abbeville, SC 29620
-Phone:   (864) 446-8911   (tel:+18644468911)
-Email:   plumbingparamedic911@gmail.com
-URL:     https://plumbingparamedic911.com  (non-www, HTTPS)
-GTM:     GTM-T33LBNF
-GA4:     G-54J49X5XJP
+Phone: (864) 446-8911
+Email: plumbingparamedic911@gmail.com
+Website: https://plumbingparamedic911.com
+Hours: 24/7 emergency dispatch
+GTM: GTM-T33LBNF
+GA4: G-54J49X5XJP
 ```
 
----
+Use the non-www HTTPS domain in canonical URLs.
 
-## Repository Structure
+## Current service-call pricing policy
+
+This is the current production service/diagnostic-call policy unless the owner explicitly changes it:
+
+- $79 Monday–Friday, 9 AM–5 PM
+- $99 after hours and weekends
+- $158 after midnight or on holidays
+- Repair/installation work is priced separately and approved before it begins.
+
+Do not restore obsolete copy such as:
+- `$150 after-hours surcharge`
+- `service call fee is waived`
+- `free diagnostic`
+- `free up-front estimates before any work begins` when referring to a dispatched service/diagnostic visit
+- old 8 AM–6 PM service-call windows
+
+`tools/current_pricing_overrides.py` and the production release validation contain guards for stale pricing language. Keep those protections intact.
+
+## Repository structure
+
+Important top-level areas:
 
 ```
 /
-├── index.html                              # Homepage (hand-authored, NOT regenerated)
+├── index.html
+├── .htaccess
 ├── sitemap.xml
 ├── robots.txt
-├── .htaccess                               # Apache rewrite/caching/security rules
-├── site.webmanifest                        # PWA manifest
-├── llms.txt                                # AI-readable business reference
-├── b2290a30b99296ce58d8329f955dec49.txt    # IndexNow key file
-│
-├── ASSETS_NEEDED.md                        # Checklist of image files still required
-├── SEO_EXTERNAL_ACTIONS.md                 # Off-site tasks (GBP, citations, aggregators)
-│
-├── css/
-│   └── style.css                           # Single stylesheet (~24 KB, ~315 lines)
-├── js/
-│   └── app.js                              # Nav toggle + minor UI JS
-│
-├── about/index.html                        # Generated
-├── contact/index.html                      # Generated
-├── faq/index.html                          # Generated
-├── financing/index.html                    # Generated
-├── pricing/index.html                      # Generated
-├── reviews/index.html                      # Generated
-├── privacy/index.html                      # Generated
-├── terms/index.html                        # Generated
-│
-├── services/                               # Service hub + one subdir per service
-│   ├── index.html                          # Generated hub
-│   ├── 24-7-emergency-plumbing/index.html  # Hand-authored (per build.py docstring)
-│   ├── backflow-prevention-testing/index.html
-│   ├── commercial-plumbing/index.html
-│   ├── drain-cleaning/index.html
-│   ├── leak-detection/index.html
-│   ├── plumbing-fixture-installation-repair/index.html
-│   ├── water-heater-repair-replacement/index.html
-│   └── well-pump-repair/index.html
-│
-├── service-areas/                          # Area hub + one subdir per city
-│   ├── index.html
-│   ├── abbeville-sc/index.html
-│   ├── anderson-sc/index.html
-│   ├── calhoun-falls-sc/index.html
-│   ├── due-west-sc/index.html
-│   ├── greenwood-sc/index.html
-│   ├── laurens-sc/index.html
-│   ├── mccormick-sc/index.html
-│   └── ninety-six-sc/index.html
-│
-└── tools/
-    └── build.py                            # Static-site generator (~1,900 lines)
+├── llms.txt
+├── css/style.css
+├── js/app.js
+├── about/
+├── contact/
+├── faq/
+├── financing/
+├── pricing/
+├── reviews/
+├── privacy/
+├── terms/
+├── services/
+├── service-areas/
+├── tools/
+└── .github/workflows/
 ```
 
----
+The current release also includes high-intent service × market landing pages generated or maintained through the release tooling. Preserve indexed routes or add explicit 301 redirects when consolidating old URLs.
 
-## How the Build Script Works
+## Build and validation
 
-`tools/build.py` is a single Python 3 file (stdlib only — no dependencies). It
-holds the entire site's content in two large in-file dicts and renders each
-page directly into its target `directory/index.html`.
-
-```
-tools/build.py
-├── Shared HTML chunks
-│   ├── NAV_HTML             (top bar, main nav, mobile nav)
-│   └── FOOTER_HTML
-├── Helpers
-│   ├── nav(active)          — inject the active-link class into NAV_HTML
-│   ├── head(title, description, path, og_image, extra_ld)
-│                            — full <head>, meta, OG/Twitter, JSON-LD injection
-│   ├── breadcrumb_ld(items) — BreadcrumbList JSON-LD
-│   ├── faq_ld(faqs) / faq_html(faqs)
-│   └── breadcrumb_html(items)
-├── SERVICES = { slug: { title, description, h1, badge, intro, schema_id,
-│                        service_type, schema_desc, price_range, price_note,
-│                        og, body, faqs, … } }
-├── CITIES = { slug: { … city hero + local content … } }
-├── Renderers
-│   ├── render_service_page(slug, s)
-│   ├── render_city_page(slug, c)
-│   ├── render_services_hub()
-│   ├── render_areas_hub()
-│   ├── render_about() / render_contact() / render_pricing()
-│   ├── render_faq() / render_reviews() / render_financing()
-│   └── render_legal(slug, title, body_html)      — privacy, terms
-└── main()                                        — iterate + call write()
-```
-
-**Not regenerated by `build.py`** (hand-authored, richer content):
-- `/index.html` (homepage)
-- `/services/24-7-emergency-plumbing/index.html`
-
-Everything else in `about/`, `contact/`, `faq/`, `financing/`, `pricing/`,
-`reviews/`, `privacy/`, `terms/`, `services/*`, `service-areas/*` is regenerated
-on every build.
-
-### Running the build
+For a production-equivalent local validation, run:
 
 ```bash
-python3 tools/build.py
+python3 tools/release_build.py
+python3 tools/check_internal_links.py
 ```
 
-- Requires Python 3.9+ (uses `str | None` union syntax)
-- Zero third-party dependencies
-- Writes into the repo. Commit the generated files alongside content changes
-  so the deployed FTP copy matches the repo.
+The release builder regenerates generator-owned pages, creates local money pages, applies the current pricing policy, strengthens internal links, updates required sitemap entries and validates critical SEO/AEO requirements.
 
-### Editing content
-
-- **Service copy** → edit the `SERVICES` dict entry, then rerun the build
-- **City copy** → edit the `CITIES` dict entry, then rerun the build
-- **Utility pages** (about/contact/pricing/faq/reviews/financing/privacy/terms)
-  → edit the corresponding `render_*` function
-- **Nav, footer, `<head>` boilerplate** → edit `NAV_HTML`, `FOOTER_HTML`, or the
-  `head()` helper — a single change propagates to every generated page on rebuild
-- **Homepage** and **`/services/24-7-emergency-plumbing/`** → edit the HTML directly
-
----
-
-## Code Conventions
-
-### HTML (both generated and hand-authored)
-
-- One page per directory: `directory/index.html`
-- Skip link, semantic landmarks, one `<h1>` per page
-- Canonical tag, meta description, `theme-color` (`#0D47A1` on this build —
-  note the blue vs. red used on the `8911` build), OG + Twitter Card
-- **GTM snippet inlined** in every `<head>` (container `GTM-T33LBNF`)
-- **NOTE — bug in `tools/build.py`**: the inlined GTM snippet contains a typo
-  (`'schript'` instead of `'script'`) that breaks the tag on every generated
-  page. When editing content, fix this at the source in `NAV_HTML`/`head()` in
-  `build.py` (grep for `schript`) rather than post-editing generated HTML.
-- Trailing slashes ARE used on internal links here (e.g., `/services/`) —
-  `.htaccess` forces trailing slashes on directory URLs (opposite of the `8911`
-  repo). Match the existing convention.
-
-### CSS
-
-- All styles live in `css/style.css` (singular — do not create a second file)
-- CSS custom properties for brand color, spacing, and radius
-- Mobile-first with `@media (min-width: ...)` breakpoints
-
-### JavaScript
-
-- `js/app.js` — hamburger nav toggle, dropdown behavior, minor UI helpers
-- IIFE + `'use strict'`
-- **Do not add frameworks** (React, Vue, jQuery)
-
-### URL Structure
-
-- Canonical URLs are **non-www** and use **HTTPS**
-- Directory URLs use a **trailing slash** on this build (`.htaccess` enforces it)
-- Kebab-case slugs
-
----
-
-## Structured Data (JSON-LD)
-
-Every generated page carries a JSON-LD block built by `head()` + `breadcrumb_ld()`
-+ per-page schema (Service/Place/FAQPage). The `LocalBusiness` node's `@id` is
-referenced by service schema via `provider.@id`.
-
-Do not remove or restructure JSON-LD in either the generator or generated files.
-
----
-
-## Apache / .htaccess
-
-Handles, in order:
-1. `DirectoryIndex index.html`, `AddDefaultCharset UTF-8`, `Options -Indexes`
-2. Force HTTPS
-3. Force non-www (`www.plumbingparamedic911.com` → apex)
-4. Force trailing slash on directory-style URLs (skip files with extensions)
-5. Browser caching and security headers
-
-Do not remove or reorder rules — mod_rewrite condition order matters.
-
----
+Do not rely on editing only a generated HTML file if the underlying generator will recreate it differently on the next release.
 
 ## Deployment
 
-- **No GitHub Actions workflow** in this repo yet. Deployment is manual FTP
-  upload to Namecheap.
-- Upload the full repo tree except `.git`, `tools/`, `*.md` planning files.
-- Suggested setup: mirror the `8911` repo's `.github/workflows/ftp-deploy.yml`
-  (lftp with STARTTLS explicit TLS on port 21) if/when CI deploy is wanted.
+Production deployment is automatic from `main` through `.github/workflows/deploy-seo-repair.yml`.
 
----
+The workflow:
+1. Checks out the website.
+2. Runs the production release build and internal-link validation.
+3. Validates FTPS secrets.
+4. Uploads the validated site to Namecheap over FTPS.
+5. Fetches key live URLs and verifies production behavior.
+6. Confirms deployment scope.
 
-## Assets Still Required
+Do not add another repository or branch that can upload to the same production target. One production writer is intentional.
 
-`ASSETS_NEEDED.md` lists the image/icon files the HTML references but that are
-not in the repo (favicons, `/logo.png`, `/og-image.jpg`, per-page OG images
-under `/images/og/`). Upload those to the deployed site before shipping.
+## Git workflow
 
----
+- Create a focused feature/fix branch from `main`.
+- Make source changes and run the release validation.
+- Open a PR to `main`.
+- Let `SEO AEO Quality Gate` pass.
+- Merge only after the change is understood and safe.
+- The merge to `main` triggers the production deployment.
 
-## Off-Site SEO Actions
+## Legacy 8911 migration
 
-`SEO_EXTERNAL_ACTIONS.md` is a checklist of manual off-repo tasks (kill the
-`.org` domain, fix Facebook/YP/Yelp/Birdeye/HomeAdvisor listings, submit
-sitemap to GSC/Bing, GBP updates). These are **not** code changes — treat that
-file as a task list, not a spec that affects HTML output.
+`8911` contains useful historical material that is not all present here, including additional service pages, city/service landing pages, blog/resource content, GBP/SEO notes and older voice-agent code. The migration tracker is GitHub issue #13 in this repository.
 
----
+When migrating a legacy page:
+1. Check whether its URL has historical/indexed value.
+2. Port useful content into this repository's current layout/generator conventions.
+3. Replace stale NAP, pricing, schema, hours, links and claims.
+4. Preserve the old URL or add a permanent redirect to the best current equivalent.
+5. Run the SEO/AEO quality gate before merge.
 
-## Git Branch Conventions
+Do not copy the legacy deployment workflows, old red-theme conventions, stale pricing or obsolete structured data into production.
 
-- Feature branches: `claude/[description]-[id]` (e.g., `claude/claude-md-docs-ovgxyj`)
-- Merge into main via PR; no automatic deploy yet
+## SEO/AEO rules
 
----
+- Canonical domain is `https://plumbingparamedic911.com` (non-www).
+- Keep unique page titles/descriptions and valid JSON-LD.
+- Preserve LocalBusiness/Service entity consistency.
+- Keep important pages statically linked; avoid orphaned sitemap URLs.
+- Maintain crawl-safe redirects in `.htaccess` for retired/legacy URLs.
+- `llms.txt` must reflect current business/pricing facts.
+- Do not invent review counts, ratings, licensing details, guarantees or response times.
 
-## What NOT to Do
+## Code conventions
 
-- Do not add npm, `package.json`, or a JS build toolchain
-- Do not introduce CSS/JS frameworks
-- Do not commit real GTM/GA/Meta Pixel/Vapi API keys
-- Do not hand-edit generated pages when the content lives in the `SERVICES` /
-  `CITIES` dict — edit the dict and rerun the build
-- Do not remove the hand-authored homepage or emergency-plumbing page — they
-  are intentionally outside the generator
-- Do not use `www.` in any URLs (site is non-www)
-- Do not drop the trailing slash from directory URLs on this build
-- Do not remove JSON-LD structured data from any page
+- Static HTML5, CSS and vanilla JavaScript only unless a deliberate architecture change is approved.
+- Keep `css/style.css` as the primary stylesheet.
+- Keep `js/app.js` as the main site JavaScript unless a feature specifically requires another asset.
+- Use accessible semantic HTML and one meaningful H1 per page.
+- Do not introduce a JS framework merely for convenience.
+- Do not expose secrets or API keys in client-side files or repository content.
+
+## What not to do
+
+- Do not deploy from `8911`.
+- Do not treat `8911` as production truth.
+- Do not add a second automatic Namecheap production deployment source.
+- Do not wholesale-merge old repositories.
+- Do not restore stale pricing wording.
+- Do not bypass `tools/release_build.py` for production validation.
+- Do not remove redirects or change indexed URL structure without checking SEO impact.
+- Do not remove JSON-LD, analytics or lead-capture integrations without understanding the consequence.
+
+If documentation conflicts, this file and the root `README.md` describe the current repository/deployment authority. Historical planning documents must not override them.
