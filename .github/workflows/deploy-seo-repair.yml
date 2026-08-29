@@ -80,11 +80,46 @@ jobs:
                 --exclude-glob '_noop.txt' \
                 --exclude-glob '_branch_marker.tmp' \
                 ./ .;
+
+              # Exact, audited cleanup only. These paths belong to the frozen
+              # 8911 build and are not part of the canonical public release.
+              # Do not replace this list with mirror --delete; host-managed
+              # paths such as .well-known must remain untouched.
               rm -f _noop.txt;
               rm -f _branch_marker.tmp;
+              rm -f 54eabb3418e503e2c0ef58126dbaee0b.txt;
+              rm -f CLAUDE.md;
+              rm -f gbp/index.html;
+              rm -f docs/local-seo-heat-map.html;
+              rm -f docs/session-recommendations.md;
+              rm -f contact/contact-handler.php;
+              rm -f css/styles.css;
+              rm -f js/main.js;
+              rm -f js/vapi-widget.js;
+              rm -f js/voice-agent.js;
+              rm -f scripts/submit-index.js;
+              rm -f .github/workflows/cloudflare-pages-deploy.yml;
+              rm -f .github/workflows/fix-email-links.yml;
+              rm -f .github/workflows/ftp-deploy.yml;
+
+              # Retired HTML is removed physically only where a permanent
+              # canonical redirect exists in .htaccess.
+              rm -f blog/index.html;
+              rm -f blog/how-to-shut-off-water-in-emergency/index.html;
+              rm -f blog/signs-water-heater-failing/index.html;
+              rm -f costs/index.html;
+              rm -f costs/drain-cleaning-cost/index.html;
+              rm -f costs/emergency-plumber-cost/index.html;
+              rm -f costs/sewer-line-repair-cost/index.html;
+              rm -f costs/water-heater-cost/index.html;
+              rm -f backflow-testing-abbeville-sc/index.html;
+              rm -f commercial-plumber-greenwood-sc/index.html;
+              rm -f service-areas/iva-sc/index.html;
+              rm -f service-areas/starr-sc/index.html;
+              rm -f privacy-policy/index.html;
               bye
             "; then
-              echo "Namecheap FTPS upload completed on attempt ${attempt}."
+              echo "Namecheap FTPS upload and selective legacy cleanup completed on attempt ${attempt}."
               break
             fi
             if [ "$attempt" -eq 3 ]; then
@@ -130,6 +165,32 @@ jobs:
               exit 1
             }
             echo "Verified redirect: ${path} -> ${expected}"
+          }
+
+          assert_retired_file() {
+            path="$1"
+            status="$(curl --silent --show-error --output /dev/null \
+              --write-out '%{http_code}' \
+              -H 'Cache-Control: no-cache' \
+              "${BASE_URL}${path}?deploy=${GITHUB_SHA}")"
+            [ "$status" = '404' ] || {
+              echo "Retired legacy file is still publicly reachable: ${path} (${status})"
+              exit 1
+            }
+            echo "Verified retired file is gone: ${path}"
+          }
+
+          assert_retired_directory() {
+            path="$1"
+            status="$(curl --silent --show-error --output /dev/null \
+              --write-out '%{http_code}' \
+              -H 'Cache-Control: no-cache' \
+              "${BASE_URL}${path}?deploy=${GITHUB_SHA}")"
+            case "$status" in
+              403|404) ;;
+              *) echo "Retired legacy directory is still serving content: ${path} (${status})"; exit 1 ;;
+            esac
+            echo "Verified retired directory serves no content: ${path} (${status})"
           }
 
           # Technical SEO repairs from the first production pass.
@@ -195,6 +256,11 @@ jobs:
           printf '%s' "$guides" | grep -Fq 'Get the Complete Bundle'
           echo 'Verified canonical paid homeowner guide storefront remains live.'
 
+          # Make sure selective cleanup did not touch current shared assets.
+          fetch "${BASE_URL}/css/style.css?deploy=${GITHUB_SHA}" >/dev/null
+          fetch "${BASE_URL}/js/app.js?deploy=${GITHUB_SHA}" >/dev/null
+          echo 'Verified current CSS and JavaScript remain live.'
+
           headers="$(curl --silent --show-error --head \
             -H 'Cache-Control: no-cache' "${BASE_URL}/?deploy=${GITHUB_SHA}" | tr -d '\r')"
           printf '%s' "$headers" | grep -i 'content-security-policy:' | \
@@ -203,12 +269,33 @@ jobs:
 
           assert_redirect '/blog/signs-water-heater-failing/' \
             'https://plumbingparamedic911.com/services/water-heater-repair-replacement/'
+          assert_redirect '/blog/how-to-shut-off-water-in-emergency/' \
+            'https://plumbingparamedic911.com/services/24-7-emergency-plumbing/'
           assert_redirect '/costs/' \
             'https://plumbingparamedic911.com/pricing/'
           assert_redirect '/costs/emergency-plumber-cost/' \
             'https://plumbingparamedic911.com/pricing/'
           assert_redirect '/service-areas/iva-sc/' \
             'https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/'
+          assert_redirect '/service-areas/starr-sc/' \
+            'https://plumbingparamedic911.com/service-areas/anderson-sc/'
+          assert_redirect '/backflow-testing-abbeville-sc/' \
+            'https://plumbingparamedic911.com/services/backflow-prevention-testing/'
+          assert_redirect '/commercial-plumber-greenwood-sc/' \
+            'https://plumbingparamedic911.com/services/commercial-plumbing/'
+          assert_redirect '/privacy-policy/' \
+            'https://plumbingparamedic911.com/privacy/'
+
+          # Known archive-only files must no longer be publicly served.
+          assert_retired_directory '/gbp/'
+          assert_retired_file '/docs/local-seo-heat-map.html'
+          assert_retired_file '/contact/contact-handler.php'
+          assert_retired_file '/css/styles.css'
+          assert_retired_file '/js/main.js'
+          assert_retired_file '/js/vapi-widget.js'
+          assert_retired_file '/js/voice-agent.js'
+          assert_retired_file '/scripts/submit-index.js'
+          assert_retired_file '/54eabb3418e503e2c0ef58126dbaee0b.txt'
 
           not_found_url="${BASE_URL}/seo-verification-page-that-does-not-exist-${GITHUB_SHA}/"
           status="$(curl --silent --show-error --output /tmp/pp911-404.html \
@@ -227,6 +314,7 @@ jobs:
 
       - name: Confirm production deployment scope
         run: |
-          echo "Validated, uploaded, and live-verified the full public website tree."
+          echo "Validated, uploaded, selectively cleaned, and live-verified the full public website tree."
           echo "Source/build files (.git, .github, tools, Markdown) were excluded."
-          echo "No remote mirror-delete was used; obsolete indexed URLs are handled by explicit redirects."
+          echo "Only audited legacy-only Namecheap files were removed; no remote mirror-delete was used."
+          echo "Obsolete indexed URLs retain explicit permanent redirects to canonical replacements."
