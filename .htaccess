@@ -27,6 +27,10 @@ Options -Indexes
   RewriteRule ^pricing\.html$ /pricing/ [L,R=301,NC]
   RewriteRule ^faq\.html$ /faq/ [L,R=301,NC]
 
+  # Preserve the former privacy-policy route while consolidating it to the
+  # canonical privacy page.
+  RewriteRule ^privacy-policy/?$ /privacy/ [L,R=301,NC]
+
   RewriteRule ^services/emergency-plumbing\.html$ /services/24-7-emergency-plumbing/ [L,R=301,NC]
   RewriteRule ^services/water-heater-repair\.html$ /services/water-heater-repair-replacement/ [L,R=301,NC]
   RewriteRule ^services/fixture-installation\.html$ /services/plumbing-fixture-installation-repair/ [L,R=301,NC]
