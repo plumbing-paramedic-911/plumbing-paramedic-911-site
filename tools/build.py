@@ -504,6 +504,7 @@ SERVICES = {
 </ul>
 <h3>Pressure tanks</h3>
 <p>The blue or red tank in your basement or pump house is the pressure tank. It contains a rubber bladder filled with compressed air. As the pump runs, water fills the bladder; the air keeps water under pressure between pump cycles. When that bladder fails — every 8–15 years — the pump short-cycles and burns up. Replacement is $499–$899 depending on size (20, 32, or 44 gallon).</p>
+<p>In McCormick County? See our <a href="/service-areas/mccormick-sc/well-pump-repair/">McCormick well pump and pressure tank service page</a> for local response details and price ranges.</p>
 <h3>Well water testing</h3>
 <p>If you've moved into a home with a well, or you haven't tested in a few years, we recommend a basic water test ($99–$199). It checks bacteria (coliform, E. coli), nitrates, iron, hardness, and pH. Based on results we can recommend appropriate filtration — softeners for hard water, sediment filters, iron filters, or UV sterilization.</p>
 """,
@@ -1064,7 +1065,7 @@ CITIES = {
 <p>Lakefront homes have their own pattern — long supply runs from a pump house to the main house, often through unheated crawl space; multiple bathrooms that see usage spikes (weekend guests); and freeze-vulnerable plumbing because nobody is home to catch a leak in February. We do a lot of winterization work in October–November and rapid response in January–February when something didn't get fully drained.</p>
 <h3>Common services in McCormick</h3>
 <ul>
-  <li><strong>Well pump repair, replacement, and pressure tank service</strong></li>
+  <li><strong><a href="/service-areas/mccormick-sc/well-pump-repair/">Well pump repair, replacement, and pressure tank service</a></strong> — McCormick-specific diagnostics, published price ranges and 24/7 no-water dispatch</li>
   <li><strong>Water quality testing and whole-house filtration</strong></li>
   <li><strong>Sediment, iron, and sulfur filter installation</strong></li>
   <li><strong>Septic line repair (house-side)</strong></li>
@@ -1343,6 +1344,86 @@ def render_city_page(slug: str, c: dict) -> str:
         faqs_html=faq_html(city_faqs(c)),
     )
     return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
+
+
+def render_mccormick_well_pump_page() -> str:
+    """High-intent local/service page for McCormick County well owners."""
+    path = "/service-areas/mccormick-sc/well-pump-repair/"
+    title = "Well Pump &amp; Pressure Tank Repair in McCormick, SC | Plumbing Paramedic 911"
+    description = "McCormick, SC well pump repair, pressure tank replacement and no-water diagnostics. Upfront price ranges, 24/7 dispatch and a 2-year warranty. Call (864) 446-8911."
+    faqs = [
+        ("How much does well pump repair cost in McCormick, SC?", "A diagnostic or smaller well-system repair typically starts at $349. Jet pump replacement is $499–$999, submersible pump replacement is $799–$1,599, and pressure tank replacement is $499–$899. Well depth, horsepower, access, pipe and wiring condition affect the written quote."),
+        ("Do you charge extra to travel to McCormick?", "No per-mile or distance surcharge is added for McCormick service. We give you a written flat-rate quote before work starts."),
+        ("Can you service a 360-foot well?", "Yes. We diagnose and replace deep-well submersible pump systems, including wells around 360 feet. The final equipment and price depend on measured depth, pump horsepower, pipe, wire and site access."),
+        ("Do you provide emergency no-water service?", "Yes. No-water calls in McCormick and surrounding McCormick County can be dispatched 24/7. Call (864) 446-8911 for the fastest response."),
+        ("What is included with a pump replacement?", "The quoted scope can include pulling the old pump, a correctly sized replacement, splice kit, safety line, check valve or seal as needed, system reset, pressure testing and a 2-year labor warranty. Your written estimate will list the exact included work."),
+        ("Do you repair pressure switches and pressure tanks?", "Yes. We test the switch, tank air charge, control components and pump before recommending replacement. Pressure tank replacement generally runs $499–$899 depending on size and access."),
+    ]
+    crumbs = [("Home", "/"), ("McCormick, SC", "/service-areas/mccormick-sc/"), ("Well Pump Repair", path)]
+    service_id = BASE_URL + path + "#service"
+    extra = [
+        {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":title.replace("&amp;", "&"),"about":{"@id":service_id},"isPartOf":{"@id":BASE_URL+"/#website"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".speakable-headline",".speakable-summary",".speakable-phone"]}},
+        {"@type":"Service","@id":service_id,"name":"Well Pump and Pressure Tank Repair in McCormick, SC","serviceType":["Well Pump Repair","Pressure Tank Replacement","No-Water Diagnostics"],"url":BASE_URL+path,"description":"Local well pump, pressure tank, pressure switch and deep-well submersible pump service for McCormick, South Carolina and surrounding McCormick County.","provider":{"@id":BASE_URL+"/#localbusiness"},"areaServed":{"@type":"AdministrativeArea","name":"McCormick County, South Carolina"},"offers":{"@type":"AggregateOffer","lowPrice":"349","highPrice":"1599","priceCurrency":"USD","offerCount":"4"},"hoursAvailable":{"@type":"OpeningHoursSpecification","dayOfWeek":["https://schema.org/Monday","https://schema.org/Tuesday","https://schema.org/Wednesday","https://schema.org/Thursday","https://schema.org/Friday","https://schema.org/Saturday","https://schema.org/Sunday"],"opens":"00:00","closes":"23:59"}},
+        breadcrumb_ld(crumbs), faq_ld(faqs),
+    ]
+    h = head(title, description, path, og_image="/images/og/well-pump-1200x630.jpg", extra_jsonld=extra, body_page="mccormick-well-pump")
+    body = f"""
+<main id="main-content">
+  <section class="service-hero">
+    <div class="container">
+      <nav class="city-breadcrumb" aria-label="Breadcrumb">{breadcrumb_html(crumbs)}</nav>
+      <div class="chip chip-live" style="margin-bottom:14px">● 24/7 No-Water Dispatch</div>
+      <h1 class="speakable-headline" style="color:white">Well Pump &amp; Pressure Tank Repair in McCormick, SC</h1>
+      <p class="lead lead-white speakable-summary" style="max-width:720px;margin-bottom:28px">No water, low pressure, rapid cycling or a failed deep-well pump? Eric Callaway, a South Carolina Master Plumber in the trade since 1996, services McCormick County well systems—including deep submersible installations around 360 feet.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a href="tel:+18644468911" class="btn btn-green btn-xl speakable-phone">📞 Call (864) 446-8911</a><a href="/contact/" class="btn btn-outline-white btn-xl">Request Service Online →</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-sidebar">
+      <div class="prose">
+        <span class="label">Local well-system specialist</span>
+        <h2>McCormick well problems diagnosed before parts are replaced</h2>
+        <p>A no-water call does not automatically mean the pump is dead. We test the breaker and controls, pressure switch, tank air charge, wiring and system pressure before recommending a repair. That separates a smaller electrical or tank problem from a pump that actually needs to be pulled.</p>
+        <h3>Well pump and pressure services</h3>
+        <ul>
+          <li>Submersible and jet pump diagnosis, repair and replacement</li>
+          <li>Deep-well service, including systems around 360 feet</li>
+          <li>Pressure tank, pressure switch and control-box replacement</li>
+          <li>Low-pressure, short-cycling and constantly running pump diagnosis</li>
+          <li>Well-water sediment, iron and sulfur troubleshooting</li>
+          <li>Emergency no-water dispatch for McCormick County</li>
+        </ul>
+        <h3>What affects your final price</h3>
+        <p>Well depth and pump horsepower are only part of the job. Access to the well head, pipe and wire condition, failed check valves, damaged fittings and the size of the pressure tank can change the scope. We inspect first and put the exact price in writing before work begins.</p>
+        <h3>Real local capability, not a referral directory</h3>
+        <p>Plumbing Paramedic 911 is an Abbeville-based plumbing company serving McCormick—not a contractor-matching website. Eric Callaway is a licensed South Carolina Master Plumber, and completed work carries a 2-year labor warranty. McCormick is typically about 40 minutes from our Abbeville shop.</p>
+      </div>
+      <aside>
+        <div class="price-box">
+          <div class="price-label">Published McCormick price ranges</div>
+          <div class="price-big">$349–$1,599</div>
+          <p style="font-size:.9rem;margin:8px 0 16px">Written flat-rate quote before work. No per-mile McCormick surcharge.</p>
+          <ul style="font-size:.88rem;margin-bottom:18px">
+            <li>Well-system repair: from $349</li>
+            <li>Jet pump replacement: $499–$999</li>
+            <li>Submersible pump: $799–$1,599</li>
+            <li>Pressure tank: $499–$899</li>
+          </ul>
+          <a href="/pricing/" class="btn btn-blue" style="width:100%;justify-content:center">See Pricing Details →</a>
+        </div>
+        <div class="card" style="margin-top:20px"><h3>Why homeowners call us</h3><ul><li>SC Master Plumber</li><li>In the trade since 1996</li><li>24/7 emergency dispatch</li><li>2-year labor warranty</li><li>Upfront flat-rate quote</li></ul></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container" style="max-width:820px"><span class="label">McCormick well pump FAQ</span><h2 style="margin-bottom:28px">Clear answers before you schedule</h2>{faq_html(faqs)}</div>
+  </section>
+  <section style="background:linear-gradient(135deg,var(--green-dk),var(--green));padding:64px 0"><div class="container" style="text-align:center"><h2 style="color:white;margin-bottom:10px">No water in McCormick?</h2><p style="color:rgba(255,255,255,.9);margin-bottom:24px">Call for 24/7 dispatch or send a service request online.</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a href="tel:+18644468911" class="btn btn-outline-white btn-xl speakable-phone">📞 (864) 446-8911</a><a href="/contact/" class="btn btn-outline-white btn-xl">Request Service Online →</a></div></div></section>
+</main>
+"""
+    return h + nav("areas") + body + FOOTER_HTML + "</body>\n</html>\n"
 
 
 # ─── Services hub page ─────────────────────────────────────────────────────
@@ -2019,6 +2100,7 @@ def main():
     # Cities
     for slug, c in CITIES.items():
         write(f"service-areas/{slug}/index.html", render_city_page(slug, c))
+    write("service-areas/mccormick-sc/well-pump-repair/index.html", render_mccormick_well_pump_page())
     # Hubs
     write("services/index.html", render_services_hub())
     write("service-areas/index.html", render_areas_hub())
