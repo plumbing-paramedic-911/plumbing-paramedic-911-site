@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Private Plumbing Paramedic 911 operations dashboard for CRM, dispatch, calls, jobs, pricing and invoicing.">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <link rel="canonical" href="https://plumbingparamedic911.com/ops/">
+  <meta name="theme-color" content="#0D47A1">
+  <title>PP911 Operations</title>
+  <link rel="manifest" href="/ops/manifest.webmanifest">
+  <link rel="stylesheet" href="/ops/styles.css">
+</head>
+<body>
+  <div id="authView" class="center-wrap">
+    <div class="auth-card">
+      <div class="brand-mark">PP<span>911</span></div>
+      <h1>Operations</h1>
+      <p class="muted">Private Plumbing Paramedic 911 CRM, dispatch and field-service dashboard.</p>
+      <div id="authMsg" class="msg hidden"></div>
+      <form id="authForm">
+        <label>Full name<input id="fullName" autocomplete="name" placeholder="Eric Callaway"></label>
+        <label>Email<input id="email" type="email" autocomplete="email" required></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" minlength="8" required></label>
+        <div class="row gap">
+          <button class="btn primary grow" type="submit">Sign in</button>
+          <button class="btn secondary" id="signupBtn" type="button">Create owner login</button>
+        </div>
+      </form>
+      <form id="claimForm" class="hidden top-space">
+        <label>Owner setup code<input id="claimCode" type="password" autocomplete="one-time-code" required></label>
+        <button class="btn primary full" type="submit">Activate owner access</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="appView" class="app hidden">
+    <header class="topbar">
+      <div><div class="brand-mark small">PP<span>911</span></div><div class="subbrand">Operations</div></div>
+      <div class="top-actions"><button id="refreshBtn" class="icon-btn" title="Refresh">↻</button><button id="signOutBtn" class="btn secondary compact">Sign out</button></div>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button data-view="dashboard" class="active">Dashboard</button>
+      <button data-view="leads">Leads</button>
+      <button data-view="customers">Customers</button>
+      <button data-view="schedule">Schedule</button>
+      <button data-view="jobs">Jobs</button>
+      <button data-view="dispatch">Dispatch</button>
+      <button data-view="calls">Calls</button>
+      <button data-view="pricing">Price Book</button>
+      <button data-view="invoices">Invoices</button>
+    </nav>
+
+    <main>
+      <section id="dashboard" class="view active">
+        <div class="page-head"><div><h2>Today at a glance</h2><p class="muted">Website, Darla, CRM and field-service activity in one place.</p></div><div class="row gap"><button class="btn primary" data-modal="leadModal">+ New lead</button><button class="btn secondary" data-modal="customerModal">+ New customer</button></div></div>
+        <div id="stats" class="stats"></div>
+        <div class="grid2">
+          <div class="panel"><div class="panel-head"><h3>Newest leads</h3></div><div id="dashboardLeads"></div></div>
+          <div class="panel"><div class="panel-head"><h3>Recent calls</h3></div><div id="dashboardCalls"></div></div>
+        </div>
+      </section>
+      <section id="leads" class="view"><div class="page-head"><h2>Leads</h2><button class="btn primary" data-modal="leadModal">+ New lead</button></div><div class="panel"><div id="leadsTable"></div></div></section>
+      <section id="customers" class="view"><div class="page-head"><h2>Customers</h2><button class="btn primary" data-modal="customerModal">+ New customer</button></div><div class="panel"><div id="customersTable"></div></div></section>
+      <section id="schedule" class="view"><div class="page-head"><h2>Schedule</h2></div><div class="panel"><div id="scheduleTable"></div></div></section>
+      <section id="jobs" class="view"><div class="page-head"><h2>Work orders</h2></div><div class="panel"><div id="jobsTable"></div></div></section>
+      <section id="dispatch" class="view"><div class="page-head"><h2>Emergency dispatch</h2></div><div class="panel"><div id="dispatchTable"></div></div></section>
+      <section id="calls" class="view"><div class="page-head"><h2>Darla call history</h2></div><div class="panel"><div id="callsTable"></div></div></section>
+      <section id="pricing" class="view"><div class="page-head"><h2>Flat-rate price book</h2></div><div class="panel"><div id="pricingTable"></div></div></section>
+      <section id="invoices" class="view"><div class="page-head"><h2>Invoices</h2></div><div class="panel"><div id="invoicesTable"></div></div></section>
+    </main>
+  </div>
+
+  <dialog id="leadModal"><form method="dialog" class="modal-card" id="leadForm"><div class="modal-head"><h3>New lead</h3><button class="icon-btn" value="cancel">×</button></div><label>Name<input name="caller_name"></label><label>Phone<input name="phone" type="tel" required></label><label>Email<input name="email" type="email"></label><label>Issue<textarea name="issue_summary" required></textarea></label><label>Urgency<select name="urgency"><option>routine</option><option>same_day</option><option>urgent</option><option>emergency</option></select></label><div class="row gap"><button value="cancel" class="btn secondary">Cancel</button><button id="saveLeadBtn" type="button" class="btn primary grow">Save lead</button></div></form></dialog>
+
+  <dialog id="customerModal"><form method="dialog" class="modal-card" id="customerForm"><div class="modal-head"><h3>New customer</h3><button class="icon-btn" value="cancel">×</button></div><div class="grid2 form-grid"><label>First name<input name="first_name" required></label><label>Last name<input name="last_name" required></label></div><label>Phone<input name="phone" type="tel" required></label><label>Email<input name="email" type="email"></label><label>Service address<input name="address_line1"></label><div class="grid2 form-grid"><label>City<input name="city"></label><label>ZIP<input name="postal_code"></label></div><div class="row gap"><button value="cancel" class="btn secondary">Cancel</button><button id="saveCustomerBtn" type="button" class="btn primary grow">Save customer</button></div></form></dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/ops/app.js"></script>
+</body>
+</html>
