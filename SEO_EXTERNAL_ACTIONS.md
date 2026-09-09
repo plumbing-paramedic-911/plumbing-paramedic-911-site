@@ -113,3 +113,44 @@ Notes:
 ## 9. Confirm `Eric Callaway` shows up on the SC LLR public license lookup
 
 - [ ] Verify on `https://verify.llronline.com/LicLookup/` — Master Plumber registration must be current and publicly searchable
+
+## 10. Google Search Console cleanup (after the redirect fix deploys)
+
+The redirects themselves are now handled in `.htaccess` and covered by
+`tools/check_redirects.py`. The items below can only be done inside the Search
+Console interface and still need a human.
+
+Do these **after** the deployment finishes, so Google re-crawls into a live 301
+rather than another 404.
+
+- [ ] **Validate the 404 fix.** Search Console → Indexing → Pages → "Not found (404)".
+      Open the issue and click **Validate Fix**. Without this, Google re-checks the
+      old URLs on its own slow schedule; validation puts them in a priority queue.
+      Expect the count to fall over 1–2 weeks, not overnight.
+- [ ] **Spot-check three of the old URLs first** using the URL Inspection tool
+      (e.g. `/about.html`, `/services/leak-detection.html`,
+      `/service-areas/anderson-sc.html`). Each should report a redirect, not an
+      error, before you start the validation run.
+- [ ] **Remove the duplicate `www.` sitemap submission.** Search Console →
+      Sitemaps, under the `www.plumbingparamedic911.com` property. The site already
+      301s `www` → non-www, so the `www` sitemap is dead residue.
+      Keep the non-www property as the reporting property.
+- [ ] **Delete the 5 stale sitemap entries** left from the previous site builder.
+      Search Console → Sitemaps → select each old entry → Remove. `.htaccess` now
+      301s the common legacy sitemap filenames to `/sitemap.xml`, so they resolve
+      instead of erroring, but the stale *submissions* should still be cleared so
+      the Sitemaps report is readable.
+- [ ] **Confirm `https://plumbingparamedic911.com/sitemap.xml` is the only
+      submitted sitemap** and shows a recent successful read.
+- [ ] **Re-check `?add-to-cart=` URLs in ~4 weeks.** These now 301 to a real page
+      and are no longer blocked in `robots.txt` (a blocked URL can never have its
+      redirect seen, so it would sit in the index forever). They should drop out on
+      their own. Only use the Removals tool if any are still appearing after that.
+
+### What this fix does and does not do
+
+Fixing the 404s stops the site from leaking ranking signal and removes a
+site-quality drag. It is necessary, but on its own it will not lift the local
+pages onto page 1. The remaining lift is off-page and is covered by sections 2
+(Google Business Profile), 5 (citations) and 8 (review cadence) above — those are
+what move `plumber near me` type queries in a local pack.

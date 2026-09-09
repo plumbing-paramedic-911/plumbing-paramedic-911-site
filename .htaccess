@@ -45,6 +45,62 @@ Options -Indexes
   RewriteRule ^service-areas/calhoun-falls-sc\.html$ /service-areas/calhoun-falls-sc/ [L,R=301,NC]
   RewriteRule ^service-areas/due-west-sc\.html$ /service-areas/due-west-sc/ [L,R=301,NC]
 
+  # Catch-all for any remaining legacy flat ".html" URL whose modern
+  # equivalent is a real directory on disk. This covers the long tail of old
+  # URLs still sitting in Search Console that are not enumerated above, and
+  # keeps future page moves from silently producing 404s. Real files on disk
+  # (404.html, verification files) are never redirected.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{DOCUMENT_ROOT}/$1/ -d
+  RewriteRule ^(.+?)\.html$ /$1/ [L,R=301]
+
+  # Legacy mixed-case URLs (e.g. /About/, /Services/Drain-Cleaning.html).
+  # The uppercase guard stops these from matching the already-canonical
+  # lowercase URL, which would loop.
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^about(?:\.html)?/?$ /about/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^contact(?:\.html)?/?$ /contact/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^services(?:\.html)?/?$ /services/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^service-areas(?:\.html)?/?$ /service-areas/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^faq(?:\.html)?/?$ /faq/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^pricing(?:\.html)?/?$ /pricing/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^financing(?:\.html)?/?$ /financing/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^reviews(?:\.html)?/?$ /reviews/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^privacy(?:\.html)?/?$ /privacy/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^terms(?:\.html)?/?$ /terms/ [L,R=301,NC]
+  RewriteCond %{REQUEST_URI} [A-Z]
+  RewriteRule ^guides(?:\.html)?/?$ /guides/ [L,R=301,NC]
+
+  # Retired e-commerce plugin routes. Google indexed ?add-to-cart= and related
+  # store query strings from an old shopping-cart plugin that is no longer part
+  # of this site. Strip the query and send the request to a real page instead of
+  # letting it resolve as an indexable duplicate.
+  RewriteCond %{QUERY_STRING} (^|&)(add-to-cart|remove_item|undo_item|added-to-cart)= [NC]
+  RewriteRule ^(.*)$ /$1? [L,R=301]
+  RewriteRule ^(?:cart|checkout|my-account|shop|basket)(?:/.*)?$ /pricing/ [L,R=301,NC]
+
+  # Stray staging/preview host paths that were indexed during the site build.
+  RewriteRule ^site/[0-9a-f]{6,}/home/?$ / [L,R=301,NC]
+  RewriteRule ^site/[0-9a-f]{6,}/?$ / [L,R=301,NC]
+  RewriteRule ^site/[0-9a-f]{6,}/(.+)$ /$1 [L,R=301,NC]
+
+  # Legacy sitemap filenames left over from a previous site builder. These are
+  # still submitted in Search Console; point them at the real sitemap so they
+  # resolve instead of returning 404.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(?:[a-z0-9_-]+-)?sitemap(?:[_-][a-z0-9]+)?\.xml(?:\.gz)?$ /sitemap.xml [L,R=301,NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^sitemap\.(?:txt|html|php)$ /sitemap.xml [L,R=301,NC]
+
   # Consolidate duplicate/obsolete pages from the older production build.
   # Paid homeowner guides are intentionally preserved as live authority and
   # passive-income assets; only stale/duplicative content is redirected here.

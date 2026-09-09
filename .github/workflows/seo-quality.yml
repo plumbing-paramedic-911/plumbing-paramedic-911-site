@@ -35,5 +35,8 @@ jobs:
       - name: Check sitemap and static internal links
         run: python3 tools/check_internal_links.py
 
+      - name: Check legacy URL redirects
+        run: python3 tools/check_redirects.py
+
       - name: Check Python syntax
-        run: python3 -m py_compile tools/build.py tools/release_build.py tools/check_internal_links.py
+        run: python3 -m py_compile tools/build.py tools/release_build.py tools/check_internal_links.py tools/check_redirects.py

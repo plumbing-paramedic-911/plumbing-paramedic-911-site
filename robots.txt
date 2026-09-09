@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /cart/
-Disallow: /checkout/
+# Retired shopping-cart routes are 301-redirected in .htaccess rather than
+# blocked here: a blocked URL can never have its redirect crawled, so it
+# would stay in the index as a dead result.
 
 # Core search engines
 User-agent: Googlebot
