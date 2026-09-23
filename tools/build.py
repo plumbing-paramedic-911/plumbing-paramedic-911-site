@@ -111,7 +111,7 @@ FOOTER_HTML = """\
   </div>
 </footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
-<script src="/js/app.js" defer></script>
+<script src="/js/app.js?v=20260923-crm2" defer></script>
 """
 
 
