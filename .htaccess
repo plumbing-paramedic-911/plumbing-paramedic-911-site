@@ -107,6 +107,7 @@ Options -Indexes
   RewriteRule ^blog/signs-water-heater-failing/?$ /services/water-heater-repair-replacement/ [L,R=301,NC]
   RewriteRule ^blog/how-to-shut-off-water-in-emergency/?$ /services/24-7-emergency-plumbing/ [L,R=301,NC]
   RewriteRule ^blog/?$ /faq/ [L,R=301,NC]
+  RewriteRule ^plumbing-repairs-replacements/?$ /services/ [L,R=301,NC]
 
   # Old cost articles contain pricing that may no longer match the live price
   # book. Consolidate the entire section to the current pricing calculator.
