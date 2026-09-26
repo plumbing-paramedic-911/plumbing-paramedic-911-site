@@ -1219,6 +1219,33 @@ def city_faqs(c):
     ]
 
 
+CORE_MEMBERSHIP_MARKETS = {"abbeville-sc", "greenwood-sc", "anderson-sc", "mccormick-sc"}
+
+
+def city_membership_promo(slug: str, city: str) -> str:
+    if slug not in CORE_MEMBERSHIP_MARKETS:
+        return ""
+    return f"""
+  <section class="section" style="background:linear-gradient(135deg,var(--blue-dk),var(--blue))">
+    <div class="container">
+      <div class="grid-2" style="gap:40px;align-items:center">
+        <div>
+          <span class="chip" style="background:var(--green);color:white;margin-bottom:14px">Limited-Time Membership Offer</span>
+          <h2 style="color:white;margin-bottom:12px">VIP Diamond Plan for {city} homeowners</h2>
+          <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.7">Get priority plumbing service, a yearly whole-home inspection, no overtime charges, and 15% off covered repairs.</p>
+        </div>
+        <div class="card" style="text-align:center;border:3px solid var(--green)">
+          <div style="font-family:var(--ff-head);font-size:2.35rem;font-weight:900;color:var(--blue-dk)">$179/year</div>
+          <div style="font-weight:700;color:var(--ink2);margin:5px 0 14px">or $17.99/month</div>
+          <p style="font-size:.86rem;color:var(--ink3);margin-bottom:18px">Annual billing saves $36.88. New members receive their first monthly payment free.</p>
+          <a href="/membership/" class="btn btn-green" style="width:100%;justify-content:center">See Benefits &amp; Join →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+
+
 CITY_PAGE_TPL = """\
 <main>
   <section class="city-hero">
@@ -1293,6 +1320,8 @@ CITY_PAGE_TPL = """\
     </div>
   </section>
 
+{membership_promo}
+
   <section class="section">
     <div class="container" style="max-width:820px">
       <span class="label">FAQ — {city}, {abbr}</span>
@@ -1342,6 +1371,7 @@ def render_city_page(slug: str, c: dict) -> str:
         h1=h1, intro=c["intro"], body=c["body"],
         city_q=c["city"].replace(" ","+"),
         faqs_html=faq_html(city_faqs(c)),
+        membership_promo=city_membership_promo(slug, c["city"]),
     )
     return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
 
@@ -1644,6 +1674,107 @@ def render_contact():
           </div>
         </div>
       </div>
+    </div>
+  </section>
+</main>
+"""
+    return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
+
+
+def render_membership():
+    path = "/membership/"
+    title = "VIP Plumbing Membership | $179/Year | Plumbing Paramedic 911"
+    description = "Join the VIP Diamond plumbing membership for $179/year or $17.99/month. Priority service, annual whole-home inspection, no overtime charges and 15% off covered repairs in Abbeville, Greenwood, Anderson and McCormick, SC."
+    faqs = [
+        ("How much is the VIP Diamond Plan?", "The plan is $179 per year or $17.99 per month. Annual billing saves $36.88 compared with twelve monthly payments."),
+        ("What does the plumbing membership include?", "Members receive priority scheduling, no overtime charges, 15% off covered plumbing repairs, and one annual whole-home plumbing inspection."),
+        ("Where is the membership available?", "The VIP Diamond Plan is available to homeowners in Abbeville, Greenwood, Anderson, McCormick, and the surrounding Plumbing Paramedic 911 service area."),
+        ("Is there a new-member promotion?", "Yes. New members choosing monthly billing receive their first monthly payment free. Annual members receive the lowest total price from the start."),
+        ("Can I use the repair discount immediately?", "Yes. Membership benefits begin when enrollment is confirmed. Discounts apply to covered work and cannot be combined with another promotion on the same service."),
+    ]
+    breadcrumb_items = [("Home", "/"), ("VIP Diamond Plan", path)]
+    offer = {
+        "@type": "Service",
+        "@id": BASE_URL + path + "#membership",
+        "name": "VIP Diamond Plumbing Membership",
+        "serviceType": "Residential plumbing maintenance membership",
+        "provider": {"@id": BASE_URL + "/#localbusiness"},
+        "areaServed": [{"@type": "City", "name": city} for city in ["Abbeville", "Greenwood", "Anderson", "McCormick"]],
+        "offers": [
+            {"@type": "Offer", "name": "Annual VIP Diamond Plan", "price": "179.00", "priceCurrency": "USD", "url": BASE_URL + path},
+            {"@type": "Offer", "name": "Monthly VIP Diamond Plan", "price": "17.99", "priceCurrency": "USD", "url": BASE_URL + path},
+        ],
+    }
+    extra = [
+        {"@type": "WebPage", "@id": BASE_URL + path + "#webpage", "url": BASE_URL + path, "name": title, "isPartOf": {"@id": BASE_URL + "/#website"}, "about": {"@id": BASE_URL + path + "#membership"}, "inLanguage": "en-US"},
+        offer,
+        breadcrumb_ld(breadcrumb_items),
+        faq_ld(faqs),
+    ]
+    h = head(title, description, path, extra_jsonld=extra, body_page="membership")
+    n = nav()
+    body = f"""\
+<main>
+  <div class="page-header">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>VIP Diamond Plan</span></nav>
+      <div class="chip chip-live" style="margin-bottom:14px">First Monthly Payment Free</div>
+      <h1 class="speakable-headline">VIP Diamond Plumbing Membership</h1>
+      <p class="speakable-summary">Priority care, preventive inspections and straightforward member savings across Abbeville, Greenwood, Anderson and McCormick.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="gap:48px;align-items:start">
+        <div>
+          <span class="label">Membership Benefits</span>
+          <h2>Protect the plumbing in your home</h2>
+          <div class="divider"></div>
+          <ul class="check-list">
+            <li>Priority scheduling when you need service</li>
+            <li>No overtime charges on covered service calls</li>
+            <li>15% off covered plumbing repairs</li>
+            <li>One annual whole-home plumbing inspection</li>
+            <li>Written pricing before work begins</li>
+            <li>Service from an SC Master Plumber</li>
+          </ul>
+          <p style="font-size:.86rem;color:var(--ink3);margin-top:18px">Benefits apply after enrollment is confirmed. Repair discounts cannot be combined with another promotion on the same service.</p>
+        </div>
+        <aside class="card" style="border:3px solid var(--green);text-align:center">
+          <div style="font-size:2.6rem;margin-bottom:8px">💎</div>
+          <h2 style="font-size:1.55rem">Choose your payment option</h2>
+          <div style="font-family:var(--ff-head);font-size:2.6rem;font-weight:900;color:var(--blue-dk);margin-top:18px">$179/year</div>
+          <p style="font-weight:700;color:var(--green-dk);margin:3px 0 14px">Best value — save $36.88</p>
+          <div style="font-family:var(--ff-head);font-size:1.7rem;font-weight:800;color:var(--ink)">$17.99/month</div>
+          <p style="font-size:.88rem;color:var(--ink3);margin:5px 0 20px">New monthly members get the first payment free.</p>
+          <a href="tel:+18644468911" class="btn btn-green btn-lg speakable-phone" style="width:100%;justify-content:center">Call to Join: (864) 446-8911</a>
+          <a href="/contact/" class="btn btn-blue" style="width:100%;justify-content:center;margin-top:10px">Request Enrollment Online →</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="container" style="max-width:920px">
+      <div style="text-align:center;margin-bottom:30px">
+        <span class="label">Available Across Our Core Markets</span>
+        <h2>One plan. The same benefits in every market.</h2>
+      </div>
+      <div class="grid-4">
+        <a class="nav-card" href="/service-areas/abbeville-sc/"><h3>📍 Abbeville</h3><p>Home-base coverage.</p></a>
+        <a class="nav-card" href="/service-areas/greenwood-sc/"><h3>📍 Greenwood</h3><p>County-wide coverage.</p></a>
+        <a class="nav-card" href="/service-areas/anderson-sc/"><h3>📍 Anderson</h3><p>Anderson County service.</p></a>
+        <a class="nav-card" href="/service-areas/mccormick-sc/"><h3>📍 McCormick</h3><p>Rural and lake-area service.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <span class="label">Membership FAQ</span>
+      <h2 style="margin-bottom:28px">VIP Diamond Plan questions</h2>
+      {faq_html(faqs)}
     </div>
   </section>
 </main>
@@ -2108,6 +2239,7 @@ def main():
     write("about/index.html", render_about())
     write("contact/index.html", render_contact())
     write("pricing/index.html", render_pricing())
+    write("membership/index.html", render_membership())
     write("faq/index.html", render_faq())
     write("reviews/index.html", render_reviews())
     write("financing/index.html", render_financing())
