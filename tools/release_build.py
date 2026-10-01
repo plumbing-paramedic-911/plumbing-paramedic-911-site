@@ -48,7 +48,7 @@ CRITICAL_TITLE_PATHS = {
     "services/backflow-prevention-testing/index.html", "service-areas/mccormick-sc/index.html",
     "service-areas/calhoun-falls-sc/index.html", "well-pump-repair-mccormick-sc/index.html",
     "well-pump-repair-iva-lake-secession-sc/index.html", "drain-cleaning-greenwood-sc/index.html",
-    "water-heater-repair-greenwood-sc/index.html", "water-heater-repair-anderson-sc/index.html",
+    "water-heater-repair-abbeville-sc/index.html", "water-heater-repair-greenwood-sc/index.html", "water-heater-repair-anderson-sc/index.html",
     "emergency-plumber-abbeville-sc/index.html", "drain-cleaning-abbeville-sc/index.html",
     "sewer-line-repair-abbeville-sc/index.html", "emergency-plumber-greenwood-sc/index.html",
 }
