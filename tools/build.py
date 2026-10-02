@@ -918,7 +918,7 @@ CITIES = {
 <ul>
   <li>We're local — based at 13 Callaway Dr, not driving in from another county</li>
   <li>Eric Callaway is a licensed SC Master Plumber with 30 years in the trade</li>
-  <li>BBB A+ rated, 32+ Google reviews, 4.9-star average</li>
+  <li>BBB A+ rated, 30+ Google reviews</li>
   <li>Flat-rate pricing — no hourly surprises</li>
   <li>2-year warranty on every job</li>
   <li>In-house financing on jobs over $500</li>
@@ -961,7 +961,7 @@ CITIES = {
 <ul>
   <li>We bring the same flat-rate pricing and same 24/7 response to Greenwood as we do to Abbeville</li>
   <li>Licensed SC Master Plumber on every job — Eric Callaway personally on most Greenwood calls</li>
-  <li>BBB A+ rated, 32+ Google reviews, 4.9-star average</li>
+  <li>BBB A+ rated, 30+ Google reviews</li>
   <li>2-year warranty on every repair and installation</li>
   <li>In-house financing on jobs over $500</li>
   <li>Military, senior, and first-responder discounts</li>
@@ -1598,8 +1598,7 @@ def render_about():
         <ul>
           <li>South Carolina Master Plumber license — issued by SC Contractor's Licensing Board (LLR)</li>
           <li>BBB A+ Rating</li>
-          <li>4.9-star average across Google, Facebook, and BBB</li>
-          <li>32+ Google reviews and counting</li>
+          <li>30+ Google reviews from local homeowners</li>
           <li>Licensed and insured for residential and commercial work statewide</li>
           <li>Certified for backflow prevention assembly testing across South Carolina</li>
         </ul>
@@ -2066,7 +2065,7 @@ def render_faq():
 def render_reviews():
     path = "/reviews/"
     title = "Reviews — Plumbing Paramedic 911 | Abbeville SC"
-    description = "Real customer reviews of Plumbing Paramedic 911 from homeowners across Abbeville, Greenwood, Anderson &amp; Upstate SC. 4.9★ average, 32+ Google reviews, A+ BBB. Call (864) 446-8911."
+    description = "Real customer reviews of Plumbing Paramedic 911 from homeowners across Abbeville, Greenwood, Anderson &amp; Upstate SC. A+ BBB rated, 30+ Google reviews. Call (864) 446-8911."
     breadcrumb_items = [("Home","/"),("Reviews", path)]
     reviews = [
         ("James T.","Abbeville, SC",5,"Eric showed up at midnight for a burst pipe. Fixed it fast, price was exactly what he said on the phone. No invoice surprises. This is the only plumber I'll ever call."),
@@ -2096,7 +2095,7 @@ def render_reviews():
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">{breadcrumb_html(breadcrumb_items)}</nav>
       <h1 class="speakable-headline">Customer Reviews</h1>
-      <p class="speakable-summary">4.9★ average across Google, Facebook, and BBB. 32+ Google reviews and growing. Here's what Upstate SC homeowners say.</p>
+      <p class="speakable-summary">A+ BBB rated with 30+ Google reviews and growing. Here's what Upstate SC homeowners say.</p>
     </div>
   </section>
   <section class="section">
@@ -2111,7 +2110,7 @@ def render_reviews():
       <h2>Had a good experience? Leave a review.</h2>
       <p class="lead" style="margin:14px auto 24px">Your review helps other Upstate SC homeowners find an honest plumber.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="https://www.google.com/search?q=Plumbing+Paramedic+911+Abbeville+SC" target="_blank" rel="noopener" class="btn btn-blue">Review on Google</a>
+        <a href="https://maps.google.com/?cid=12319185328943590636" target="_blank" rel="noopener" class="btn btn-blue">Review on Google</a>
         <a href="https://www.bbb.org/us/sc/abbeville/profile/plumber/plumbing-paramedic-911-0673-90010577" target="_blank" rel="noopener" class="btn btn-blue">Review on BBB</a>
         <a href="https://www.facebook.com/PlumbingParamedic911/" target="_blank" rel="noopener" class="btn btn-blue">Review on Facebook</a>
       </div>
