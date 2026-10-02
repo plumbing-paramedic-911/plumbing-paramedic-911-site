@@ -111,7 +111,7 @@ FOOTER_HTML = """\
   </div>
 </footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
-<script src="/js/app.js?v=20260923-crm2" defer></script>
+<script src="/js/app.js" defer></script>
 """
 
 
@@ -587,7 +587,7 @@ SERVICES = {
         "service_type": "Commercial Plumbing",
         "schema_desc": "Full-service commercial plumbing for restaurants, offices, retail, industrial, and multi-family properties across Abbeville, Greenwood, Anderson, Laurens, and McCormick counties. 24/7 service, scheduled maintenance, code-compliant installs.",
         "price_range": "Quoted per job",
-        "price_note": "Service call $129. Commercial water heaters, grease traps, backflow, and repipes priced on-site.",
+        "price_note": "Service / diagnostic call: $79 weekdays, $99 after hours and weekends, and $158 after midnight or on holidays. Commercial water heaters, grease traps, backflow, and repipes are priced separately and approved before work begins.",
         "og": "/images/og/commercial-1200x630.jpg",
         "body": """
 <h3>Properties we serve</h3>
@@ -1207,7 +1207,7 @@ def city_faqs(c):
         (f"Do you offer 24/7 emergency plumbing service in {c['city']}, {c['abbr']}?",
          f"Yes. Plumbing Paramedic 911 dispatches emergency plumbing service to {c['city']}, {c['abbr']} 24 hours a day, 365 days a year. Typical response time from our Abbeville shop is {c['response']}. Call (864) 446-8911 any time."),
         (f"How much do you charge to come out to {c['city']}, {c['abbr']}?",
-         f"Standard service call in {c['city']} is $129 to $179 — the same flat-rate pricing as Abbeville, with no per-mile or distance surcharge. The exact repair quote is written before any work begins."),
+         f"The service / diagnostic call in {c['city']} is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. There is no per-mile or distance surcharge, and repair work is priced separately and approved before it begins."),
         (f"Are you a licensed plumber for work in {c['city']}, {c['abbr']}?",
          f"Yes. Eric Callaway holds a South Carolina Master Plumber license, valid for residential and commercial work statewide including {c['city']} and the surrounding {c['state']} area."),
         (f"Do you replace water heaters same-day in {c['city']}?",
@@ -1217,33 +1217,6 @@ def city_faqs(c):
         (f"What's your warranty on plumbing work in {c['city']}?",
          f"Every repair and installation we do in {c['city']} carries a 2-year warranty on parts and labor. If anything fails within that window, we come back and fix it at no charge."),
     ]
-
-
-CORE_MEMBERSHIP_MARKETS = {"abbeville-sc", "greenwood-sc", "anderson-sc", "mccormick-sc"}
-
-
-def city_membership_promo(slug: str, city: str) -> str:
-    if slug not in CORE_MEMBERSHIP_MARKETS:
-        return ""
-    return f"""
-  <section class="section" style="background:linear-gradient(135deg,var(--blue-dk),var(--blue))">
-    <div class="container">
-      <div class="grid-2" style="gap:40px;align-items:center">
-        <div>
-          <span class="chip" style="background:var(--green);color:white;margin-bottom:14px">Limited-Time Membership Offer</span>
-          <h2 style="color:white;margin-bottom:12px">VIP Diamond Plan for {city} homeowners</h2>
-          <p style="color:rgba(255,255,255,.88);font-size:1.05rem;line-height:1.7">Get priority plumbing service, a yearly whole-home inspection, no overtime charges, and 15% off covered repairs.</p>
-        </div>
-        <div class="card" style="text-align:center;border:3px solid var(--green)">
-          <div style="font-family:var(--ff-head);font-size:2.35rem;font-weight:900;color:var(--blue-dk)">$179/year</div>
-          <div style="font-weight:700;color:var(--ink2);margin:5px 0 14px">or $17.99/month</div>
-          <p style="font-size:.86rem;color:var(--ink3);margin-bottom:18px">Annual billing saves $36.88. New members receive their first monthly payment free.</p>
-          <a href="/membership/" class="btn btn-green" style="width:100%;justify-content:center">See Benefits &amp; Join →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-"""
 
 
 CITY_PAGE_TPL = """\
@@ -1320,8 +1293,6 @@ CITY_PAGE_TPL = """\
     </div>
   </section>
 
-{membership_promo}
-
   <section class="section">
     <div class="container" style="max-width:820px">
       <span class="label">FAQ — {city}, {abbr}</span>
@@ -1371,7 +1342,6 @@ def render_city_page(slug: str, c: dict) -> str:
         h1=h1, intro=c["intro"], body=c["body"],
         city_q=c["city"].replace(" ","+"),
         faqs_html=faq_html(city_faqs(c)),
-        membership_promo=city_membership_promo(slug, c["city"]),
     )
     return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
 
@@ -1681,107 +1651,6 @@ def render_contact():
     return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
 
 
-def render_membership():
-    path = "/membership/"
-    title = "VIP Plumbing Membership | $179/Year | Plumbing Paramedic 911"
-    description = "Join the VIP Diamond plumbing membership for $179/year or $17.99/month. Priority service, annual whole-home inspection, no overtime charges and 15% off covered repairs in Abbeville, Greenwood, Anderson and McCormick, SC."
-    faqs = [
-        ("How much is the VIP Diamond Plan?", "The plan is $179 per year or $17.99 per month. Annual billing saves $36.88 compared with twelve monthly payments."),
-        ("What does the plumbing membership include?", "Members receive priority scheduling, no overtime charges, 15% off covered plumbing repairs, and one annual whole-home plumbing inspection."),
-        ("Where is the membership available?", "The VIP Diamond Plan is available to homeowners in Abbeville, Greenwood, Anderson, McCormick, and the surrounding Plumbing Paramedic 911 service area."),
-        ("Is there a new-member promotion?", "Yes. New members choosing monthly billing receive their first monthly payment free. Annual members receive the lowest total price from the start."),
-        ("Can I use the repair discount immediately?", "Yes. Membership benefits begin when enrollment is confirmed. Discounts apply to covered work and cannot be combined with another promotion on the same service."),
-    ]
-    breadcrumb_items = [("Home", "/"), ("VIP Diamond Plan", path)]
-    offer = {
-        "@type": "Service",
-        "@id": BASE_URL + path + "#membership",
-        "name": "VIP Diamond Plumbing Membership",
-        "serviceType": "Residential plumbing maintenance membership",
-        "provider": {"@id": BASE_URL + "/#localbusiness"},
-        "areaServed": [{"@type": "City", "name": city} for city in ["Abbeville", "Greenwood", "Anderson", "McCormick"]],
-        "offers": [
-            {"@type": "Offer", "name": "Annual VIP Diamond Plan", "price": "179.00", "priceCurrency": "USD", "url": BASE_URL + path},
-            {"@type": "Offer", "name": "Monthly VIP Diamond Plan", "price": "17.99", "priceCurrency": "USD", "url": BASE_URL + path},
-        ],
-    }
-    extra = [
-        {"@type": "WebPage", "@id": BASE_URL + path + "#webpage", "url": BASE_URL + path, "name": title, "isPartOf": {"@id": BASE_URL + "/#website"}, "about": {"@id": BASE_URL + path + "#membership"}, "inLanguage": "en-US"},
-        offer,
-        breadcrumb_ld(breadcrumb_items),
-        faq_ld(faqs),
-    ]
-    h = head(title, description, path, extra_jsonld=extra, body_page="membership")
-    n = nav()
-    body = f"""\
-<main>
-  <div class="page-header">
-    <div class="container">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>VIP Diamond Plan</span></nav>
-      <div class="chip chip-live" style="margin-bottom:14px">First Monthly Payment Free</div>
-      <h1 class="speakable-headline">VIP Diamond Plumbing Membership</h1>
-      <p class="speakable-summary">Priority care, preventive inspections and straightforward member savings across Abbeville, Greenwood, Anderson and McCormick.</p>
-    </div>
-  </div>
-
-  <section class="section">
-    <div class="container">
-      <div class="grid-2" style="gap:48px;align-items:start">
-        <div>
-          <span class="label">Membership Benefits</span>
-          <h2>Protect the plumbing in your home</h2>
-          <div class="divider"></div>
-          <ul class="check-list">
-            <li>Priority scheduling when you need service</li>
-            <li>No overtime charges on covered service calls</li>
-            <li>15% off covered plumbing repairs</li>
-            <li>One annual whole-home plumbing inspection</li>
-            <li>Written pricing before work begins</li>
-            <li>Service from an SC Master Plumber</li>
-          </ul>
-          <p style="font-size:.86rem;color:var(--ink3);margin-top:18px">Benefits apply after enrollment is confirmed. Repair discounts cannot be combined with another promotion on the same service.</p>
-        </div>
-        <aside class="card" style="border:3px solid var(--green);text-align:center">
-          <div style="font-size:2.6rem;margin-bottom:8px">💎</div>
-          <h2 style="font-size:1.55rem">Choose your payment option</h2>
-          <div style="font-family:var(--ff-head);font-size:2.6rem;font-weight:900;color:var(--blue-dk);margin-top:18px">$179/year</div>
-          <p style="font-weight:700;color:var(--green-dk);margin:3px 0 14px">Best value — save $36.88</p>
-          <div style="font-family:var(--ff-head);font-size:1.7rem;font-weight:800;color:var(--ink)">$17.99/month</div>
-          <p style="font-size:.88rem;color:var(--ink3);margin:5px 0 20px">New monthly members get the first payment free.</p>
-          <a href="tel:+18644468911" class="btn btn-green btn-lg speakable-phone" style="width:100%;justify-content:center">Call to Join: (864) 446-8911</a>
-          <a href="/contact/" class="btn btn-blue" style="width:100%;justify-content:center;margin-top:10px">Request Enrollment Online →</a>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <section class="section bg-alt">
-    <div class="container" style="max-width:920px">
-      <div style="text-align:center;margin-bottom:30px">
-        <span class="label">Available Across Our Core Markets</span>
-        <h2>One plan. The same benefits in every market.</h2>
-      </div>
-      <div class="grid-4">
-        <a class="nav-card" href="/service-areas/abbeville-sc/"><h3>📍 Abbeville</h3><p>Home-base coverage.</p></a>
-        <a class="nav-card" href="/service-areas/greenwood-sc/"><h3>📍 Greenwood</h3><p>County-wide coverage.</p></a>
-        <a class="nav-card" href="/service-areas/anderson-sc/"><h3>📍 Anderson</h3><p>Anderson County service.</p></a>
-        <a class="nav-card" href="/service-areas/mccormick-sc/"><h3>📍 McCormick</h3><p>Rural and lake-area service.</p></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container" style="max-width:820px">
-      <span class="label">Membership FAQ</span>
-      <h2 style="margin-bottom:28px">VIP Diamond Plan questions</h2>
-      {faq_html(faqs)}
-    </div>
-  </section>
-</main>
-"""
-    return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
-
-
 def render_pricing():
     path = "/pricing/"
     title = "Upfront Plumbing Pricing in Abbeville SC | Plumbing Paramedic 911"
@@ -1793,10 +1662,10 @@ def render_pricing():
         faq_ld([
             ("Is this price final or just an estimate?",
              "The ranges shown are honest estimates based on typical jobs in the Abbeville area. When we arrive, we give you an exact written price before any work starts. That price doesn't change — if the job goes longer than expected, that's on us, not you."),
-            ("Do you charge a service call or diagnostic fee?",
-             "We do not charge a separate diagnostic fee on top of the repair price. The service call fee is waived when you proceed with the repair. We'll always tell you upfront what the full cost will be."),
-            ("What does the after-hours surcharge cover?",
-             "The $150 after-hours surcharge applies to jobs scheduled outside of regular business hours (Mon–Fri 8 AM–6 PM), including evenings, weekends, and holidays. It covers dispatching outside normal hours. There are no additional fees beyond what you're quoted."),
+            ("What is the service / diagnostic call charge?",
+             "The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair or installation work is priced separately and approved before we proceed."),
+            ("What is the after-hours service-call charge?",
+             "After-hours and weekend service / diagnostic calls are $99. After-midnight and holiday service / diagnostic calls are $158. Repair or installation work is quoted separately before it begins."),
             ("What if my job is more complicated than expected?",
              "If we discover additional issues during the job, we stop, explain what we found, quote any additional work, and get your approval before proceeding. We never add costs without your sign-off."),
             ("How does in-house financing work?",
@@ -1928,8 +1797,10 @@ def render_pricing():
             <div style="margin-bottom:20px">
               <div style="font-weight:700;font-size:.88rem;margin-bottom:10px;color:var(--ink)">🕐 Timing</div>
               <div class="calc-timing">
-                <button class="timing-btn active" onclick="selectTiming(this,'business',0)"><strong>Business Hours</strong><span>Mon–Fri 8 AM–6 PM</span></button>
-                <button class="timing-btn" onclick="selectTiming(this,'after',150)"><strong>After Hours / Emergency</strong><span>Evenings, Weekends, Holidays</span></button>
+                <button class="timing-btn active" onclick="selectTiming(this,'regular',79)"><strong>Regular Hours — $79</strong><span>Mon–Fri · 9 AM–5 PM</span></button>
+                <button class="timing-btn" onclick="selectTiming(this,'after',99)"><strong>After Hours / Weekend — $99</strong><span>Weekdays after 5 PM + weekends</span></button>
+                <button class="timing-btn" onclick="selectTiming(this,'midnight',158)"><strong>After Midnight — $158</strong><span>Midnight until regular hours</span></button>
+                <button class="timing-btn" onclick="selectTiming(this,'holiday',158)"><strong>Holiday Service — $158</strong><span>Any holiday service call</span></button>
               </div>
             </div>
             <div>
@@ -1957,7 +1828,7 @@ def render_pricing():
             </div>
             <div class="calc-breakdown">
               <div class="breakdown-row"><span>Base service</span><span id="bd-base">$89 – $149</span></div>
-              <div class="breakdown-row"><span>After-hours surcharge</span><span id="bd-surcharge">$0</span></div>
+              <div class="breakdown-row"><span>Service / diagnostic call</span><span id="bd-surcharge">$79</span></div>
               <div class="breakdown-row"><span>Commercial adjustment</span><span id="bd-commercial">$0</span></div>
               <div class="breakdown-row"><span id="bd-discount-label">Discount</span><span id="bd-discount">$0</span></div>
               <div class="breakdown-row"><span>Estimated total</span><span id="bd-total">$89 – $149</span></div>
@@ -1980,8 +1851,8 @@ def render_pricing():
         <span class="label">Pricing FAQ</span>
         <h2 style="margin-bottom:28px">Common pricing questions</h2>
         <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Is this price final or just an estimate?</span><span class="faq-arrow">+</span></button><div class="faq-a">The ranges shown are honest estimates based on typical jobs in the Abbeville area. When we arrive, we give you an exact written price before any work starts. That price doesn't change — if the job goes longer than expected, that's on us, not you.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Do you charge a service call or diagnostic fee?</span><span class="faq-arrow">+</span></button><div class="faq-a">We do not charge a separate diagnostic fee on top of the repair price. The service call fee is waived when you proceed with the repair. We'll always tell you upfront what the full cost will be.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What does the after-hours surcharge cover?</span><span class="faq-arrow">+</span></button><div class="faq-a">The $150 after-hours surcharge applies to jobs scheduled outside of regular business hours (Mon–Fri 8 AM–6 PM), including evenings, weekends, and holidays. It covers dispatching our team outside normal hours. There are no additional fees beyond what you're quoted.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What is the service / diagnostic call charge?</span><span class="faq-arrow">+</span></button><div class="faq-a">The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair or installation work is priced separately and approved before we proceed.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What is the after-hours service-call charge?</span><span class="faq-arrow">+</span></button><div class="faq-a">After-hours and weekend service / diagnostic calls are $99. After-midnight and holiday service / diagnostic calls are $158. Repair or installation work is quoted separately before it begins.</div></div>
         <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What if my job is more complicated than expected?</span><span class="faq-arrow">+</span></button><div class="faq-a">If we discover additional issues during the job, we'll stop, explain what we found, quote any additional work, and get your approval before proceeding. We never add costs without your sign-off.</div></div>
         <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>How does in-house financing work?</span><span class="faq-arrow">+</span></button><div class="faq-a">For jobs over $500, we offer in-house financing with low interest rates regardless of your credit score. Ask us about financing options when you call or when our technician arrives.</div></div>
       </div>
@@ -2239,7 +2110,6 @@ def main():
     write("about/index.html", render_about())
     write("contact/index.html", render_contact())
     write("pricing/index.html", render_pricing())
-    write("membership/index.html", render_membership())
     write("faq/index.html", render_faq())
     write("reviews/index.html", render_reviews())
     write("financing/index.html", render_financing())
