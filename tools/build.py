@@ -2067,42 +2067,24 @@ def render_reviews():
     title = "Reviews — Plumbing Paramedic 911 | Abbeville SC"
     description = "Real customer reviews of Plumbing Paramedic 911 from homeowners across Abbeville, Greenwood, Anderson &amp; Upstate SC. A+ BBB rated, 30+ Google reviews. Call (864) 446-8911."
     breadcrumb_items = [("Home","/"),("Reviews", path)]
-    reviews = [
-        ("James T.","Abbeville, SC",5,"Eric showed up at midnight for a burst pipe. Fixed it fast, price was exactly what he said on the phone. No invoice surprises. This is the only plumber I'll ever call."),
-        ("Susan M.","Greenwood, SC",5,"Well pump died on a Friday. The Plumbing Paramedic 911 team came out same afternoon. They explained the price before starting, got the job done right, and everything's been perfect since."),
-        ("Robert K.","McCormick, SC",5,"Got a quote from another company for $2,800 to replace my water heater. Plumbing Paramedic 911 did the same job for $1,100 with a 2-year warranty. The transparency alone is worth 5 stars."),
-        ("Linda P.","Anderson, SC",5,"Called for a slab leak. They located it in 45 minutes — turned out to be a pinhole leak in the hot water line. Repaired it the same day without tearing up the whole floor. Excellent work."),
-        ("Mark D.","Laurens, SC",5,"Drain backed up on a Sunday. They had it cleared in under an hour, then ran a camera to show me a root intrusion. Hydro-jetted it the next week. Fair price, did what they said they'd do."),
-        ("Patricia S.","Due West, SC",5,"Our 1920s house had original galvanized supply lines. They repiped the whole house with PEX in two days. Clean job, great crew, water pressure is incredible now."),
-        ("Daniel R.","Calhoun Falls, SC",5,"Frozen pipe at our lake house in January. They drove out from Abbeville the same morning, thawed and repaired the line, and added insulation. Saved us from a flooded house."),
-        ("Karen H.","Ninety Six, SC",5,"Quick faucet install — under $200 like the website said. They came when scheduled, did the work in 30 minutes, cleaned up. No upselling. Just honest plumbing."),
-        ("Tom B.","Greenwood, SC",5,"Tankless water heater install. Eric walked me through every option before quoting. The install was clean, code-compliant, and the price was exactly what he wrote down."),
-        ("Beth K.","Abbeville, SC",5,"Backflow test for our irrigation. Easy scheduling, paperwork filed with the city, done in 30 minutes. They'll be doing this every year for us now."),
-    ]
     extra = [
         {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":"Reviews","isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":BASE_URL+"/#localbusiness"},"inLanguage":"en-US"},
         breadcrumb_ld(breadcrumb_items),
     ]
     h = head(title, description, path, extra_jsonld=extra, body_page="reviews")
     n = nav()
-    cards = []
-    for name,city,stars,text in reviews:
-        initials = "".join(p[0] for p in name.split()[:2]).upper()
-        cards.append(f'<article class="review-card"><div class="review-quote">"</div><div class="stars" aria-label="{stars} out of 5 stars">{"★"*stars}{"☆"*(5-stars)}</div><p class="review-text">{text}</p><div class="reviewer"><div class="avatar">{initials}</div><div><div class="reviewer-name">{name}</div><div class="reviewer-meta">{city}</div></div></div></article>')
     body = f"""\
 <main>
   <section class="page-header">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">{breadcrumb_html(breadcrumb_items)}</nav>
       <h1 class="speakable-headline">Customer Reviews</h1>
-      <p class="speakable-summary">A+ BBB rated with 30+ Google reviews and growing. Here's what Upstate SC homeowners say.</p>
+      <p class="speakable-summary">A+ BBB rated with 30+ Google reviews and growing. Read real customer reviews on our Google Business Profile.</p>
     </div>
   </section>
   <section class="section">
     <div class="container">
-      <div class="grid-3">
-        {chr(10).join(cards)}
-      </div>
+      <div style="text-align:center;max-width:640px;margin:0 auto;background:var(--bg-alt, #f5f7fa);border-radius:12px;padding:32px 24px"><p class="lead" style="margin:0 0 18px">Read what real customers say about Plumbing Paramedic 911 on our Google Business Profile.</p><a href="https://maps.google.com/?cid=12319185328943590636" target="_blank" rel="noopener" class="btn btn-blue">See Our Google Reviews</a></div>
     </div>
   </section>
   <section class="section bg-alt">
