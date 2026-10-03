@@ -130,8 +130,13 @@ def expand_super_service_hub() -> None:
 
 def ensure_sitemap() -> None:
     sitemap = ROOT / "sitemap.xml"; text = sitemap.read_text(encoding="utf-8")
-    for url in ["https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/", "https://plumbingparamedic911.com/service-areas/savannah-lakes-village-sc/"]:
-        if url not in text: text = text.replace("</urlset>", f"  <url><loc>{url}</loc><lastmod>2026-08-13</lastmod></url>\n</urlset>")
+    urls = {
+        "https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/": "2026-08-13",
+        "https://plumbingparamedic911.com/service-areas/savannah-lakes-village-sc/": "2026-08-13",
+        "https://plumbingparamedic911.com/specials/whole-home-repipe/": "2026-10-03",
+    }
+    for url, lastmod in urls.items():
+        if url not in text: text = text.replace("</urlset>", f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>\n</urlset>")
     sitemap.write_text(text, encoding="utf-8")
 
 
