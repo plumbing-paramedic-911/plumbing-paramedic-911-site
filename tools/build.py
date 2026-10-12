@@ -311,21 +311,21 @@ SERVICES = {
 
     "water-heater-repair-replacement": {
         "title": "Water Heater Repair &amp; Replacement in Abbeville, SC | Plumbing Paramedic 911",
-        "description": "Same-day water heater repair and replacement in Abbeville, Greenwood, Anderson, Laurens, McCormick — tank, tankless, gas, electric, heat-pump. Flat-rate from $149 repair, $899 replacement. Call (864) 446-8911.",
+        "description": "Same-day water heater repair and replacement in Abbeville, Greenwood, Anderson, Laurens, McCormick — tank, tankless, gas, electric, heat-pump. Repair from $149; tank replacement starts around $1,800. Call (864) 446-8911.",
         "h1": "Water Heater Repair &amp; Replacement",
         "badge": "● Same-Day Replacement Available",
         "intro": "Cold shower today, no hot water tomorrow — water heaters give some warning before they quit, but not much. We diagnose, repair, and replace tank and tankless models same day in most cases, with stock heaters ranging from 40 to 80 gallons on the truck.",
         "schema_id": "https://plumbingparamedic911.com/#service-waterheater",
         "service_type": "Water Heater Repair",
         "schema_desc": "Diagnose, repair, and install tank and tankless water heaters — gas, electric, and heat-pump models. Same-day replacement in Abbeville, Greenwood, Anderson, Laurens, and McCormick counties.",
-        "price_range": "$149 – $2,899",
-        "price_note": "Repair from $149. 40-gallon tank from $899. 50-gallon from $999. Tankless install $1,599 – $2,899.",
+        "price_range": "Repair from $149 · replacement from $1,800",
+        "price_note": "Repair from $149. Replacement starts around $1,800 for 40 gallons, $2,065 for 50 gallons and $3,100 for tankless. Equipment, access and installation requirements affect the written quote.",
         "og": "/images/og/water-heater-1200x630.jpg",
         "body": """
 <h3>Repair or replace?</h3>
 <p>The rule of thumb: if your heater is under 8 years old, repair almost always makes sense. Common repairs include thermocouple/igniter on a gas unit (under $200), heating element on an electric unit (under $250), or T&P relief valve and anode rod ($149–$199). Past 10 years, replacement is usually the smarter spend — efficiency, warranty, and reliability all tilt toward a new unit.</p>
 <h3>Tank vs tankless</h3>
-<p>A 40 or 50-gallon tank is what most Upstate SC homes already have. It's the cheapest install, holds 40–50 gallons of hot water ready to go, and lasts 8–12 years. A tankless unit ("on-demand") heats water as you use it — never runs out, lasts 18–20 years, takes up almost no space, and saves about 25% on energy. The trade-off: tankless costs more to install ($1,599–$2,899 vs $899–$1,499) and may require gas-line or electrical upgrades. We'll walk you through both options at quote time.</p>
+<p>A 40 or 50-gallon tank is what most Upstate SC homes already have. It's the cheapest install, holds 40–50 gallons of hot water ready to go, and lasts 8–12 years. A tankless unit ("on-demand") heats water as you use it — never runs out, lasts 18–20 years, takes up almost no space, and saves about 25% on energy. The trade-off: tankless costs more to install (starting around $3,100 for tankless vs $1,800 for a 40-gallon tank or $2,065 for a 50-gallon tank) and may require gas-line or electrical upgrades. We'll walk you through both options at quote time.</p>
 <h3>What's included in a replacement</h3>
 <ul>
   <li>Removal and disposal of the old unit</li>
@@ -351,7 +351,7 @@ SERVICES = {
 """,
         "faqs": [
             ("How much does it cost to replace a water heater in Abbeville SC?",
-             "A 40-gallon tank replacement is $899 to $1,299 installed. A 50-gallon tank is $999 to $1,499. Tankless installation runs $1,599 to $2,899 depending on whether gas-line or electrical upgrades are needed. All flat-rate, written quote before we start."),
+             "Water heater replacement starts around $1,800 for a 40-gallon tank, $2,065 for a 50-gallon tank, and $3,100 for tankless. Equipment, access and installation requirements affect the written quote. The service call is separate; repair or installation pricing is approved before work begins."),
             ("How long does water heater installation take?",
              "A like-for-like tank replacement (same fuel, same size, same location) is typically 2 to 3 hours. A tankless installation is 4 to 7 hours. Conversion from electric to gas, or relocation to a different room, can take a full day."),
             ("Tank or tankless — which is better for a home in Upstate SC?",
@@ -641,8 +641,8 @@ SERVICES = {
         "schema_id": "https://plumbingparamedic911.com/#service-tankless",
         "service_type": "Tankless Water Heater Installation and Repair",
         "schema_desc": "Tankless water heater installation, repair, and maintenance across Abbeville, Greenwood, Anderson, Laurens, and McCormick counties. Gas and electric models.",
-        "price_range": "$199 – $3,500+",
-        "price_note": "Repair from $199. New tankless install from $2,200 (unit + labor). Tank-to-tankless conversion quoted on-site.",
+        "price_range": "Repair from $199 · installation from $3,100",
+        "price_note": "Repair from $199. New tankless installation starts around $3,100. Tank-to-tankless conversion quoted on-site.",
         "og": "/images/og/tankless-water-heater-1200x630.jpg",
         "body": """
 <h3>Why go tankless?</h3>
@@ -662,7 +662,7 @@ SERVICES = {
 """,
         "faqs": [
             ("How much does a tankless water heater cost to install?",
-             "A new tankless water heater installation typically runs $2,200 to $3,500+ depending on the unit, whether it's gas or electric, and whether your home needs gas line or venting upgrades. We give you a flat-rate written quote before any work begins."),
+             "Tankless water heater installation starts around $3,100. Equipment, access, gas-line, electrical and venting requirements affect the written quote. We give you a flat-rate written quote before any work begins."),
             ("Is a tankless water heater worth it?",
              "For most households, yes. You'll save 20 to 40 percent on water-heating energy costs, never run out of hot water, and the unit lasts about twice as long as a tank. The upfront cost is higher, but the lifetime cost is usually lower."),
             ("Do tankless water heaters need maintenance?",
@@ -894,17 +894,17 @@ CITIES = {
         "city":"Abbeville","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/Abbeville,_South_Carolina",
         "lat":34.178172,"lng":-82.379015,
-        "response":"30–45 min",
-        "title":"Plumber in Abbeville, SC | 24/7 Service | Plumbing Paramedic 911",
+        "response":"Call for availability",
+        "title":"Abbeville SC Plumber | Plumbing Paramedic 911",
         "description":"Local SC Master Plumber in Abbeville, SC. 24/7 emergency dispatch, flat-rate pricing, drain cleaning, water heaters, well pumps, leak detection. Based at 13 Callaway Dr — call (864) 446-8911.",
         "og":"/images/og/abbeville-1200x630.jpg",
-        "intro":"Abbeville is our home base. Our shop is on Callaway Drive, a few minutes from the historic square, and most calls within Abbeville city limits get to you in 30 to 45 minutes — often faster. We've been the plumber Abbeville homeowners trust for decades.",
+        "intro":"Plumbing Paramedic 911 is based in Abbeville and has served local homes and businesses since 2015. Owner Eric Callaway is a South Carolina Master Plumber. We handle leaks, drain and sewer problems, water heaters and well systems, with 24/7 emergency dispatch and repair pricing approved before work begins. Call (864) 446-8911 for current availability.",
         "body":"""
 <h3>Local plumbing problems specific to Abbeville</h3>
 <p>Abbeville has a deep stock of historic homes — many built in the late 1800s and early 1900s, particularly around the Trinity Episcopal and Court Square neighborhoods. These houses often have original galvanized supply lines or early copper that's reaching the end of its life. We see a lot of pinhole copper leaks, low water pressure from corroded galvanized, and 80-year-old cast-iron drain stacks that finally give up. We also see the opposite — newer subdivisions on the edge of town with slab foundations where a hot-water supply leak under the slab causes warm patches on the floor and water bills that double overnight.</p>
 <h3>Common services in Abbeville</h3>
 <ul>
-  <li><strong>Emergency dispatch</strong> — typical response 30–45 minutes from Callaway Drive shop</li>
+  <li><strong>Emergency dispatch</strong> — call for current availability from our Abbeville home base</li>
   <li><strong>Galvanized and old-copper repipes</strong> — especially for Trinity, Court Square, and historic-district homes</li>
   <li><strong>Slab leak detection and repair</strong> — for 1970s+ subdivisions</li>
   <li><strong>Water heater replacement</strong> — most Abbeville homes are on city water with electric or gas tank heaters</li>
@@ -1876,7 +1876,7 @@ def render_repipe_promotion():
 def render_pricing():
     path = "/pricing/"
     title = "Upfront Plumbing Pricing in Abbeville SC | Plumbing Paramedic 911"
-    description = "Real flat-rate plumbing prices online — drain cleaning from $149, water heater replace from $899, well pump replace from $799. No hourly billing. Abbeville SC. Call (864) 446-8911."
+    description = "Real flat-rate plumbing prices online — drain cleaning from $149, 40-gallon water heater replacement from $1,800, well pump replace from $799. No hourly billing. Abbeville SC. Call (864) 446-8911."
     breadcrumb_items = [("Home","/"),("Pricing", path)]
     extra = [
         {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":"Pricing","isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":BASE_URL+"/#localbusiness"},"inLanguage":"en-US"},
@@ -1966,9 +1966,9 @@ def render_pricing():
             <h3 style="margin-bottom:16px;font-size:1rem">Select water heater service</h3>
             <div class="calc-service-grid">
               <button class="calc-service-btn" onclick="selectService(this,'WH Repair',149,349)"><span class="icon">🔧</span><span class="name">Water Heater Repair</span><span class="range">$149 – $349</span></button>
-              <button class="calc-service-btn" onclick="selectService(this,'WH Replace 40gal',899,1299)"><span class="icon">🔥</span><span class="name">Replace 40-Gal Tank</span><span class="range">$899 – $1,299</span></button>
-              <button class="calc-service-btn" onclick="selectService(this,'WH Replace 50gal',999,1499)"><span class="icon">🔥</span><span class="name">Replace 50-Gal Tank</span><span class="range">$999 – $1,499</span></button>
-              <button class="calc-service-btn" onclick="selectService(this,'Tankless Install',1599,2899)"><span class="icon">⚡</span><span class="name">Tankless Install</span><span class="range">$1,599 – $2,899</span></button>
+              <button class="calc-service-btn" onclick="selectService(this,'WH Replace 40gal',1800,null)"><span class="icon">🔥</span><span class="name">Replace 40-Gal Tank</span><span class="range">From $1,800</span></button>
+              <button class="calc-service-btn" onclick="selectService(this,'WH Replace 50gal',2065,null)"><span class="icon">🔥</span><span class="name">Replace 50-Gal Tank</span><span class="range">From $2,065</span></button>
+              <button class="calc-service-btn" onclick="selectService(this,'Tankless Install',3100,null)"><span class="icon">⚡</span><span class="name">Tankless Install</span><span class="range">From $3,100</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Tankless Repair',199,499)"><span class="icon">⚡</span><span class="name">Tankless Repair</span><span class="range">$199 – $499</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Anode Rod',149,199)"><span class="icon">🛡️</span><span class="name">Anode Rod Replace</span><span class="range">$149 – $199</span></button>
             </div>
@@ -2235,7 +2235,7 @@ def render_financing():
         <p>To start, we need basic information: name, address, ID, and a way to verify income (pay stub, bank statement, or SSI/disability documentation if applicable). That's it. Most approvals happen within the first hour of the service visit.</p>
         <h3>What jobs are commonly financed</h3>
         <ul>
-          <li>Water heater replacement — $899 to $2,899</li>
+          <li>Water heater replacement — starts around $1,800 (40 gallon), $2,065 (50 gallon), or $3,100 (tankless)</li>
           <li>Whole-house repipe — $3,499 to $8,999</li>
           <li>Sewer line repair or replacement — $899 to $5,999</li>
           <li>Well pump replacement — $799 to $1,599</li>

@@ -434,14 +434,14 @@ MONEY_PAGES = {
 
 LINK_TARGETS = {
     "services/well-pump-repair/index.html": ["well-pump-repair-mccormick-sc", "well-pump-repair-iva-lake-secession-sc"],
-    "services/drain-cleaning/index.html": ["drain-cleaning-greenwood-sc"],
+    "services/drain-cleaning/index.html": ["drain-cleaning-abbeville-sc", "drain-cleaning-greenwood-sc"],
     "services/water-heater-repair-replacement/index.html": ["water-heater-repair-abbeville-sc", "water-heater-repair-greenwood-sc", "water-heater-repair-anderson-sc"],
     "services/24-7-emergency-plumbing/index.html": ["emergency-plumber-abbeville-sc"],
     "service-areas/mccormick-sc/index.html": ["well-pump-repair-mccormick-sc"],
     "service-areas/iva-lake-secession-sc/index.html": ["well-pump-repair-iva-lake-secession-sc"],
     "service-areas/greenwood-sc/index.html": ["drain-cleaning-greenwood-sc", "water-heater-repair-greenwood-sc"],
     "service-areas/anderson-sc/index.html": ["water-heater-repair-anderson-sc"],
-    "service-areas/abbeville-sc/index.html": ["emergency-plumber-abbeville-sc", "water-heater-repair-abbeville-sc"],
+    "service-areas/abbeville-sc/index.html": ["emergency-plumber-abbeville-sc", "drain-cleaning-abbeville-sc", "water-heater-repair-abbeville-sc", "sewer-line-repair-abbeville-sc"],
     "services/index.html": list(MONEY_PAGES.keys()),
 }
 
