@@ -44,10 +44,29 @@ $$('[data-modal]').forEach(b=>b.addEventListener('click',()=>document.getElement
 async function q(tableName,select='*',opts={}){let r=sb.from(tableName).select(select);if(opts.order)r=r.order(opts.order,{ascending:opts.asc??false});if(opts.limit)r=r.limit(opts.limit);const {data,error}=await r;if(error)throw error;return data||[]}
 async function count(tableName){const {count,error}=await sb.from(tableName).select('*',{count:'exact',head:true});if(error)throw error;return count||0}
 
-async function refreshAll(){try{const [leadCount,customerCount,jobCount,dispatchCount,leads,calls,customers,appointments,jobs,dispatch,prices,invoices]=await Promise.all([
-count('leads'),count('customers'),count('work_orders'),count('dispatch_tickets'),
-q('leads','*',{order:'created_at',limit:50}),q('call_sessions','*',{order:'created_at',limit:50}),q('customers','*',{order:'created_at',limit:100}),q('appointments','*',{order:'scheduled_start',asc:true,limit:100}),q('work_orders','*',{order:'created_at',limit:100}),q('dispatch_tickets','*',{order:'created_at',limit:100}),q('price_book_items','*',{order:'category',asc:true,limit:500}),q('invoices','*',{order:'created_at',limit:100})]);
-renderStats({leadCount,customerCount,jobCount,dispatchCount});renderLeads(leads);renderCalls(calls);renderCustomers(customers);renderSchedule(appointments);renderJobs(jobs);renderDispatch(dispatch);renderPricing(prices);renderInvoices(invoices)}catch(e){console.error(e);alert('Could not refresh PP911 Operations: '+e.message)}}
+let refreshInProgress=false;
+async function refreshAll(){
+ if(refreshInProgress)return;
+ refreshInProgress=true;
+ const button=$('#refreshBtn');if(button)button.disabled=true;
+ const tasks=[
+ ['leadCount',()=>count('leads')],['customerCount',()=>count('customers')],['jobCount',()=>count('work_orders')],['dispatchCount',()=>count('dispatch_tickets')],
+ ['leads',()=>q('leads','*',{order:'created_at',limit:50})],['calls',()=>q('call_sessions','*',{order:'created_at',limit:50})],
+ ['customers',()=>q('customers','*',{order:'created_at',limit:100})],['appointments',()=>q('appointments','*',{order:'scheduled_start',asc:true,limit:100})],
+ ['jobs',()=>q('work_orders','*',{order:'created_at',limit:100})],['dispatch',()=>q('dispatch_tickets','*',{order:'created_at',limit:100})],
+ ['prices',()=>q('price_book_items','*',{order:'category',asc:true,limit:500})],['invoices',()=>q('invoices','*',{order:'created_at',limit:100})]
+ ];
+ try{
+  const results=await Promise.allSettled(tasks.map(([,run])=>run()));
+  const values={},failures=[];
+  results.forEach((r,i)=>{const name=tasks[i][0];if(r.status==='fulfilled')values[name]=r.value;else{failures.push(name);console.error('Refresh failed: '+name,r.reason)}});
+  const renderers={leads:renderLeads,calls:renderCalls,customers:renderCustomers,appointments:renderSchedule,jobs:renderJobs,dispatch:renderDispatch,prices:renderPricing,invoices:renderInvoices};
+  Object.entries(renderers).forEach(([name,render])=>{if(name in values){try{render(values[name])}catch(e){failures.push(name+' display');console.error('Render failed: '+name,e)}}});
+  if(['leadCount','customerCount','jobCount','dispatchCount'].every(k=>k in values))renderStats(values);
+  if(failures.length)msg('Some sections could not refresh: '+failures.join(', ')+'. Other sections remain available. Try again.',true);
+  else{const notice=$('#authMsg');if(notice){notice.classList.add('hidden');notice.classList.remove('error')}}
+ }finally{refreshInProgress=false;if(button)button.disabled=false}
+}
 
 function renderStats(s){$('#stats').innerHTML=[['Leads',s.leadCount],['Customers',s.customerCount],['Open jobs',s.jobCount],['Dispatch tickets',s.dispatchCount]].map(([l,n])=>`<div class="stat"><div class="num">${n}</div><div class="label">${l}</div></div>`).join('')}
 function renderLeads(data){$('#dashboardLeads').innerHTML=data.slice(0,6).length?`<div class="mini-list">${data.slice(0,6).map(x=>`<div class="mini-item"><div class="mini-title">${esc(x.caller_name||x.phone)}</div><div>${esc(x.issue_summary)}</div><div class="mini-meta">${pill(x.urgency)} · ${fmtDate(x.created_at)}</div></div>`).join('')}</div>`:empty('No leads yet.');$('#leadsTable').innerHTML=table(['Customer','Phone','Issue','Urgency','Status','Created'],data.map(x=>`<tr><td>${esc(x.caller_name||'—')}</td><td>${esc(x.phone)}</td><td>${esc(x.issue_summary)}</td><td>${pill(x.urgency)}</td><td><select class="status-select lead-status" data-id="${x.id}">${['new','contacted','qualified','booked','lost','spam'].map(v=>`<option ${x.status===v?'selected':''}>${v}</option>`).join('')}</select></td><td>${fmtDate(x.created_at)}</td></tr>`));$$('.lead-status').forEach(s=>s.addEventListener('change',async()=>{const {error}=await sb.from('leads').update({status:s.value}).eq('id',s.dataset.id);if(error)alert(error.message)}))}
