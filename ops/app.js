@@ -46,7 +46,7 @@ async function count(tableName){const {count,error}=await sb.from(tableName).sel
 
 async function refreshAll(){try{const [leadCount,customerCount,jobCount,dispatchCount,leads,calls,customers,appointments,jobs,dispatch,prices,invoices]=await Promise.all([
 count('leads'),count('customers'),count('work_orders'),count('dispatch_tickets'),
-q('leads','*',{order:'created_at',limit:50}),q('call_sessions','*',{order:'created_at',limit:50}),q('customers','*',{order:'created_at',limit:100}),q('appointments','*',{order:'scheduled_start',asc:true,limit:100}),q('work_orders','*',{order:'created_at',limit:100}),q('dispatch_tickets','*',{order:'created_at',limit:100}),q('price_book_items','*',{order:'category',asc:true,limit:500}),q('invoices','*',{order:'created_at',limit:100})]);
+q('leads','*',{order:'created_at',limit:50}),q('call_sessions','*',{order:'created_at',limit:50}),q('customers','*',{order:'created_at',limit:100}),q('appointments','*',{order:'scheduled_start',asc:true,limit:100}),q('work_orders','*',{order:'created_at',limit:100}),q('dispatch_tickets','*',{order:'created_at',limit:100}),window.PP911PriceBook.loadAll(sb),q('invoices','*',{order:'created_at',limit:100})]);
 renderStats({leadCount,customerCount,jobCount,dispatchCount});renderLeads(leads);renderCalls(calls);renderCustomers(customers);renderSchedule(appointments);renderJobs(jobs);renderDispatch(dispatch);renderPricing(prices);renderInvoices(invoices)}catch(e){console.error(e);alert('Could not refresh PP911 Operations: '+e.message)}}
 
 function renderStats(s){$('#stats').innerHTML=[['Leads',s.leadCount],['Customers',s.customerCount],['Open jobs',s.jobCount],['Dispatch tickets',s.dispatchCount]].map(([l,n])=>`<div class="stat"><div class="num">${n}</div><div class="label">${l}</div></div>`).join('')}
@@ -56,7 +56,22 @@ function renderCustomers(data){$('#customersTable').innerHTML=table(['Name','Com
 function renderSchedule(data){$('#scheduleTable').innerHTML=table(['Start','Status','Service','Problem','Arrival window'],data.map(x=>`<tr><td>${fmtDate(x.scheduled_start)}</td><td>${pill(x.status)}</td><td>${esc(x.service_category||'—')}</td><td>${esc(x.problem_description||'—')}</td><td>${esc(x.arrival_window_minutes)} min</td></tr>`))}
 function renderJobs(data){$('#jobsTable').innerHTML=table(['WO #','Status','Complaint','Diagnosis','Work performed','Created'],data.map(x=>`<tr><td><strong>#${esc(x.work_order_number)}</strong></td><td><select class="status-select job-status" data-id="${x.id}">${['open','diagnosing','quoted','approved','in_progress','completed','cancelled'].map(v=>`<option ${x.status===v?'selected':''}>${v}</option>`).join('')}</select></td><td>${esc(x.complaint||'—')}</td><td>${esc(x.diagnosis||'—')}</td><td>${esc(x.work_performed||'—')}</td><td>${fmtDate(x.created_at)}</td></tr>`));$$('.job-status').forEach(s=>s.addEventListener('change',async()=>{const patch={status:s.value};if(s.value==='completed')patch.completed_at=new Date().toISOString();const {error}=await sb.from('work_orders').update(patch).eq('id',s.dataset.id);if(error)alert(error.message)}))}
 function renderDispatch(data){$('#dispatchTable').innerHTML=table(['Ticket','Urgency','Status','Caller','Phone','City','Issue','Created'],data.map(x=>`<tr><td>#${esc(x.ticket_number)}</td><td>${pill(x.urgency)}</td><td>${pill(x.status)}</td><td>${esc(x.caller_name||'—')}</td><td>${esc(x.caller_phone)}</td><td>${esc(x.city)}</td><td>${esc(x.issue_summary)}</td><td>${fmtDate(x.created_at)}</td></tr>`))}
-function renderPricing(data){$('#pricingTable').innerHTML=table(['Category','Service','Option','Standard','Member','Minutes'],data.map(x=>`<tr><td>${esc(x.category)}</td><td><strong>${esc(x.service_name)}</strong><br><span class="muted">${esc(x.description||'')}</span></td><td>${esc(x.option_level)}</td><td>$${Number(x.standard_price||0).toLocaleString()}</td><td>${x.member_price!=null?'$'+Number(x.member_price).toLocaleString():'—'}</td><td>${esc(x.estimated_minutes||'—')}</td></tr>`))}
+let priceItems=[];
+function renderPricing(data){
+  priceItems=data;
+  const selected=$('#priceCategory').value;
+  $('#priceCategory').innerHTML='<option value="">All categories</option>'+[...new Set(data.map(x=>x.category))].map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+  $('#priceCategory').value=selected;
+  filterPricing();
+}
+function filterPricing(){
+  const data=window.PP911PriceBook.filter(priceItems,$('#priceSearch').value,$('#priceCategory').value);
+  $('#priceCount').textContent=`${data.length.toLocaleString()} of ${priceItems.length.toLocaleString()} services`;
+  const money=v=>v==null?'—':Number(v).toLocaleString('en-US',{style:'currency',currency:'USD'});
+  $('#pricingTable').innerHTML=table(['Code','Category','Service','Standard','Standard OT','Member','Member OT','Est. minutes','Book page'],data.map(x=>`<tr><td><strong>${esc(x.sku||'—')}</strong></td><td>${esc(x.category)}</td><td><strong>${esc(x.service_name)}</strong>${x.description?`<br><span class="muted">${esc(x.description)}</span>`:''}</td><td>${money(x.standard_price)}</td><td>${money(x.standard_ot_price)}</td><td>${money(x.member_price)}</td><td>${money(x.member_ot_price)}</td><td>${esc(x.estimated_minutes??'—')}</td><td>${esc(x.source_page??'—')}</td></tr>`));
+}
+$('#priceSearch').addEventListener('input',filterPricing);
+$('#priceCategory').addEventListener('change',filterPricing);
 function renderInvoices(data){$('#invoicesTable').innerHTML=table(['Invoice','Title','Status','Total','Paid','Due'],data.map(x=>`<tr><td>#${esc(x.invoice_number)}</td><td>${esc(x.title)}</td><td>${pill(x.status)}</td><td>$${Number(x.total||0).toFixed(2)}</td><td>$${Number(x.amount_paid||0).toFixed(2)}</td><td>${esc(x.due_date||'—')}</td></tr>`))}
 
 $('#saveLeadBtn').addEventListener('click',async()=>{const fd=new FormData($('#leadForm')),row=Object.fromEntries(fd.entries());row.source='office_manual';row.status='new';const {error}=await sb.from('leads').insert(row);if(error)return alert(error.message);$('#leadModal').close();$('#leadForm').reset();await refreshAll()});

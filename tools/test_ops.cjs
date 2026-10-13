@@ -6,6 +6,20 @@ const path=require('node:path');
 const crypto=require('node:crypto');
 const root=path.join(__dirname,'..');
 const source=fs.readFileSync(path.join(root,'ops/app.js'),'utf8');
+const priceBook=require('../ops/pricebook.js');
+test('price book loads all 1062 services rather than stopping at API limits',async()=>{
+  const rows=Array.from({length:1062},(_,i)=>({sku:String(i)}));
+  const calls=[];
+  const query={select(){return this},eq(){return this},order(){return this},async range(start,end){calls.push([start,end]);return {data:rows.slice(start,end+1),error:null}}};
+  const result=await priceBook.loadAll({from:name=>{assert.equal(name,'price_book_items');return query}});
+  assert.deepEqual(result,rows);assert.deepEqual(calls,[[0,499],[500,999],[1000,1499]]);
+});
+test('price book searches codes and descriptions and combines category filters',()=>{
+  const rows=[{sku:'01-01',service_name:'Clear Main Drain',category:'Drain Cleaning'},{sku:'25-01',service_name:'Well pump',category:'Well Pumps'}];
+  assert.deepEqual(priceBook.filter(rows,'25-01',''),[rows[1]]);
+  assert.deepEqual(priceBook.filter(rows,' MAIN ','Drain Cleaning'),[rows[0]]);
+  assert.deepEqual(priceBook.filter(rows,'pump','Drain Cleaning'),[]);
+});
 function setup(client,missing=false){
   const nodes=new Map();
   function node(id){

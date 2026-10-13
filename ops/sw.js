@@ -1,5 +1,5 @@
-const CACHE='pp911-ops-v2';
-const ASSETS=['/ops/','/ops/index.html','/ops/styles.css','/ops/app.js?v=20261013','/ops/vendor/supabase-2.117.3.js','/ops/manifest.webmanifest'];
+const CACHE='pp911-ops-v3';
+const ASSETS=['/ops/','/ops/index.html','/ops/styles.css','/ops/app.js?v=20261013b','/ops/pricebook.js?v=20261013','/ops/vendor/supabase-2.117.3.js','/ops/manifest.webmanifest'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('pp911-ops-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{
