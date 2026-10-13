@@ -1,3 +1,11 @@
+(() => {
+const startupMessage=document.querySelector('#authMsg');
+if(typeof window.supabase?.createClient!=='function'){
+  startupMessage.textContent='Sign-in could not load. Check your connection and refresh the page.';
+  startupMessage.classList.add('error');
+  return;
+}
+try {
 const SUPABASE_URL='https://wuwgvtjktppjueiykcww.supabase.co';
 const SUPABASE_KEY='sb_publishable_GDRVKaxxwvFuV7jhldebYA_6GjUszub';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
@@ -15,9 +23,18 @@ async function boot(){const {data:{session}}=await sb.auth.getSession();if(!sess
 function showAuth(){$('#authView').classList.remove('hidden');$('#appView').classList.add('hidden')}
 function showApp(){$('#authView').classList.add('hidden');$('#appView').classList.remove('hidden')}
 
-$('#authForm').addEventListener('submit',async e=>{e.preventDefault();msg('Signing in…');const email=$('#email').value.trim(),password=$('#password').value;const {error}=await sb.auth.signInWithPassword({email,password});if(error)return msg(error.message,true);await boot()});
-$('#signupBtn').addEventListener('click',async()=>{const email=$('#email').value.trim(),password=$('#password').value,full_name=$('#fullName').value.trim()||'Owner';if(!email||password.length<8)return msg('Enter your email and a password of at least 8 characters.',true);msg('Creating your login…');const {data,error}=await sb.auth.signUp({email,password,options:{data:{full_name}}});if(error)return msg(error.message,true);if(!data.session)return msg('Login created. Check your email for the confirmation link, then come back and sign in.');$('#claimForm').classList.remove('hidden');msg('Login created. Enter the owner setup code below.')});
-$('#claimForm').addEventListener('submit',async e=>{e.preventDefault();const code=$('#claimCode').value.trim();const {data,error}=await sb.rpc('claim_ops_owner',{p_code:code});if(error)return msg(error.message,true);msg('Owner access activated. Loading PP911 Operations…');setTimeout(boot,500)});
+let authBusy=false;
+async function authAction(action){
+  if(authBusy)return;
+  authBusy=true;
+  const buttons=$$('#authForm button, #claimForm button');
+  buttons.forEach(b=>b.disabled=true);
+  try{await action()}catch(e){msg(e.message||'Could not connect. Check your connection and try again.',true)}
+  finally{authBusy=false;buttons.forEach(b=>b.disabled=false)}
+}
+$('#authForm').addEventListener('submit',e=>{e.preventDefault();authAction(async()=>{msg('Signing in…');const email=$('#email').value.trim(),password=$('#password').value;const {error}=await sb.auth.signInWithPassword({email,password});if(error)throw error;await boot()})});
+$('#signupBtn').addEventListener('click',()=>{authAction(async()=>{const email=$('#email').value.trim(),password=$('#password').value,full_name=$('#fullName').value.trim()||'Owner';if(!email||password.length<8)return msg('Enter your email and a password of at least 8 characters.',true);if(!$('#authForm').reportValidity())return;msg('Creating your login…');const {data,error}=await sb.auth.signUp({email,password,options:{emailRedirectTo:location.origin+'/ops/',data:{full_name}}});if(error)throw error;if(!data.session)return msg('Login created. Check your email for the confirmation link, then come back and sign in.');$('#claimForm').classList.remove('hidden');msg('Login created. Enter the owner setup code below.')})});
+$('#claimForm').addEventListener('submit',e=>{e.preventDefault();authAction(async()=>{msg('Activating owner access…');const code=$('#claimCode').value.trim();const {error}=await sb.rpc('claim_ops_owner',{p_code:code});if(error)throw error;$('#claimCode').value='';$('#claimForm').classList.add('hidden');msg('Owner access activated. Loading PP911 Operations…');await boot()})});
 $('#signOutBtn').addEventListener('click',async()=>{await sb.auth.signOut();location.reload()});
 $('#refreshBtn').addEventListener('click',refreshAll);
 
@@ -46,5 +63,15 @@ $('#saveLeadBtn').addEventListener('click',async()=>{const fd=new FormData($('#l
 $('#saveCustomerBtn').addEventListener('click',async()=>{const fd=new FormData($('#customerForm'));const row=Object.fromEntries(fd.entries());const address=row.address_line1,city=row.city,postal=row.postal_code;delete row.address_line1;delete row.city;delete row.postal_code;row.source='office_manual';const {data,error}=await sb.from('customers').insert(row).select('id').single();if(error)return alert(error.message);if(address&&city){const {error:pe}=await sb.from('properties').insert({customer_id:data.id,address_line1:address,city,state:'SC',postal_code:postal||null});if(pe)alert('Customer saved, but address could not be saved: '+pe.message)}$('#customerModal').close();$('#customerForm').reset();await refreshAll()});
 
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/ops/sw.js').catch(()=>{});
-sb.auth.onAuthStateChange(()=>setTimeout(boot,0));
-boot();
+sb.auth.onAuthStateChange(()=>setTimeout(()=>boot().catch(e=>msg(e.message||'Could not load account',true)),0));
+$('#authMsg').classList.add('hidden');
+$$('#authForm button').forEach(b=>b.disabled=false);
+boot().catch(e=>msg(e.message||'Could not load account',true));
+}catch(e){
+  startupMessage.textContent='Sign-in could not start. Refresh the page and try again.';
+  startupMessage.classList.remove('hidden');
+  startupMessage.classList.add('error');
+  document.querySelectorAll('#authForm button').forEach(b=>b.disabled=true);
+  console.error('PP911 Operations startup failed',e);
+}
+})();
