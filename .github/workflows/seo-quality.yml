@@ -42,4 +42,4 @@ jobs:
         run: python3 -m py_compile tools/build.py tools/release_build.py tools/check_internal_links.py tools/check_redirects.py
 
       - name: Check Operations startup and authentication feedback
-        run: node --test tools/test_ops.cjs
+        run: node --test tools/test_ops.cjs tools/test_ops_workflows.cjs
