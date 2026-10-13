@@ -17,14 +17,15 @@
       <div class="brand-mark">PP<span>911</span></div>
       <h1>Operations</h1>
       <p class="muted">Private Plumbing Paramedic 911 CRM, dispatch and field-service dashboard.</p>
-      <div id="authMsg" class="msg hidden"></div>
+      <div id="authMsg" class="msg" role="status" aria-live="polite">Sign-in is loading. If this message remains, refresh the page or check your connection.</div>
+      <noscript><p class="msg error">JavaScript is required to sign in to PP911 Operations.</p></noscript>
       <form id="authForm">
         <label>Full name<input id="fullName" autocomplete="name" placeholder="Eric Callaway"></label>
         <label>Email<input id="email" type="email" autocomplete="email" required></label>
         <label>Password<input id="password" type="password" autocomplete="current-password" minlength="8" required></label>
         <div class="row gap">
-          <button class="btn primary grow" type="submit">Sign in</button>
-          <button class="btn secondary" id="signupBtn" type="button">Create owner login</button>
+          <button class="btn primary grow" type="submit" disabled>Sign in</button>
+          <button class="btn secondary" id="signupBtn" type="button" disabled>Create owner login</button>
         </div>
       </form>
       <form id="claimForm" class="hidden top-space">
@@ -76,7 +77,7 @@
 
   <dialog id="customerModal"><form method="dialog" class="modal-card" id="customerForm"><div class="modal-head"><h3>New customer</h3><button class="icon-btn" value="cancel">×</button></div><div class="grid2 form-grid"><label>First name<input name="first_name" required></label><label>Last name<input name="last_name" required></label></div><label>Phone<input name="phone" type="tel" required></label><label>Email<input name="email" type="email"></label><label>Service address<input name="address_line1"></label><div class="grid2 form-grid"><label>City<input name="city"></label><label>ZIP<input name="postal_code"></label></div><div class="row gap"><button value="cancel" class="btn secondary">Cancel</button><button id="saveCustomerBtn" type="button" class="btn primary grow">Save customer</button></div></form></dialog>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/ops/app.js"></script>
+  <script src="/ops/vendor/supabase-2.117.3.js" defer></script>
+  <script src="/ops/app.js?v=20261013" defer></script>
 </body>
 </html>
