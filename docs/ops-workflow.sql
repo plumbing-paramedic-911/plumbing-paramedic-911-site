@@ -39,8 +39,7 @@ begin
   if p_minutes is null or p_minutes<15 or p_minutes>480 then raise exception 'Duration must be 15 to 480 minutes'; end if;
   if nullif(trim(p_address),'') is null or nullif(trim(p_city),'') is null or nullif(trim(p_summary),'') is null then raise exception 'Address, city and issue summary are required'; end if;
   if p_staff_id is not null then
-    perform pg_advisory_xact_lock(hashtextextended('ops-staff:' || p_staff_id::text,0));
-    perform 1 from public.crm_users where id=p_staff_id and active and role in ('owner','admin','dispatcher','technician');
+    perform 1 from public.crm_users where id=p_staff_id and active for update;
     if not found then raise exception 'Choose an active staff member'; end if;
     if exists(select 1 from public.appointments where assigned_to=p_staff_id and status not in ('cancelled','no_show','completed') and scheduled_start<p_start+make_interval(mins=>p_minutes) and coalesce(scheduled_end,scheduled_start+interval '1 hour')>p_start) then raise exception 'This staff member already has an overlapping appointment'; end if;
   end if;
@@ -111,8 +110,7 @@ begin
   select * into j from public.work_orders where id=p_job_id for update;
   if not found then raise exception 'Job not found'; end if;
   if p_staff_id is not null then
-    perform pg_advisory_xact_lock(hashtextextended('ops-staff:' || p_staff_id::text,0));
-    perform 1 from public.crm_users where id=p_staff_id and active and role in ('owner','admin','dispatcher','technician');
+    perform 1 from public.crm_users where id=p_staff_id and active for update;
     if not found then raise exception 'Choose an active staff member'; end if;
   end if;
   if j.appointment_id is not null then
@@ -133,7 +131,7 @@ begin
   if not private.is_crm_staff() then raise exception 'Staff access required'; end if;
   phone_normal=regexp_replace(p_phone,'[^0-9]','','g');
   if length(phone_normal)=11 and left(phone_normal,1)='1' then phone_normal=substr(phone_normal,2); end if;
-  if nullif(trim(p_first),'') is null or length(phone_normal)<>10 then raise exception 'Name and valid phone number are required'; end if;
+  if nullif(trim(p_first),'') is null or length(phone_normal)<10 then raise exception 'Name and valid phone number are required'; end if;
   if (nullif(trim(p_address),'') is null) <> (nullif(trim(p_city),'') is null) then raise exception 'Enter both service address and city'; end if;
   perform pg_advisory_xact_lock(hashtextextended(phone_normal,0));
   if exists(select 1 from public.customers where right(regexp_replace(phone,'[^0-9]','','g'),10)=right(phone_normal,10)) then raise exception 'A customer with this phone already exists. Find and edit that customer instead'; end if;

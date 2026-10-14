@@ -41,7 +41,3 @@ Jobs support technician, status, diagnosis and work notes. Technician changes al
 Search is available on Leads, Customers, and Price Book. Active lists exclude test records and spam-only customers without deleting them; All records restores visibility. The customer editor flags possible phone duplicates. Data is paged rather than silently truncated at 50/100 records; a section reports an error above the 20,000-record safety limit. A failed query leaves other sections usable and provides a retry button.
 
 Validation: `node --test tools/test_ops.cjs tools/test_ops_workflows.cjs`, production release build, internal links, redirects, desktop/mobile browser preview with fictional records, booking/job/invoice flow, and a simulated failed invoice query. Before live deployment also run a rollback-only database integration test under an authenticated staff role and a denied nonstaff role.
-
-
-## Launch integration
-The booking workflow and full 1,062-service price book are combined. Prices show standard, overtime, member and member overtime rates. Staff scheduling uses a transaction advisory lock because CRM profiles are read-only under RLS. Apply docs/ops-workflow.sql before deploying this UI. Run docs/ops-launch-validation.sql to verify booking, overlap prevention, job completion, draft invoice totals, repeat-call idempotency and nonstaff access denial; its records are rolled back.

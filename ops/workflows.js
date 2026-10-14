@@ -32,7 +32,7 @@ function create(sb){
   const tables={leads:'leads',customers:'customers',appointments:'appointments',jobs:'work_orders',dispatch:'dispatch_tickets',calls:'call_sessions',prices:'price_book_items',invoices:'invoices',staff:'crm_users',properties:'properties'};
   const sections={leads:'leadsTable',customers:'customersTable',appointments:'scheduleTable',jobs:'jobsTable',dispatch:'dispatchTable',calls:'callsTable',prices:'pricingTable',invoices:'invoicesTable'};
   const date=v=>v?new Date(v).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'—';
-  const money=v=>v==null?'—':Number(v).toLocaleString('en-US',{style:'currency',currency:'USD'});
+  const money=v=>Number(v||0).toLocaleString('en-US',{style:'currency',currency:'USD'});
   const pill=v=>`<span class="pill ${esc(v)}">${esc(v||'—')}</span>`;
   const button=(action,id,label)=>`<button type="button" class="btn secondary compact" data-action="${action}" data-id="${esc(id)}">${esc(label)}</button>`;
   const staffName=id=>(state.staff||[]).find(s=>s.id===id)?.full_name||'Unassigned';
@@ -56,7 +56,6 @@ function create(sb){
   $('#dispatch .page-head').insertAdjacentHTML('afterend','<p class="muted">Urgent leads needing follow-up appear on the Dashboard. Dispatch tickets below come from the dispatch system.</p>');
   document.body.insertAdjacentHTML('beforeend','<dialog id="workflowModal" aria-labelledby="workflowTitle"><form id="workflowForm" class="modal-card"><div class="modal-head"><h3 id="workflowTitle"></h3><button type="button" class="icon-btn" data-close aria-label="Close">×</button></div><div id="workflowFields"></div><p id="workflowError" class="msg error hidden" role="alert"></p><div class="row gap"><button type="button" data-close class="btn secondary">Cancel</button><button type="submit" class="btn primary" id="workflowSave">Save</button></div></form></dialog>');
   async function load(key){
-    if(key==='prices')return root.PP911PriceBook.loadAll(sb);
     const rows=[];
     for(let from=0;from<20000;from+=500){
       const {data,error}=await sb.from(tables[key]).select('*').order('id',{ascending:true}).range(from,from+499);
@@ -119,12 +118,8 @@ function create(sb){
     }else if(key==='calls'){
       host.innerHTML=grid(['Caller','Phone','Status','Summary','Started'],rows.sort((a,b)=>b.created_at.localeCompare(a.created_at)).map(c=>[esc(c.caller_name||'Unknown caller'),phone(c.caller_phone),pill(c.status),details(c),date(c.started_at||c.created_at)]));
     }else if(key==='prices'){
-      const category=$('#priceCategory');
-      const selected=category.value;
-      category.innerHTML='<option value="">All categories</option>'+[...new Set(rows.map(p=>p.category))].sort().map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
-      category.value=selected;
-      rows=root.PP911PriceBook.filter(rows,search.prices||'',category.value).sort((a,b)=>String(a.sku).localeCompare(String(b.sku)));
-      host.innerHTML=`<p class="muted" role="status">${rows.length.toLocaleString()} of ${(state.prices||[]).length.toLocaleString()} services</p>`+grid(['Code','Category','Service','Standard','Standard OT','Member','Member OT','Minutes','Book page'],rows.map(p=>[esc(p.sku||'—'),esc(p.category),`<strong>${esc(p.service_name)}</strong><br>${esc(p.description||'')}`,money(p.standard_price),money(p.standard_ot_price),money(p.member_price),money(p.member_ot_price),esc(p.estimated_minutes??'—'),esc(p.source_page??'—')]));
+      rows=filtered(key,rows).sort((a,b)=>String(a.category).localeCompare(String(b.category)));
+      host.innerHTML=`<p class="muted">${rows.length} of ${(state.prices||[]).length} services</p>`+grid(['Code','Category','Service','Standard','Member','Minutes'],rows.map(p=>[esc(p.sku||'—'),esc(p.category),esc(p.service_name),money(p.standard_price),p.member_price==null?'—':money(p.member_price),esc(p.estimated_minutes??'—')]));
     }
   }
   function select(name,label,choices,value='',required=false){return `<label>${esc(label)}<select name="${name}" ${required?'required':''}>${choices.map(([v,t])=>`<option value="${esc(v)}" ${String(v)===String(value)?'selected':''}>${esc(t)}</option>`).join('')}</select></label>`;}
@@ -184,7 +179,7 @@ function create(sb){
   }
   document.querySelector('#appView').addEventListener('click',async e=>{const b=e.target.closest('[data-action]');if(!b||b.disabled)return;b.disabled=true;try{await act(b.dataset.action,b.dataset.id);}catch(e){info(e.message||'Action failed. Try again.',true);}finally{b.disabled=false;}});
   document.querySelector('#appView').addEventListener('input',e=>{const k=e.target.dataset.search;if(k){search[k]=e.target.value;render(k);}});
-  document.querySelector('#appView').addEventListener('change',e=>{if(e.target.id==='priceCategory'){render('prices');return;}const k=e.target.dataset.filter;if(k){filters[k]=e.target.value;render(k);}});
+  document.querySelector('#appView').addEventListener('change',e=>{const k=e.target.dataset.filter;if(k){filters[k]=e.target.value;render(k);}});
   document.querySelectorAll('#workflowModal [data-close]').forEach(b=>b.addEventListener('click',()=>$('#workflowModal').close()));
   $('#workflowForm').addEventListener('submit',async e=>{
     e.preventDefault();if($('#workflowSave').disabled||!$('#workflowForm').reportValidity())return;
