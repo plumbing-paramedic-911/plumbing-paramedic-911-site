@@ -403,3 +403,29 @@ dialog::backdrop { background: rgba(16, 24, 40, .5); }
   h1 { font-size: 28px; }
   h2 { font-size: 21px; }
 }
+
+/* Operations workflow controls and responsive records. */
+.mobile-nav { display: none; }
+.filter-bar { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px; }
+.filter-bar label { flex:1; min-width:150px; }
+.attention-card { border-left:4px solid var(--amber); padding:12px; margin-top:12px; background:var(--amber-tint); border-radius:8px; }
+.overdue { color:var(--red); font-weight:700; }
+.transcript { white-space:pre-wrap; max-height:320px; overflow:auto; }
+details summary { cursor:pointer; color:var(--blue); margin-top:8px; }
+.data-table .btn { margin:3px; }
+#opsNotice { margin:0 0 16px; }
+.btn:disabled, .icon-btn:disabled { opacity:.55; cursor:wait; }
+.data-table td { overflow-wrap:anywhere; }
+@media(max-width:679px){
+  .tabs { display:none; }
+  .mobile-nav { display:block; margin:0; padding:8px 14px; background:white; }
+  .topbar { position:relative; flex-wrap:wrap; }
+  .top-actions { flex-wrap:wrap; }
+  .data-table, .data-table tbody, .data-table tr, .data-table td { display:block; width:100%; }
+  .data-table thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+  .data-table tr { border:1px solid var(--line); border-radius:8px; padding:8px; margin-bottom:12px; }
+  .data-table td { min-width:0; max-width:none; padding:5px; border:0; }
+  .data-table td::before { content:attr(data-label); display:block; font-size:11px; text-transform:uppercase; color:var(--ink-2); font-weight:700; }
+  .table-wrap { overflow:visible; }
+  .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
