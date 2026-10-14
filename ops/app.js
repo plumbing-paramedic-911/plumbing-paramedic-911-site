@@ -63,9 +63,11 @@ async function refreshAll(){
   const renderers={leads:renderLeads,calls:renderCalls,customers:renderCustomers,appointments:renderSchedule,jobs:renderJobs,dispatch:renderDispatch,prices:renderPricing,invoices:renderInvoices};
   Object.entries(renderers).forEach(([name,render])=>{if(name in values){try{render(values[name])}catch(e){failures.push(name+' display');console.error('Render failed: '+name,e)}}});
   if(['leadCount','customerCount','jobCount','dispatchCount'].every(k=>k in values))renderStats(values);
-  if(failures.length)msg('Some sections could not refresh: '+failures.join(', ')+'. Other sections remain available. Try again.',true);
-  else{const notice=$('#authMsg');if(notice){notice.classList.add('hidden');notice.classList.remove('error')}}
- }finally{refreshInProgress=false;if(button)button.disabled=false}
+  const notice=$('#refreshStatus');
+  if(failures.length){notice.textContent='Some sections could not refresh: '+failures.join(', ')+'. Other sections remain available. Try again.';notice.classList.remove('hidden');notice.classList.add('error')}
+  else{notice.textContent='';notice.classList.add('hidden');notice.classList.remove('error')}
+ }catch(e){console.error('Unexpected dashboard refresh error',e);const notice=$('#refreshStatus');notice.textContent='Refresh encountered an unexpected error. Try again.';notice.classList.remove('hidden');notice.classList.add('error')}
+ finally{refreshInProgress=false;if(button)button.disabled=false}
 }
 
 function renderStats(s){$('#stats').innerHTML=[['Leads',s.leadCount],['Customers',s.customerCount],['Open jobs',s.jobCount],['Dispatch tickets',s.dispatchCount]].map(([l,n])=>`<div class="stat"><div class="num">${n}</div><div class="label">${l}</div></div>`).join('')}
