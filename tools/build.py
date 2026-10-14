@@ -18,6 +18,19 @@ import os, textwrap, json, sys
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 BASE_URL = "https://plumbingparamedic911.com"
+
+# Google Business Profile listing (CID) and keyless Maps embeds. To use the exact
+# embed code from GBP (Google Maps > Share > Embed a map), replace GBP_MAP_EMBED.
+GBP_MAPS_URL = "https://maps.google.com/?cid=12319185328943590636"
+GBP_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&amp;destination=Plumbing+Paramedic+911%2C+13+Callaway+Dr%2C+Abbeville%2C+SC+29620"
+GBP_MAP_EMBED = "https://maps.google.com/maps?q=Plumbing+Paramedic+911%2C+13+Callaway+Dr%2C+Abbeville%2C+SC+29620&amp;z=13&amp;output=embed"
+
+
+def map_embed(src: str, title: str, height: int = 320) -> str:
+    return (f'<div class="map-embed"><iframe src="{src}" title="{title}" width="600" height="{height}" '
+            'style="border:0;width:100%;display:block" loading="lazy" allowfullscreen '
+            'referrerpolicy="no-referrer-when-downgrade"></iframe></div>')
+
 PHONE_DISPLAY = "(864) 446-8911"
 PHONE_TEL = "+18644468911"
 GA_ID = "G-54J49X5XJP"
@@ -1316,10 +1329,10 @@ CITY_PAGE_TPL = """\
             </form>
           </div>
           <div style="background:var(--blue-xlt);border-radius:var(--r2);padding:32px;text-align:center;border:2px solid #90CAF9">
-            <div style="font-size:2.2rem;margin-bottom:10px">🗺️</div>
             <div style="font-family:var(--ff-head);font-weight:800;font-size:1.05rem;color:var(--blue-dk);margin-bottom:8px">Serving {city}, {abbr} &amp; surrounding area</div>
-            <p style="font-size:.85rem;color:var(--blue);margin-bottom:16px">Open in Google Maps to see service area boundaries.</p>
-            <a href="https://www.google.com/maps/search/?api=1&amp;query=Plumber+near+{city_q}+{abbr}" target="_blank" rel="noopener" class="btn btn-blue btn-sm">Open in Google Maps</a>
+            {city_map}
+            <p style="font-size:.85rem;color:var(--blue);margin:14px 0 16px">Dispatched from our Abbeville shop at 13 Callaway Dr.</p>
+            <a href="{gbp_url}" target="_blank" rel="noopener" class="btn btn-blue btn-sm">View Us on Google Maps</a>
           </div>
         </aside>
       </div>
@@ -1397,6 +1410,8 @@ def render_city_page(slug: str, c: dict) -> str:
         city=c["city"], abbr=c["abbr"], response=c["response"],
         h1=h1, intro=c["intro"], body=c["body"],
         city_q=c["city"].replace(" ","+"),
+        city_map=map_embed(f"https://maps.google.com/maps?q={c['city'].replace(' ','+')}%2C+{c['abbr']}&amp;z=12&amp;output=embed", f"Map of {c['city']}, {c['abbr']} — Plumbing Paramedic 911 service area", 260),
+        gbp_url=GBP_MAPS_URL,
         faqs_html=faq_html(city_faqs(c)),
         repipe_promo=city_repipe_promo(slug, c["city"]),
         membership_promo=city_membership_promo(slug, c["city"]),
@@ -1679,6 +1694,13 @@ def render_contact():
           </div>
           <h3 style="margin-top:32px;font-size:1.2rem">Service area</h3>
           <p style="color:var(--ink2);line-height:1.8">Abbeville, Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, Due West, and surrounding Upstate South Carolina towns.</p>
+          <h3 style="margin-top:32px;font-size:1.2rem">Find us on Google Maps</h3>
+          {map_embed(GBP_MAP_EMBED, "Plumbing Paramedic 911 — 13 Callaway Dr, Abbeville, SC 29620 on Google Maps")}
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+            <a href="{GBP_MAPS_URL}" target="_blank" rel="noopener" class="btn btn-blue btn-sm">View Our Google Business Profile</a>
+            <a href="{GBP_DIRECTIONS_URL}" target="_blank" rel="noopener" class="btn btn-blue btn-sm">Get Directions</a>
+            <a href="{GBP_MAPS_URL}" target="_blank" rel="noopener" class="btn btn-green btn-sm">Review Us on Google</a>
+          </div>
         </div>
         <div>
           <div class="card">
