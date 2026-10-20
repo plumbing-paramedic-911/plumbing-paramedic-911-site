@@ -11,6 +11,7 @@ Private, installable owner dashboard for Plumbing Paramedic 911.
 - Emergency dispatch
 - Darla/Vapi call history
 - Flat-rate price book
+- Estimates and field calculators
 - Invoices
 
 ## Backend
@@ -40,4 +41,18 @@ Jobs support technician, status, diagnosis and work notes. Technician changes al
 
 Search is available on Leads, Customers, and Price Book. Active lists exclude test records and spam-only customers without deleting them; All records restores visibility. The customer editor flags possible phone duplicates. Data is paged rather than silently truncated at 50/100 records; a section reports an error above the 20,000-record safety limit. A failed query leaves other sections usable and provides a retry button.
 
-Validation: `node --test tools/test_ops.cjs tools/test_ops_workflows.cjs`, production release build, internal links, redirects, desktop/mobile browser preview with fictional records, booking/job/invoice flow, and a simulated failed invoice query. Before live deployment also run a rollback-only database integration test under an authenticated staff role and a denied nonstaff role.
+## Estimates and field calculators
+
+The Estimates tab builds a customer-ready estimate and prints it. It writes nothing to the database: the estimate lives in the page until it is printed, so a mis-typed line cannot reach a customer record, and the `estimates` table keeps its current meaning until line-item storage is designed for it.
+
+Lines come from three places: the production price book (searched from `price_book_items`, loaded the first time the tab is opened), the field calculators, or a custom line.
+
+Pricing basis is automatic. Book lines price from the book's own `standard_price`, `member_price`, `standard_ot_price` and `member_ot_price` columns. Custom and calculator lines fall back to the published VIP Diamond Plan rate of 15% and the book's 1.40x after-hours factor. The service/diagnostic call is a flat $79 / $99 / $158 fee by time of day and is never discounted or upcharged, because the time is already priced into the fee. The printed arithmetic reconciles on paper: standard subtotal plus the after-hours adjustment minus plan savings equals what is charged. A manual discount is capped at the work and spread across the taxable share, so tax is never charged on money the customer does not pay.
+
+Calculators cover pipe runs (material and labor by material, size, length and working conditions), trenching (depth, surface cut and restoration), whole-home repipes (fixtures, stories, material) and water heater sizing (peak-hour demand). Their figures are starting points for the estimate, not published prices.
+
+Printing uses the browser's own print dialog rather than a PDF library: no dependency, works offline, and on a phone it is Share -> Print -> Save to Files with selectable text. The sheet is `display:none` on screen and is the only visible element in print media.
+
+Estimate validation: `node --test tools/test_estimator.cjs` covers the pricing basis, the reconciliation, the discount cap, each calculator, and HTML escaping of customer-supplied text.
+
+Validation: `node --test tools/test_ops.cjs tools/test_ops_workflows.cjs tools/test_estimator.cjs`, production release build, internal links, redirects, desktop/mobile browser preview with fictional records, booking/job/invoice flow, and a simulated failed invoice query. Before live deployment also run a rollback-only database integration test under an authenticated staff role and a denied nonstaff role.

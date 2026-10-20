@@ -41,9 +41,12 @@ $('#refreshBtn').addEventListener('click',refreshAll);
 $$('#tabs button').forEach(b=>b.addEventListener('click',()=>{$$('#tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');$$('.view').forEach(v=>v.classList.remove('active'));$('#'+b.dataset.view).classList.add('active')}));
 $$('[data-modal]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.modal).showModal()));
 
-let workspace;
+let workspace,estimator;
 async function refreshAll(){
   workspace ||= window.PP911Operations.create(sb);
+  // The estimator builds its own view once the workflow shell has injected the
+  // notice bar and mobile nav it reports through.
+  estimator ||= window.PP911Estimator?.create(sb);
   return workspace.refresh();
 }
 async function saveForm(formId,buttonId,modalId,action){

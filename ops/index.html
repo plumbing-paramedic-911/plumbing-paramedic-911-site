@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#0D47A1">
   <title>PP911 Operations</title>
   <link rel="manifest" href="/ops/manifest.webmanifest">
-  <link rel="stylesheet" href="/ops/styles.css?v=20261013-workflow1">
+  <link rel="stylesheet" href="/ops/styles.css?v=20261020-estimator1">
 </head>
 <body>
   <div id="authView" class="center-wrap">
@@ -50,6 +50,7 @@
       <button data-view="dispatch">Dispatch</button>
       <button data-view="calls">Calls</button>
       <button data-view="pricing">Price Book</button>
+      <button data-view="estimator">Estimates</button>
       <button data-view="invoices">Invoices</button>
     </nav>
 
@@ -69,6 +70,7 @@
       <section id="dispatch" class="view"><div class="page-head"><h2>Emergency dispatch</h2></div><div class="panel"><div id="dispatchTable"></div></div></section>
       <section id="calls" class="view"><div class="page-head"><h2>Darla call history</h2></div><div class="panel"><div id="callsTable"></div></div></section>
       <section id="pricing" class="view"><div class="page-head"><h2>Flat-rate price book</h2></div><div class="panel"><div id="pricingTable"></div></div></section>
+      <section id="estimator" class="view"><div class="page-head"><div><h2>Estimates and calculators</h2><p class="muted">Price a job from the flat-rate book, size it with the field calculators, then print it or save it as a PDF. Nothing here is written to the database.</p></div><div class="row gap"><button class="btn secondary" data-est="reset">Clear</button><button class="btn primary" data-est="print">Print / Save PDF</button></div></div></section>
       <section id="invoices" class="view"><div class="page-head"><h2>Invoices</h2></div><div class="panel"><div id="invoicesTable"></div></div></section>
     </main>
   </div>
@@ -78,7 +80,9 @@
   <dialog id="customerModal"><form method="dialog" class="modal-card" id="customerForm"><div class="modal-head"><h3>New customer</h3><button class="icon-btn" value="cancel" formnovalidate>×</button></div><div class="grid2 form-grid"><label>First name<input name="first_name" required></label><label>Last name<input name="last_name" required></label></div><label>Phone<input name="phone" type="tel" required></label><label>Email<input name="email" type="email"></label><label>Service address<input name="address_line1"></label><div class="grid2 form-grid"><label>City<input name="city"></label><label>ZIP<input name="postal_code"></label></div><div class="row gap"><button value="cancel" formnovalidate class="btn secondary">Cancel</button><button id="saveCustomerBtn" type="button" class="btn primary grow">Save customer</button></div></form></dialog>
 
   <script src="/ops/vendor/supabase-2.117.3.js" defer></script>
-  <script src="/ops/workflows.js?v=20261013-workflow1" defer></script>
-  <script src="/ops/app.js?v=20261013-workflow1" defer></script>
+  <script src="/ops/pricebook.js?v=20261020-estimator1" defer></script>
+  <script src="/ops/workflows.js?v=20261020-estimator1" defer></script>
+  <script src="/ops/estimator.js?v=20261020-estimator1" defer></script>
+  <script src="/ops/app.js?v=20261020-estimator1" defer></script>
 </body>
 </html>
