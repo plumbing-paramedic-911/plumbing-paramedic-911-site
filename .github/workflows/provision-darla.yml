@@ -1,0 +1,51 @@
+name: Provision Darla in Vapi
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  provision:
+    name: Create Darla Vapi assistant
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          ref: feature/darla-vapi-receptionist
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify required secrets
+        env:
+          VAPI_API_KEY: ${{ secrets.VAPI_API_KEY }}
+          ON_CALL_TRANSFER_NUMBER: ${{ secrets.ON_CALL_TRANSFER_NUMBER }}
+        run: |
+          set -euo pipefail
+          test -n "$VAPI_API_KEY" || { echo "Missing repository secret: VAPI_API_KEY"; exit 1; }
+          test -n "$ON_CALL_TRANSFER_NUMBER" || { echo "Missing repository secret: ON_CALL_TRANSFER_NUMBER"; exit 1; }
+          if [ "$ON_CALL_TRANSFER_NUMBER" = "+18644468911" ]; then
+            echo "ON_CALL_TRANSFER_NUMBER cannot be the public 864-446-8911 number because that can create a forwarding loop."
+            exit 1
+          fi
+
+      - name: Create Darla assistant
+        env:
+          VAPI_API_KEY: ${{ secrets.VAPI_API_KEY }}
+          ON_CALL_TRANSFER_NUMBER: ${{ secrets.ON_CALL_TRANSFER_NUMBER }}
+          VAPI_MODEL: gpt-6-luna
+          PP911_LEAD_ENDPOINT: https://wuwgvtjktppjueiykcww.supabase.co/functions/v1/website-lead-capture
+        run: node integrations/vapi/create-darla-assistant.mjs
+
+      - name: Next step
+        run: |
+          echo "Darla assistant created."
+          echo "Assign the returned Assistant ID to a TEST Vapi/Twilio number first."
+          echo "Do not forward the public 864-446-8911 number until the test matrix passes."
