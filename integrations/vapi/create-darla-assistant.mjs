@@ -87,8 +87,34 @@ const transferTool = {
       number: ON_CALL,
       description:
         "Plumbing Paramedic 911 on-call plumber. Use only for a true urgent plumbing need or when the caller specifically asks for a person now, after the caller clearly agrees to be transferred.",
-      message: "I’m connecting you with the on-call plumber now.",
-      transferPlan: { mode: "blind-transfer" }
+      message: "I’m going to try the on-call plumber now. If they can’t take the call, I’ll come back on the line with you.",
+      transferPlan: {
+        mode: "warm-transfer-experimental",
+        transferAssistant: {
+          firstMessage:
+            "Hi, this is Darla with Plumbing Paramedic 911. I have an urgent plumbing caller waiting. Can you take the call now?",
+          firstMessageMode: "assistant-speaks-first",
+          maxDurationSeconds: 45,
+          silenceTimeoutSeconds: 15,
+          model: {
+            provider: "openai",
+            model: MODEL,
+            reasoningEffort: "none",
+            messages: [
+              {
+                role: "system",
+                content:
+                  "You are the transfer assistant for Plumbing Paramedic 911. Use the prior caller conversation for concise context if the on-call plumber asks. Call transferSuccessful only after a live human explicitly confirms they will take the caller. Call transferCancel for voicemail, an IVR, an automated hold queue, silence/no usable response, or if the person declines. Do not connect the customer to voicemail or an automated system."
+              }
+            ]
+          }
+        },
+        fallbackPlan: {
+          message:
+            "I wasn’t able to get the on-call plumber on the transfer. I’ve marked your request urgent for a callback, and I’m still here with you.",
+          endCallEnabled: false
+        }
+      }
     }
   ]
 };
