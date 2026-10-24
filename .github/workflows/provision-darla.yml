@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
-        with:
-          ref: feature/darla-vapi-receptionist
 
       - name: Use Node.js 22
         uses: actions/setup-node@v4
