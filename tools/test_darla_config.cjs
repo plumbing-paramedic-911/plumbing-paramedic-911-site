@@ -39,6 +39,18 @@ test("Darla never routes the forwarded public line back into itself", () => {
   assert.match(prompt, /must never point back to the public business number/i);
 });
 
+
+test("Darla uses recoverable assistant-based warm transfer", () => {
+  assert.match(script, /mode: "warm-transfer-experimental"/);
+  assert.doesNotMatch(script, /mode: "blind-transfer"/);
+  assert.match(script, /transferAssistant/);
+  assert.match(script, /transferSuccessful/);
+  assert.match(script, /transferCancel/);
+  assert.match(script, /fallbackPlan/);
+  assert.match(script, /endCallEnabled: false/);
+  assert.match(script, /voicemail|IVR/i);
+});
+
 test("Darla captures leads before emergency transfer when practical", () => {
   assert.match(script, /type: "apiRequest"/);
   assert.match(script, /name: "capture_plumbing_lead"/);
