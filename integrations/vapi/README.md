@@ -68,7 +68,7 @@ Do not send live customers to Darla first.
 1. Assign Darla to a Vapi or imported Twilio **test number**.
 2. Run every scenario in `darla-test-cases.md`.
 3. Confirm the lead appears in the existing PP911 intake pipeline.
-4. Confirm the transfer destination rings and does not loop.
+4. Confirm the on-call destination rings, a live person must accept before connection, and busy/no-answer/voicemail returns the caller to Darla instead of dropping the call.
 5. Review Vapi call logs/transcripts/recordings.
 6. Only then configure the public `864-446-8911` number to route to Darla for the desired hours.
 
