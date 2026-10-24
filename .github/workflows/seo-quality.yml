@@ -43,3 +43,8 @@ jobs:
 
       - name: Check Operations startup, authentication and estimate math
         run: node --test tools/test_ops.cjs tools/test_ops_workflows.cjs tools/test_estimator.cjs
+
+      - name: Check Darla Vapi receptionist configuration
+        run: |
+          node --check integrations/vapi/create-darla-assistant.mjs
+          node --test tools/test_darla_config.cjs
