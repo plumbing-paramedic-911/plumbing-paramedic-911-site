@@ -23,9 +23,13 @@ Deno.serve(async(req:Request)=>{
  const address=clean(b.address,300),city=clean(b.city),issue=[service,message].filter(Boolean).join(" — ");
  const urgent=b.urgency==="emergency"||/emergency|flood|burst|sewage|sewer backup|gas (smell|leak)|smell gas|no water|gushing/i.test(issue);
  const {data:org,error:oe}=await sb.from("organizations").select("id").eq("slug","plumbing-paramedic-911").eq("active",true).single();if(oe||!org)throw Error("Company unavailable");
- const requestKey=await hash("darla|"+org.id+"|"+phone+"|"+issue+"|"+address+"|"+Math.floor(Date.now()/600000));
+ const now=Date.now(),bucket=Math.floor(now/600000),keyBase="darla|"+org.id+"|"+phone+"|"+issue+"|"+address+"|";
+ let requestKey=await hash(keyBase+bucket);
+ // Reuse a recent saved key even when the retry crosses a clock-bucket boundary.
+ const previousKey=await hash(keyBase+(bucket-1));
+ let {data:intake,error:ie}=await sb.from("receptionist_intake").select("id,request_key").in("request_key",[requestKey,previousKey]).gte("created_at",new Date(now-600000).toISOString()).order("created_at",{ascending:false}).limit(1).maybeSingle();if(ie)throw ie;
+ if(intake)requestKey=intake.request_key;
  const {data:session,error:se}=await sb.from("call_sessions").upsert({organization_id:org.id,external_call_id:"darla-intake:"+requestKey,provider:"vapi",direction:"inbound",status:"in_progress",caller_phone:phone,caller_name:name,ai_summary:issue,emergency:urgent,raw_payload:{source:"darla-lead-capture"}},{onConflict:"external_call_id"}).select("id").single();if(se)throw se;
- let {data:intake,error:ie}=await sb.from("receptionist_intake").select("id").eq("request_key",requestKey).maybeSingle();if(ie)throw ie;
  if(!intake){
  const {data,error}=await sb.from("receptionist_intake").insert({organization_id:org.id,call_session_id:session.id,request_key:requestKey,caller_name:name,phone,address_line1:address||null,city:city||null,state:"SC",issue_summary:issue,urgency:urgent?"emergency":"routine",processing_status:"needs_review",booked:false,access_notes:"Darla voice intake; schedule and dispatch require separate confirmation."}).select("id").single();
  if(error&&error.code!=="23505")throw error;
