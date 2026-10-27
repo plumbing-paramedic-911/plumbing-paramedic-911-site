@@ -1,15 +1,23 @@
 import { readFile } from "node:fs/promises";
 
-const required = ["VAPI_API_KEY", "ON_CALL_TRANSFER_NUMBER"];
+const required = ["VAPI_API_KEY", "ON_CALL_TRANSFER_NUMBER", "VAPI_INTAKE_CREDENTIAL_ID"];
 for (const name of required) {
   if (!process.env[name]) throw new Error(`Missing required environment variable: ${name}`);
 }
 
 const API_KEY = process.env.VAPI_API_KEY;
 const ON_CALL = process.env.ON_CALL_TRANSFER_NUMBER;
+const INTAKE_CREDENTIAL_ID = process.env.VAPI_INTAKE_CREDENTIAL_ID;
 const LEAD_ENDPOINT =
   process.env.PP911_LEAD_ENDPOINT ||
-  "https://wuwgvtjktppjueiykcww.supabase.co/functions/v1/website-lead-capture";
+  "https://wuwgvtjktppjueiykcww.supabase.co/functions/v1/darla-lead-capture";
+// Never send the stored endpoint credential to an override URL.
+if (LEAD_ENDPOINT !== "https://wuwgvtjktppjueiykcww.supabase.co/functions/v1/darla-lead-capture") {
+  throw new Error("PP911_LEAD_ENDPOINT must be the authenticated PP911 Darla endpoint");
+}
+if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(INTAKE_CREDENTIAL_ID)) {
+  throw new Error("VAPI_INTAKE_CREDENTIAL_ID must identify an existing Vapi Custom Credential");
+}
 const MODEL = process.env.VAPI_MODEL || "gpt-6-luna";
 
 if (!/^\+\d{8,15}$/.test(ON_CALL)) {
@@ -31,6 +39,7 @@ const captureLeadTool = {
     "Save a confirmed Plumbing Paramedic 911 caller request. Use after collecting a callback number and enough issue detail to identify the service. For urgent calls, save before transfer when practical.",
   method: "POST",
   url: LEAD_ENDPOINT,
+  credentialId: INTAKE_CREDENTIAL_ID,
   timeoutSeconds: 10,
   body: {
     type: "object",
@@ -43,9 +52,13 @@ const captureLeadTool = {
         type: "string",
         description: "Best callback number confirmed by the caller."
       },
+      address: {
+        type: "string",
+        description: "Confirmed street address when provided; do not invent one."
+      },
       city: {
         type: "string",
-        description: "Service city or service address if the caller provided it."
+        description: "Service city if the caller provided it."
       },
       service: {
         type: "string",
