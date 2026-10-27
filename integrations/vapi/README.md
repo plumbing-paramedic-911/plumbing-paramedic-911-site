@@ -27,7 +27,7 @@ Darla:
 3. triages hazards before ordinary intake
 4. asks one question at a time
 5. collects name, callback number, service location, and problem
-6. saves the request to the same existing PP911 lead endpoint used by the live website
+6. saves the request through the authenticated `darla-lead-capture` endpoint into the existing PP911 intake pipeline
 7. offers an urgent transfer to a **separate on-call number**
 8. avoids circular transfers back into the public business line
 9. records/logs/transcribes calls through Vapi artifacts
@@ -42,7 +42,10 @@ Set these environment variables locally. Do **not** commit the values:
 ```bash
 export VAPI_API_KEY="your-private-vapi-key"
 export ON_CALL_TRANSFER_NUMBER="+1XXXXXXXXXX"
+export VAPI_INTAKE_CREDENTIAL_ID="existing-vapi-custom-credential-uuid"
 ```
+
+The credential ID must reference an existing Vapi Custom Credential whose bearer token matches the active Vapi credential hash in the PP911 backend. It is separate from the Vapi API key. Never put the token in the prompt, body, source, or plain-text tool headers. Configure the same ID as the `VAPI_INTAKE_CREDENTIAL_ID` repository secret for the manual workflow. Endpoint overrides are restricted to the authenticated PP911 endpoint.
 
 The on-call number must be a separate destination that rings Eric/on-call personnel directly. It must **not** be the public `864-446-8911` number if that public number forwards to Vapi.
 
@@ -50,7 +53,7 @@ Optional:
 
 ```bash
 export VAPI_MODEL="gpt-6-luna"
-export PP911_LEAD_ENDPOINT="https://wuwgvtjktppjueiykcww.supabase.co/functions/v1/website-lead-capture"
+export PP911_LEAD_ENDPOINT="https://wuwgvtjktppjueiykcww.supabase.co/functions/v1/darla-lead-capture"
 ```
 
 Then run:
@@ -59,7 +62,15 @@ Then run:
 node integrations/vapi/create-darla-assistant.mjs
 ```
 
-The script prints the new Vapi Assistant ID.
+The script creates a new assistant and prints its ID. Do not run it to repair the existing assistant: update that assistant’s lead tool URL and Custom Credential instead, preserving its other tools, calendar connection, and phone assignments.
+
+## Validation status — October 27, 2026
+
+- The stable retry-boundary fix is merged in PR #36 and present in active Edge Function version 2.
+- An October 25 test intake has linked CRM lead/customer/property records, no appointment, and no recorded error; office review remains required.
+- The October 27 10:00–10:05 AM calendar event is configuration-only and contains no test results. No new CRM call/intake/appointment records were found for October 26–27 during inspection.
+- Live Vapi intake authentication, scheduling, human-accepted transfer, unanswered-transfer recovery, and owner notifications remain unverified. A signed-in Vapi session is required to finish those checks.
+- Repository configuration tests do not constitute a live call test. Public phone routing must remain unchanged until validation succeeds.
 
 ## Phone-number rollout
 
