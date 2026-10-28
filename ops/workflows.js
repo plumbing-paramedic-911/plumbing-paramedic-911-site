@@ -26,7 +26,7 @@ function visibleCustomers(customers,leads){return customers.filter(c=>{
 });}
 function create(sb){
   const $=s=>document.querySelector(s);
-  const state={},errors={},filters={leads:'active',customers:'active'},search={};
+  const state={},errors={},filters={leads:'active',customers:'active',prices:''},search={};
   let refreshPromise,currentAction=null;
   const names={leads:'Leads',customers:'Customers',appointments:'Schedule',jobs:'Jobs',dispatch:'Dispatch',calls:'Calls',prices:'Price Book',invoices:'Invoices',staff:'Staff',properties:'Addresses'};
   const tables={leads:'leads',customers:'customers',appointments:'appointments',jobs:'work_orders',dispatch:'dispatch_tickets',calls:'call_sessions',prices:'price_book_items',invoices:'invoices',staff:'crm_users',properties:'properties'};
@@ -46,6 +46,7 @@ function create(sb){
   const phone=v=>`<a href="tel:${esc(String(v||'').replace(/[^+0-9]/g,''))}">${esc(v||'—')}</a>`;
   function toolbar(key,options){return `<div class="filter-bar"><label>Search ${esc(names[key].toLowerCase())}<input type="search" data-search="${key}" placeholder="Name, phone, or keyword"></label>${options?`<label>Show<select data-filter="${key}">${options.map(([v,t])=>`<option value="${v}">${t}</option>`).join('')}</select></label>`:''}</div>`;}
   for(const key of ['leads','customers','prices'])$('#'+sections[key]).insertAdjacentHTML('beforebegin',toolbar(key,key==='leads'?[['active','Active leads'],['all','All leads'],['urgent','Urgent / emergency'],['spam','Spam'],['lost','Lost']]:key==='customers'?[['active','Active customers'],['all','All records']]:null));
+  $('#pricingTable').insertAdjacentHTML('beforebegin','<label>Category<select data-filter="prices"><option value="">All categories</option></select></label><p class="muted">Edition 2026.1. OT means after-hours pricing. Code 30-27: for parts costing more than $400, multiply vendor cost by 1.4; this is a quoted amount, not a fixed-price item.</p>');
   $('#stats').insertAdjacentHTML('afterend','<section id="followupQueue" class="panel" aria-label="Urgent follow-up"></section>');
   $('#appView main').insertAdjacentHTML('afterbegin','<div id="opsNotice" class="msg hidden" role="status" aria-live="polite"></div>');
   $('#tabs').insertAdjacentHTML('beforebegin','<label class="mobile-nav">Go to<select id="mobileView">'+[...document.querySelectorAll('#tabs button')].map(b=>`<option value="${b.dataset.view}">${b.textContent}</option>`).join('')+'</select></label>');
@@ -56,6 +57,7 @@ function create(sb){
   $('#dispatch .page-head').insertAdjacentHTML('afterend','<p class="muted">Urgent leads needing follow-up appear on the Dashboard. Dispatch tickets below come from the dispatch system.</p>');
   document.body.insertAdjacentHTML('beforeend','<dialog id="workflowModal" aria-labelledby="workflowTitle"><form id="workflowForm" class="modal-card"><div class="modal-head"><h3 id="workflowTitle"></h3><button type="button" class="icon-btn" data-close aria-label="Close">×</button></div><div id="workflowFields"></div><p id="workflowError" class="msg error hidden" role="alert"></p><div class="row gap"><button type="button" data-close class="btn secondary">Cancel</button><button type="submit" class="btn primary" id="workflowSave">Save</button></div></form></dialog>');
   async function load(key){
+    if(key==='prices')return root.PP911PriceBook.loadAll(sb);
     const rows=[];
     for(let from=0;from<20000;from+=500){
       const {data,error}=await sb.from(tables[key]).select('*').order('id',{ascending:true}).range(from,from+499);
@@ -118,8 +120,14 @@ function create(sb){
     }else if(key==='calls'){
       host.innerHTML=grid(['Caller','Phone','Status','Summary','Started'],rows.sort((a,b)=>b.created_at.localeCompare(a.created_at)).map(c=>[esc(c.caller_name||'Unknown caller'),phone(c.caller_phone),pill(c.status),details(c),date(c.started_at||c.created_at)]));
     }else if(key==='prices'){
-      rows=filtered(key,rows).sort((a,b)=>String(a.category).localeCompare(String(b.category)));
-      host.innerHTML=`<p class="muted">${rows.length} of ${(state.prices||[]).length} services</p>`+grid(['Code','Category','Service','Standard','Member','Minutes'],rows.map(p=>[esc(p.sku||'—'),esc(p.category),esc(p.service_name),money(p.standard_price),p.member_price==null?'—':money(p.member_price),esc(p.estimated_minutes??'—')]));
+      const category=$('[data-filter="prices"]');
+      const categories=[...new Set(rows.map(p=>p.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+      if(filters.prices&&!categories.includes(filters.prices))filters.prices='';
+      category.innerHTML='<option value="">All categories</option>'+categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+      category.value=filters.prices;
+      rows=root.PP911PriceBook.filter(rows,search.prices||'',filters.prices);
+      const rate=v=>v==null?'—':money(v);
+      host.innerHTML=`<p class="muted" role="status">${rows.length.toLocaleString('en-US')} of ${(state.prices||[]).length.toLocaleString('en-US')} services</p>`+grid(['Code','Category','Service','Standard','Standard OT','Member','Member OT','Minutes','Book page'],rows.map(p=>[esc(p.sku||'—'),esc(p.category),`<strong>${esc(p.service_name)}</strong>${p.description?`<br><span class="muted">${esc(p.description)}</span>`:''}`,rate(p.standard_price),rate(p.standard_ot_price),rate(p.member_price),rate(p.member_ot_price),esc(p.estimated_minutes??'—'),esc(p.source_page??'—')]),'No matching services.');
     }
   }
   function select(name,label,choices,value='',required=false){return `<label>${esc(label)}<select name="${name}" ${required?'required':''}>${choices.map(([v,t])=>`<option value="${esc(v)}" ${String(v)===String(value)?'selected':''}>${esc(t)}</option>`).join('')}</select></label>`;}
