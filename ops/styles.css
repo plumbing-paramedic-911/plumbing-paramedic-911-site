@@ -429,3 +429,46 @@ details summary { cursor:pointer; color:var(--blue); margin-top:8px; }
   .table-wrap { overflow:visible; }
   .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
+/* Estimates, field calculators and the printable estimate sheet. */
+.checkline { display:flex; align-items:center; gap:8px; font-weight:600; color:var(--ink-2); }
+.checkline input { width:20px; height:20px; flex:none; }
+.calc-card { border:1px solid var(--line); border-radius:var(--radius-sm); padding:14px; }
+.calc-card h4 { margin:0 0 10px; font-size:15px; }
+.calc-out { margin:10px 0; font-size:13px; color:var(--ink-2); min-height:36px; }
+.data-table input[type="number"] { width:88px; }
+.data-table input[type="checkbox"] { width:22px; height:22px; }
+.est-totals { margin:14px 0 0 auto; max-width:440px; border-top:1px solid var(--line); padding-top:12px; }
+.est-totals > div { display:flex; justify-content:space-between; gap:16px; padding:4px 0; font-size:14px; }
+.est-totals .grand { margin-top:6px; padding-top:8px; border-top:1px solid var(--line); font-size:17px; font-weight:800; }
+.sheet-code { font-size:11px; color:var(--ink-3); }
+
+/* The sheet only exists for the print dialog: it is built on demand, printed,
+   and never shown on screen. */
+.print-sheet { display:none; }
+
+@media print {
+  /* Print the estimate alone. Everything else in the dashboard is navigation. */
+  body > * { display:none !important; }
+  body > .print-sheet { display:block !important; }
+  @page { margin:0.6in; }
+  body { background:#fff !important; }
+  .sheet { background:#fff; color:#000; font-size:12px; line-height:1.45; }
+  .sheet .right { text-align:right; }
+  .sheet-head, .sheet-parties { display:flex; justify-content:space-between; gap:24px; }
+  .sheet-head { padding-bottom:10px; border-bottom:2px solid #000; }
+  .sheet-head strong, .sheet-parties strong { font-size:14px; }
+  .sheet-parties { margin:14px 0; }
+  .sheet-lines { width:100%; border-collapse:collapse; margin-top:6px; }
+  .sheet-lines th, .sheet-lines td { padding:6px 4px; border-bottom:1px solid #bbb; vertical-align:top; }
+  .sheet-lines thead th { border-bottom:1px solid #000; text-align:left; font-size:11px; text-transform:uppercase; }
+  .sheet-totals { width:58%; margin:12px 0 0 auto; }
+  .sheet-totals > div { display:flex; justify-content:space-between; gap:16px; padding:3px 0; }
+  .sheet-totals .grand { margin-top:4px; padding-top:6px; border-top:1px solid #000; font-weight:700; font-size:14px; }
+  .sheet-notes { margin-top:16px; }
+  .sheet-notes div { white-space:pre-wrap; }
+  .sheet-terms { margin-top:16px; font-size:10.5px; }
+  .sheet-sign { display:flex; justify-content:space-between; gap:40px; margin-top:34px; font-size:10.5px; }
+  .sheet-sign div { flex:1; padding-top:4px; border-top:1px solid #000; }
+  .sheet-foot { margin-top:18px; font-size:9.5px; text-align:center; color:#555; }
+}
