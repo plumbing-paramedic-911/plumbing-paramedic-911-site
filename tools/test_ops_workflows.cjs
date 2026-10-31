@@ -29,7 +29,7 @@ test('transcript summaries use caller excerpts and escape hostile text',()=>{
 
 // Exercise the real controller and price-book loader together; helper-only tests
 // cannot catch a page that silently stops using either module.
-function pricingWorkspace(rows){
+function pricingWorkspace(rows,history=[]){
   const vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
   const nodes=new Map(),calls=[];
   const node=s=>{
@@ -42,7 +42,7 @@ function pricingWorkspace(rows){
   let fail=false;
   const sb={from(table){const query={select(){return this;},eq(k,v){assert.equal(k,'active');assert.equal(v,true);return this;},order(){return this;},async range(a,b){
     if(table==='price_book_items'){calls.push([a,b]);return fail?{error:{message:'Pricing offline'}}:{data:rows.filter(x=>x.active).slice(a,b+1)};}
-    return {data:[]};
+    return {data:table==='legacy_import_records'?history.slice(a,b+1):[]};
   }};return query;}};
   return {workspace:window.PP911Operations.create(sb),node,calls,fail:v=>{fail=v;}};
 }
@@ -67,6 +67,19 @@ test('workflow displays all active services, four rates, source pages and combin
   assert.equal(node('[data-filter="prices"]').value,'Pumps');
   assert.match(host.innerHTML,/1 of 1,062 services/);
 });
+test('imported history paginates, escapes source fields, and filters nested payloads',async()=>{
+  const history=Array.from({length:575},(_,i)=>({id:String(i),record_kind:'job',customer_id:i===574?'c1':null,review_required:i!==574,source_url:'https://docs.google.com/spreadsheets/d/source/edit',payload:{'Customer name':i===574?'Cameron <McCoy>':'1979.0','Service address':i===574?'Horseshoe Rd':'','Description':'<script>unsafe</script>'}}));
+  const {workspace,node}=pricingWorkspace([],history);await workspace.refresh();
+  assert.match(node('#historyTable').innerHTML,/575 records/);
+  assert.match(node('#historyTable').innerHTML,/Page 1 of 12/);
+  assert.doesNotMatch(node('#historyTable').innerHTML,/<script>/);
+  node('#historySearch').value='horseshoe';node('#historySearch').events.input();
+  assert.match(node('#historyTable').innerHTML,/1 records/);
+  assert.match(node('#historyTable').innerHTML,/Cameron &lt;McCoy&gt;/);
+  node('#historyReview').checked=true;node('#historyReview').events.change();
+  assert.match(node('#historyTable').innerHTML,/0 records/);
+  assert.equal(ops.legacyRows(history,'','job',false,'c1').length,1);
+});
 test('pricing failures leave other workflows available and recover on refresh',async()=>{
   const {workspace,node,fail}=pricingWorkspace([{active:true,sku:'P-1',category:'Pumps',service_name:'Pump',standard_price:0,standard_ot_price:null,member_price:null,member_ot_price:null}]);
   fail(true);await workspace.refresh();
@@ -78,3 +91,4 @@ test('pricing failures leave other workflows available and recover on refresh',a
   assert.match(node('#pricingTable').innerHTML,/\$0\.00/);
   assert.doesNotMatch(node('#pricingTable').innerHTML,/Pricing offline/);
 });
+
