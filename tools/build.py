@@ -1389,16 +1389,13 @@ def render_city_page(slug: str, c: dict) -> str:
     extra = [
         {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":c["title"],"isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":BASE_URL+"/#localbusiness"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".speakable-headline",".speakable-summary",".speakable-phone"]}},
         {
-            "@type":"LocalBusiness",
-            "@id":BASE_URL+path+"#localbusiness-"+slug,
-            "name":f"Plumbing Paramedic 911 — {c['city']}, {c['abbr']}",
+            "@type":"Service",
+            "@id":BASE_URL+path+"#plumbing-service",
+            "name":f"Plumbing services in {c['city']}, {c['abbr']}",
+            "serviceType":"Residential and commercial plumbing",
             "url":BASE_URL+path,
-            "parentOrganization":{"@id":BASE_URL+"/#localbusiness"},
-            "telephone":"+1-864-446-8911",
-            "address":{"@type":"PostalAddress","streetAddress":"13 Callaway Dr","addressLocality":"Abbeville","addressRegion":"SC","postalCode":"29620","addressCountry":"US"},
-            "areaServed":{"@type":"City","name":c["city"],"sameAs":c["wiki"]},
-            "geo":{"@type":"GeoCoordinates","latitude":c["lat"],"longitude":c["lng"]},
-            "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["https://schema.org/Monday","https://schema.org/Tuesday","https://schema.org/Wednesday","https://schema.org/Thursday","https://schema.org/Friday","https://schema.org/Saturday","https://schema.org/Sunday"],"opens":"00:00","closes":"23:59"}]
+            "provider":{"@id":BASE_URL+"/#localbusiness"},
+            "areaServed":{"@type":"City","name":c["city"],"sameAs":c["wiki"]}
         },
         breadcrumb_ld(breadcrumb_items),
         faq_ld(city_faqs(c)),
