@@ -96,6 +96,8 @@ Options -Indexes
   # Legacy sitemap filenames left over from a previous site builder. These are
   # still submitted in Search Console; point them at the real sitemap so they
   # resolve instead of returning 404.
+  # Exact dotted filename retained in old Search Console submissions.
+  RewriteRule ^sitemap\.website\.xml$ /sitemap.xml [L,R=301,NC]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(?:[a-z0-9_-]+-)?sitemap(?:[_-][a-z0-9]+)?\.xml(?:\.gz)?$ /sitemap.xml [L,R=301,NC]
   RewriteCond %{REQUEST_FILENAME} !-f
