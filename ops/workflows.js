@@ -24,13 +24,18 @@ function visibleCustomers(customers,leads){return customers.filter(c=>{
   const related=leads.filter(l=>l.customer_id===c.id);
   return !related.length||related.some(l=>!isTest(l)&&l.status!=='spam');
 });}
+function legacyRows(rows,term='',kind='',review=false,customerId=null){
+  const q=term.trim().toLowerCase();
+  return rows.filter(r=>(!kind||r.record_kind===kind)&&(!review||r.review_required)&&(!customerId||r.customer_id===customerId)&&(!q||JSON.stringify(r.payload).toLowerCase().includes(q)));
+}
 function create(sb){
   const $=s=>document.querySelector(s);
   const state={},errors={},filters={leads:'active',customers:'active',prices:''},search={};
   let refreshPromise,currentAction=null;
-  const names={leads:'Leads',customers:'Customers',appointments:'Schedule',jobs:'Jobs',dispatch:'Dispatch',calls:'Calls',prices:'Price Book',invoices:'Invoices',staff:'Staff',properties:'Addresses'};
-  const tables={leads:'leads',customers:'customers',appointments:'appointments',jobs:'work_orders',dispatch:'dispatch_tickets',calls:'call_sessions',prices:'price_book_items',invoices:'invoices',staff:'crm_users',properties:'properties'};
-  const sections={leads:'leadsTable',customers:'customersTable',appointments:'scheduleTable',jobs:'jobsTable',dispatch:'dispatchTable',calls:'callsTable',prices:'pricingTable',invoices:'invoicesTable'};
+  const names={leads:'Leads',customers:'Customers',appointments:'Schedule',jobs:'Jobs',dispatch:'Dispatch',calls:'Calls',prices:'Price Book',invoices:'Invoices',staff:'Staff',properties:'Addresses',history:'Imported history'};
+  const tables={leads:'leads',customers:'customers',appointments:'appointments',jobs:'work_orders',dispatch:'dispatch_tickets',calls:'call_sessions',prices:'price_book_items',invoices:'invoices',staff:'crm_users',properties:'properties',history:'legacy_import_records'};
+  const sections={leads:'leadsTable',customers:'customersTable',appointments:'scheduleTable',jobs:'jobsTable',dispatch:'dispatchTable',calls:'callsTable',prices:'pricingTable',invoices:'invoicesTable',history:'historyTable'};
+  let historyPage=0,historyCustomer=null;
   const date=v=>v?new Date(v).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'—';
   const money=v=>Number(v||0).toLocaleString('en-US',{style:'currency',currency:'USD'});
   const pill=v=>`<span class="pill ${esc(v)}">${esc(v||'—')}</span>`;
@@ -43,7 +48,13 @@ function create(sb){
   function info(text,error=false){const n=$('#opsNotice');n.textContent=text;n.className='msg'+(error?' error':'');}
   function show(view){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===view));document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$('#mobileView').value=view;}
   function details(x){const text=x.issue_summary||x.problem_description||x.complaint||x.ai_summary||x.disposition||'';return `<div>${esc(excerpt(x)||text.slice(0,220)||'—')}</div>${text.length>220?`<details><summary>${/AI:/.test(text)?'View transcript':'View full details'}</summary><p class="transcript">${esc(text)}</p></details>`:''}`;}
-  const phone=v=>`<a href="tel:${esc(String(v||'').replace(/[^+0-9]/g,''))}">${esc(v||'—')}</a>`;
+  const phone=v=>phoneKey(v)?`<a href="tel:${esc(String(v).replace(/[^+0-9]/g,''))}">${esc(v)}</a>`:'<span>Missing phone</span>';
+  $('#tabs').insertAdjacentHTML('beforeend','<button data-view="history">Imported history</button>');
+  $('#appView main').insertAdjacentHTML('beforeend','<section id="history" class="view"><div class="page-head"><h2>Imported history</h2></div><p class="muted">Historical job export as of June 30, 2025. Due amounts and statuses are unverified historical values, not current debt or scheduled work. Item names have no prices. Staff and settings are historical references.</p><div class="panel"><label>Search imported records<input id="historySearch" type="search" placeholder="Customer, address, job number, service"></label><label>Record type<select id="historyKind"><option value="">All types</option><option value="job">Jobs</option><option value="item">Service items</option><option value="staff">Staff</option><option value="accounting">Accounting</option><option value="setting">Settings</option></select></label><label><input type="checkbox" id="historyReview"> Needs review only</label><button id="historyClear" class="btn secondary" type="button">Clear filters</button><div id="historyTable"></div></div></section>');
+  $('#tabs [data-view="history"]').addEventListener('click',()=>show('history'));
+  for(const id of ['historySearch','historyKind','historyReview'])$('#'+id).addEventListener(id==='historySearch'?'input':'change',()=>{historyPage=0;render('history');});
+  $('#historyClear').addEventListener('click',()=>{historyCustomer=null;historyPage=0;$('#historySearch').value='';$('#historyKind').value='';$('#historyReview').checked=false;render('history');});
+  $('#historyTable').addEventListener('click',e=>{const b=e.target.closest('[data-history-page]');if(b){historyPage=Number(b.dataset.historyPage);render('history');}});
   function toolbar(key,options){return `<div class="filter-bar"><label>Search ${esc(names[key].toLowerCase())}<input type="search" data-search="${key}" placeholder="Name, phone, or keyword"></label>${options?`<label>Show<select data-filter="${key}">${options.map(([v,t])=>`<option value="${v}">${t}</option>`).join('')}</select></label>`:''}</div>`;}
   for(const key of ['leads','customers','prices'])$('#'+sections[key]).insertAdjacentHTML('beforebegin',toolbar(key,key==='leads'?[['active','Active leads'],['all','All leads'],['urgent','Urgent / emergency'],['spam','Spam'],['lost','Lost']]:key==='customers'?[['active','Active customers'],['all','All records']]:null));
   $('#pricingTable').insertAdjacentHTML('beforebegin','<label>Category<select data-filter="prices"><option value="">All categories</option></select></label><p class="muted">Edition 2026.1. OT means after-hours pricing. Code 30-27: for parts costing more than $400, multiply vendor cost by 1.4; this is a quoted amount, not a fixed-price item.</p>');
@@ -105,9 +116,19 @@ function create(sb){
       host.innerHTML=(errors.leads?'<p class="msg error">Lead classifications are unavailable; showing all customer records.</p>':'')+grid(['Name','Phone','Email','Record checks','Actions'],rows.map(c=>{
         const linked=(state.leads||[]).find(l=>l.customer_id===c.id&&l.caller_name&&!/unknown|system test/i.test(l.caller_name));
         const unknown=/unknown/i.test(`${c.first_name} ${c.last_name}`);
-        const duplicates=(state.customers||[]).filter(x=>phoneKey(x.phone)===phoneKey(c.phone)).length>1;
-        return [esc(`${c.first_name} ${c.last_name}`),phone(c.phone),esc(c.email||'—'),`${isTest(c)?'Test record. ':''}${duplicates?'Possible duplicate phone. ':''}${unknown&&linked?'Lead name: '+esc(linked.caller_name):''}`,button('customer-edit',c.id,'Edit customer')];
+        const duplicates=phoneKey(c.phone)&&(state.customers||[]).filter(x=>phoneKey(x.phone)===phoneKey(c.phone)).length>1;
+        return [esc(`${c.first_name} ${c.last_name}`),phone(c.phone),esc(c.email||'—'),`${isTest(c)?'Test record. ':''}${duplicates?'Possible duplicate phone. ':''}${unknown&&linked?'Lead name: '+esc(linked.caller_name):''}${c.source==='drive-recovery-20261031-v1'?'Imported; contact details need review.':''}`,button('customer-edit',c.id,'Edit customer')+button('customer-history',c.id,'View history')];
       }),'No matching customers.');
+    }else if(key==='history'){
+      rows=legacyRows(rows,$('#historySearch').value,$('#historyKind').value,$('#historyReview').checked,historyCustomer);
+      const pages=Math.max(1,Math.ceil(rows.length/50));historyPage=Math.min(historyPage,pages-1);
+      const start=historyPage*50;
+      host.innerHTML=`<p>${rows.length} records${historyCustomer?' for '+esc(customerName(historyCustomer)):''}. Page ${historyPage+1} of ${pages}.</p>`+grid(['Type','Record','Review','Details'],rows.slice(start,start+50).map(r=>{
+        const p=r.payload||{};
+        const label=p['Customer name']||p['Original item path']||p['Source staff name']||p['Source name']||p.Setting||r.source_key;
+        const source=/^https:\/\/docs\.google\.com\//.test(r.source_url)?`<a href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer">Source file</a>`:'';
+        return [esc(r.record_kind),esc(label),r.review_required?'Needs review':(r.record_kind==='job'?'Historical record':'Historical reference'),`<details><summary>View original fields</summary><dl>${Object.entries(p).map(([k,v])=>`<dt>${esc(k)}</dt><dd style="white-space:pre-wrap">${esc(v)}</dd>`).join('')}</dl>${source}</details>`];
+      }),'No matching imported records.')+`<div class="row gap"><button type="button" class="btn secondary" data-history-page="${historyPage-1}" ${historyPage===0?'disabled':''}>Previous</button><button type="button" class="btn secondary" data-history-page="${historyPage+1}" ${historyPage>=pages-1?'disabled':''}>Next</button></div>`;
     }else if(key==='appointments'){
       rows.sort((a,b)=>a.scheduled_start.localeCompare(b.scheduled_start));
       host.innerHTML=grid(['Start (Eastern)','Customer','Staff','Status','Issue','Actions'],rows.map(a=>[date(a.scheduled_start),esc(customerName(a.customer_id)),esc(staffName(a.assigned_to)),pill(a.status),details(a),button('appointment',a.id,'Update appointment')+button('job-create',a.id,'Open / create job')]),'No appointments. Use Book appointment to schedule an active lead.');
@@ -155,6 +176,7 @@ function create(sb){
     open('Draft invoice',`<p>Job #${esc(j.work_order_number)} · ${esc(customerName(j.customer_id))}</p><p class="muted">Creates a draft for review. No invoice is sent and no payment is collected.</p>`+input('title','Invoice title','Service invoice','text','required')+input('subtotal','Subtotal ($)','','number','required min="0" max="1000000" step="0.01"')+input('tax','Tax ($)',0,'number','required min="0" max="1000000" step="0.01"')+input('due','Due date','','date'),async f=>{await rpc('ops_draft_invoice',{p_work_order_id:id,p_title:f.title,p_subtotal:Number(f.subtotal),p_tax:Number(f.tax),p_due:f.due||null});show('invoices');return 'Invoice draft saved.';},'Create draft');
   }
   async function act(action,id){
+    if(action==='customer-history'){historyCustomer=id;historyPage=0;$('#historySearch').value='';$('#historyKind').value='job';$('#historyReview').checked=false;render('history');show('history');return;}
     if(action==='retry'){delete state[id];await refresh();return;}
     if(action==='book'){openBook(id);return;}
     if(action==='invoice'){openInvoice(id);return;}
@@ -181,8 +203,8 @@ function create(sb){
     if(action==='customer-edit'){requireData(['customers','leads']);
       const c=state.customers.find(c=>c.id===id);const linked=state.leads.find(l=>l.customer_id===id&&l.caller_name&&!/unknown|system test/i.test(l.caller_name));
       open('Edit customer',linked?`<p class="muted">Linked lead name: ${esc(linked.caller_name)}</p>`:'',async()=>{});
-      $('#workflowFields').insertAdjacentHTML('beforeend',input('first','First name',c.first_name,'text','required')+input('last','Last name',c.last_name)+input('phone','Phone',c.phone,'tel','required')+input('email','Email',c.email||'','email'));
-      currentAction=async f=>{const duplicate=state.customers.some(x=>x.id!==id&&phoneKey(x.phone)===phoneKey(f.phone));if(duplicate)throw new Error('Another customer has this phone. Review the duplicate before saving.');await update('customers',id,{first_name:f.first.trim(),last_name:f.last.trim(),phone:f.phone.trim(),email:f.email.trim()||null});return 'Customer saved.';};return;
+      $('#workflowFields').insertAdjacentHTML('beforeend',input('first','First name / source display name',c.first_name,'text','required')+input('last','Last name',c.last_name)+input('phone','Phone',c.phone,'tel',c.source==='drive-recovery-20261031-v1'?'':'required')+input('email','Email',c.email||'','email'));
+      currentAction=async f=>{const duplicate=phoneKey(f.phone)&&state.customers.some(x=>x.id!==id&&phoneKey(x.phone)===phoneKey(f.phone));if(duplicate)throw new Error('Another customer has this phone. Review the duplicate before saving.');await update('customers',id,{first_name:f.first.trim(),last_name:f.last.trim(),phone:f.phone.trim(),email:f.email.trim()||null});return 'Customer saved.';};return;
     }
   }
   document.querySelector('#appView').addEventListener('click',async e=>{const b=e.target.closest('[data-action]');if(!b||b.disabled)return;b.disabled=true;try{await act(b.dataset.action,b.dataset.id);}catch(e){info(e.message||'Action failed. Try again.',true);}finally{b.disabled=false;}});
@@ -212,6 +234,7 @@ function easternISO(value){
   }
   return matches.length===1?matches[0]:null;
 }
-const api={create,esc,isTest,activeLead,followup,excerpt,phoneKey,visibleCustomers,easternISO};
+const api={create,esc,isTest,activeLead,followup,excerpt,phoneKey,visibleCustomers,easternISO,legacyRows};
 if(typeof module!=='undefined')module.exports=api;else root.PP911Operations=api;
 })(typeof window==='undefined'?globalThis:window);
+

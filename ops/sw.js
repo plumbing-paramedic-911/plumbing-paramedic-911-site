@@ -1,5 +1,5 @@
-const CACHE='pp911-ops-pricebook1';
-const ASSETS=['/ops/','/ops/index.html','/ops/styles.css?v=20261028-pricebook1','/ops/pricebook.js?v=20261028-pricebook1','/ops/workflows.js?v=20261028-pricebook1','/ops/estimator.js?v=20261028-pricebook1','/ops/app.js?v=20261028-pricebook1','/ops/vendor/supabase-2.117.3.js','/ops/manifest.webmanifest'];
+const CACHE='pp911-ops-history1';
+const ASSETS=['/ops/','/ops/index.html','/ops/styles.css?v=20261028-pricebook1','/ops/pricebook.js?v=20261028-pricebook1','/ops/workflows.js?v=20261031-history1','/ops/estimator.js?v=20261028-pricebook1','/ops/app.js?v=20261028-pricebook1','/ops/vendor/supabase-2.117.3.js','/ops/manifest.webmanifest'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('pp911-ops-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{
@@ -11,3 +11,4 @@ self.addEventListener('fetch',e=>{
     return r;
   }).catch(async()=>await caches.match(e.request)||Response.error()));
 });
+
