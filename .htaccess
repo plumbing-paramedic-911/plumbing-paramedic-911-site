@@ -18,6 +18,9 @@ Options -Indexes
   RewriteRule ^(.+/)index\.html$ /$1 [L,R=301]
   RewriteRule ^index\.html$ / [L,R=301]
 
+  # Legacy emergency-service page still reported as a live 404 in Search Console.
+  RewriteRule ^24-7-plumbing-service/?$ /services/24-7-emergency-plumbing/ [L,R=301,NC]
+
   # Exact legacy flat HTML URLs still appearing in search indexes.
   RewriteRule ^about\.html$ /about/ [L,R=301,NC]
   RewriteRule ^contact\.html$ /contact/ [L,R=301,NC]
