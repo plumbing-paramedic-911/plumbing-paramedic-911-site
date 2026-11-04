@@ -132,6 +132,29 @@ jobs:
             echo "Verified redirect: ${path} -> ${expected}"
           }
 
+          # Keep legacy URLs out of Search Console's recurring 404 report.
+          # Each must redirect in one hop to its matching canonical page.
+          assert_redirect '/about.html' \
+            'https://plumbingparamedic911.com/about/'
+          assert_redirect '/services/leak-detection.html' \
+            'https://plumbingparamedic911.com/services/leak-detection/'
+          assert_redirect '/service-areas/anderson-sc.html' \
+            'https://plumbingparamedic911.com/service-areas/anderson-sc/'
+          assert_redirect '/service-areas/abbeville-sc.html' \
+            'https://plumbingparamedic911.com/service-areas/abbeville-sc/'
+          assert_redirect '/sitemap_index.xml' \
+            'https://plumbingparamedic911.com/sitemap.xml'
+
+          # Verify each updated priority market is present in the published XML.
+          sitemap="$(fetch "${BASE_URL}/sitemap.xml?deploy=${GITHUB_SHA}")"
+          for city in abbeville-sc greenwood-sc anderson-sc; do
+            printf '%s' "$sitemap" | grep -Fq "<loc>${BASE_URL}/service-areas/${city}/</loc><lastmod>2026-11-04</lastmod>" || {
+              echo "Priority market sitemap entry missing or stale: ${city}"
+              exit 1
+            }
+          done
+          echo 'Verified priority market sitemap freshness.'
+
           # Technical SEO repairs from the first production pass.
           assert_title '/services/well-pump-repair/' \
             'Well Pump Repair Abbeville SC | Plumbing Paramedic 911'
