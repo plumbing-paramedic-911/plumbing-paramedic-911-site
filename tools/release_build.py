@@ -28,6 +28,9 @@ SUPER_SITE_FILE = ROOT / "tools" / "super_site_content.py"
 BASE_URL = "https://plumbingparamedic911.com"
 
 TITLE_OVERRIDES = {
+    ("CITIES", "abbeville-sc"): "Plumber Abbeville SC | Plumbing Paramedic 911",
+    ("CITIES", "greenwood-sc"): "Plumber Greenwood SC | Plumbing Paramedic 911",
+    ("CITIES", "anderson-sc"): "Plumber Anderson SC | Plumbing Paramedic 911",
     ("SERVICES", "well-pump-repair"): "Well Pump Repair Abbeville SC | Plumbing Paramedic 911",
     ("SERVICES", "plumbing-fixture-installation-repair"): "Fixture Repair Abbeville SC | Plumbing Paramedic 911",
     ("SERVICES", "backflow-prevention-testing"): "Backflow Testing Upstate SC | Plumbing Paramedic 911",
@@ -36,6 +39,9 @@ TITLE_OVERRIDES = {
     ("CITIES", "calhoun-falls-sc"): "Calhoun Falls SC Plumber | Plumbing Paramedic 911",
 }
 DESCRIPTION_OVERRIDES = {
+    ("CITIES", "abbeville-sc"): "Need an Abbeville SC plumber? Local drain cleaning, sewer repairs, water heaters, leak detection and well pumps. 24/7 emergency dispatch. Call (864) 446-8911.",
+    ("CITIES", "greenwood-sc"): "Plumber serving Greenwood SC for drain cleaning, water heaters, well pumps, leak detection and emergency repairs. Upfront pricing. Call (864) 446-8911.",
+    ("CITIES", "anderson-sc"): "Anderson SC plumbing service for drain cleaning, water heaters, leak repair, sewer backups and well pumps. Upfront pricing and 24/7 dispatch. (864) 446-8911.",
     ("SERVICES", "well-pump-repair"): "Same-day well pump repair, pressure tanks and no-water service in Abbeville, McCormick and Upstate SC. Upfront pricing. Call (864) 446-8911.",
     ("SERVICES", "plumbing-fixture-installation-repair"): "Faucet, toilet, sink, disposal and fixture repair or installation in Abbeville and Upstate SC. Upfront flat-rate pricing. Call (864) 446-8911.",
     ("SERVICES", "backflow-prevention-testing"): "Certified backflow testing, repair and installation for irrigation, fire and commercial systems across Upstate SC. Call (864) 446-8911.",
@@ -44,7 +50,8 @@ DESCRIPTION_OVERRIDES = {
     ("CITIES", "calhoun-falls-sc"): "24/7 plumber in Calhoun Falls SC for well pumps, lake homes, water heaters, drains and leaks. Upfront pricing. Call (864) 446-8911.",
 }
 CRITICAL_TITLE_PATHS = {
-    "services/well-pump-repair/index.html", "services/plumbing-fixture-installation-repair/index.html",
+    "service-areas/abbeville-sc/index.html", "service-areas/greenwood-sc/index.html",
+    "service-areas/anderson-sc/index.html", "services/well-pump-repair/index.html", "services/plumbing-fixture-installation-repair/index.html",
     "services/backflow-prevention-testing/index.html", "service-areas/mccormick-sc/index.html",
     "service-areas/calhoun-falls-sc/index.html", "well-pump-repair-mccormick-sc/index.html",
     "well-pump-repair-iva-lake-secession-sc/index.html", "drain-cleaning-greenwood-sc/index.html",
