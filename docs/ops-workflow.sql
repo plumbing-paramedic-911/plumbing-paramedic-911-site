@@ -39,7 +39,7 @@ begin
   if p_minutes is null or p_minutes<15 or p_minutes>480 then raise exception 'Duration must be 15 to 480 minutes'; end if;
   if nullif(trim(p_address),'') is null or nullif(trim(p_city),'') is null or nullif(trim(p_summary),'') is null then raise exception 'Address, city and issue summary are required'; end if;
   if p_staff_id is not null then
-    perform 1 from public.crm_users where id=p_staff_id and active for update;
+    perform 1 from public.crm_users where id=p_staff_id and active;
     if not found then raise exception 'Choose an active staff member'; end if;
     if exists(select 1 from public.appointments where assigned_to=p_staff_id and status not in ('cancelled','no_show','completed') and scheduled_start<p_start+make_interval(mins=>p_minutes) and coalesce(scheduled_end,scheduled_start+interval '1 hour')>p_start) then raise exception 'This staff member already has an overlapping appointment'; end if;
   end if;
@@ -110,7 +110,7 @@ begin
   select * into j from public.work_orders where id=p_job_id for update;
   if not found then raise exception 'Job not found'; end if;
   if p_staff_id is not null then
-    perform 1 from public.crm_users where id=p_staff_id and active for update;
+    perform 1 from public.crm_users where id=p_staff_id and active;
     if not found then raise exception 'Choose an active staff member'; end if;
   end if;
   if j.appointment_id is not null then
