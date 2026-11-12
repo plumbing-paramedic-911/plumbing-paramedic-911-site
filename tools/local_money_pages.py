@@ -410,7 +410,7 @@ MONEY_PAGES = {
             "Give the repair price before moving from emergency stabilization into additional work",
         ],
         "price_drivers": [
-            "Time of dispatch: weekday, after hours/weekend, or after midnight/holiday",
+            "Time of dispatch: weekday, after hours/weekend, or after midnight/holiday \u2014 this moves both the service call and the repair price",
             "Whether the emergency can be isolated quickly or requires immediate repair to stop damage",
             "Access inside walls, ceilings, crawlspaces or buried piping",
             "Materials and code-required work needed for a permanent repair",
@@ -468,7 +468,7 @@ MONEY_PAGES = {
             "Give the repair price before moving from emergency stabilization into additional work",
         ],
         "price_drivers": [
-            "Time of dispatch: weekday, after hours/weekend, or after midnight/holiday",
+            "Time of dispatch: weekday, after hours/weekend, or after midnight/holiday \u2014 this moves both the service call and the repair price",
             "Whether the failure can be isolated quickly or must be repaired on the spot to stop damage",
             "Access to the failed pipe \u2014 open crawlspace, finished ceiling, slab or buried line",
             "Pipe material: a polybutylene failure often means the surrounding line is also due",
@@ -477,6 +477,7 @@ MONEY_PAGES = {
         "faqs": [
             ("How fast can an emergency plumber get to Anderson, SC?", "Our published typical response for Anderson is about 60 minutes from the Abbeville shop when a technician is available. Active calls, weather and traffic change that, so call for the current ETA rather than assuming."),
             ("Do you charge extra to drive to Anderson?", "No. There is no distance or per-mile surcharge for Anderson. The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays \u2014 the same schedule we charge in Abbeville."),
+            ("Does the repair itself cost more at night?", "Yes, and we publish both numbers rather than surprise you with one. Evening, weekend and holiday repairs are priced from the after-hours column of our price book \u2014 clearing a drain, for example, is $245 during regular hours and $343 after hours. Every figure is on our Anderson plumbing prices page, and you approve the written price before any work starts. If the problem can safely wait for regular hours, we will say so."),
             ("My gray plastic water line burst. Can you fix it tonight?", "Usually yes, at least to stop the damage. Polybutylene is repairable in the short term, but a failure in one spot often means the rest of the line is near the end of its life. We stabilize the emergency first and then give you a written price for a permanent repair or repipe."),
             ("Is a sewer backup an emergency?", "Yes, when sewage is entering living space or several fixtures are backing up together. Stop running water and call. Every flush after that point adds to the cleanup."),
             ("What should I do while a pipe is leaking?", "Shut off the main water valve if you can reach it safely, open a low faucet to relieve pressure, and move belongings clear of the water. Stay away from panels, outlets and anything energized near standing water."),
@@ -504,7 +505,7 @@ MONEY_PAGES = {
         "guide": "/guides/drain-maintenance-playbook/",
         "guide_name": "Drain Maintenance Playbook",
         "og": "/images/og/drain-cleaning-1200x630.jpg",
-        "intro": "A slow bathroom sink and a whole-house sewer backup are not the same job and should not carry the same price. In Anderson we identify whether the blockage is at one fixture, in a branch line, in the building sewer, or inside a corroded cast-iron stack \u2014 then use the least destructive method that actually fixes it. Clearing a clog in Anderson starts at $225 for a toilet auger and $245 for a sink, tub or shower line.",
+        "intro": "A slow bathroom sink and a whole-house sewer backup are not the same job and should not carry the same price. In Anderson we identify whether the blockage is at one fixture, in a branch line, in the building sewer, or inside a corroded cast-iron stack \u2014 then use the least destructive method that actually fixes it. Clearing a clog in Anderson starts at $225 for a toilet auger and $245 for a sink, tub or shower line during regular hours \u2014 $315 and $343 evenings, weekends and holidays.",
         "answer": "If more than one drain in an Anderson home is backing up at the same time, stop running water and have the main line checked before anything else. Water rising in a tub or shower when a toilet flushes is a main-line symptom, not a fixture problem. A single slow drain with everything else running normally is usually a local trap or branch clog.",
         "local_context": """
 <p>A large share of Anderson's housing was built mid-century with cast-iron drain stacks, and that changes the job. The inside of an old cast-iron pipe scales and corrodes until the usable diameter is a fraction of what the pipe size suggests. The symptom is a clog that keeps coming back a few weeks after it was cleared, usually at the same fixture.</p>
@@ -535,10 +536,10 @@ MONEY_PAGES = {
             "Grease, roots or structural damage that cabling alone will not resolve",
         ],
         "faqs": [
-            ("How much does drain cleaning cost in Anderson, SC?", "Clearing a toilet with a hand auger is $225 and a sink, tub or shower line is $245. A difficult sink or lavatory arm is $289, electric hydro jetting of a branch or main drain is $325, and a video camera inspection of the drain line is $395. The service / diagnostic call is separate: $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, $158 after midnight or on holidays. Main sewer work is priced separately \u2014 see our Anderson price list."),
+            ("How much does drain cleaning cost in Anderson, SC?", "During regular hours, clearing a toilet with a hand auger is $225 and a sink, tub or shower line is $245. A difficult sink or lavatory arm is $289, electric hydro jetting of a branch or main drain is $325, and a video camera inspection of the drain line is $395. Evenings, weekends and holidays those are $315, $343, $405, $455 and $553. The service / diagnostic call is separate: $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, $158 after midnight or on holidays. Both columns are published on our Anderson price list."),
             ("How do I know if my main sewer line is clogged?", "Several fixtures backing up together, water rising in a tub when a toilet flushes, gurgling toilets, and sewage appearing at a floor drain or cleanout all point at the main line. Stop using water until it is checked."),
             ("Why does my drain keep clogging in the same place?", "In older Anderson homes that is usually internal scale in a cast-iron stack: the pipe's usable diameter has shrunk, so it re-blocks quickly. A camera inspection shows whether jetting will buy real time or whether the section needs replacing."),
-            ("Do you use a sewer camera?", "Yes. Drain line inspection with a video camera is $395, and a full sewer line inspection is $495. We recommend it for recurring clogs, because a cable cannot tell you about roots, a belly, a broken joint or lost pipe structure."),
+            ("Do you use a sewer camera?", "Yes. Drain line inspection with a video camera is $395 during regular hours and $553 after hours; a full sewer line inspection is $495, or $693 after hours. We recommend it for recurring clogs, because a cable cannot tell you about roots, a belly, a broken joint or lost pipe structure."),
             ("Is hydro jetting better than snaking?", "Not always. A cable is often the faster and cheaper tool for a straightforward blockage. Jetting earns its price where grease, heavy scale or root debris means the pipe wall itself has to be cleaned."),
             ("Can you clear a drain the same day in Anderson?", "Usually yes. Drain calls are typically same-day, and we dispatch to Anderson 24/7 when a backup cannot wait."),
         ],
@@ -564,8 +565,8 @@ MONEY_PAGES = {
         "guide": "/guides/water-heater-buyers-guide-sc/",
         "guide_name": "Water Heater Buyer\u2019s Guide",
         "og": "/images/og/greenwood-1200x630.jpg",
-        "intro": "These are the actual flat-rate prices from our Greenwood price book \u2014 the same numbers the technician quotes at your door, not a range we work out later. The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair prices below are for the work itself and are approved by you in writing before anything starts.",
-        "answer": "In Greenwood, clearing a sink, tub or shower drain is $245 and a toilet auger is $225. A 40-gallon electric water heater installed is $1,800 and a 50-gallon is $2,065. Replacing a well tank pressure switch is $165 and a 22-gallon well tank is $795. Each price is flat-rate for the job under normal access conditions, and the service / diagnostic call is charged separately at $79 weekdays, $99 after hours and weekends, or $158 after midnight and on holidays.",
+        "intro": "These are the actual flat-rate prices from our Greenwood price book \u2014 the same numbers the technician quotes at your door, not a range we work out later. Both the regular-hours and the after-hours price are published for every job. The service / diagnostic call is separate: $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays.",
+        "answer": "In Greenwood, clearing a sink, tub or shower drain is $245 during regular hours and $343 evenings, weekends and holidays. A toilet auger is $225 regular hours, $315 after hours. A 40-gallon electric water heater installed is $1,800 regular hours, $2,520 after hours. Replacing a well tank pressure switch is $165, or $231 after hours. Each price is flat-rate for the job under normal access conditions, VIP Diamond Plan members pay 15% less, and the service / diagnostic call is charged separately at $79 weekdays, $99 after hours and weekends, or $158 after midnight and on holidays.",
         "local_context": """
 <p>Greenwood\u2019s municipal water is moderately hard, and that shows up in which prices on this page a Greenwood homeowner actually ends up paying. Scale shortens element and tank life, so thermostat and element replacements and full heater swaps are our most common Greenwood invoices by a wide margin. If you are replacing a heater for the second time in eight years, the price to look at is not on this page \u2014 it is the cost of treating the water feeding it.</p>
 <p>Out toward Lake Greenwood and on rural Greenwood County properties, the well-pump prices matter more than the municipal ones. A pressure switch is a $165 job; a pressure tank is $795 to $895. Knowing which one failed before anyone opens a wallet is the entire point of diagnosing the system rather than replacing the pump by default.</p>
@@ -581,25 +582,27 @@ MONEY_PAGES = {
         ],
         "checks": [
             "Flat-rate means the price is the price for that job, not an hourly meter",
+            "Both columns are published, so you can see the after-hours price before you call",
             "The service / diagnostic call is separate and is posted before you book",
             "Prices assume normal access \u2014 we say so up front when a job does not qualify",
             "You approve the written price before any work begins",
             "If we find a second problem, it gets its own price before we touch it",
-            "VIP Diamond Plan members pay the member column on covered repairs",
+            "VIP Diamond Plan members take 15% off covered repairs in either column",
         ],
         "price_drivers": [
             "Access \u2014 an open crawlspace prices differently than a finished ceiling or a slab",
             "Pipe and fixture material and condition once the job is opened up",
             "Code-required upgrades triggered by replacing an old appliance",
             "Equipment you supply versus equipment we supply and warranty",
-            "Time of dispatch, which sets the service-call charge only, not the repair price",
+            "Time of dispatch \u2014 evenings, weekends and holidays move both the service call and the repair price",
         ],
         "faqs": [
-            ("How much does a plumber charge in Greenwood, SC?", "The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair work is flat-rate on top of that: clearing a drain is $225\u2013$325, a 40-gallon electric water heater installed is $1,800, and a well tank pressure switch is $165. Full prices are listed on this page."),
-            ("Do you charge by the hour?", "No. Every repair on this page is flat-rate, so the price does not change if the job takes longer than expected. The only hourly item in our book is extended gas hydro jetting of a main drain, which is priced in blocks and quoted before it starts."),
+            ("How much does a plumber charge in Greenwood, SC?", "The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair work is flat-rate on top of that. During regular hours, clearing a drain is $225\u2013$325, a 40-gallon electric water heater installed is $1,800, and a well tank pressure switch is $165. Evenings, weekends and holidays those same jobs are $315\u2013$455, $2,520 and $231. Both columns are published on this page."),
+            ("Do you charge by the hour?", "No. Every repair on this page is flat-rate, so the price does not change if the job takes longer than expected \u2014 that risk is ours, not yours. What does change the price is when we come out: evenings, weekends and holidays are priced from the after-hours column, which is published here too. The only hourly item in our book is extended gas hydro jetting of a main drain, which is priced in blocks and quoted before it starts."),
             ("How much is a water heater in Greenwood?", "Installed, with a 6-year warranty: a 40-gallon electric is $1,800, a 50-gallon electric is $2,065, a 40-gallon natural gas is $1,945, and a 50-gallon natural gas is $2,095. A condensing high-efficiency tankless is $4,495. If the existing heater is still under manufacturer warranty, replacing a 30\u201350 gallon electric is $995."),
             ("Is the service call charged on top of the repair price?", "Yes. The service / diagnostic call covers the trip and the diagnosis. The repair price listed here is for the work itself. We tell you both numbers before anything is done."),
-            ("What does the VIP Diamond Plan save me?", "Members pay the member column \u2014 15% off covered repairs. On a $2,065 water heater that is $310 off; on a $245 drain clearing it is $37. The plan also includes an annual whole-home plumbing inspection. Discounts apply to covered work and cannot be combined with another promotion on the same service."),
+            ("What does the VIP Diamond Plan save me?", "Members take 15% off covered repairs in either column. On a $2,065 water heater that is $310 off; on a $245 drain clearing it is $37; on the $343 after-hours drain clearing it is $51. The plan also includes an annual whole-home plumbing inspection. Discounts apply to covered work and cannot be combined with another promotion on the same service."),
+            ("Why is the after-hours price higher?", "Because the work costs us more to do at 11 PM on a Saturday than at 10 AM on a Tuesday, and we would rather publish that than bury it. The after-hours column applies in the same window that moves the service call from $79 to $99 or $158: evenings, weekends and holidays. If the job can safely wait until regular hours, we will tell you so and book it at the lower price."),
             ("Will the price change once you are here?", "Not for the job quoted. The price changes only if the scope changes \u2014 different access, a failed part we could not see, or a code-required upgrade. If that happens we stop, explain it, and give you a new written price before continuing."),
             ("Do you charge extra to come to Greenwood?", "No. There is no mileage or distance surcharge. Greenwood pays the same service-call rate and the same flat repair prices as Abbeville."),
         ],
@@ -611,50 +614,50 @@ MONEY_PAGES = {
         ],
         "price_table": [
             ("Drain cleaning and sewer", [
-                ("Clear a toilet with a hand auger", 225, 191),
-                ("Clear a sink, lavatory, tub or shower line with a hand snake", 245, 208),
-                ("Clear a difficult sink or lavatory arm", 289, 246),
-                ("Clear a branch or main drain with the electric hydro jet", 325, 276),
-                ("Drain line inspection with a video camera", 395, 336),
-                ("Clear a sewer drain up to 25 ft with the J-cable", 485, 412),
-                ("Video inspect the sewer line with a camera", 495, 421),
-                ("Clear the main sewer line with the hydro jet, up to 100 ft", 595, 506),
-                ("Clear a main drain with the gas hydro jet, up to 1.5 hours", 695, 591),
+                ("Clear a toilet with a hand auger", 225, 315),
+                ("Clear a sink, lavatory, tub or shower line with a hand snake", 245, 343),
+                ("Clear a difficult sink or lavatory arm", 289, 405),
+                ("Clear a branch or main drain with the electric hydro jet", 325, 455),
+                ("Drain line inspection with a video camera", 395, 553),
+                ("Clear a sewer drain up to 25 ft with the J-cable", 485, 679),
+                ("Video inspect the sewer line with a camera", 495, 693),
+                ("Clear the main sewer line with the hydro jet, up to 100 ft", 595, 833),
+                ("Clear a main drain with the gas hydro jet, up to 1.5 hours", 695, 973),
             ]),
             ("Water heaters", [
-                ("Replace a single thermostat", 165, 140),
-                ("Replace both upper and lower thermostats", 245, 208),
-                ("Replace the T&amp;P safety valve", 225, 191),
-                ("Replace a single heating element, up to 4500W", 285, 242),
-                ("Flush and refill the heater and replace the drain valve", 285, 242),
-                ("Replace the expansion tank", 295, 251),
-                ("Replace an electric heater still under warranty, 30\u201350 gal", 995, 846),
-                ("40-gallon electric heater installed, 6-year warranty", 1800, 1530),
-                ("40-gallon natural gas heater installed, 6-year warranty", 1945, 1653),
-                ("50-gallon electric heater installed, 6-year warranty", 2065, 1755),
-                ("50-gallon natural gas heater installed, 6-year warranty", 2095, 1781),
-                ("Condensing high-efficiency tankless heater installed", 4495, 3821),
+                ("Replace a single thermostat", 165, 231),
+                ("Replace both upper and lower thermostats", 245, 343),
+                ("Replace the T&amp;P safety valve", 225, 315),
+                ("Replace a single heating element, up to 4500W", 285, 399),
+                ("Flush and refill the heater and replace the drain valve", 285, 399),
+                ("Replace the expansion tank", 295, 413),
+                ("Replace an electric heater still under warranty, 30\u201350 gal", 995, 1393),
+                ("40-gallon electric heater installed, 6-year warranty", 1800, 2520),
+                ("40-gallon natural gas heater installed, 6-year warranty", 1945, 2723),
+                ("50-gallon electric heater installed, 6-year warranty", 2065, 2891),
+                ("50-gallon natural gas heater installed, 6-year warranty", 2095, 2933),
+                ("Condensing high-efficiency tankless heater installed", 4495, 6293),
             ]),
             ("Toilets, faucets and disposals", [
-                ("Replace a toilet supply connector", 115, 98),
-                ("Replace a toilet shut-off valve", 135, 115),
-                ("Rebuild a toilet tank \u2014 flapper and fill valve", 245, 208),
-                ("Remove, reset and seal a toilet", 245, 208),
-                ("Replace a garbage disposal you supply", 285, 242),
-                ("Install a toilet you supply, with materials", 425, 361),
-                ("Install a new 1/2 HP garbage disposal, parts included", 485, 412),
-                ("Install an elongated toilet, 10\u201312 inch rough", 495, 421),
-                ("Install a new 3/4 HP garbage disposal, parts included", 595, 506),
+                ("Replace a toilet supply connector", 115, 161),
+                ("Replace a toilet shut-off valve", 135, 189),
+                ("Rebuild a toilet tank \u2014 flapper and fill valve", 245, 343),
+                ("Remove, reset and seal a toilet", 245, 343),
+                ("Replace a garbage disposal you supply", 285, 399),
+                ("Install a toilet you supply, with materials", 425, 595),
+                ("Install a new 1/2 HP garbage disposal, parts included", 485, 679),
+                ("Install an elongated toilet, 10\u201312 inch rough", 495, 693),
+                ("Install a new 3/4 HP garbage disposal, parts included", 595, 833),
             ]),
             ("Well pumps and pressure tanks", [
-                ("Replace the well tank pressure switch", 165, 140),
-                ("Prime a jet pump", 195, 166),
-                ("Replace the pressure switch and gauge", 195, 166),
-                ("Replace the pressure switch, gauge and nipple", 245, 208),
-                ("Replace a 1/2 HP 2-wire well motor, pump under warranty", 495, 421),
-                ("Replace a submersible well pump you supply", 795, 676),
-                ("Replace a 22-gallon well tank", 795, 676),
-                ("Replace a 35-gallon well tank", 895, 761),
+                ("Replace the well tank pressure switch", 165, 231),
+                ("Prime a jet pump", 195, 273),
+                ("Replace the pressure switch and gauge", 195, 273),
+                ("Replace the pressure switch, gauge and nipple", 245, 343),
+                ("Replace a 1/2 HP 2-wire well motor, pump under warranty", 495, 693),
+                ("Replace a submersible well pump you supply", 795, 1113),
+                ("Replace a 22-gallon well tank", 795, 1113),
+                ("Replace a 35-gallon well tank", 895, 1253),
             ]),
         ],
     },
@@ -673,8 +676,8 @@ MONEY_PAGES = {
         "guide": "/guides/drain-maintenance-playbook/",
         "guide_name": "Drain Maintenance Playbook",
         "og": "/images/og/anderson-1200x630.jpg",
-        "intro": "These are the actual flat-rate prices from our Anderson price book \u2014 the same numbers the technician quotes at your door, not a range we work out later. The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays, with no distance charge for Anderson. Repair prices below are for the work itself and are approved by you in writing before anything starts.",
-        "answer": "In Anderson, clearing a toilet with an auger is $225 and clearing a sink, tub or shower line is $245. A video camera inspection of a drain line is $395 and a full sewer line inspection is $495. A 40-gallon electric water heater installed is $1,800 and a 50-gallon is $2,065. Each price is flat-rate for the job under normal access conditions, and the service / diagnostic call is charged separately at $79 weekdays, $99 after hours and weekends, or $158 after midnight and on holidays.",
+        "intro": "These are the actual flat-rate prices from our Anderson price book \u2014 the same numbers the technician quotes at your door, not a range we work out later. Both the regular-hours and the after-hours price are published for every job. The service / diagnostic call is separate: $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, $158 after midnight or on holidays \u2014 with no distance charge for Anderson.",
+        "answer": "In Anderson, clearing a toilet with an auger is $225 during regular hours and $315 evenings, weekends and holidays. Clearing a sink, tub or shower line is $245 regular hours, $343 after hours. A video camera inspection of a drain line is $395, or $553 after hours. A 40-gallon electric water heater installed is $1,800 regular hours, $2,520 after hours. Each price is flat-rate for the job under normal access conditions, VIP Diamond Plan members pay 15% less, and the service / diagnostic call is charged separately at $79 weekdays, $99 after hours and weekends, or $158 after midnight and on holidays.",
         "local_context": """
 <p>Which of these prices an Anderson homeowner actually pays depends mostly on when the house was built. In the mid-century parts of town with original cast-iron drain stacks, the recurring expense is drain work \u2014 and the $395 camera inspection is usually the cheapest line on this page, because it answers whether $325 of jetting buys you three years or three weeks.</p>
 <p>In the 1980s subdivisions, the call is more often a polybutylene supply failure. That is quoted as a repair rather than from a fixed list, because the honest answer depends on how much of the line is left and whether a repipe makes more sense than another patch. We give that price in writing before we start, same as everything else here.</p>
@@ -690,26 +693,28 @@ MONEY_PAGES = {
         ],
         "checks": [
             "Flat-rate means the price is the price for that job, not an hourly meter",
+            "Both columns are published, so you can see the after-hours price before you call",
             "The service / diagnostic call is separate and is posted before you book",
             "Prices assume normal access \u2014 we say so up front when a job does not qualify",
             "You approve the written price before any work begins",
             "If we find a second problem, it gets its own price before we touch it",
-            "VIP Diamond Plan members pay the member column on covered repairs",
+            "VIP Diamond Plan members take 15% off covered repairs in either column",
         ],
         "price_drivers": [
             "Access \u2014 an open crawlspace prices differently than a finished ceiling or a slab",
             "Drain pipe material and internal condition, which decides cable vs jetting vs replacement",
             "Code-required upgrades triggered by replacing an old appliance",
             "Equipment you supply versus equipment we supply and warranty",
-            "Time of dispatch, which sets the service-call charge only, not the repair price",
+            "Time of dispatch \u2014 evenings, weekends and holidays move both the service call and the repair price",
         ],
         "faqs": [
-            ("How much does a plumber charge in Anderson, SC?", "The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair work is flat-rate on top of that: clearing a drain is $225\u2013$325, a drain camera inspection is $395, and a 40-gallon electric water heater installed is $1,800. Full prices are listed on this page."),
+            ("How much does a plumber charge in Anderson, SC?", "The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair work is flat-rate on top of that. During regular hours, clearing a drain is $225\u2013$325, a drain camera inspection is $395, and a 40-gallon electric water heater installed is $1,800. Evenings, weekends and holidays those same jobs are $315\u2013$455, $553 and $2,520. Both columns are published on this page."),
             ("How much is drain cleaning in Anderson?", "A toilet auger is $225. A sink, lavatory, tub or shower line is $245, or $289 for a difficult lavatory arm. Electric hydro jetting of a branch or main drain is $325. Clearing the main sewer line with the hydro jet up to 100 feet is $595."),
             ("What does a sewer camera inspection cost in Anderson?", "A drain line inspection with a video camera is $395. A full sewer line video inspection is $495. On a drain that has clogged more than once, that is usually the cheapest money you can spend, because it shows whether the pipe can be cleaned or needs replacing."),
-            ("Do you charge by the hour?", "No. Every repair on this page is flat-rate, so the price does not change if the job runs long. The only hourly item in our book is extended gas hydro jetting of a main drain, which is priced in blocks and quoted before it starts."),
+            ("Do you charge by the hour?", "No. Every repair on this page is flat-rate, so the price does not change if the job runs long \u2014 that risk is ours, not yours. What does change the price is when we come out: evenings, weekends and holidays are priced from the after-hours column, which is published here too. The only hourly item in our book is extended gas hydro jetting of a main drain, which is priced in blocks and quoted before it starts."),
             ("Do you charge extra to drive to Anderson?", "No. There is no mileage or distance surcharge for Anderson. Same service-call rate, same flat repair prices as Abbeville."),
-            ("What does the VIP Diamond Plan save me?", "Members pay the member column \u2014 15% off covered repairs. On a $2,065 water heater that is $310 off; on a $395 camera inspection it is $59. The plan also includes an annual whole-home plumbing inspection. Discounts apply to covered work and cannot be combined with another promotion on the same service."),
+            ("What does the VIP Diamond Plan save me?", "Members take 15% off covered repairs in either column. On a $2,065 water heater that is $310 off; on a $395 camera inspection it is $59; on the $553 after-hours inspection it is $83. The plan also includes an annual whole-home plumbing inspection. Discounts apply to covered work and cannot be combined with another promotion on the same service."),
+            ("Why is the after-hours price higher?", "Because the work costs us more to do at 11 PM on a Saturday than at 10 AM on a Tuesday, and we would rather publish that than bury it. The after-hours column applies in the same window that moves the service call from $79 to $99 or $158: evenings, weekends and holidays. If the job can safely wait until regular hours, we will tell you so and book it at the lower price."),
             ("Will the price change once you are here?", "Not for the job quoted. It changes only if the scope changes \u2014 different access, a failed part we could not see, or a code-required upgrade. If that happens we stop, explain it, and give you a new written price before continuing."),
         ],
         "related": [
@@ -720,50 +725,50 @@ MONEY_PAGES = {
         ],
         "price_table": [
             ("Drain cleaning and sewer", [
-                ("Clear a toilet with a hand auger", 225, 191),
-                ("Clear a sink, lavatory, tub or shower line with a hand snake", 245, 208),
-                ("Clear a difficult sink or lavatory arm", 289, 246),
-                ("Clear a branch or main drain with the electric hydro jet", 325, 276),
-                ("Drain line inspection with a video camera", 395, 336),
-                ("Clear a sewer drain up to 25 ft with the J-cable", 485, 412),
-                ("Video inspect the sewer line with a camera", 495, 421),
-                ("Clear the main sewer line with the hydro jet, up to 100 ft", 595, 506),
-                ("Clear a main drain with the gas hydro jet, up to 1.5 hours", 695, 591),
+                ("Clear a toilet with a hand auger", 225, 315),
+                ("Clear a sink, lavatory, tub or shower line with a hand snake", 245, 343),
+                ("Clear a difficult sink or lavatory arm", 289, 405),
+                ("Clear a branch or main drain with the electric hydro jet", 325, 455),
+                ("Drain line inspection with a video camera", 395, 553),
+                ("Clear a sewer drain up to 25 ft with the J-cable", 485, 679),
+                ("Video inspect the sewer line with a camera", 495, 693),
+                ("Clear the main sewer line with the hydro jet, up to 100 ft", 595, 833),
+                ("Clear a main drain with the gas hydro jet, up to 1.5 hours", 695, 973),
             ]),
             ("Water heaters", [
-                ("Replace a single thermostat", 165, 140),
-                ("Replace both upper and lower thermostats", 245, 208),
-                ("Replace the T&amp;P safety valve", 225, 191),
-                ("Replace a single heating element, up to 4500W", 285, 242),
-                ("Flush and refill the heater and replace the drain valve", 285, 242),
-                ("Replace the expansion tank", 295, 251),
-                ("Replace an electric heater still under warranty, 30\u201350 gal", 995, 846),
-                ("40-gallon electric heater installed, 6-year warranty", 1800, 1530),
-                ("40-gallon natural gas heater installed, 6-year warranty", 1945, 1653),
-                ("50-gallon electric heater installed, 6-year warranty", 2065, 1755),
-                ("50-gallon natural gas heater installed, 6-year warranty", 2095, 1781),
-                ("Condensing high-efficiency tankless heater installed", 4495, 3821),
+                ("Replace a single thermostat", 165, 231),
+                ("Replace both upper and lower thermostats", 245, 343),
+                ("Replace the T&amp;P safety valve", 225, 315),
+                ("Replace a single heating element, up to 4500W", 285, 399),
+                ("Flush and refill the heater and replace the drain valve", 285, 399),
+                ("Replace the expansion tank", 295, 413),
+                ("Replace an electric heater still under warranty, 30\u201350 gal", 995, 1393),
+                ("40-gallon electric heater installed, 6-year warranty", 1800, 2520),
+                ("40-gallon natural gas heater installed, 6-year warranty", 1945, 2723),
+                ("50-gallon electric heater installed, 6-year warranty", 2065, 2891),
+                ("50-gallon natural gas heater installed, 6-year warranty", 2095, 2933),
+                ("Condensing high-efficiency tankless heater installed", 4495, 6293),
             ]),
             ("Toilets, faucets and disposals", [
-                ("Replace a toilet supply connector", 115, 98),
-                ("Replace a toilet shut-off valve", 135, 115),
-                ("Rebuild a toilet tank \u2014 flapper and fill valve", 245, 208),
-                ("Remove, reset and seal a toilet", 245, 208),
-                ("Replace a garbage disposal you supply", 285, 242),
-                ("Install a toilet you supply, with materials", 425, 361),
-                ("Install a new 1/2 HP garbage disposal, parts included", 485, 412),
-                ("Install an elongated toilet, 10\u201312 inch rough", 495, 421),
-                ("Install a new 3/4 HP garbage disposal, parts included", 595, 506),
+                ("Replace a toilet supply connector", 115, 161),
+                ("Replace a toilet shut-off valve", 135, 189),
+                ("Rebuild a toilet tank \u2014 flapper and fill valve", 245, 343),
+                ("Remove, reset and seal a toilet", 245, 343),
+                ("Replace a garbage disposal you supply", 285, 399),
+                ("Install a toilet you supply, with materials", 425, 595),
+                ("Install a new 1/2 HP garbage disposal, parts included", 485, 679),
+                ("Install an elongated toilet, 10\u201312 inch rough", 495, 693),
+                ("Install a new 3/4 HP garbage disposal, parts included", 595, 833),
             ]),
             ("Well pumps and pressure tanks", [
-                ("Replace the well tank pressure switch", 165, 140),
-                ("Prime a jet pump", 195, 166),
-                ("Replace the pressure switch and gauge", 195, 166),
-                ("Replace the pressure switch, gauge and nipple", 245, 208),
-                ("Replace a 1/2 HP 2-wire well motor, pump under warranty", 495, 421),
-                ("Replace a submersible well pump you supply", 795, 676),
-                ("Replace a 22-gallon well tank", 795, 676),
-                ("Replace a 35-gallon well tank", 895, 761),
+                ("Replace the well tank pressure switch", 165, 231),
+                ("Prime a jet pump", 195, 273),
+                ("Replace the pressure switch and gauge", 195, 273),
+                ("Replace the pressure switch, gauge and nipple", 245, 343),
+                ("Replace a 1/2 HP 2-wire well motor, pump under warranty", 495, 693),
+                ("Replace a submersible well pump you supply", 795, 1113),
+                ("Replace a 22-gallon well tank", 795, 1113),
+                ("Replace a 35-gallon well tank", 895, 1253),
             ]),
         ],
     },
@@ -812,15 +817,16 @@ def price_table_html(groups: list[tuple[str, list[tuple[str, int, int]]]]) -> st
     for title, rows in groups:
         body = "\n".join(
             f'<tr><td class="job-cell">{job}</td>'
-            f'<td class="price-cell" data-label="Flat rate">{money(standard)}</td>'
-            f'<td class="price-cell" data-label="Member">{money(member)}</td></tr>'
-            for job, standard, member in rows
+            f'<td class="price-cell" data-label="Regular hours">{money(standard)}</td>'
+            f'<td class="price-cell" data-label="After hours">{money(after_hours)}</td></tr>'
+            for job, standard, after_hours in rows
         )
         blocks.append(
             f'<h3 style="margin:28px 0 10px">{title}</h3>'
             f'<div class="table-wrap"><table class="price-table">'
-            f'<thead><tr><th scope="col">Job</th><th scope="col">Flat-rate price</th>'
-            f'<th scope="col">VIP Diamond member</th></tr></thead>'
+            f'<thead><tr><th scope="col">Job</th>'
+            f'<th scope="col">Mon\u2013Fri, 9\u20135</th>'
+            f'<th scope="col">After hours</th></tr></thead>'
             f'<tbody>{body}</tbody></table></div>'
         )
     return "\n".join(blocks)
@@ -829,10 +835,16 @@ def price_table_html(groups: list[tuple[str, list[tuple[str, int, int]]]]) -> st
 def offer_catalog(p: dict, service_id: str) -> dict:
     offers = []
     for title, rows in p["price_table"]:
-        for job, standard, _member in rows:
+        for job, standard, after_hours in rows:
             offers.append({
                 "@type": "Offer",
                 "itemOffered": {"@type": "Service", "name": job, "category": title},
+                "description": (
+                    f"{money(standard)} Monday\u2013Friday 9 AM\u20135 PM. "
+                    f"{money(after_hours)} after hours, weekends and holidays. "
+                    "VIP Diamond Plan members pay 15% less. "
+                    "The service / diagnostic call is charged separately."
+                ),
                 "priceSpecification": {
                     "@type": "UnitPriceSpecification",
                     "price": str(standard),
@@ -899,10 +911,14 @@ def render_page(build, slug: str, p: dict) -> str:
             '<h2 style="margin-top:40px">Published flat-rate repair prices</h2>'
             f'<p class="lead">Prices below are for the work itself, under normal access conditions, '
             f'and are separate from the service / diagnostic call above. '
+            f'Evening, weekend and holiday work is priced from the after-hours column. '
             f'You approve the written price before any work begins.</p>'
             + price_table_html(p["price_table"])
             + '<p style="font-size:.88rem;color:var(--ink3);margin-top:16px">'
-            'VIP Diamond Plan members pay the member column on covered repairs. '
+            '<strong>After hours</strong> means evenings, weekends and holidays \u2014 the same window that moves '
+            'the service call from $79 to $99 or $158. <strong>VIP Diamond Plan members pay 15% less in either '
+            'column</strong>, so a $245 regular-hours drain clearing is $208 for a member, and the $343 '
+            'after-hours price is $292. '
             'If access, code-required upgrades, equipment, materials or hidden conditions change the job, '
             'we stop, explain the difference and get your approval before going further. '
             'Work not listed here is quoted the same way: in writing, before it starts.</p>'
