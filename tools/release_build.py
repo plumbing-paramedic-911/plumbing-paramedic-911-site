@@ -57,6 +57,8 @@ CRITICAL_TITLE_PATHS = {
     "well-pump-repair-iva-lake-secession-sc/index.html", "drain-cleaning-greenwood-sc/index.html",
     "water-heater-repair-abbeville-sc/index.html", "water-heater-repair-greenwood-sc/index.html", "water-heater-repair-anderson-sc/index.html",
     "emergency-plumber-abbeville-sc/index.html", "drain-cleaning-abbeville-sc/index.html",
+    "emergency-plumber-anderson-sc/index.html", "drain-cleaning-anderson-sc/index.html",
+    "plumbing-prices-greenwood-sc/index.html", "plumbing-prices-anderson-sc/index.html",
     "sewer-line-repair-abbeville-sc/index.html", "emergency-plumber-greenwood-sc/index.html",
 }
 LAKE_AREA_LINKS = ('<a href="/service-areas/iva-lake-secession-sc/">📍 Iva &amp; Lake Secession, SC</a>' '<a href="/service-areas/savannah-lakes-village-sc/">📍 Savannah Lakes Village, SC</a>')

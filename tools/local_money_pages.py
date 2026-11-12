@@ -430,18 +430,356 @@ MONEY_PAGES = {
             ("💰", "Upfront Pricing", "/pricing/", "Current service-call schedule and planning ranges."),
         ],
     },
+    "emergency-plumber-anderson-sc": {
+        "title": "Emergency Plumber Anderson SC | Plumbing Paramedic 911",
+        "description": "24/7 emergency plumber for Anderson SC: burst pipes, polybutylene failures, sewer backups, leaking water heaters and no-water calls. Upfront dispatch pricing. Call (864) 446-8911.",
+        "h1": "Emergency Plumber in Anderson, SC",
+        "badge": "\u25cf 24/7 Emergency Dispatch to Anderson County",
+        "city": "Anderson",
+        "area_type": "City",
+        "service_type": "Emergency Plumbing",
+        "parent_service": "/services/24-7-emergency-plumbing/",
+        "parent_service_name": "24/7 Emergency Plumbing",
+        "city_page": "/service-areas/anderson-sc/",
+        "city_page_name": "Anderson, SC",
+        "guide": "/guides/sc-homeowner-plumbing-survival-guide/",
+        "guide_name": "SC Homeowner Plumbing Survival Guide",
+        "og": "/images/og/emergency-plumbing-1200x630.jpg",
+        "intro": "Plumbing Paramedic 911 dispatches to Anderson 24 hours a day, every day of the year. Typical response is about 60 minutes when a technician is available. The service / diagnostic call is $79 weekdays 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays \u2014 with no distance or per-mile surcharge for Anderson.",
+        "answer": "If water is actively damaging the home, close the fixture shutoff or the main water valve if you can reach it safely, then call. If sewage is backing up, stop using every toilet, sink, shower and appliance until the blockage is controlled \u2014 each additional flush pushes more sewage inside. If you smell gas, leave the building first and call the gas utility or 911 from outside before arranging plumbing repair.",
+        "local_context": """
+<p>Anderson is the largest city we serve, and the emergencies here follow the housing stock. In 1980s subdivisions we see polybutylene supply lines fail without warning \u2014 the gray plastic pipe was installed widely across the South and a lot of it is now past its service life. Those failures tend to be sudden, full-pressure leaks rather than slow drips, which is exactly the call that cannot wait for a scheduled appointment.</p>
+<p>In the mid-century parts of Anderson, the emergency is more often a sewer backup out of a corroded cast-iron drain stack. In both cases the first job is the same: stop the damage, then diagnose the permanent repair. We will isolate and stabilize a property at 2 AM and schedule the full replacement in daylight when that is the safer and cheaper sequence for the homeowner.</p>
+""",
+        "symptoms": [
+            "Burst or actively spraying supply line, including gray polybutylene pipe",
+            "Water coming through a ceiling, wall or light fixture",
+            "Sewage backing up into toilets, tubs or a floor drain",
+            "Water heater leaking onto a floor, into a closet or into a crawlspace",
+            "Whole house suddenly has no water or no pressure",
+            "Main shutoff valve will not close while a leak is running",
+        ],
+        "checks": [
+            "Control the active leak or sewage exposure before secondary damage spreads",
+            "Identify whether the source is supply, drain/sewer, water heater, fixture or well system",
+            "Isolate the failed section so the rest of the house can be put back in service",
+            "Check for additional failures that appear once pressure is restored \u2014 common on aging polybutylene",
+            "Explain temporary stabilization vs permanent repair when a full replacement cannot be finished that night",
+            "Give the repair price before moving from emergency stabilization into additional work",
+        ],
+        "price_drivers": [
+            "Time of dispatch: weekday, after hours/weekend, or after midnight/holiday",
+            "Whether the failure can be isolated quickly or must be repaired on the spot to stop damage",
+            "Access to the failed pipe \u2014 open crawlspace, finished ceiling, slab or buried line",
+            "Pipe material: a polybutylene failure often means the surrounding line is also due",
+            "Whether follow-up work (repipe, drain replacement, water extraction) is needed afterward",
+        ],
+        "faqs": [
+            ("How fast can an emergency plumber get to Anderson, SC?", "Our published typical response for Anderson is about 60 minutes from the Abbeville shop when a technician is available. Active calls, weather and traffic change that, so call for the current ETA rather than assuming."),
+            ("Do you charge extra to drive to Anderson?", "No. There is no distance or per-mile surcharge for Anderson. The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays \u2014 the same schedule we charge in Abbeville."),
+            ("My gray plastic water line burst. Can you fix it tonight?", "Usually yes, at least to stop the damage. Polybutylene is repairable in the short term, but a failure in one spot often means the rest of the line is near the end of its life. We stabilize the emergency first and then give you a written price for a permanent repair or repipe."),
+            ("Is a sewer backup an emergency?", "Yes, when sewage is entering living space or several fixtures are backing up together. Stop running water and call. Every flush after that point adds to the cleanup."),
+            ("What should I do while a pipe is leaking?", "Shut off the main water valve if you can reach it safely, open a low faucet to relieve pressure, and move belongings clear of the water. Stay away from panels, outlets and anything energized near standing water."),
+            ("Do you answer the phone at night in Anderson?", "Yes. Dispatch is staffed 24/7, including nights, weekends and holidays. The after-midnight and holiday service-call rate is posted on this page before you book."),
+        ],
+        "related": [
+            ("\U0001f6a8", "24/7 Emergency Plumbing", "/services/24-7-emergency-plumbing/", "How emergency dispatch works across the service area."),
+            ("\U0001f4cd", "Anderson Plumbing", "/service-areas/anderson-sc/", "Every Plumbing Paramedic 911 service in Anderson."),
+            ("\U0001f4b0", "Anderson Plumbing Prices", "/plumbing-prices-anderson-sc/", "Real flat-rate prices for common Anderson jobs."),
+            ("\U0001f4d9", "Homeowner Survival Guide", "/guides/sc-homeowner-plumbing-survival-guide/", "Find your shutoffs before you need them."),
+        ],
+    },
+    "drain-cleaning-anderson-sc": {
+        "title": "Drain Cleaning Anderson SC | Plumbing Paramedic 911",
+        "description": "Drain cleaning in Anderson SC for kitchen, bath and main-line backups. Cable, hydro jetting and camera inspection on cast-iron and PVC drains. Upfront pricing. Call (864) 446-8911.",
+        "h1": "Drain Cleaning in Anderson, SC",
+        "badge": "\u25cf Clogs, Recurring Backups & Cast-Iron Drains",
+        "city": "Anderson",
+        "area_type": "City",
+        "service_type": "Drain Cleaning",
+        "parent_service": "/services/drain-cleaning/",
+        "parent_service_name": "Drain Cleaning",
+        "city_page": "/service-areas/anderson-sc/",
+        "city_page_name": "Anderson, SC",
+        "guide": "/guides/drain-maintenance-playbook/",
+        "guide_name": "Drain Maintenance Playbook",
+        "og": "/images/og/drain-cleaning-1200x630.jpg",
+        "intro": "A slow bathroom sink and a whole-house sewer backup are not the same job and should not carry the same price. In Anderson we identify whether the blockage is at one fixture, in a branch line, in the building sewer, or inside a corroded cast-iron stack \u2014 then use the least destructive method that actually fixes it. Clearing a clog in Anderson starts at $225 for a toilet auger and $245 for a sink, tub or shower line.",
+        "answer": "If more than one drain in an Anderson home is backing up at the same time, stop running water and have the main line checked before anything else. Water rising in a tub or shower when a toilet flushes is a main-line symptom, not a fixture problem. A single slow drain with everything else running normally is usually a local trap or branch clog.",
+        "local_context": """
+<p>A large share of Anderson's housing was built mid-century with cast-iron drain stacks, and that changes the job. The inside of an old cast-iron pipe scales and corrodes until the usable diameter is a fraction of what the pipe size suggests. The symptom is a clog that keeps coming back a few weeks after it was cleared, usually at the same fixture.</p>
+<p>Cabling that line opens a channel through the blockage. Hydro jetting scours the pipe wall and buys considerably more time. Neither one restores a pipe that has lost its structure \u2014 when the camera shows that, we say so and price the replacement instead of selling the same clog back to you twice a year.</p>
+<p>Newer Anderson subdivisions are a different problem set: PVC drains that fail at a belly, a settled joint or tree roots at the property line rather than from internal corrosion.</p>
+""",
+        "symptoms": [
+            "Several fixtures slow down or back up at the same time",
+            "Water rises in a tub or shower when a toilet is flushed",
+            "The same drain clogs again a few weeks after being cleared",
+            "Gurgling toilets or sewer odor inside the house",
+            "Floor drain or cleanout overflows when the washer discharges",
+            "Kitchen line that never fully drains even when it is not blocked",
+        ],
+        "checks": [
+            "Determine whether the blockage is fixture-level, branch-line or main sewer",
+            "Locate and open a usable cleanout before running any equipment",
+            "Match the cable and head to the pipe material, size and type of blockage",
+            "Camera the line when a clog is recurring, so the cause is identified rather than guessed",
+            "Check for internal scale and loss of diameter in older cast-iron stacks",
+            "Use hydro jetting where grease, heavy scale or root debris means the pipe wall needs cleaning",
+        ],
+        "price_drivers": [
+            "Single fixture vs branch drain vs main sewer line",
+            "Whether a usable cleanout exists, and the distance to the blockage",
+            "Pipe material and condition \u2014 scaled cast iron takes longer than clean PVC",
+            "Whether camera inspection is needed to explain a repeating problem",
+            "Grease, roots or structural damage that cabling alone will not resolve",
+        ],
+        "faqs": [
+            ("How much does drain cleaning cost in Anderson, SC?", "Clearing a toilet with a hand auger is $225 and a sink, tub or shower line is $245. A difficult sink or lavatory arm is $289, electric hydro jetting of a branch or main drain is $325, and a video camera inspection of the drain line is $395. The service / diagnostic call is separate: $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, $158 after midnight or on holidays. Main sewer work is priced separately \u2014 see our Anderson price list."),
+            ("How do I know if my main sewer line is clogged?", "Several fixtures backing up together, water rising in a tub when a toilet flushes, gurgling toilets, and sewage appearing at a floor drain or cleanout all point at the main line. Stop using water until it is checked."),
+            ("Why does my drain keep clogging in the same place?", "In older Anderson homes that is usually internal scale in a cast-iron stack: the pipe's usable diameter has shrunk, so it re-blocks quickly. A camera inspection shows whether jetting will buy real time or whether the section needs replacing."),
+            ("Do you use a sewer camera?", "Yes. Drain line inspection with a video camera is $395, and a full sewer line inspection is $495. We recommend it for recurring clogs, because a cable cannot tell you about roots, a belly, a broken joint or lost pipe structure."),
+            ("Is hydro jetting better than snaking?", "Not always. A cable is often the faster and cheaper tool for a straightforward blockage. Jetting earns its price where grease, heavy scale or root debris means the pipe wall itself has to be cleaned."),
+            ("Can you clear a drain the same day in Anderson?", "Usually yes. Drain calls are typically same-day, and we dispatch to Anderson 24/7 when a backup cannot wait."),
+        ],
+        "related": [
+            ("\U0001f6bf", "Full Drain Cleaning Service", "/services/drain-cleaning/", "Cabling, main-line clearing, camera inspection and hydro jetting."),
+            ("\U0001f4cd", "Anderson Plumbing", "/service-areas/anderson-sc/", "Every Plumbing Paramedic 911 service in Anderson."),
+            ("\U0001f4b0", "Anderson Plumbing Prices", "/plumbing-prices-anderson-sc/", "Flat-rate prices for drains, heaters, toilets and well pumps."),
+            ("\U0001f4d7", "Drain Maintenance Playbook", "/guides/drain-maintenance-playbook/", "How to stop paying for the same clog twice."),
+        ],
+    },
+    "plumbing-prices-greenwood-sc": {
+        "title": "Plumbing Prices Greenwood SC | Plumbing Paramedic 911",
+        "description": "Real flat-rate plumbing prices for Greenwood SC: drain cleaning from $225, water heater installs from $1,800, well tanks from $795. Service call $79 weekdays. Call (864) 446-8911.",
+        "h1": "Plumbing Prices in Greenwood, SC",
+        "badge": "\u25cf Published Flat-Rate Prices \u2014 Not Estimates",
+        "city": "Greenwood",
+        "area_type": "City",
+        "service_type": "Plumbing",
+        "parent_service": "/pricing/",
+        "parent_service_name": "Pricing",
+        "city_page": "/service-areas/greenwood-sc/",
+        "city_page_name": "Greenwood, SC",
+        "guide": "/guides/water-heater-buyers-guide-sc/",
+        "guide_name": "Water Heater Buyer\u2019s Guide",
+        "og": "/images/og/greenwood-1200x630.jpg",
+        "intro": "These are the actual flat-rate prices from our Greenwood price book \u2014 the same numbers the technician quotes at your door, not a range we work out later. The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair prices below are for the work itself and are approved by you in writing before anything starts.",
+        "answer": "In Greenwood, clearing a sink, tub or shower drain is $245 and a toilet auger is $225. A 40-gallon electric water heater installed is $1,800 and a 50-gallon is $2,065. Replacing a well tank pressure switch is $165 and a 22-gallon well tank is $795. Each price is flat-rate for the job under normal access conditions, and the service / diagnostic call is charged separately at $79 weekdays, $99 after hours and weekends, or $158 after midnight and on holidays.",
+        "local_context": """
+<p>Greenwood\u2019s municipal water is moderately hard, and that shows up in which prices on this page a Greenwood homeowner actually ends up paying. Scale shortens element and tank life, so thermostat and element replacements and full heater swaps are our most common Greenwood invoices by a wide margin. If you are replacing a heater for the second time in eight years, the price to look at is not on this page \u2014 it is the cost of treating the water feeding it.</p>
+<p>Out toward Lake Greenwood and on rural Greenwood County properties, the well-pump prices matter more than the municipal ones. A pressure switch is a $165 job; a pressure tank is $795 to $895. Knowing which one failed before anyone opens a wallet is the entire point of diagnosing the system rather than replacing the pump by default.</p>
+<p>There is no distance charge to Greenwood. These are the same prices we charge in Abbeville.</p>
+""",
+        "symptoms": [
+            "You want a number before you book, not after",
+            "Another company quoted hourly and you want to compare like for like",
+            "You are deciding between repairing and replacing a water heater",
+            "You are budgeting a job that is not an emergency",
+            "You want to know what the VIP Diamond Plan actually saves",
+            "You were told \u201cit depends\u201d and never got a figure",
+        ],
+        "checks": [
+            "Flat-rate means the price is the price for that job, not an hourly meter",
+            "The service / diagnostic call is separate and is posted before you book",
+            "Prices assume normal access \u2014 we say so up front when a job does not qualify",
+            "You approve the written price before any work begins",
+            "If we find a second problem, it gets its own price before we touch it",
+            "VIP Diamond Plan members pay the member column on covered repairs",
+        ],
+        "price_drivers": [
+            "Access \u2014 an open crawlspace prices differently than a finished ceiling or a slab",
+            "Pipe and fixture material and condition once the job is opened up",
+            "Code-required upgrades triggered by replacing an old appliance",
+            "Equipment you supply versus equipment we supply and warranty",
+            "Time of dispatch, which sets the service-call charge only, not the repair price",
+        ],
+        "faqs": [
+            ("How much does a plumber charge in Greenwood, SC?", "The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair work is flat-rate on top of that: clearing a drain is $225\u2013$325, a 40-gallon electric water heater installed is $1,800, and a well tank pressure switch is $165. Full prices are listed on this page."),
+            ("Do you charge by the hour?", "No. Every repair on this page is flat-rate, so the price does not change if the job takes longer than expected. The only hourly item in our book is extended gas hydro jetting of a main drain, which is priced in blocks and quoted before it starts."),
+            ("How much is a water heater in Greenwood?", "Installed, with a 6-year warranty: a 40-gallon electric is $1,800, a 50-gallon electric is $2,065, a 40-gallon natural gas is $1,945, and a 50-gallon natural gas is $2,095. A condensing high-efficiency tankless is $4,495. If the existing heater is still under manufacturer warranty, replacing a 30\u201350 gallon electric is $995."),
+            ("Is the service call charged on top of the repair price?", "Yes. The service / diagnostic call covers the trip and the diagnosis. The repair price listed here is for the work itself. We tell you both numbers before anything is done."),
+            ("What does the VIP Diamond Plan save me?", "Members pay the member column \u2014 15% off covered repairs. On a $2,065 water heater that is $310 off; on a $245 drain clearing it is $37. The plan also includes an annual whole-home plumbing inspection. Discounts apply to covered work and cannot be combined with another promotion on the same service."),
+            ("Will the price change once you are here?", "Not for the job quoted. The price changes only if the scope changes \u2014 different access, a failed part we could not see, or a code-required upgrade. If that happens we stop, explain it, and give you a new written price before continuing."),
+            ("Do you charge extra to come to Greenwood?", "No. There is no mileage or distance surcharge. Greenwood pays the same service-call rate and the same flat repair prices as Abbeville."),
+        ],
+        "related": [
+            ("\U0001f4b0", "Price Estimator", "/pricing/", "Build a planning estimate for your own job."),
+            ("\U0001f4cd", "Greenwood Plumbing", "/service-areas/greenwood-sc/", "Every Plumbing Paramedic 911 service in Greenwood."),
+            ("\U0001f48e", "VIP Diamond Plan", "/membership/", "What the member column costs and covers."),
+            ("\U0001f4b3", "Financing", "/financing/", "In-house financing on larger jobs."),
+        ],
+        "price_table": [
+            ("Drain cleaning and sewer", [
+                ("Clear a toilet with a hand auger", 225, 191),
+                ("Clear a sink, lavatory, tub or shower line with a hand snake", 245, 208),
+                ("Clear a difficult sink or lavatory arm", 289, 246),
+                ("Clear a branch or main drain with the electric hydro jet", 325, 276),
+                ("Drain line inspection with a video camera", 395, 336),
+                ("Clear a sewer drain up to 25 ft with the J-cable", 485, 412),
+                ("Video inspect the sewer line with a camera", 495, 421),
+                ("Clear the main sewer line with the hydro jet, up to 100 ft", 595, 506),
+                ("Clear a main drain with the gas hydro jet, up to 1.5 hours", 695, 591),
+            ]),
+            ("Water heaters", [
+                ("Replace a single thermostat", 165, 140),
+                ("Replace both upper and lower thermostats", 245, 208),
+                ("Replace the T&amp;P safety valve", 225, 191),
+                ("Replace a single heating element, up to 4500W", 285, 242),
+                ("Flush and refill the heater and replace the drain valve", 285, 242),
+                ("Replace the expansion tank", 295, 251),
+                ("Replace an electric heater still under warranty, 30\u201350 gal", 995, 846),
+                ("40-gallon electric heater installed, 6-year warranty", 1800, 1530),
+                ("40-gallon natural gas heater installed, 6-year warranty", 1945, 1653),
+                ("50-gallon electric heater installed, 6-year warranty", 2065, 1755),
+                ("50-gallon natural gas heater installed, 6-year warranty", 2095, 1781),
+                ("Condensing high-efficiency tankless heater installed", 4495, 3821),
+            ]),
+            ("Toilets, faucets and disposals", [
+                ("Replace a toilet supply connector", 115, 98),
+                ("Replace a toilet shut-off valve", 135, 115),
+                ("Rebuild a toilet tank \u2014 flapper and fill valve", 245, 208),
+                ("Remove, reset and seal a toilet", 245, 208),
+                ("Replace a garbage disposal you supply", 285, 242),
+                ("Install a toilet you supply, with materials", 425, 361),
+                ("Install a new 1/2 HP garbage disposal, parts included", 485, 412),
+                ("Install an elongated toilet, 10\u201312 inch rough", 495, 421),
+                ("Install a new 3/4 HP garbage disposal, parts included", 595, 506),
+            ]),
+            ("Well pumps and pressure tanks", [
+                ("Replace the well tank pressure switch", 165, 140),
+                ("Prime a jet pump", 195, 166),
+                ("Replace the pressure switch and gauge", 195, 166),
+                ("Replace the pressure switch, gauge and nipple", 245, 208),
+                ("Replace a 1/2 HP 2-wire well motor, pump under warranty", 495, 421),
+                ("Replace a submersible well pump you supply", 795, 676),
+                ("Replace a 22-gallon well tank", 795, 676),
+                ("Replace a 35-gallon well tank", 895, 761),
+            ]),
+        ],
+    },
+    "plumbing-prices-anderson-sc": {
+        "title": "Plumbing Prices Anderson SC | Plumbing Paramedic 911",
+        "description": "Real flat-rate plumbing prices for Anderson SC: drain cleaning from $225, camera inspection $395, water heater installs from $1,800. Service call $79 weekdays. Call (864) 446-8911.",
+        "h1": "Plumbing Prices in Anderson, SC",
+        "badge": "\u25cf Published Flat-Rate Prices \u2014 Not Estimates",
+        "city": "Anderson",
+        "area_type": "City",
+        "service_type": "Plumbing",
+        "parent_service": "/pricing/",
+        "parent_service_name": "Pricing",
+        "city_page": "/service-areas/anderson-sc/",
+        "city_page_name": "Anderson, SC",
+        "guide": "/guides/drain-maintenance-playbook/",
+        "guide_name": "Drain Maintenance Playbook",
+        "og": "/images/og/anderson-1200x630.jpg",
+        "intro": "These are the actual flat-rate prices from our Anderson price book \u2014 the same numbers the technician quotes at your door, not a range we work out later. The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays, with no distance charge for Anderson. Repair prices below are for the work itself and are approved by you in writing before anything starts.",
+        "answer": "In Anderson, clearing a toilet with an auger is $225 and clearing a sink, tub or shower line is $245. A video camera inspection of a drain line is $395 and a full sewer line inspection is $495. A 40-gallon electric water heater installed is $1,800 and a 50-gallon is $2,065. Each price is flat-rate for the job under normal access conditions, and the service / diagnostic call is charged separately at $79 weekdays, $99 after hours and weekends, or $158 after midnight and on holidays.",
+        "local_context": """
+<p>Which of these prices an Anderson homeowner actually pays depends mostly on when the house was built. In the mid-century parts of town with original cast-iron drain stacks, the recurring expense is drain work \u2014 and the $395 camera inspection is usually the cheapest line on this page, because it answers whether $325 of jetting buys you three years or three weeks.</p>
+<p>In the 1980s subdivisions, the call is more often a polybutylene supply failure. That is quoted as a repair rather than from a fixed list, because the honest answer depends on how much of the line is left and whether a repipe makes more sense than another patch. We give that price in writing before we start, same as everything else here.</p>
+<p>On rural Anderson County properties and out toward Iva, Honea Path, Belton and Pendleton, the well-pump prices below are the ones that matter. There is no distance charge to any of it \u2014 Anderson pays the same rates as Abbeville.</p>
+""",
+        "symptoms": [
+            "You want a number before you book, not after",
+            "A drain keeps clogging and you want to know what the camera costs",
+            "You are deciding between repairing and replacing a water heater",
+            "You are comparing a flat-rate quote against an hourly one",
+            "You want to know what the VIP Diamond Plan actually saves",
+            "You were told \u201cit depends\u201d and never got a figure",
+        ],
+        "checks": [
+            "Flat-rate means the price is the price for that job, not an hourly meter",
+            "The service / diagnostic call is separate and is posted before you book",
+            "Prices assume normal access \u2014 we say so up front when a job does not qualify",
+            "You approve the written price before any work begins",
+            "If we find a second problem, it gets its own price before we touch it",
+            "VIP Diamond Plan members pay the member column on covered repairs",
+        ],
+        "price_drivers": [
+            "Access \u2014 an open crawlspace prices differently than a finished ceiling or a slab",
+            "Drain pipe material and internal condition, which decides cable vs jetting vs replacement",
+            "Code-required upgrades triggered by replacing an old appliance",
+            "Equipment you supply versus equipment we supply and warranty",
+            "Time of dispatch, which sets the service-call charge only, not the repair price",
+        ],
+        "faqs": [
+            ("How much does a plumber charge in Anderson, SC?", "The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair work is flat-rate on top of that: clearing a drain is $225\u2013$325, a drain camera inspection is $395, and a 40-gallon electric water heater installed is $1,800. Full prices are listed on this page."),
+            ("How much is drain cleaning in Anderson?", "A toilet auger is $225. A sink, lavatory, tub or shower line is $245, or $289 for a difficult lavatory arm. Electric hydro jetting of a branch or main drain is $325. Clearing the main sewer line with the hydro jet up to 100 feet is $595."),
+            ("What does a sewer camera inspection cost in Anderson?", "A drain line inspection with a video camera is $395. A full sewer line video inspection is $495. On a drain that has clogged more than once, that is usually the cheapest money you can spend, because it shows whether the pipe can be cleaned or needs replacing."),
+            ("Do you charge by the hour?", "No. Every repair on this page is flat-rate, so the price does not change if the job runs long. The only hourly item in our book is extended gas hydro jetting of a main drain, which is priced in blocks and quoted before it starts."),
+            ("Do you charge extra to drive to Anderson?", "No. There is no mileage or distance surcharge for Anderson. Same service-call rate, same flat repair prices as Abbeville."),
+            ("What does the VIP Diamond Plan save me?", "Members pay the member column \u2014 15% off covered repairs. On a $2,065 water heater that is $310 off; on a $395 camera inspection it is $59. The plan also includes an annual whole-home plumbing inspection. Discounts apply to covered work and cannot be combined with another promotion on the same service."),
+            ("Will the price change once you are here?", "Not for the job quoted. It changes only if the scope changes \u2014 different access, a failed part we could not see, or a code-required upgrade. If that happens we stop, explain it, and give you a new written price before continuing."),
+        ],
+        "related": [
+            ("\U0001f4b0", "Price Estimator", "/pricing/", "Build a planning estimate for your own job."),
+            ("\U0001f4cd", "Anderson Plumbing", "/service-areas/anderson-sc/", "Every Plumbing Paramedic 911 service in Anderson."),
+            ("\U0001f6bf", "Drain Cleaning Anderson", "/drain-cleaning-anderson-sc/", "What we do about a clog that keeps coming back."),
+            ("\U0001f48e", "VIP Diamond Plan", "/membership/", "What the member column costs and covers."),
+        ],
+        "price_table": [
+            ("Drain cleaning and sewer", [
+                ("Clear a toilet with a hand auger", 225, 191),
+                ("Clear a sink, lavatory, tub or shower line with a hand snake", 245, 208),
+                ("Clear a difficult sink or lavatory arm", 289, 246),
+                ("Clear a branch or main drain with the electric hydro jet", 325, 276),
+                ("Drain line inspection with a video camera", 395, 336),
+                ("Clear a sewer drain up to 25 ft with the J-cable", 485, 412),
+                ("Video inspect the sewer line with a camera", 495, 421),
+                ("Clear the main sewer line with the hydro jet, up to 100 ft", 595, 506),
+                ("Clear a main drain with the gas hydro jet, up to 1.5 hours", 695, 591),
+            ]),
+            ("Water heaters", [
+                ("Replace a single thermostat", 165, 140),
+                ("Replace both upper and lower thermostats", 245, 208),
+                ("Replace the T&amp;P safety valve", 225, 191),
+                ("Replace a single heating element, up to 4500W", 285, 242),
+                ("Flush and refill the heater and replace the drain valve", 285, 242),
+                ("Replace the expansion tank", 295, 251),
+                ("Replace an electric heater still under warranty, 30\u201350 gal", 995, 846),
+                ("40-gallon electric heater installed, 6-year warranty", 1800, 1530),
+                ("40-gallon natural gas heater installed, 6-year warranty", 1945, 1653),
+                ("50-gallon electric heater installed, 6-year warranty", 2065, 1755),
+                ("50-gallon natural gas heater installed, 6-year warranty", 2095, 1781),
+                ("Condensing high-efficiency tankless heater installed", 4495, 3821),
+            ]),
+            ("Toilets, faucets and disposals", [
+                ("Replace a toilet supply connector", 115, 98),
+                ("Replace a toilet shut-off valve", 135, 115),
+                ("Rebuild a toilet tank \u2014 flapper and fill valve", 245, 208),
+                ("Remove, reset and seal a toilet", 245, 208),
+                ("Replace a garbage disposal you supply", 285, 242),
+                ("Install a toilet you supply, with materials", 425, 361),
+                ("Install a new 1/2 HP garbage disposal, parts included", 485, 412),
+                ("Install an elongated toilet, 10\u201312 inch rough", 495, 421),
+                ("Install a new 3/4 HP garbage disposal, parts included", 595, 506),
+            ]),
+            ("Well pumps and pressure tanks", [
+                ("Replace the well tank pressure switch", 165, 140),
+                ("Prime a jet pump", 195, 166),
+                ("Replace the pressure switch and gauge", 195, 166),
+                ("Replace the pressure switch, gauge and nipple", 245, 208),
+                ("Replace a 1/2 HP 2-wire well motor, pump under warranty", 495, 421),
+                ("Replace a submersible well pump you supply", 795, 676),
+                ("Replace a 22-gallon well tank", 795, 676),
+                ("Replace a 35-gallon well tank", 895, 761),
+            ]),
+        ],
+    },
 }
 
 LINK_TARGETS = {
     "services/well-pump-repair/index.html": ["well-pump-repair-mccormick-sc", "well-pump-repair-iva-lake-secession-sc"],
-    "services/drain-cleaning/index.html": ["drain-cleaning-abbeville-sc", "drain-cleaning-greenwood-sc"],
+    "services/drain-cleaning/index.html": ["drain-cleaning-abbeville-sc", "drain-cleaning-greenwood-sc", "drain-cleaning-anderson-sc"],
     "services/water-heater-repair-replacement/index.html": ["water-heater-repair-abbeville-sc", "water-heater-repair-greenwood-sc", "water-heater-repair-anderson-sc"],
-    "services/24-7-emergency-plumbing/index.html": ["emergency-plumber-abbeville-sc"],
+    "services/24-7-emergency-plumbing/index.html": ["emergency-plumber-abbeville-sc", "emergency-plumber-anderson-sc"],
     "service-areas/mccormick-sc/index.html": ["well-pump-repair-mccormick-sc"],
     "service-areas/iva-lake-secession-sc/index.html": ["well-pump-repair-iva-lake-secession-sc"],
-    "service-areas/greenwood-sc/index.html": ["drain-cleaning-greenwood-sc", "water-heater-repair-greenwood-sc"],
-    "service-areas/anderson-sc/index.html": ["water-heater-repair-anderson-sc"],
+    "service-areas/greenwood-sc/index.html": ["drain-cleaning-greenwood-sc", "water-heater-repair-greenwood-sc", "plumbing-prices-greenwood-sc"],
+    "service-areas/anderson-sc/index.html": ["water-heater-repair-anderson-sc", "emergency-plumber-anderson-sc", "drain-cleaning-anderson-sc", "plumbing-prices-anderson-sc"],
     "service-areas/abbeville-sc/index.html": ["emergency-plumber-abbeville-sc", "drain-cleaning-abbeville-sc", "water-heater-repair-abbeville-sc", "sewer-line-repair-abbeville-sc"],
+    "pricing/index.html": ["plumbing-prices-greenwood-sc", "plumbing-prices-anderson-sc"],
     "services/index.html": list(MONEY_PAGES.keys()),
 }
 
@@ -458,6 +796,59 @@ def related_cards(items: list[tuple[str, str, str, str]]) -> str:
             f'<h3>{name}</h3><p>{description}</p><span class="arrow">Open →</span></a>'
         )
     return "\n".join(cards)
+
+
+def money(value: int) -> str:
+    return f"${value:,}"
+
+
+def price_table_html(groups: list[tuple[str, list[tuple[str, int, int]]]]) -> str:
+    """Render the published flat-rate prices.
+
+    The visible table and the Offer schema below are built from the same rows,
+    so an answer engine can never quote a number the customer does not see.
+    """
+    blocks = []
+    for title, rows in groups:
+        body = "\n".join(
+            f'<tr><td class="job-cell">{job}</td>'
+            f'<td class="price-cell" data-label="Flat rate">{money(standard)}</td>'
+            f'<td class="price-cell" data-label="Member">{money(member)}</td></tr>'
+            for job, standard, member in rows
+        )
+        blocks.append(
+            f'<h3 style="margin:28px 0 10px">{title}</h3>'
+            f'<div class="table-wrap"><table class="price-table">'
+            f'<thead><tr><th scope="col">Job</th><th scope="col">Flat-rate price</th>'
+            f'<th scope="col">VIP Diamond member</th></tr></thead>'
+            f'<tbody>{body}</tbody></table></div>'
+        )
+    return "\n".join(blocks)
+
+
+def offer_catalog(p: dict, service_id: str) -> dict:
+    offers = []
+    for title, rows in p["price_table"]:
+        for job, standard, _member in rows:
+            offers.append({
+                "@type": "Offer",
+                "itemOffered": {"@type": "Service", "name": job, "category": title},
+                "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": str(standard),
+                    "priceCurrency": "USD",
+                    "valueAddedTaxIncluded": False,
+                },
+                "areaServed": {"@type": p["area_type"], "name": p["city"] + ", South Carolina"},
+                "availability": "https://schema.org/InStock",
+                "seller": {"@id": BASE_URL + "/#localbusiness"},
+            })
+    return {
+        "@type": "OfferCatalog",
+        "@id": service_id.replace("#service", "#prices"),
+        "name": f"Flat-rate plumbing prices in {p['city']}, SC",
+        "itemListElement": offers,
+    }
 
 
 def render_page(build, slug: str, p: dict) -> str:
@@ -492,6 +883,7 @@ def render_page(build, slug: str, p: dict) -> str:
             "description": p["description"],
             "provider": {"@id": BASE_URL + "/#localbusiness"},
             "areaServed": {"@type": p["area_type"], "name": p["city"] + ", South Carolina"},
+            **({"hasOfferCatalog": offer_catalog(p, service_id)} if p.get("price_table") else {}),
         },
         build.breadcrumb_ld(breadcrumb_items),
         build.faq_ld(p["faqs"]),
@@ -501,6 +893,20 @@ def render_page(build, slug: str, p: dict) -> str:
         body_page=f"local-service-{slug}",
     )
     nav = build.nav("services")
+    price_block = ""
+    if p.get("price_table"):
+        price_block = (
+            '<h2 style="margin-top:40px">Published flat-rate repair prices</h2>'
+            f'<p class="lead">Prices below are for the work itself, under normal access conditions, '
+            f'and are separate from the service / diagnostic call above. '
+            f'You approve the written price before any work begins.</p>'
+            + price_table_html(p["price_table"])
+            + '<p style="font-size:.88rem;color:var(--ink3);margin-top:16px">'
+            'VIP Diamond Plan members pay the member column on covered repairs. '
+            'If access, code-required upgrades, equipment, materials or hidden conditions change the job, '
+            'we stop, explain the difference and get your approval before going further. '
+            'Work not listed here is quoted the same way: in writing, before it starts.</p>'
+        )
     body = f"""\
 <main>
   <section class="page-header">
@@ -568,6 +974,7 @@ def render_page(build, slug: str, p: dict) -> str:
       <h2>Know the service-call charge before you book.</h2>
       <p class="lead">The dispatch / diagnostic schedule is posted here so you are not guessing before the technician arrives.</p>
       {SERVICE_CALL_HTML}
+      {price_block}
       <div style="margin-top:20px"><a href="/pricing/" class="btn btn-blue">Open the Plumbing Price Estimator →</a></div>
     </div>
   </section>
