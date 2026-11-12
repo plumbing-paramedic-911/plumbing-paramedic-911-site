@@ -8,6 +8,7 @@ and internal links into the service/city/guide graph.
 """
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -23,6 +24,26 @@ SERVICE_CALL_HTML = """\
 </div>
 <p style="font-size:.88rem;color:var(--ink3);margin-top:14px">Repair and replacement work is priced separately after diagnosis. If access, code-required upgrades, equipment, materials, or hidden conditions change the job, we explain the difference and get approval before proceeding.</p>
 """
+
+SNAPSHOT_FILE = ROOT / "tools" / "price_book_snapshot.json"
+
+
+def price_book_snapshot() -> list[tuple[str, list[tuple[str, int, int]]]]:
+    """The published price table, read from the recorded price-book snapshot.
+
+    Prices are never written out by hand here. tools/price_book_snapshot.json is
+    a dated copy of the price_book_items rows these pages publish, and
+    tools/test_published_prices.cjs checks the rendered pages back against it,
+    so a typo cannot reach a customer and the page cannot drift from the book.
+    """
+    data = json.loads(SNAPSHOT_FILE.read_text(encoding="utf-8"))
+    return [
+        (group["title"],
+         [(item["published_as"], item["standard_price"], item["standard_ot_price"])
+          for item in group["items"]])
+        for group in data["groups"]
+    ]
+
 
 MONEY_PAGES = {
     "well-pump-repair-mccormick-sc": {
@@ -612,54 +633,7 @@ MONEY_PAGES = {
             ("\U0001f48e", "VIP Diamond Plan", "/membership/", "What the member column costs and covers."),
             ("\U0001f4b3", "Financing", "/financing/", "In-house financing on larger jobs."),
         ],
-        "price_table": [
-            ("Drain cleaning and sewer", [
-                ("Clear a toilet with a hand auger", 225, 315),
-                ("Clear a sink, lavatory, tub or shower line with a hand snake", 245, 343),
-                ("Clear a difficult sink or lavatory arm", 289, 405),
-                ("Clear a branch or main drain with the electric hydro jet", 325, 455),
-                ("Drain line inspection with a video camera", 395, 553),
-                ("Clear a sewer drain up to 25 ft with the J-cable", 485, 679),
-                ("Video inspect the sewer line with a camera", 495, 693),
-                ("Clear the main sewer line with the hydro jet, up to 100 ft", 595, 833),
-                ("Clear a main drain with the gas hydro jet, up to 1.5 hours", 695, 973),
-            ]),
-            ("Water heaters", [
-                ("Replace a single thermostat", 165, 231),
-                ("Replace both upper and lower thermostats", 245, 343),
-                ("Replace the T&amp;P safety valve", 225, 315),
-                ("Replace a single heating element, up to 4500W", 285, 399),
-                ("Flush and refill the heater and replace the drain valve", 285, 399),
-                ("Replace the expansion tank", 295, 413),
-                ("Replace an electric heater still under warranty, 30\u201350 gal", 995, 1393),
-                ("40-gallon electric heater installed, 6-year warranty", 1800, 2520),
-                ("40-gallon natural gas heater installed, 6-year warranty", 1945, 2723),
-                ("50-gallon electric heater installed, 6-year warranty", 2065, 2891),
-                ("50-gallon natural gas heater installed, 6-year warranty", 2095, 2933),
-                ("Condensing high-efficiency tankless heater installed", 4495, 6293),
-            ]),
-            ("Toilets, faucets and disposals", [
-                ("Replace a toilet supply connector", 115, 161),
-                ("Replace a toilet shut-off valve", 135, 189),
-                ("Rebuild a toilet tank \u2014 flapper and fill valve", 245, 343),
-                ("Remove, reset and seal a toilet", 245, 343),
-                ("Replace a garbage disposal you supply", 285, 399),
-                ("Install a toilet you supply, with materials", 425, 595),
-                ("Install a new 1/2 HP garbage disposal, parts included", 485, 679),
-                ("Install an elongated toilet, 10\u201312 inch rough", 495, 693),
-                ("Install a new 3/4 HP garbage disposal, parts included", 595, 833),
-            ]),
-            ("Well pumps and pressure tanks", [
-                ("Replace the well tank pressure switch", 165, 231),
-                ("Prime a jet pump", 195, 273),
-                ("Replace the pressure switch and gauge", 195, 273),
-                ("Replace the pressure switch, gauge and nipple", 245, 343),
-                ("Replace a 1/2 HP 2-wire well motor, pump under warranty", 495, 693),
-                ("Replace a submersible well pump you supply", 795, 1113),
-                ("Replace a 22-gallon well tank", 795, 1113),
-                ("Replace a 35-gallon well tank", 895, 1253),
-            ]),
-        ],
+        "price_table": price_book_snapshot(),
     },
     "plumbing-prices-anderson-sc": {
         "title": "Plumbing Prices Anderson SC | Plumbing Paramedic 911",
@@ -723,54 +697,7 @@ MONEY_PAGES = {
             ("\U0001f6bf", "Drain Cleaning Anderson", "/drain-cleaning-anderson-sc/", "What we do about a clog that keeps coming back."),
             ("\U0001f48e", "VIP Diamond Plan", "/membership/", "What the member column costs and covers."),
         ],
-        "price_table": [
-            ("Drain cleaning and sewer", [
-                ("Clear a toilet with a hand auger", 225, 315),
-                ("Clear a sink, lavatory, tub or shower line with a hand snake", 245, 343),
-                ("Clear a difficult sink or lavatory arm", 289, 405),
-                ("Clear a branch or main drain with the electric hydro jet", 325, 455),
-                ("Drain line inspection with a video camera", 395, 553),
-                ("Clear a sewer drain up to 25 ft with the J-cable", 485, 679),
-                ("Video inspect the sewer line with a camera", 495, 693),
-                ("Clear the main sewer line with the hydro jet, up to 100 ft", 595, 833),
-                ("Clear a main drain with the gas hydro jet, up to 1.5 hours", 695, 973),
-            ]),
-            ("Water heaters", [
-                ("Replace a single thermostat", 165, 231),
-                ("Replace both upper and lower thermostats", 245, 343),
-                ("Replace the T&amp;P safety valve", 225, 315),
-                ("Replace a single heating element, up to 4500W", 285, 399),
-                ("Flush and refill the heater and replace the drain valve", 285, 399),
-                ("Replace the expansion tank", 295, 413),
-                ("Replace an electric heater still under warranty, 30\u201350 gal", 995, 1393),
-                ("40-gallon electric heater installed, 6-year warranty", 1800, 2520),
-                ("40-gallon natural gas heater installed, 6-year warranty", 1945, 2723),
-                ("50-gallon electric heater installed, 6-year warranty", 2065, 2891),
-                ("50-gallon natural gas heater installed, 6-year warranty", 2095, 2933),
-                ("Condensing high-efficiency tankless heater installed", 4495, 6293),
-            ]),
-            ("Toilets, faucets and disposals", [
-                ("Replace a toilet supply connector", 115, 161),
-                ("Replace a toilet shut-off valve", 135, 189),
-                ("Rebuild a toilet tank \u2014 flapper and fill valve", 245, 343),
-                ("Remove, reset and seal a toilet", 245, 343),
-                ("Replace a garbage disposal you supply", 285, 399),
-                ("Install a toilet you supply, with materials", 425, 595),
-                ("Install a new 1/2 HP garbage disposal, parts included", 485, 679),
-                ("Install an elongated toilet, 10\u201312 inch rough", 495, 693),
-                ("Install a new 3/4 HP garbage disposal, parts included", 595, 833),
-            ]),
-            ("Well pumps and pressure tanks", [
-                ("Replace the well tank pressure switch", 165, 231),
-                ("Prime a jet pump", 195, 273),
-                ("Replace the pressure switch and gauge", 195, 273),
-                ("Replace the pressure switch, gauge and nipple", 245, 343),
-                ("Replace a 1/2 HP 2-wire well motor, pump under warranty", 495, 693),
-                ("Replace a submersible well pump you supply", 795, 1113),
-                ("Replace a 22-gallon well tank", 795, 1113),
-                ("Replace a 35-gallon well tank", 895, 1253),
-            ]),
-        ],
+        "price_table": price_book_snapshot(),
     },
 }
 

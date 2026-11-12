@@ -1,0 +1,336 @@
+{
+  "_meta": {
+    "what": "Recorded copy of the price_book_items rows that the public city pricing pages publish.",
+    "why": "The pages and tools/test_published_prices.cjs both read this file, so a published price cannot be a transcription error and the regression test has an independent record to check against.",
+    "source": "Supabase project wuwgvtjktppjueiykcww, table price_book_items, active rows, columns standard_price / member_price / standard_ot_price / member_ot_price.",
+    "recorded_on": "2026-11-12",
+    "refresh": "Re-run the query for these SKUs when the price book changes, update this file, and let the test confirm the pages still agree.",
+    "note": "standard_ot_price is the book's own overtime column, stored in whole dollars. It is not recomputed here."
+  },
+  "groups": [
+    {
+      "title": "Drain cleaning and sewer",
+      "items": [
+        {
+          "sku": "01-16",
+          "published_as": "Clear a toilet with a hand auger",
+          "standard_price": 225,
+          "member_price": 191,
+          "standard_ot_price": 315,
+          "member_ot_price": 268
+        },
+        {
+          "sku": "01-15",
+          "published_as": "Clear a sink, lavatory, tub or shower line with a hand snake",
+          "standard_price": 245,
+          "member_price": 208,
+          "standard_ot_price": 343,
+          "member_ot_price": 292
+        },
+        {
+          "sku": "01-14",
+          "published_as": "Clear a difficult sink or lavatory arm",
+          "standard_price": 289,
+          "member_price": 246,
+          "standard_ot_price": 405,
+          "member_ot_price": 344
+        },
+        {
+          "sku": "01-10",
+          "published_as": "Clear a branch or main drain with the electric hydro jet",
+          "standard_price": 325,
+          "member_price": 276,
+          "standard_ot_price": 455,
+          "member_ot_price": 387
+        },
+        {
+          "sku": "01-22",
+          "published_as": "Drain line inspection with a video camera",
+          "standard_price": 395,
+          "member_price": 336,
+          "standard_ot_price": 553,
+          "member_ot_price": 470
+        },
+        {
+          "sku": "02-05",
+          "published_as": "Clear a sewer drain up to 25 ft with the J-cable",
+          "standard_price": 485,
+          "member_price": 412,
+          "standard_ot_price": 679,
+          "member_ot_price": 577
+        },
+        {
+          "sku": "02-11",
+          "published_as": "Video inspect the sewer line with a camera",
+          "standard_price": 495,
+          "member_price": 421,
+          "standard_ot_price": 693,
+          "member_ot_price": 589
+        },
+        {
+          "sku": "02-07",
+          "published_as": "Clear the main sewer line with the hydro jet, up to 100 ft",
+          "standard_price": 595,
+          "member_price": 506,
+          "standard_ot_price": 833,
+          "member_ot_price": 708
+        },
+        {
+          "sku": "01-04",
+          "published_as": "Clear a main drain with the gas hydro jet, up to 1.5 hours",
+          "standard_price": 695,
+          "member_price": 591,
+          "standard_ot_price": 973,
+          "member_ot_price": 827
+        }
+      ]
+    },
+    {
+      "title": "Water heaters",
+      "items": [
+        {
+          "sku": "23-03",
+          "published_as": "Replace a single thermostat",
+          "standard_price": 165,
+          "member_price": 140,
+          "standard_ot_price": 231,
+          "member_ot_price": 196
+        },
+        {
+          "sku": "23-37",
+          "published_as": "Replace the T&amp;P safety valve",
+          "standard_price": 225,
+          "member_price": 191,
+          "standard_ot_price": 315,
+          "member_ot_price": 268
+        },
+        {
+          "sku": "23-57",
+          "published_as": "Replace both upper and lower thermostats",
+          "standard_price": 245,
+          "member_price": 208,
+          "standard_ot_price": 343,
+          "member_ot_price": 292
+        },
+        {
+          "sku": "23-01",
+          "published_as": "Replace a single heating element, up to 4500W",
+          "standard_price": 285,
+          "member_price": 242,
+          "standard_ot_price": 399,
+          "member_ot_price": 339
+        },
+        {
+          "sku": "23-35",
+          "published_as": "Flush and refill the heater and replace the drain valve",
+          "standard_price": 285,
+          "member_price": 242,
+          "standard_ot_price": 399,
+          "member_ot_price": 339
+        },
+        {
+          "sku": "23-49",
+          "published_as": "Replace the expansion tank",
+          "standard_price": 295,
+          "member_price": 251,
+          "standard_ot_price": 413,
+          "member_ot_price": 351
+        },
+        {
+          "sku": "24-31",
+          "published_as": "Replace an electric heater still under warranty, 30–50 gal",
+          "standard_price": 995,
+          "member_price": 846,
+          "standard_ot_price": 1393,
+          "member_ot_price": 1184
+        },
+        {
+          "sku": "24-03",
+          "published_as": "40-gallon electric heater installed, 6-year warranty",
+          "standard_price": 1800,
+          "member_price": 1530,
+          "standard_ot_price": 2520,
+          "member_ot_price": 2142
+        },
+        {
+          "sku": "24-04",
+          "published_as": "40-gallon natural gas heater installed, 6-year warranty",
+          "standard_price": 1945,
+          "member_price": 1653,
+          "standard_ot_price": 2723,
+          "member_ot_price": 2315
+        },
+        {
+          "sku": "24-06",
+          "published_as": "50-gallon electric heater installed, 6-year warranty",
+          "standard_price": 2065,
+          "member_price": 1755,
+          "standard_ot_price": 2891,
+          "member_ot_price": 2457
+        },
+        {
+          "sku": "24-07",
+          "published_as": "50-gallon natural gas heater installed, 6-year warranty",
+          "standard_price": 2095,
+          "member_price": 1781,
+          "standard_ot_price": 2933,
+          "member_ot_price": 2493
+        },
+        {
+          "sku": "24-22",
+          "published_as": "Condensing high-efficiency tankless heater installed",
+          "standard_price": 4495,
+          "member_price": 3821,
+          "standard_ot_price": 6293,
+          "member_ot_price": 5349
+        }
+      ]
+    },
+    {
+      "title": "Toilets, faucets and disposals",
+      "items": [
+        {
+          "sku": "05-13",
+          "published_as": "Replace a toilet supply connector",
+          "standard_price": 115,
+          "member_price": 98,
+          "standard_ot_price": 161,
+          "member_ot_price": 137
+        },
+        {
+          "sku": "05-12",
+          "published_as": "Replace a toilet shut-off valve",
+          "standard_price": 135,
+          "member_price": 115,
+          "standard_ot_price": 189,
+          "member_ot_price": 161
+        },
+        {
+          "sku": "05-06",
+          "published_as": "Rebuild a toilet tank — flapper and fill valve",
+          "standard_price": 245,
+          "member_price": 208,
+          "standard_ot_price": 343,
+          "member_ot_price": 292
+        },
+        {
+          "sku": "05-01",
+          "published_as": "Remove, reset and seal a toilet",
+          "standard_price": 245,
+          "member_price": 208,
+          "standard_ot_price": 343,
+          "member_ot_price": 292
+        },
+        {
+          "sku": "03-04",
+          "published_as": "Replace a garbage disposal you supply",
+          "standard_price": 285,
+          "member_price": 242,
+          "standard_ot_price": 399,
+          "member_ot_price": 339
+        },
+        {
+          "sku": "06-24",
+          "published_as": "Install a toilet you supply, with materials",
+          "standard_price": 425,
+          "member_price": 361,
+          "standard_ot_price": 595,
+          "member_ot_price": 506
+        },
+        {
+          "sku": "03-05",
+          "published_as": "Install a new 1/2 HP garbage disposal, parts included",
+          "standard_price": 485,
+          "member_price": 412,
+          "standard_ot_price": 679,
+          "member_ot_price": 577
+        },
+        {
+          "sku": "06-33",
+          "published_as": "Install an elongated toilet, 10–12 inch rough",
+          "standard_price": 495,
+          "member_price": 421,
+          "standard_ot_price": 693,
+          "member_ot_price": 589
+        },
+        {
+          "sku": "03-06",
+          "published_as": "Install a new 3/4 HP garbage disposal, parts included",
+          "standard_price": 595,
+          "member_price": 506,
+          "standard_ot_price": 833,
+          "member_ot_price": 708
+        }
+      ]
+    },
+    {
+      "title": "Well pumps and pressure tanks",
+      "items": [
+        {
+          "sku": "25-113",
+          "published_as": "Replace the well tank pressure switch",
+          "standard_price": 165,
+          "member_price": 140,
+          "standard_ot_price": 231,
+          "member_ot_price": 196
+        },
+        {
+          "sku": "25-42",
+          "published_as": "Prime a jet pump",
+          "standard_price": 195,
+          "member_price": 166,
+          "standard_ot_price": 273,
+          "member_ot_price": 232
+        },
+        {
+          "sku": "25-31",
+          "published_as": "Replace the pressure switch and gauge",
+          "standard_price": 195,
+          "member_price": 166,
+          "standard_ot_price": 273,
+          "member_ot_price": 232
+        },
+        {
+          "sku": "25-115",
+          "published_as": "Replace the pressure switch, gauge and nipple",
+          "standard_price": 245,
+          "member_price": 208,
+          "standard_ot_price": 343,
+          "member_ot_price": 292
+        },
+        {
+          "sku": "25-21",
+          "published_as": "Replace a 1/2 HP 2-wire well motor, pump under warranty",
+          "standard_price": 495,
+          "member_price": 421,
+          "standard_ot_price": 693,
+          "member_ot_price": 589
+        },
+        {
+          "sku": "25-58",
+          "published_as": "Replace a submersible well pump you supply",
+          "standard_price": 795,
+          "member_price": 676,
+          "standard_ot_price": 1113,
+          "member_ot_price": 946
+        },
+        {
+          "sku": "25-11",
+          "published_as": "Replace a 22-gallon well tank",
+          "standard_price": 795,
+          "member_price": 676,
+          "standard_ot_price": 1113,
+          "member_ot_price": 946
+        },
+        {
+          "sku": "25-12",
+          "published_as": "Replace a 35-gallon well tank",
+          "standard_price": 895,
+          "member_price": 761,
+          "standard_ot_price": 1253,
+          "member_ot_price": 1065
+        }
+      ]
+    }
+  ]
+}
