@@ -315,3 +315,25 @@ footer h4{font-family:var(--ff-head);font-weight:800;font-size:.88rem;letter-spa
 
 /* Google Maps embeds (contact + service-area pages) */
 .map-embed{border-radius:var(--r2);overflow:hidden;border:1.5px solid #90CAF9;background:var(--blue-xlt)}
+
+/* Published flat-rate price tables (city pricing pages) */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.price-table{width:100%;border-collapse:collapse;background:white;border:1.5px solid #90CAF9;border-radius:var(--r2);overflow:hidden;font-size:.97rem}
+.price-table th,.price-table td{padding:12px 14px;text-align:left;border-bottom:1px solid #E3F2FD;vertical-align:top}
+.price-table thead th{background:var(--blue-xlt);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;color:var(--blue-dk);white-space:nowrap}
+.price-table tbody tr:last-child td{border-bottom:0}
+.price-table .price-cell{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
+.price-table tbody tr:nth-child(even){background:#FAFCFF}
+/* On a phone the three columns cannot share the width without hiding the
+   member price off-screen, so each job becomes its own stacked card. */
+@media(max-width:600px){
+  .price-table{font-size:.95rem;border-radius:var(--r2)}
+  .price-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .price-table,.price-table tbody,.price-table tr,.price-table td{display:block;width:100%}
+  .price-table tr{padding:12px 14px;border-bottom:1px solid #E3F2FD}
+  .price-table tr:nth-child(even){background:#FAFCFF}
+  .price-table td{border:0;padding:0}
+  .price-table .job-cell{font-weight:600;margin-bottom:6px}
+  .price-table .price-cell{display:inline-block;width:auto;text-align:left;margin-right:18px}
+  .price-table .price-cell::before{content:attr(data-label) " ";font-weight:600;color:var(--ink3)}
+}

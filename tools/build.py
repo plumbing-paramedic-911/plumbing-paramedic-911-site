@@ -947,7 +947,7 @@ CITIES = {
         "title":"Plumber in Greenwood, SC | 24/7 Emergency &amp; Scheduled Service | Plumbing Paramedic 911",
         "description":"Licensed SC Master Plumber serving Greenwood, SC and Greenwood County 24/7. Drain cleaning, water heaters, well pumps, slab leaks, water softeners, tankless installs. Flat-rate pricing, 2-year warranty. Call (864) 446-8911.",
         "og":"/images/og/greenwood-1200x630.jpg",
-        "intro":"Greenwood is our biggest neighboring city — about a 30-minute drive from our Abbeville shop via US 178 and SC 72. We service Greenwood city limits and the surrounding Greenwood County area for everything from same-day drain calls to full bathroom remodels, with a typical emergency response time of around 45 minutes.",
+        "intro":"Greenwood is the city we work in most after our own. We cover Greenwood city limits and the surrounding county 24/7, with a typical emergency response of about 45 minutes and no distance charge \u2014 Greenwood pays the same published flat rates as Abbeville. A licensed SC Master Plumber runs every job, from a same-day drain call to a full repipe.",
         "body":"""
 <h3>Greenwood plumbing problems we see every week</h3>
 <p>Greenwood's municipal water is moderately hard, and we see the consequences on water heaters and fixtures. Scale builds up on heating elements (electric heaters) and shortens tank life from a 12-year average to 6 or 7. Faucet aerators and showerheads clog faster. Pressure-balanced shower valves develop intermittent function. The fix is usually a <a href="/services/water-filtration-softener-systems/">softener or scale-inhibiting filter</a> on the main supply line — something we install regularly in Greenwood and almost never need to install in Abbeville (which has different source water chemistry).</p>
@@ -970,16 +970,33 @@ CITIES = {
 <p>We work across all of Greenwood — from Uptown and the Main Street corridor, to the neighborhoods around Lander University, to Self Regional Healthcare and the medical campus area, to the residential streets off Montague Avenue and Bypass 25 (US 25), to the subdivisions near Greenwood Mall, to the lakefront and rural properties along SC 702 toward Lake Greenwood. If you're in Greenwood County, we'll come to you.</p>
 <h3>About Greenwood</h3>
 <p>Greenwood is the seat of Greenwood County and home to about 23,000 people in the city limits and 70,000+ in the county. Lander University is here; so is the headquarters of Self Regional Healthcare. The Uptown district, centered on Main Street, has seen significant revitalization in recent years. Municipal water comes from Greenwood Commissioners of Public Works (CPW), which sources from Lake Greenwood. We're roughly 20 miles east of our Abbeville shop on US 178 / SC 72.</p>
+<h3>What plumbing in Greenwood actually costs</h3>
+<p>The service / diagnostic call is <strong>$79 Monday–Friday 9 AM–5 PM</strong>, <strong>$99 after hours and weekends</strong>, and <strong>$158 after midnight or on holidays</strong>. No mileage charge, no distance markup. Repair work is flat-rate and approved in writing before it starts — clearing a sink, tub or shower drain is $245, a 40-gallon electric water heater installed is $1,800, and a well tank pressure switch is $165. The full published list is on our <a href="/plumbing-prices-greenwood-sc/">Greenwood plumbing prices page</a>.</p>
 <h3>Why Greenwood homeowners call us</h3>
 <ul>
-  <li>We bring the same flat-rate pricing and same 24/7 response to Greenwood as we do to Abbeville</li>
+  <li>Published flat-rate prices — the number is the number, and it is on the site before you call</li>
+  <li>Same rates and same 24/7 response in Greenwood as in Abbeville, with no distance charge</li>
   <li>Licensed SC Master Plumber on every job — Eric Callaway personally on most Greenwood calls</li>
   <li>BBB A+ rated, 30+ Google reviews</li>
   <li>2-year warranty on every repair and installation</li>
   <li>In-house financing on jobs over $500</li>
   <li>Military, senior, and first-responder discounts</li>
 </ul>
-"""
+""",
+        "faqs":[
+            ("How much does a plumber charge in Greenwood, SC?",
+             "The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays, with no distance charge to Greenwood. Repair work is flat-rate on top of that — clearing a drain is $225–$325 and a 40-gallon electric water heater installed is $1,800. Our full Greenwood price list is published on this site."),
+            ("Why do water heaters fail faster in Greenwood?",
+             "Greenwood's municipal water is moderately hard. Scale builds on electric heating elements and in the bottom of the tank, which shortens a heater's working life from around twelve years to six or seven and clogs aerators and shower valves along the way. Treating the water is usually cheaper over a decade than replacing heaters early."),
+            ("Do you install water softeners in Greenwood?",
+             "Yes, regularly — it is one of the few services we install far more often in Greenwood than in Abbeville, because the source water chemistry is different. On well properties near Lake Greenwood we also install filtration for iron and sulfur."),
+            ("Do you cover Lake Greenwood and the rural parts of the county?",
+             "Yes. Properties along SC 702 and the marina roads are often on well and septic even though they are close to town, and we service both. Well pumps, pressure tanks and pressure switches are routine calls for us out there."),
+            ("How fast can you get to Greenwood in an emergency?",
+             "Typical response is about 45 minutes when a technician is available, 24 hours a day including weekends and holidays. Call for the current ETA rather than assuming — active jobs and weather change it."),
+            ("Do you do backflow testing for Greenwood CPW?",
+             "Yes. We handle annual backflow testing and the compliance paperwork for irrigation, commercial and fire systems in the Greenwood CPW service area."),
+        ],
     },
     "anderson-sc": {
         "city":"Anderson","state":"South Carolina","abbr":"SC",
@@ -989,34 +1006,53 @@ CITIES = {
         "title":"Plumber in Anderson, SC | 24/7 Service | Plumbing Paramedic 911",
         "description":"Licensed plumber serving Anderson, SC and surrounding Anderson County 24/7. Water heaters, drain cleaning, well pumps, fixture install, leak detection. Call (864) 446-8911.",
         "og":"/images/og/anderson-1200x630.jpg",
-        "intro":"Anderson is about an hour north of our Abbeville shop, and we make the drive every week for both emergency and scheduled work. We serve homeowners and businesses in Anderson city limits, the suburbs along US 29 and SC 81, and the surrounding Anderson County area including Iva, Honea Path, Belton, and Pendleton.",
+        "intro":"Plumbing Paramedic 911 covers Anderson 24 hours a day, with a typical emergency response of about 60 minutes and no distance charge \u2014 Anderson pays the same flat rates as our home market. We work inside the city limits, the neighborhoods along US 29 and SC 81, and the wider Anderson County area including Iva, Honea Path, Belton and Pendleton. A licensed SC Master Plumber runs every job.",
         "body":"""
-<h3>Local plumbing problems specific to Anderson</h3>
-<p>Anderson is a larger city with a broader mix of plumbing systems than Abbeville or Greenwood — heavier commercial and industrial, more multi-family, and a wider age range of residential plumbing. We see polybutylene supply-line failures fairly often in 1980s subdivisions (Quail Creek, Concord, and others); these gray plastic lines were widely installed in the South and many are reaching failure age. Replacement with PEX is usually the right answer.</p>
-<p>The Anderson area also has a lot of mid-century homes with original cast-iron drain stacks, and we get called regularly to address the slow-drain, recurring-clog pattern that signals the inside of those stacks is heavily corroded. Hydro jetting buys you a few years; full replacement is the long-term fix.</p>
+<h3>What plumbing in Anderson actually costs</h3>
+<p>The service / diagnostic call is <strong>$79 Monday–Friday 9 AM–5 PM</strong>, <strong>$99 after hours and weekends</strong>, and <strong>$158 after midnight or on holidays</strong>. There is no mileage or distance surcharge for Anderson. Repair work is flat-rate and quoted in writing before it starts — clearing a drain runs $225–$325, a drain camera inspection is $395, and a 40-gallon electric water heater installed is $1,800. The full list is on our <a href="/plumbing-prices-anderson-sc/">Anderson plumbing prices page</a>.</p>
+<h3>The two plumbing problems Anderson calls us about most</h3>
+<p><strong>Polybutylene supply lines in 1980s subdivisions.</strong> The gray plastic pipe went into a lot of Anderson-area homes and much of it is now past its service life. These lines rarely weep — they let go at full pressure, which is why so many of our <a href="/emergency-plumber-anderson-sc/">Anderson emergency calls</a> are burst supply lines. A patch will stop tonight's flood; if the rest of the line is the same age, a PEX repipe is the honest recommendation and we will tell you that rather than sell you the same repair four times.</p>
+<p><strong>Cast-iron drain stacks in mid-century homes.</strong> Decades of scale shrink the usable diameter until the line re-clogs within weeks of being cleared. Cabling opens a channel. Hydro jetting cleans the pipe wall and buys real time. Neither restores a pipe that has lost its structure — a $395 camera inspection tells you which situation you are in before you spend money on the wrong one. That is the whole reason our <a href="/drain-cleaning-anderson-sc/">Anderson drain cleaning</a> starts with diagnosis.</p>
 <h3>Common services in Anderson</h3>
 <ul>
-  <li><strong>Emergency dispatch</strong> — typical response 60 minutes from Abbeville</li>
+  <li><strong>24/7 emergency dispatch</strong> — typical response about 60 minutes</li>
+  <li><strong><a href="/drain-cleaning-anderson-sc/">Drain cleaning, sewer clearing and hydro jetting</a></strong> — including camera inspection on repeat clogs</li>
   <li><strong>Polybutylene repipes</strong> — common in 1980s Anderson subdivisions</li>
   <li><strong>Cast-iron drain stack replacement</strong> — for mid-century homes</li>
-  <li><strong>Water heater repair and replacement</strong></li>
-  <li><strong>Drain cleaning and hydro jetting</strong></li>
-  <li><strong>Leak detection</strong> — acoustic, thermal, slab</li>
-  <li><strong>Backflow testing</strong> — for Anderson Joint Regional Water System / Anderson Regional Joint</li>
-  <li><strong>Commercial plumbing</strong> — restaurants, offices, retail, multi-family</li>
+  <li><strong><a href="/water-heater-repair-anderson-sc/">Water heater repair and replacement</a></strong> — tank and tankless</li>
+  <li><strong><a href="/services/leak-detection/">Leak detection</a></strong> — acoustic, thermal and slab</li>
+  <li><strong><a href="/services/well-pump-repair/">Well pumps and pressure tanks</a></strong> — for rural Anderson County properties</li>
+  <li><strong><a href="/services/backflow-prevention-testing/">Backflow testing</a></strong> — annual compliance for Anderson Regional Joint Water System</li>
+  <li><strong><a href="/services/commercial-plumbing/">Commercial plumbing</a></strong> — restaurants, offices, retail and multi-family</li>
 </ul>
+<h3>Where we work in Anderson County</h3>
+<p>Inside Anderson city limits, the neighborhoods along US 29 and SC 81, and out through Iva, Honea Path, Belton, Pendleton, Starr and the rural county. Municipal customers are generally on Anderson Regional Joint Water System; properties outside the lines are typically on well or co-op water, and we service both. Rural well work is a routine call for us, not an exception.</p>
 <h3>About Anderson</h3>
-<p>Anderson is the seat of Anderson County and the largest city we serve, with about 28,000 in the city limits and 200,000+ in the county. It's part of the Greenville–Anderson metropolitan area. Municipal water comes from Anderson Regional Joint Water System; rural areas may be on well or co-op water. We're roughly 45 miles north of Abbeville via SC 28 or US 178.</p>
+<p>Anderson is the seat of Anderson County and the largest city we serve — roughly 28,000 people in the city limits and over 200,000 countywide, within the Greenville–Anderson metropolitan area. The housing stock runs from pre-war in-town homes to 1980s subdivisions to new construction, which is exactly why the plumbing problems here vary so much street to street.</p>
 <h3>Why Anderson homeowners and businesses call us</h3>
 <ul>
   <li>SC Master Plumber on every job — Eric Callaway personally on most calls</li>
-  <li>Flat-rate pricing — same as Abbeville, with no distance markup</li>
-  <li>24/7 emergency dispatch</li>
+  <li>Flat-rate pricing, published in advance, with no distance markup to Anderson</li>
+  <li>24/7 emergency dispatch, including nights, weekends and holidays</li>
   <li>2-year warranty on all parts and labor</li>
-  <li>In-house financing for larger jobs</li>
+  <li>In-house financing on larger jobs</li>
   <li>BBB A+ rating</li>
 </ul>
-"""
+""",
+        "faqs":[
+            ("Do you actually serve Anderson, or just the surrounding area?",
+             "We serve Anderson itself — inside the city limits, the neighborhoods along US 29 and SC 81, and the wider county including Iva, Honea Path, Belton, Pendleton and Starr. Anderson is a regular route for us, not an occasional trip."),
+            ("Do you charge more because Anderson is further away?",
+             "No. There is no mileage or distance surcharge for Anderson. The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays, and flat-rate repair prices are identical to the ones we charge at home."),
+            ("My Anderson house has gray plastic water pipe. Is that a problem?",
+             "Probably, eventually. Polybutylene was installed widely in 1980s subdivisions across the South and a lot of it is now failing — usually as a sudden full-pressure burst rather than a slow leak. We can repair a single failure, but if the rest of the line is the same vintage we will tell you honestly that a PEX repipe is the better spend."),
+            ("Why does my Anderson drain keep clogging in the same spot?",
+             "In mid-century Anderson homes that is almost always internal scale in an original cast-iron stack. The pipe's usable diameter has shrunk, so it re-blocks quickly after each clearing. A $395 camera inspection shows whether hydro jetting will buy you years or whether that section needs replacing."),
+            ("Who treats the water in Anderson, and does it affect my plumbing?",
+             "Municipal customers are generally served by Anderson Regional Joint Water System; properties outside the lines are on private wells or co-op water. Well systems are the ones that bring us the most water-quality work — iron, sulfur and sediment — and we install filtration and softening for them."),
+            ("Can you get to Anderson overnight for an emergency?",
+             "Yes. Dispatch runs 24/7 and typical Anderson response is about 60 minutes when a technician is available. The after-midnight and holiday service-call rate is $158, posted before you book."),
+        ],
     },
     "laurens-sc": {
         "city":"Laurens","state":"South Carolina","abbr":"SC",
@@ -1229,7 +1265,7 @@ def city_faqs(c):
          f"Yes. We service submersible and jet well pumps, pressure tanks, and pressure switches across the {c['city']} area and rural surrounding properties. Same-day service is typical."),
         (f"What's your warranty on plumbing work in {c['city']}?",
          f"Every repair and installation we do in {c['city']} carries a 2-year warranty on parts and labor. If anything fails within that window, we come back and fix it at no charge."),
-    ]
+    ] + list(c.get("faqs", []))
 
 
 CORE_MEMBERSHIP_MARKETS = {"abbeville-sc", "greenwood-sc", "anderson-sc", "mccormick-sc"}
