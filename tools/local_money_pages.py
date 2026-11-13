@@ -35,6 +35,8 @@ LASTMODS = {
     # Rewritten from a 933-word repair page to a replacement page with the
     # installed prices published.
     "water-heater-repair-greenwood-sc": "2026-11-13",
+    # New page.
+    "water-quality-calhoun-falls-sc": "2026-11-13",
 }
 
 SERVICE_CALL_HTML = """\
@@ -254,6 +256,95 @@ MONEY_PAGES = {
             ("📍", "Greenwood Plumbing", "/service-areas/greenwood-sc/", "All Plumbing Paramedic 911 services in Greenwood."),
             ("📗", "Drain Maintenance Playbook", "/guides/drain-maintenance-playbook/", "Homeowner guidance for preventing and recognizing drain problems."),
             ("💰", "Upfront Pricing", "/pricing/", "Current service-call schedule and planning ranges."),
+        ],
+    },
+    "water-quality-calhoun-falls-sc": {
+        # Built from the owner's own report of the top water problem in his
+        # service area, plus the public record for the Calhoun Falls Water
+        # System. Every regulatory number here was verified against EPA's
+        # Stage 1 D/DBP rule before publication; see the FAQ and deep_dive.
+        "title": "Calhoun Falls SC Water Quality | Plumbing Paramedic 911",
+        "description": "What is in Calhoun Falls SC tap water: two chlorine disinfection byproducts, a soft-water reading, and what chlorine does to your water heater anode rod.",
+        "h1": "Calhoun Falls, SC Tap Water: What Is Actually In It",
+        "badge": "\u25cf Disinfection Byproducts &amp; Chlorine",
+        "city": "Calhoun Falls",
+        "area_type": "City",
+        "service_type": "Water Quality",
+        "parent_service": "/services/water-filtration-softener-systems/",
+        "parent_service_name": "Water Filtration &amp; Softeners",
+        "city_page": "/service-areas/calhoun-falls-sc/",
+        "city_page_name": "Calhoun Falls, SC",
+        "guide": "/guides/sc-homeowner-plumbing-survival-guide/",
+        "guide_name": "SC Homeowner's Plumbing Survival Guide",
+        "og": "/images/og/water-heater-1200x630.jpg",
+        "intro": "Calhoun Falls tap water shows two compounds above EPA\u2019s health goals: bromodichloromethane at 7.6 ppb and dichloroacetic acid at 0.0132 ppm. Both are disinfection byproducts \u2014 what is left when chlorine meets the organic matter in surface water. Here is what that means, what it does not mean, and what it does to your plumbing.",
+        "answer": "Those two compounds have a health goal of zero, which is why they read as \u201cabove guidelines\u201d. The enforceable federal limits are different numbers and apply to group totals, not single compounds: 80 ppb for the four trihalomethanes together and 60 ppb for the five haloacetic acids. Both readings here are a fraction of those. Your water is treated and monitored \u2014 but the chlorine doing the treating is also working on your water heater\u2019s anode rod and elements, and that part is ours to deal with.",
+        "cta_note": "Call (864) 446-8911. The service / diagnostic call is $79 Monday through Friday, 9 AM to 5 PM. A basic water test runs $99 to $199, and we quote filtration only after we know what is actually in your water.",
+        "local_context": """
+<p>The Calhoun Falls Water System serves about 2,473 people on purchased surface water. Surface water carries natural organic matter \u2014 leaf litter, algae, the ordinary content of a lake or river \u2014 and the chlorine used to make it safe to drink reacts with that material. What comes out of the reaction is a family of compounds called disinfection byproducts. Bromodichloromethane is one of the trihalomethanes; dichloroacetic acid is one of the haloacetic acids. Finding them in chlorinated surface water is expected, not anomalous.</p>
+<p>One thing the data settles: <strong>the water here is soft.</strong> USGS sampling across Abbeville County puts hardness around 14 mg/L, about 0.8 grains per gallon, which is firmly in the soft range. That is a county-level estimate rather than a reading from your tap, but it is consistent, and it means a water softener is not the answer to anything you are experiencing on city water. Anyone selling you one for Calhoun Falls city water is selling you equipment for a problem you do not have.</p>
+<p>Out on the wells around Lake Russell and Richard B. Russell Lake the picture is different \u2014 that is where we see genuine hardness, iron and sulfur, and where filtration decisions are made on a test result rather than a guess.</p>
+""",
+        "deep_dive_label": "What the numbers mean",
+        "deep_dive_heading": "Above the goal is not the same as above the limit",
+        "deep_dive": """
+<h3>Two different numbers, often confused</h3>
+<p>EPA publishes two kinds of figure for a drinking-water contaminant. The <strong>MCLG</strong>, or Maximum Contaminant Level Goal, is the level at which there is no known or expected health risk, with a margin of safety. It is a goal, not a rule, and for compounds treated as possible carcinogens over a lifetime of exposure it is simply set at zero. The <strong>MCL</strong>, or Maximum Contaminant Level, is the enforceable legal limit a utility must meet.</p>
+<p>Bromodichloromethane and dichloroacetic acid both carry an MCLG of zero. That is why a report flags them the moment they are detected at all. Neither is regulated individually at the MCL level: bromodichloromethane counts toward <strong>total trihalomethanes, limit 80 ppb</strong>, and dichloroacetic acid counts toward <strong>the five haloacetic acids, limit 60 ppb</strong>, each measured as a running annual average of the group.</p>
+<p>For scale: 7.6 ppb of bromodichloromethane against an 80 ppb group limit, and 0.0132 ppm \u2014 that is 13.2 ppb \u2014 against a 60 ppb group limit. Those are single-compound readings and the group totals include species not shown here, so the system\u2019s compliance figures are the utility\u2019s to publish, not ours to calculate. Every public water system has to issue an annual Consumer Confidence Report with those running averages in it, and it is worth reading the real document rather than a summary of it.</p>
+<p>We are plumbers, not a testing laboratory or a health authority. On what is in the water and what it means for your health, the utility and SCDPH are the sources. What we can speak to with authority is what chlorinated water does to the pipework and appliances we pull out of houses here every week.</p>
+<h3>What chlorine does to your water heater</h3>
+<p>Every tank water heater contains a sacrificial anode rod. It is a length of magnesium or aluminium whose entire job is to corrode <em>instead of</em> the steel tank. Chlorinated water consumes that rod faster. Once it is gone, there is nothing left between the water and the tank shell, and the clock on the tank starts running.</p>
+<p>This is the single most common thing we find on a heater that failed earlier than it should have on city water: a spent anode rod nobody ever looked at. It also shows up on the elements, and on the rubber and elastomer parts \u2014 flex connector linings, washers, the gaskets inside valves \u2014 which harden and crack sooner in chlorinated water than the spec sheet suggests.</p>
+<p>The fix is unglamorous and cheap compared with a tank: have the anode rod inspected, and replace it when it is more than about half consumed. On a heater on Calhoun Falls city water that is a conversation worth having every two to three years, not once a decade.</p>
+<h3>What is worth doing, and what is not</h3>
+<p><strong>Worth doing:</strong> a test, so decisions come from your numbers rather than a county average. Anode rod inspection on any tank more than a few years old. Activated carbon filtration if the chlorine taste and smell bother you \u2014 carbon is the right medium for chlorine and its byproducts, and it is the honest recommendation here.</p>
+<p><strong>Not worth doing:</strong> a water softener, on city water that measures 0.8 grains per gallon. Softeners exchange hardness minerals for sodium; with no hardness to exchange, you have bought a maintenance obligation and nothing else. We will tell you that on the phone rather than at the end of a quote.</p>
+<p>Whole-house versus point-of-use is a real decision and it depends on what you are trying to achieve. We quote filtration after a test, never from a brochure, and if the test says you do not need equipment we will say that too.</p>
+""",
+        "symptoms": [
+            "Chlorine or swimming-pool smell and taste at the tap",
+            "A water heater that failed earlier than it should have",
+            "Rusty or discoloured hot water with clear cold water",
+            "Flex connectors, washers or valve gaskets failing early",
+            "You have never had the anode rod in your tank looked at",
+            "You are on a well outside the city and have never had a test",
+        ],
+        "checks": [
+            "Pull and read the anode rod, and say how much of it is left",
+            "Check the tank shell, fittings and T&amp;P valve for early corrosion",
+            "Inspect flex connectors and elastomer parts for hardening or cracking",
+            "Test the water when the decision needs numbers, not a county average",
+            "Confirm whether you are on city water or a private well before advising",
+        ],
+        "price_drivers": [
+            "Whether a test is needed first, at $99 to $199",
+            "Anode rod replacement versus a tank already past saving",
+            "Point-of-use carbon filtration versus a whole-house system",
+            "City water or a private well \u2014 completely different equipment",
+            "Access to the heater, the main line and a drain for a backwash system",
+        ],
+        "faqs": [
+            ("Is Calhoun Falls tap water safe to drink?",
+             "That is the utility\u2019s and SCDPH\u2019s determination, not ours. What the public record shows is two disinfection byproducts detected above EPA\u2019s health goals, which are set at zero for compounds of this kind, while the enforceable limits are group totals of 80 ppb for trihalomethanes and 60 ppb for haloacetic acids. Read the Calhoun Falls Water System\u2019s annual Consumer Confidence Report for the running averages it reports."),
+            ("What are bromodichloromethane and dichloroacetic acid?",
+             "Disinfection byproducts. Calhoun Falls is on purchased surface water, which carries natural organic matter, and the chlorine used to disinfect it reacts with that material. Bromodichloromethane is one of the four trihalomethanes; dichloroacetic acid is one of the five haloacetic acids. Both are expected findings in chlorinated surface water."),
+            ("Why does a report say they are above EPA guidelines?",
+             "Because the guideline being compared against is the health goal, which is zero for both compounds \u2014 so any detection at all reads as above it. That is a different number from the enforceable limit. It is worth knowing the difference before you panic or before you spend money."),
+            ("Do I need a water softener in Calhoun Falls?",
+             "On city water, no. USGS sampling across Abbeville County puts hardness near 14 mg/L, about 0.8 grains per gallon, which is soft. A softener removes hardness you do not have. On a private well outside the city it is a different question and should be answered by a test."),
+            ("Does chlorine shorten the life of my water heater?",
+             "It consumes the sacrificial anode rod faster, and the anode rod is the only thing protecting the steel tank from corroding. Once it is gone the tank is next. It also works on the elements and on rubber and elastomer parts. This is the most common cause we find behind a heater that failed early on city water."),
+            ("What filter actually removes chlorine and its byproducts?",
+             "Activated carbon is the right medium for chlorine, chlorine taste and odour, and trihalomethanes. Whether you want it at one tap or for the whole house depends on what you are trying to achieve, and we quote it after a test rather than from a brochure."),
+            ("How much does a water test cost?",
+             "A basic test runs $99 to $199 and covers bacteria, nitrates, iron, hardness and pH. On city water you can start with the utility\u2019s own Consumer Confidence Report, which is free and reports what they measure at the plant and in the distribution system."),
+        ],
+        "related": [
+            ("\U0001f6b0", "Water Filtration &amp; Softeners", "/services/water-filtration-softener-systems/", "Carbon filtration, softeners where they are actually needed, and testing."),
+            ("\U0001f525", "Water Heater Service", "/services/water-heater-repair-replacement/", "Anode rods, elements, repair and replacement."),
+            ("\U0001f4cd", "Calhoun Falls Plumbing", "/service-areas/calhoun-falls-sc/", "All Plumbing Paramedic 911 services in Calhoun Falls."),
+            ("\U0001f4d8", "SC Homeowner\u2019s Survival Guide", "/guides/sc-homeowner-plumbing-survival-guide/", "Shutoffs, pipe materials and seasonal prep for SC homes."),
         ],
     },
     "water-heater-repair-greenwood-sc": {
@@ -777,6 +868,8 @@ LINK_TARGETS = {
     "service-areas/anderson-sc/index.html": ["water-heater-repair-anderson-sc", "emergency-plumber-anderson-sc", "drain-cleaning-anderson-sc", "plumbing-prices-anderson-sc"],
     "service-areas/abbeville-sc/index.html": ["emergency-plumber-abbeville-sc", "drain-cleaning-abbeville-sc", "water-heater-repair-abbeville-sc", "sewer-line-repair-abbeville-sc"],
     "pricing/index.html": ["plumbing-prices-greenwood-sc", "plumbing-prices-anderson-sc"],
+    "service-areas/calhoun-falls-sc/index.html": ["water-quality-calhoun-falls-sc"],
+    "services/water-filtration-softener-systems/index.html": ["water-quality-calhoun-falls-sc"],
     "services/index.html": list(MONEY_PAGES.keys()),
 }
 

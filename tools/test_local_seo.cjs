@@ -180,6 +180,57 @@ test('no page claims Greenwood city water is hard',()=>{
     'a page states Greenwood city water is hard, which the owner corrected');
 });
 
+test('water-quality pages never overstate what a health goal means',()=>{
+  // The riskiest content on this site. "Above EPA health guidelines" means
+  // above the MCLG, a non-enforceable goal set to zero for compounds treated
+  // as possible carcinogens. The enforceable MCLs are group totals: 80 ppb
+  // for the four trihalomethanes, 60 ppb for the five haloacetic acids.
+  // Reporting the first without the second reads as "your utility is poisoning
+  // you", which is both untrue and a claim about a named public utility that
+  // this business works alongside. A page may not do that.
+  const pages=[];
+  const walk=dir=>{
+    for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+      if(entry.name.startsWith('.')||entry.name==='node_modules')continue;
+      const full=path.join(dir,entry.name);
+      if(entry.isDirectory())walk(full);
+      else if(entry.name.endsWith('.html'))pages.push(full);
+    }
+  };
+  walk(root);
+
+  // Never, on any page.
+  const forbidden=[
+    /water (?:is|here is) (?:not safe|unsafe)/i,
+    /\b(?:illegal|unlawful)\b[^.]{0,40}(?:water|utility|system)/i,
+    /(?:in violation|non-?compliant)[^.]{0,40}(?:water|utility|limit)/i,
+    /exceeds? the (?:legal|enforceable|federal) limit/i,
+    /causes? cancer/i,
+  ];
+  const offenders=[];
+  for(const file of pages){
+    const text=fs.readFileSync(file,'utf8');
+    const rel=path.relative(root,file);
+    for(const re of forbidden)
+      if(re.test(text))offenders.push(`${rel}: ${re}`);
+  }
+  assert.deepEqual(offenders,[],'a page overstates a drinking-water finding');
+
+  // And where a page raises the health goal, it must give the real limit.
+  for(const file of pages){
+    const text=fs.readFileSync(file,'utf8');
+    const rel=path.relative(root,file);
+    const raisesGoal=/health goal|MCLG|above (?:EPA(?:\u2019s|'s)? )?health/i.test(text);
+    if(!raisesGoal)continue;
+    assert.match(text,/80 ppb/,
+      `${rel} raises the health goal without the 80 ppb trihalomethane limit`);
+    assert.match(text,/60 ppb/,
+      `${rel} raises the health goal without the 60 ppb haloacetic acid limit`);
+    assert.match(text,/Consumer Confidence Report/,
+      `${rel} discusses a utility's water without pointing at its own published report`);
+  }
+});
+
 test('no sitemap entry claims a date in the future',()=>{
   const today=new Date().toISOString().slice(0,10);
   const future=[];
