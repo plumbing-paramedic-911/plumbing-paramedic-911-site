@@ -27,7 +27,13 @@ const NAP={
 };
 const BASE='https://plumbingparamedic911.com';
 const LOCALBUSINESS_ID=`${BASE}/#localbusiness`;
-const SCHEMA_CITIES=['greenwood-sc','anderson-sc'];
+// Every city page, including the two hand-authored lake-area pages that
+// build.py does not generate and release_build.py injects into instead.
+const SCHEMA_CITIES=[
+  'abbeville-sc','greenwood-sc','anderson-sc','laurens-sc','mccormick-sc',
+  'ninety-six-sc','calhoun-falls-sc','due-west-sc',
+  'iva-lake-secession-sc','savannah-lakes-village-sc',
+];
 const HOMEPAGE_LOCAL_PAGES=[
   'plumbing-prices-greenwood-sc',
   'plumbing-prices-anderson-sc',
@@ -60,6 +66,17 @@ const danglingRefs=nodes=>{
   return [...refs].filter(r=>!defined.has(r));
 };
 
+test('every city page under /service-areas/ is covered by these tests',()=>{
+  // A city page added later must either carry the business schema or be added
+  // here deliberately - it must not simply go unchecked.
+  const dir=path.join(root,'service-areas');
+  const found=fs.readdirSync(dir,{withFileTypes:true})
+    .filter(e=>e.isDirectory()&&fs.existsSync(path.join(dir,e.name,'index.html')))
+    .map(e=>e.name);
+  const missing=found.filter(c=>!SCHEMA_CITIES.includes(c));
+  assert.deepEqual(missing,[],'a city page exists that no business-schema test covers');
+});
+
 test('the homepage links the high-intent local pages',()=>{
   const home=read('index.html');
   for(const slug of HOMEPAGE_LOCAL_PAGES)
@@ -78,7 +95,7 @@ test('the pricing hub is not scoped to one city',()=>{
     'the pricing hub meta description still narrows the page to Abbeville');
 });
 
-test('the priority city pages carry the business, with the real NAP',()=>{
+test('every city page carries the business, with the real NAP',()=>{
   for(const city of SCHEMA_CITIES){
     const nodes=graphOf(`service-areas/${city}/index.html`);
     const lb=nodes.find(n=>[].concat(n['@type']||[]).includes('LocalBusiness'));
@@ -108,7 +125,7 @@ test('the city pages claim one business, not a branch per city',()=>{
   }
 });
 
-test('the priority city pages resolve every schema reference they make',()=>{
+test('every city page resolves every schema reference it makes',()=>{
   for(const city of SCHEMA_CITIES){
     const left=danglingRefs(graphOf(`service-areas/${city}/index.html`));
     assert.deepEqual(left,[],`service-areas/${city}/ points at schema nodes it does not define`);

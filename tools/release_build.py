@@ -141,8 +141,8 @@ def expand_super_service_hub() -> None:
 def ensure_sitemap() -> None:
     sitemap = ROOT / "sitemap.xml"; text = sitemap.read_text(encoding="utf-8")
     urls = {
-        "https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/": "2026-08-13",
-        "https://plumbingparamedic911.com/service-areas/savannah-lakes-village-sc/": "2026-08-13",
+        "https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/": "2026-11-13",
+        "https://plumbingparamedic911.com/service-areas/savannah-lakes-village-sc/": "2026-11-13",
         "https://plumbingparamedic911.com/specials/whole-home-repipe/": "2026-11-13",
         "https://plumbingparamedic911.com/specials/winterization/": "2026-11-12",
     }
@@ -217,6 +217,43 @@ def validate_release() -> None:
     print(f"SEO/AEO release validation passed: {len(html_files)} HTML pages, {len(sitemap_urls)} sitemap URLs.")
 
 
+# The two lake-area city pages are hand-authored and have no generator in
+# build.py, so render_city_page() never reaches them. They still reference
+# #localbusiness and #website without defining either, exactly as the
+# generated city pages did. This injects the same nodes from the same source
+# (build.business_ld(), itself read out of index.html) rather than letting a
+# second copy of the NAP be typed into these two files by hand.
+HAND_AUTHORED_CITY_PAGES = (
+    "service-areas/iva-lake-secession-sc/index.html",
+    "service-areas/savannah-lakes-village-sc/index.html",
+)
+
+
+def ensure_hand_authored_business_schema(build) -> None:
+    for rel in HAND_AUTHORED_CITY_PAGES:
+        file = ROOT / rel
+        text = file.read_text(encoding="utf-8")
+        blocks = re.findall(
+            r'<script type="application/ld\+json">(.*?)</script>', text, re.S
+        )
+        if len(blocks) != 1:
+            raise RuntimeError(f"{rel}: expected exactly one JSON-LD block, found {len(blocks)}")
+        data = json.loads(blocks[0])
+        graph = data.get("@graph")
+        if graph is None:
+            raise RuntimeError(f"{rel}: JSON-LD block has no @graph to extend")
+        have = {node.get("@id") for node in graph}
+        additions = [node for node in build.business_ld() if node.get("@id") not in have]
+        if not additions:
+            continue
+        data["@graph"] = graph + additions
+        # Re-emit in the file's own compact style, so the diff is the one line
+        # that actually changed rather than a reformat of the whole block.
+        rendered = json.dumps(data, separators=(",", ":"), ensure_ascii=False)
+        text = text.replace(blocks[0], "\n" + rendered + "\n", 1)
+        file.write_text(text, encoding="utf-8")
+
+
 def main() -> None:
     build = load_build_module(); money = load_money_module(); pricing_policy = load_pricing_policy_module(); super_site = load_super_site_module()
     super_site.apply(build, money)
@@ -224,6 +261,7 @@ def main() -> None:
     build.main()
     expand_super_service_hub()
     strengthen_internal_links()
+    ensure_hand_authored_business_schema(build)
     money.generate(build)
     super_site.generate_guides(build)
     pricing_policy.apply()
