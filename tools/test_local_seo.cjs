@@ -149,19 +149,26 @@ test('every page ships parseable JSON-LD',()=>{
   assert.deepEqual(bad,[]);
 });
 
-test('no page claims Greenwood city water is hard',()=>{
+test('no page claims this service area has hard city water',()=>{
   // Owner correction, 2026-11-13: Greenwood city water comes off Lake
   // Greenwood and is not hard. What shortens heater life on it is the
   // chlorine used to treat it, which consumes the sacrificial anode rod and
   // works on the elements. Real hardness, with iron and sulfur, is on the
   // wells outside the city. Four pages asserted hardness as plain fact.
   // Hardness claims about the county wells are correct and not matched here.
-  const wrong=[
-    /Greenwood'?s hard[- ]water/i,
-    /hard[- ]water areas? like Greenwood/i,
-    /Greenwood and other hard[- ]water/i,
-    /hard[- ]water[^.]{0,30}\bin Greenwood\b/i,
-  ];
+  // USGS county estimates from the owner's own data: Abbeville County about
+  // 14.0 mg/L (0.8 gpg, 231 samples) and Anderson County about 12.5 mg/L
+  // (0.7 gpg, 650 samples). Both soft. Calhoun Falls is in Abbeville County.
+  // Hardness claims about the WELLS outside these towns are correct and are
+  // deliberately not matched here.
+  const towns=['Greenwood','Abbeville','Anderson','Calhoun Falls','Ninety Six'];
+  const wrong=towns.flatMap(t=>[
+    new RegExp(`${t}'?s hard[- ]water`,'i'),
+    new RegExp(`hard[- ]water areas? like ${t}`,'i'),
+    new RegExp(`${t} and other hard[- ]water`,'i'),
+    new RegExp(`hard[- ]water[^.]{0,30}\\bin ${t}\\b`,'i'),
+    new RegExp(`${t}[^.]{0,30}\\bhas hard[- ]water`,'i'),
+  ]);
   const offenders=[];
   const walk=dir=>{
     for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
@@ -177,7 +184,7 @@ test('no page claims Greenwood city water is hard',()=>{
   };
   walk(root);
   assert.deepEqual(offenders,[],
-    'a page states Greenwood city water is hard, which the owner corrected');
+    'a page states this service area has hard city water, which the owner corrected');
 });
 
 test('water-quality pages never overstate what a health goal means',()=>{

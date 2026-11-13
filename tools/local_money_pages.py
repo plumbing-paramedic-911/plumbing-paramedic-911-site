@@ -37,6 +37,7 @@ LASTMODS = {
     "water-heater-repair-greenwood-sc": "2026-11-13",
     # New page.
     "water-quality-calhoun-falls-sc": "2026-11-13",
+    "water-quality-anderson-sc": "2026-11-13",
 }
 
 SERVICE_CALL_HTML = """\
@@ -256,6 +257,96 @@ MONEY_PAGES = {
             ("📍", "Greenwood Plumbing", "/service-areas/greenwood-sc/", "All Plumbing Paramedic 911 services in Greenwood."),
             ("📗", "Drain Maintenance Playbook", "/guides/drain-maintenance-playbook/", "Homeowner guidance for preventing and recognizing drain problems."),
             ("💰", "Upfront Pricing", "/pricing/", "Current service-call schedule and planning ranges."),
+        ],
+    },
+    "water-quality-anderson-sc": {
+        # Companion to water-quality-calhoun-falls-sc, from the owner's data
+        # for ZIP 29621. Same regulatory framing, verified the same way: the
+        # MCLG for both compounds is zero, and the enforceable MCLs are group
+        # totals of 80 ppb (TTHM) and 60 ppb (HAA5) under 40 CFR 141.64.
+        "title": "Anderson SC Water Quality | Plumbing Paramedic 911",
+        "description": "What is in Anderson SC tap water: two chlorine disinfection byproducts, a soft-water reading, five utilities, and what chlorine does to a water heater.",
+        "h1": "Anderson, SC Tap Water: What Is Actually In It",
+        "badge": "\u25cf Five Utilities \u2014 Chlorine &amp; Byproducts",
+        "city": "Anderson",
+        "area_type": "City",
+        "service_type": "Water Quality",
+        "parent_service": "/services/water-filtration-softener-systems/",
+        "parent_service_name": "Water Filtration &amp; Softeners",
+        "city_page": "/service-areas/anderson-sc/",
+        "city_page_name": "Anderson, SC",
+        "guide": "/guides/sc-homeowner-plumbing-survival-guide/",
+        "guide_name": "SC Homeowner's Plumbing Survival Guide",
+        "og": "/images/og/anderson-1200x630.jpg",
+        "intro": "Anderson tap water shows two compounds above EPA\u2019s health goals: bromodichloromethane at 4.15 ppb and dichloroacetic acid at 0.0071 ppm. Both are disinfection byproducts \u2014 what is left when chlorine meets the organic matter in surface water. The water here is also soft, and five different utilities serve ZIP 29621, which changes the answer depending on your address.",
+        "answer": "Those two compounds have a health goal of zero, which is why any detection reads as \u201cabove guidelines\u201d. The enforceable federal limits are different numbers and apply to group totals: 80 ppb for the four trihalomethanes together and 60 ppb for the five haloacetic acids. Anderson\u2019s readings are around 5% and 12% of those group limits. What the chlorine doing the treating also does is work through your water heater\u2019s anode rod and elements, and that part is ours.",
+        "cta_note": "Call (864) 446-8911. The service / diagnostic call is $79 Monday through Friday, 9 AM to 5 PM. A basic water test runs $99 to $199, and we quote filtration only after we know what is in your water.",
+        "local_context": """
+<p>Five water utilities serve ZIP 29621, which is unusual and worth knowing before you act on any area-wide report. <strong>Electric City Utilities</strong> is the big one at roughly 38,200 people. <strong>Broadway Water &amp; Sewer District</strong> serves about 9,600. Three much smaller systems \u2014 BGWC Town Creek, BGWC Calhoun Acres and Anderson Regional Joint Water System \u2014 serve a few hundred between them. Nearly all of it is purchased surface water, and your own numbers come from whichever system your meter belongs to, not from a ZIP-code average. The Northlake system has no contaminant results on file at all.</p>
+<p>Surface water carries natural organic matter, and the chlorine used to make it safe to drink reacts with that material. Bromodichloromethane is one of the trihalomethanes that reaction produces; dichloroacetic acid is one of the haloacetic acids. Finding them in chlorinated surface water is expected rather than alarming, and Anderson\u2019s readings are lower than several of the systems around it.</p>
+<p><strong>Anderson water is soft.</strong> USGS sampling across Anderson County \u2014 650 samples, a far larger set than most counties have \u2014 puts hardness near 12.5 mg/L, about 0.7 grains per gallon. That is soft by any standard, and it means a water softener is not the answer to anything you are experiencing on city water. Out on the wells toward Lake Hartwell it is a different question entirely.</p>
+""",
+        "deep_dive_label": "What the numbers mean",
+        "deep_dive_heading": "Above the goal is not the same as above the limit",
+        "deep_dive": """
+<h3>Two different numbers, routinely confused</h3>
+<p>EPA publishes two figures for a drinking-water contaminant. The <strong>MCLG</strong>, or Maximum Contaminant Level Goal, is the level at which there is no known or expected health risk, with a margin of safety \u2014 and for compounds treated as possible carcinogens over a lifetime of exposure it is simply set at zero. It is a goal, not a rule. The <strong>MCL</strong>, or Maximum Contaminant Level, is the enforceable legal limit a utility has to meet.</p>
+<p>Bromodichloromethane and dichloroacetic acid both carry an MCLG of zero, which is why a report flags them the instant they are detected at all. Neither is regulated individually at the enforceable level. Bromodichloromethane counts toward <strong>total trihalomethanes, limit 80 ppb</strong>; dichloroacetic acid counts toward <strong>the five haloacetic acids, limit 60 ppb</strong>, both as running annual averages of the group.</p>
+<p>Anderson\u2019s 4.15 ppb of bromodichloromethane sits against an 80 ppb group limit. The 0.0071 ppm of dichloroacetic acid is 7.1 ppb against a 60 ppb group limit. Those are single-compound readings and the group totals include species not shown here, so the compliance figures belong to each utility, not to us. Every public water system issues an annual Consumer Confidence Report with those running averages in it, and with five systems in this ZIP the only one that matters is the one serving your address.</p>
+<p>We are plumbers, not a testing laboratory or a health authority. On what is in the water and what it means for your health, your utility and SCDPH are the sources. What we can speak to is what chlorinated water does to the pipework and appliances we pull out of Anderson houses.</p>
+<h3>What chlorine does to your water heater</h3>
+<p>Every tank heater has a sacrificial anode rod \u2014 magnesium or aluminium, there to corrode <em>instead of</em> the steel tank. Chlorinated water consumes it faster. Once the rod is gone there is nothing between the water and the tank shell, and the clock on the tank starts.</p>
+<p>This is the most common cause we find behind a heater that failed earlier than it should have on city water: a spent anode rod nobody ever looked at. It also shows on the elements, and on rubber and elastomer parts \u2014 flex connector linings, washers, valve gaskets \u2014 which harden and crack sooner than a spec sheet suggests.</p>
+<p>Inspecting that rod and replacing it when it is more than about half gone is cheap next to a tank. On Anderson city water that is a two-to-three-year conversation, not a once-a-decade one.</p>
+<h3>Carbon, not reverse osmosis, for this particular problem</h3>
+<p>Area water reports often steer straight to reverse osmosis. For chlorine and its byproducts specifically, <strong>activated carbon is the right medium</strong> and a fraction of the cost. RO systems are built to remove dissolved solids; they include carbon stages, but buying RO to solve a chlorine-taste problem is paying for capability you are not using, and RO at the kitchen tap does nothing for the heater in your garage.</p>
+<p>If the taste and smell are what bother you, carbon at the tap or on the main is the honest recommendation. If you want the chlorine out before it reaches the water heater, that is a whole-house carbon conversation. And a softener, on 0.7 grain water, is equipment for a problem Anderson city water does not have.</p>
+<h3>Start with a test, or with the report you already paid for</h3>
+<p>On city water, your utility\u2019s Consumer Confidence Report is free and reports what they measure. On a well, there is no report and a $99 to $199 test is where any sensible decision starts. We quote filtration after a test, never from a brochure, and if the numbers say you do not need equipment we will tell you that.</p>
+""",
+        "symptoms": [
+            "Chlorine or swimming-pool smell and taste at the tap",
+            "A water heater that failed earlier than it should have",
+            "Rusty or discoloured hot water with clear cold water",
+            "Flex connectors, washers or valve gaskets failing early",
+            "You have never had the anode rod in your tank looked at",
+            "You are on a well toward Lake Hartwell and have never tested",
+        ],
+        "checks": [
+            "Establish which of the five utilities actually serves your address",
+            "Pull and read the anode rod, and say how much of it is left",
+            "Check the tank shell, fittings and T&amp;P valve for early corrosion",
+            "Inspect flex connectors and elastomer parts for hardening or cracking",
+            "Test the water when the decision needs numbers rather than a county average",
+        ],
+        "price_drivers": [
+            "Whether a test is needed first, at $99 to $199",
+            "Anode rod replacement versus a tank already past saving",
+            "Carbon at one tap versus carbon on the whole house",
+            "City water or a private well \u2014 completely different equipment",
+            "Access to the heater, the main line and a drain for a backwash system",
+        ],
+        "faqs": [
+            ("Is Anderson SC tap water safe to drink?",
+             "That is your utility\u2019s and SCDPH\u2019s determination, not ours. The public record shows two disinfection byproducts detected above EPA\u2019s health goals, which are set at zero for compounds of this kind, while the enforceable limits are group totals of 80 ppb for trihalomethanes and 60 ppb for haloacetic acids. Anderson\u2019s readings are roughly 5% and 12% of those. Read the Consumer Confidence Report from whichever of the five utilities serves your address."),
+            ("Which water utility serves my Anderson address?",
+             "ZIP 29621 is served by five: Electric City Utilities, which covers about 38,200 people, Broadway Water &amp; Sewer District at about 9,600, and the smaller BGWC Town Creek, BGWC Calhoun Acres and Anderson Regional Joint Water System. Your bill names yours. It matters, because an area-wide report blends systems that each measure their own water."),
+            ("What are bromodichloromethane and dichloroacetic acid?",
+             "Disinfection byproducts. Anderson\u2019s systems are on purchased surface water, which carries natural organic matter, and the chlorine used to disinfect it reacts with that material. Bromodichloromethane is one of the four trihalomethanes; dichloroacetic acid is one of the five haloacetic acids. Both are expected findings in chlorinated surface water."),
+            ("Do I need a water softener in Anderson?",
+             "On city water, no. USGS sampling across Anderson County \u2014 650 samples \u2014 puts hardness near 12.5 mg/L, about 0.7 grains per gallon, which is soft. A softener removes hardness you do not have. On a private well it is a different question and a test should answer it."),
+            ("Should I buy a reverse osmosis system for chlorine?",
+             "Usually not. Activated carbon is the correct medium for chlorine, chlorine taste and odour, and trihalomethanes, and it costs far less. Reverse osmosis is built for dissolved solids; it includes carbon stages, but buying RO for a chlorine problem is paying for capability you are not using. RO at the kitchen sink also does nothing for the water heater in the garage."),
+            ("Does chlorine shorten the life of my water heater?",
+             "It consumes the sacrificial anode rod faster, and that rod is the only thing protecting the steel tank from corroding. Once it is gone the tank is next. It also works on the elements and on rubber and elastomer parts. This is the most common cause we find behind a heater that failed early on city water."),
+            ("How much does a water test cost?",
+             "A basic test runs $99 to $199 and covers bacteria, nitrates, iron, hardness and pH. On city water, start with your utility\u2019s Consumer Confidence Report, which is free and reports what they measure at the plant and in the distribution system."),
+        ],
+        "related": [
+            ("\U0001f6b0", "Water Filtration &amp; Softeners", "/services/water-filtration-softener-systems/", "Carbon filtration, softeners where actually needed, and testing."),
+            ("\U0001f525", "Water Heater Service", "/services/water-heater-repair-replacement/", "Anode rods, elements, repair and replacement."),
+            ("\U0001f4cd", "Anderson Plumbing", "/service-areas/anderson-sc/", "All Plumbing Paramedic 911 services in Anderson."),
+            ("\U0001f4b5", "Anderson Plumbing Prices", "/plumbing-prices-anderson-sc/", "All 38 published flat rates, regular and after hours."),
         ],
     },
     "water-quality-calhoun-falls-sc": {
@@ -510,7 +601,7 @@ MONEY_PAGES = {
         "answer": "If the tank itself is leaking, replacement is usually the correct path. If the tank is sound, many no-hot-water failures are component problems. The diagnosis should identify the failed part and any safety/code issues before the conversation turns to buying a new heater.",
         "local_context": """
 <p>Abbeville has historic in-town homes, mid-century houses, newer subdivisions and rural properties across the county. We encounter older atmospheric-vent gas heaters, electric tanks, propane equipment and newer tankless systems. Crawlspaces, closets and additions can make access, drainage or venting as important as the appliance itself.</p>
-<p>Local hard-water and sediment symptoms can reduce hot-water capacity or create popping and rumbling. We also verify pans, drains, expansion control, electrical or gas supply and venting so a replacement quote covers the complete installation rather than only the tank.</p>
+<p>Abbeville city water is soft \u2014 USGS sampling across the county puts it near 14 mg/L, about 0.8 grains per gallon \u2014 so hardness is not what shortens heater life here. The chlorine used to treat it works through the sacrificial anode rod, and sediment settles and insulates the lower element, which is the popping and rumbling you hear. Genuine hardness, with iron and sulfur, is on the wells outside town. We also verify pans, drains, expansion control, electrical or gas supply and venting so a replacement quote covers the complete installation rather than only the tank.</p>
 """,
         "symptoms": [
             "No hot water, intermittent hot water or long recovery time",
@@ -865,11 +956,11 @@ LINK_TARGETS = {
     "service-areas/mccormick-sc/index.html": ["well-pump-repair-mccormick-sc"],
     "service-areas/iva-lake-secession-sc/index.html": ["well-pump-repair-iva-lake-secession-sc"],
     "service-areas/greenwood-sc/index.html": ["drain-cleaning-greenwood-sc", "water-heater-repair-greenwood-sc", "plumbing-prices-greenwood-sc"],
-    "service-areas/anderson-sc/index.html": ["water-heater-repair-anderson-sc", "emergency-plumber-anderson-sc", "drain-cleaning-anderson-sc", "plumbing-prices-anderson-sc"],
+    "service-areas/anderson-sc/index.html": ["water-heater-repair-anderson-sc", "emergency-plumber-anderson-sc", "drain-cleaning-anderson-sc", "plumbing-prices-anderson-sc", "water-quality-anderson-sc"],
     "service-areas/abbeville-sc/index.html": ["emergency-plumber-abbeville-sc", "drain-cleaning-abbeville-sc", "water-heater-repair-abbeville-sc", "sewer-line-repair-abbeville-sc"],
     "pricing/index.html": ["plumbing-prices-greenwood-sc", "plumbing-prices-anderson-sc"],
     "service-areas/calhoun-falls-sc/index.html": ["water-quality-calhoun-falls-sc"],
-    "services/water-filtration-softener-systems/index.html": ["water-quality-calhoun-falls-sc"],
+    "services/water-filtration-softener-systems/index.html": ["water-quality-calhoun-falls-sc", "water-quality-anderson-sc"],
     "services/index.html": list(MONEY_PAGES.keys()),
 }
 

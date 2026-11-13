@@ -1236,7 +1236,7 @@ CITIES = {
 <h3>Common services in Ninety Six</h3>
 <ul>
   <li><strong>Same-day service</strong> — typical 25-minute response</li>
-  <li><strong>Water heater repair and replacement</strong> — hard-water-related failures</li>
+  <li><strong>Water heater repair and replacement</strong> — anode rods and elements worked through by chlorinated city water, and hardness on the wells outside town</li>
   <li><strong>Drain cleaning and sewer service</strong></li>
   <li><strong>Well pump repair</strong> — for properties on private well</li>
   <li><strong>Water softener installation</strong></li>
