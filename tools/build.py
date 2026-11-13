@@ -2474,13 +2474,41 @@ def render_faq():
 
 
 def render_reviews():
+    """Reviews page.
+
+    Deliberately carries no testimonial quotes. Six attributed testimonials
+    exist in the legacy 8911 archive, but nothing here establishes that they
+    are real customers, and the FTC's Consumer Reviews and Testimonials Rule
+    (16 CFR 465, effective 2024-10-21) makes disseminating a fabricated
+    testimonial a civil-penalty matter. They go in only once the owner
+    confirms they are genuine.
+
+    No Review or AggregateRating markup either: Google stopped showing review
+    stars in 2019 for a business marking up reviews about itself, so it would
+    add risk and no rich result.
+    """
     path = "/reviews/"
-    title = "Reviews — Plumbing Paramedic 911 | Abbeville SC"
-    description = "Real customer reviews of Plumbing Paramedic 911 from homeowners across Abbeville, Greenwood, Anderson &amp; Upstate SC. A+ BBB rated, 30+ Google reviews. Call (864) 446-8911."
+    title = "Reviews &amp; Our Guarantees | Plumbing Paramedic 911"
+    description = "Where to read real reviews of Plumbing Paramedic 911, and the guarantees behind them: a written price before work, a 2-year warranty, and a direct line to Eric."
     breadcrumb_items = [("Home","/"),("Reviews", path)]
+    faqs = [
+        ("Where can I read your reviews?",
+         "On our Google Business Profile, which is where most Upstate SC homeowners leave them, and on our BBB profile and Facebook page. We link all three below. We do not reprint reviews on this page \u2014 you should read them where they were written, with the reviewer attached."),
+        ("How many reviews do you have?",
+         "30-plus on Google and growing, with an A+ BBB rating. We are a one-truck operation, not a franchise with a call centre, so the count grows at the speed of actual jobs."),
+        ("What is your warranty?",
+         "Two years on parts and labour for repairs and installations. If something we fixed fails inside that window, we come back and make it right at no charge."),
+        ("Do I get the price before the work starts?",
+         "Yes, in writing, and you approve it before anything begins. If we find something that changes the job \u2014 access, a code-required upgrade, a hidden condition \u2014 we stop, explain it and get your approval rather than putting it on the invoice afterward."),
+        ("What happens if I am not happy with the work?",
+         "Call (864) 446-8911 and ask for Eric. You will reach the person who did the work or sent the technician, not a dispatcher in another state. We would rather fix it than read about it."),
+        ("Who actually shows up?",
+         "Eric Callaway is a South Carolina Master Plumber and has been in the trade since 1996, running Plumbing Paramedic 911 since 2015. The licence, the warranty and the phone number all belong to the same person."),
+    ]
     extra = [
-        {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":"Reviews","isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":BASE_URL+"/#localbusiness"},"inLanguage":"en-US"},
+        {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":"Reviews","isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":BASE_URL+"/#localbusiness"},"inLanguage":"en-US","speakable":{"@type":"SpeakableSpecification","cssSelector":[".speakable-headline",".speakable-summary"]}},
         breadcrumb_ld(breadcrumb_items),
+        faq_ld(faqs),
     ]
     h = head(title, description, path, extra_jsonld=extra, body_page="reviews")
     n = nav()
@@ -2489,23 +2517,79 @@ def render_reviews():
   <section class="page-header">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">{breadcrumb_html(breadcrumb_items)}</nav>
-      <h1 class="speakable-headline">Customer Reviews</h1>
-      <p class="speakable-summary">A+ BBB rated with 30+ Google reviews and growing. Read real customer reviews on our Google Business Profile.</p>
+      <h1 class="speakable-headline">Reviews &amp; What We Guarantee</h1>
+      <p class="speakable-summary">30-plus Google reviews and an A+ BBB rating. Read them where they were written \u2014 and here is what stands behind them.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+        <a href="{GBP_MAPS_URL}" target="_blank" rel="noopener" class="btn btn-blue btn-lg">Read our Google reviews</a>
+        <a href="tel:+18644468911" class="btn btn-green btn-lg speakable-phone">&#128222; (864) 446-8911</a>
+      </div>
     </div>
   </section>
+
   <section class="section">
-    <div class="container">
-      <div style="text-align:center;max-width:640px;margin:0 auto;background:var(--bg-alt, #f5f7fa);border-radius:12px;padding:32px 24px"><p class="lead" style="margin:0 0 18px">Read what real customers say about Plumbing Paramedic 911 on our Google Business Profile.</p><a href="https://maps.google.com/?cid=12319185328943590636" target="_blank" rel="noopener" class="btn btn-blue">See Our Google Reviews</a></div>
+    <div class="container" style="max-width:900px">
+      <div class="card" style="border-left:5px solid var(--green)">
+        <span class="label">Why this page has no quotes on it</span>
+        <h2 style="font-size:1.35rem;margin:7px 0 10px">We would rather you read the real ones</h2>
+        <p style="margin:0">Any plumber can print five glowing paragraphs on their own website, and you have no way to tell whether a real person wrote them. So we do not. Our reviews live on Google, the BBB and Facebook, with the reviewer's name attached and out of our control. That is the version worth reading, and all three are linked on this page.</p>
+      </div>
     </div>
   </section>
+
   <section class="section bg-alt">
-    <div class="container" style="text-align:center;max-width:680px">
-      <h2>Had a good experience? Leave a review.</h2>
-      <p class="lead" style="margin:14px auto 24px">Your review helps other Upstate SC homeowners find an honest plumber.</p>
+    <div class="container">
+      <div style="text-align:center;max-width:660px;margin:0 auto 32px">
+        <span class="label">The Promises Behind The Reviews</span>
+        <h2>Four things we commit to on every job</h2>
+      </div>
+      <div class="grid-2" style="gap:24px;max-width:960px;margin:0 auto">
+        <div class="card"><h3 style="margin:0 0 8px">A written price first</h3><p style="margin:0">You see the number and approve it before work starts. If the job changes, we stop and explain before going further \u2014 not afterwards on the invoice.</p></div>
+        <div class="card"><h3 style="margin:0 0 8px">A 2-year warranty</h3><p style="margin:0">Parts and labour, on repairs and installations. If it fails inside two years we come back and fix it at no charge.</p></div>
+        <div class="card"><h3 style="margin:0 0 8px">A licensed Master Plumber</h3><p style="margin:0">Eric Callaway, SC Master Plumber, in the trade since 1996. The licence and the phone number belong to the same person.</p></div>
+        <div class="card"><h3 style="margin:0 0 8px">Published prices</h3><p style="margin:0">Our flat rates are <a href="/pricing/">on the website</a>, including the after-hours column. You can check the number before you call.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:860px">
+      <span class="label">If Something Goes Wrong</span>
+      <h2>Call the same number and ask for Eric</h2>
+      <p class="lead">There is no regional office and no ticket queue. If a repair did not hold, or the bill did not match what you were told, you reach the person who did the work or sent the technician. Most complaints a homeowner has about a plumber come from not being able to get hold of anyone afterwards. That is the part we can actually promise.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+        <a href="tel:+18644468911" class="btn btn-green btn-lg speakable-phone">&#128222; (864) 446-8911</a>
+        <a href="/contact/" class="btn btn-blue btn-lg">Send us a message</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="container" style="text-align:center;max-width:720px">
+      <span class="label">Where To Read Them</span>
+      <h2>Three places, none of them us</h2>
+      <p class="lead" style="margin:14px auto 26px">Reviews on these profiles are written by customers and we cannot edit them. That is the point.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="https://maps.google.com/?cid=12319185328943590636" target="_blank" rel="noopener" class="btn btn-blue">Review on Google</a>
-        <a href="https://www.bbb.org/us/sc/abbeville/profile/plumber/plumbing-paramedic-911-0673-90010577" target="_blank" rel="noopener" class="btn btn-blue">Review on BBB</a>
-        <a href="https://www.facebook.com/PlumbingParamedic911/" target="_blank" rel="noopener" class="btn btn-blue">Review on Facebook</a>
+        <a href="{GBP_MAPS_URL}" target="_blank" rel="noopener" class="btn btn-blue">Google</a>
+        <a href="https://www.bbb.org/us/sc/abbeville/profile/plumber/plumbing-paramedic-911-0673-90010577" target="_blank" rel="noopener" class="btn btn-blue">BBB (A+ rated)</a>
+        <a href="https://www.facebook.com/PlumbingParamedic911/" target="_blank" rel="noopener" class="btn btn-blue">Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <span class="label">Reviews FAQ</span>
+      <h2 style="margin-bottom:28px">Questions about our reviews and guarantees</h2>
+      {faq_html(faqs)}
+    </div>
+  </section>
+
+  <section style="background:linear-gradient(135deg,var(--blue-dk),var(--blue));padding:64px 0">
+    <div class="container" style="text-align:center;max-width:760px">
+      <h2 style="color:white;margin-bottom:10px">Had us out? Leave an honest review.</h2>
+      <p style="color:rgba(255,255,255,.9);margin-bottom:24px">Good or bad, it helps the next Upstate SC homeowner decide. We do not offer anything in exchange for a review and we never will \u2014 that would make every other review on the profile worth less.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="{GBP_MAPS_URL}" target="_blank" rel="noopener" class="btn btn-outline-white btn-xl">Review us on Google</a>
       </div>
     </div>
   </section>

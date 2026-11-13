@@ -34,12 +34,6 @@ const SCHEMA_CITIES=[
   'ninety-six-sc','calhoun-falls-sc','due-west-sc',
   'iva-lake-secession-sc','savannah-lakes-village-sc',
 ];
-const HOMEPAGE_LOCAL_PAGES=[
-  'plumbing-prices-greenwood-sc',
-  'plumbing-prices-anderson-sc',
-  'emergency-plumber-anderson-sc',
-  'drain-cleaning-anderson-sc',
-];
 
 const graphOf=rel=>{
   const text=read(rel);
@@ -77,11 +71,27 @@ test('every city page under /service-areas/ is covered by these tests',()=>{
   assert.deepEqual(missing,[],'a city page exists that no business-schema test covers');
 });
 
-test('the homepage links the high-intent local pages',()=>{
+test('the homepage links every city+service page, not a subset',()=>{
+  // It linked 4 of 16 and nothing linked the other 12 from the strongest page
+  // on the site. The block is generated from MONEY_PAGES now, so this asserts
+  // the invariant rather than a hand-kept list: every root-level *-sc page
+  // directory must be linked from the homepage.
   const home=read('index.html');
-  for(const slug of HOMEPAGE_LOCAL_PAGES)
-    assert.ok(home.includes(`href="/${slug}/"`),
-      `index.html does not link /${slug}/ - it only gets found through deeper pages`);
+  const pages=fs.readdirSync(root,{withFileTypes:true})
+    .filter(e=>e.isDirectory()&&/-sc$/.test(e.name)
+      &&fs.existsSync(path.join(root,e.name,'index.html')))
+    .map(e=>e.name);
+  assert.ok(pages.length>=14,`expected the local pages to exist, found ${pages.length}`);
+  const missing=pages.filter(slug=>!home.includes(`href="/${slug}/"`));
+  assert.deepEqual(missing,[],'the homepage does not link these local pages');
+});
+
+test('the homepage keeps the markers the generated directory needs',()=>{
+  // Losing either marker makes the build fail loudly rather than quietly
+  // shipping a homepage that links nothing; this catches it at test time too.
+  const home=read('index.html');
+  assert.match(home,/money-page-directory:start/,'index.html lost the directory start marker');
+  assert.match(home,/money-page-directory:end/,'index.html lost the directory end marker');
 });
 
 test('the pricing hub is not scoped to one city',()=>{
