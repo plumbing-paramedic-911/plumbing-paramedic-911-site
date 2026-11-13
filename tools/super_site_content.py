@@ -84,6 +84,8 @@ SERVICE_ADDITIONS = {
 <p>Replacement material depends on the building, code requirements, water conditions and access. PEX is common for residential repiping because it can reduce the number of fittings and wall openings, but the right layout still depends on the individual property.</p>
 <h3>Protect the parts of the home that are not plumbing</h3>
 <p>Repiping is also an access project. We plan routes around crawlspaces, attics, cabinets and finished walls so the plumbing work solves the problem without creating unnecessary demolition.</p>
+<h3>Whole-home repipe pricing</h3>
+<p>If a full repipe is what your home needs, the published typical range and what the written quote covers are laid out on our <a href="/specials/whole-home-repipe/">whole-home repipe pricing page</a> for Abbeville, Greenwood and McCormick.</p>
 """,
         "faqs": [
             ("How much does a whole-house repipe cost?", "Our current planning range is $3,499–$8,999 for a whole-house repipe. Home size, number of fixtures, access, existing material and required finish work can change the final written quote."),

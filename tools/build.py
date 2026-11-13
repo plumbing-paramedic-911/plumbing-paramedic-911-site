@@ -1273,10 +1273,14 @@ def city_faqs(c):
 
 
 CORE_MEMBERSHIP_MARKETS = {"abbeville-sc", "greenwood-sc", "anderson-sc", "mccormick-sc"}
-REPIPE_PROMO_MARKETS = {"abbeville-sc", "greenwood-sc", "mccormick-sc"}
-# The seasonal slot holds one offer per city page. These are the markets whose
-# page is not already carrying the repipe promotion.
-WINTERIZATION_PROMO_MARKETS = {"anderson-sc", "laurens-sc", "ninety-six-sc", "calhoun-falls-sc", "due-west-sc"}
+# The seasonal slot holds one offer per city page. The October 2026 repipe
+# promotion expired on 2026-10-31, so every market that carried it now carries
+# the winter offer instead. /specials/whole-home-repipe/ remains as an
+# evergreen repipe pricing page, linked from the repiping service page.
+WINTERIZATION_PROMO_MARKETS = {
+    "abbeville-sc", "greenwood-sc", "mccormick-sc",
+    "anderson-sc", "laurens-sc", "ninety-six-sc", "calhoun-falls-sc", "due-west-sc",
+}
 
 
 def city_winterization_promo(slug: str, city: str) -> str:
@@ -1295,30 +1299,6 @@ def city_winterization_promo(slug: str, city: str) -> str:
           <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
             <a href="/specials/winterization/" class="btn btn-green btn-lg">View Offer &amp; Rates →</a>
             <a href="/contact/?service=winterization&amp;offer=winter-50" class="btn btn-outline-white btn-lg">Schedule Winterization</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-"""
-
-
-def city_repipe_promo(slug: str, city: str) -> str:
-    if slug not in REPIPE_PROMO_MARKETS:
-        return ""
-    return f"""
-  <section class="section" style="padding-top:34px;padding-bottom:34px">
-    <div class="container">
-      <div style="background:linear-gradient(135deg,#0D47A1,#1565C0);border:3px solid var(--green);border-radius:var(--r2);padding:30px;color:white">
-        <div class="grid-2" style="gap:34px;align-items:center">
-          <div>
-            <span class="chip" style="background:var(--green);color:white;margin-bottom:12px">October 2026 Repipe Offer</span>
-            <h2 style="color:white;margin-bottom:10px">Save $250 on a qualifying whole-home repipe in {city}</h2>
-            <p style="color:rgba(255,255,255,.9);font-size:1.02rem;line-height:1.65;margin-bottom:0">Our published typical range is $3,499–$8,999. Eligible projects receive $250 off the written flat-rate price when booked by October 31, 2026.</p>
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-            <a href="/specials/whole-home-repipe/" class="btn btn-green btn-lg">View Offer &amp; Terms →</a>
-            <a href="/contact/?service=whole-home-repipe&amp;offer=october-250" class="btn btn-outline-white btn-lg">Request a Repipe Quote</a>
           </div>
         </div>
       </div>
@@ -1427,7 +1407,7 @@ CITY_PAGE_TPL = """\
 
 {membership_promo}
 
-{repipe_promo}
+{seasonal_promo}
 
   <section class="section">
     <div class="container" style="max-width:820px">
@@ -1477,7 +1457,7 @@ def render_city_page(slug: str, c: dict) -> str:
         city_map=map_embed(f"https://maps.google.com/maps?q={c['city'].replace(' ','+')}%2C+{c['abbr']}&amp;z=12&amp;output=embed", f"Map of {c['city']}, {c['abbr']} — Plumbing Paramedic 911 service area", 260),
         gbp_url=GBP_MAPS_URL,
         faqs_html=faq_html(city_faqs(c)),
-        repipe_promo=city_repipe_promo(slug, c["city"]) + city_winterization_promo(slug, c["city"]),
+        seasonal_promo=city_winterization_promo(slug, c["city"]),
         membership_promo=city_membership_promo(slug, c["city"]),
     )
     return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
@@ -1895,64 +1875,76 @@ def render_membership():
     return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
 
 
-def render_repipe_promotion():
+def render_repipe_page():
+    """Evergreen whole-home repipe pricing page.
+
+    This was the October 2026 "$250 off" promotion page. That offer expired on
+    2026-10-31, so the dated discount, the countdown chip and the expired
+    priceValidUntil offer have been removed. The published $3,499-$8,999 range
+    and the repipe decision content stay, because that is what the page ranks
+    for. A future promotion can be layered back on top of this page.
+    """
     path = "/specials/whole-home-repipe/"
-    title = "$250 Off Whole-Home Repiping | Plumbing Paramedic 911"
-    description = "Save $250 on a qualifying whole-home repipe booked by October 31, 2026 in Abbeville, Greenwood or McCormick, SC. Published typical range $3,499–$8,999."
+    title = "Whole-Home Repipe Cost in Upstate SC | Plumbing Paramedic 911"
+    description = "Whole-home repiping in Abbeville, Greenwood and McCormick, SC. Published typical range $3,499-$8,999, written flat-rate price before work starts."
     faqs = [
-        ("How much does a whole-home repipe typically cost?", "Our published typical range is $3,499–$8,999. Home size, fixture count, access, pipe material and restoration needs affect the final written flat-rate price."),
-        ("How does the $250 repipe discount work?", "For an eligible residential whole-home water-supply repipe, we reduce the written project price by $250. The agreement must be signed by October 31, 2026."),
-        ("Where is the October repipe offer available?", "The promotion is available for eligible homes in Abbeville, Greenwood and McCormick, South Carolina, including surrounding areas we normally serve."),
-        ("What is excluded from the promotion?", "The offer does not apply to spot repairs, drain or sewer repiping, exterior water-service lines, permits, drywall, paint, carpentry or other restoration unless those items are specifically included in the written scope."),
-        ("Can I combine this offer with another discount?", "No. The $250 repipe discount cannot be combined with another promotion or a membership repair discount on the same project."),
+        ("How much does a whole-home repipe typically cost?", "Our published typical range is $3,499-$8,999. Home size, fixture count, access, pipe material and restoration needs affect the final written flat-rate price."),
+        ("Do I get the price in writing before work starts?", "Yes. We inspect the piping, count fixtures and review access first, then give you a written flat-rate price for the whole project. You approve that number before anything is opened up."),
+        ("Where do you repipe homes?", "Abbeville, Greenwood and McCormick, South Carolina, along with the surrounding Upstate areas we normally serve. There is no distance surcharge inside our service area."),
+        ("What is not included in a repipe quote?", "Unless your written scope specifically lists them, a repipe quote excludes drain or sewer repiping, exterior water-service lines, permits, and drywall, paint or carpentry restoration."),
+        ("Does a VIP Diamond Plan membership discount a repipe?", "The 15% member discount applies to covered repairs. A whole-home repipe is a planned project priced on its own written scope, so call us and we will tell you exactly what applies to your job."),
+        ("Can I repair instead of repiping the whole house?", "Often, yes. One split fitting or pinhole leak is a spot repair, not a repipe. We only recommend a full repipe when the failure pattern, material and flow show the rest of the system is going the same way."),
     ]
-    breadcrumb_items = [("Home", "/"), ("Whole-Home Repipe Offer", path)]
+    breadcrumb_items = [("Home", "/"), ("Whole-Home Repiping", path)]
     service_id = BASE_URL + path + "#service"
     extra = [
         {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":title,"isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":service_id},"inLanguage":"en-US"},
-        {"@type":"Service","@id":service_id,"name":"Whole-Home Water-Supply Repiping","serviceType":"Residential whole-home water-supply repiping","provider":{"@id":BASE_URL+"/#localbusiness"},"areaServed":[{"@type":"City","name":city+", South Carolina"} for city in ["Abbeville","Greenwood","McCormick"]],"offers":{"@type":"Offer","name":"October 2026 Whole-Home Repipe Promotion","description":"$250 off an eligible whole-home water-supply repipe","priceCurrency":"USD","priceValidUntil":"2026-10-31","url":BASE_URL+path}},
+        {"@type":"Service","@id":service_id,"name":"Whole-Home Water-Supply Repiping","serviceType":"Residential whole-home water-supply repiping","provider":{"@id":BASE_URL+"/#localbusiness"},"areaServed":[{"@type":"City","name":city+", South Carolina"} for city in ["Abbeville","Greenwood","McCormick"]],"offers":{"@type":"AggregateOffer","name":"Whole-Home Water-Supply Repipe","description":"Published typical range for a residential whole-home water-supply repipe, quoted as a written flat-rate price after an on-site assessment","priceCurrency":"USD","lowPrice":"3499","highPrice":"8999","url":BASE_URL+path}},
         breadcrumb_ld(breadcrumb_items),
         faq_ld(faqs),
     ]
-    h = head(title, description, path, extra_jsonld=extra, body_page="repipe-promotion")
+    h = head(title, description, path, extra_jsonld=extra, body_page="whole-home-repipe")
     body = f"""\
 <main>
   <section class="service-hero">
     <div class="container">
-      <nav class="city-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>Whole-Home Repipe Offer</span></nav>
-      <div class="chip chip-live" style="margin-bottom:14px">Offer Ends October 31, 2026</div>
-      <h1 class="speakable-headline" style="color:white">Save $250 on a Whole-Home Repipe</h1>
-      <p class="lead lead-white speakable-summary" style="max-width:720px;margin-bottom:26px">Qualifying homeowners in Abbeville, Greenwood and McCormick receive $250 off the written flat-rate price of a complete water-supply repipe.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap"><a href="/contact/?service=whole-home-repipe&amp;offer=october-250" class="btn btn-green btn-xl">Request a Repipe Quote</a><a href="tel:+18644468911" class="btn btn-outline-white btn-xl speakable-phone">📞 (864) 446-8911</a></div>
+      <nav class="city-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>Whole-Home Repiping</span></nav>
+      <div class="chip chip-live" style="margin-bottom:14px">Published Range $3,499-$8,999</div>
+      <h1 class="speakable-headline" style="color:white">Whole-Home Repiping in Upstate South Carolina</h1>
+      <p class="lead lead-white speakable-summary" style="max-width:720px;margin-bottom:26px">A written flat-rate price for the whole project before we open a wall. Serving Abbeville, Greenwood, McCormick and the surrounding Upstate.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a href="/contact/?service=whole-home-repipe" class="btn btn-green btn-xl">Request a Repipe Quote</a><a href="tel:+18644468911" class="btn btn-outline-white btn-xl speakable-phone">&#128222; (864) 446-8911</a></div>
     </div>
   </section>
   <section class="section">
     <div class="container grid-2" style="gap:48px;align-items:start">
       <article class="prose">
         <span class="label">Transparent Repipe Pricing</span>
-        <h2>See the normal range before the discount</h2>
-        <p>Our published typical whole-home repipe range is <strong>$3,499–$8,999</strong>. If your project qualifies, we subtract <strong>$250</strong> from the exact written flat-rate price—not from an inflated promotional number.</p>
-        <p>We inspect the existing piping, count fixtures, review access and explain the recommended material before you approve any work. The quote lists what is included and the final price before the project begins.</p>
-        <h3>Eligible service area</h3>
-        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-blue btn-sm" href="/service-areas/abbeville-sc/">Abbeville →</a><a class="btn btn-blue btn-sm" href="/service-areas/greenwood-sc/">Greenwood →</a><a class="btn btn-blue btn-sm" href="/service-areas/mccormick-sc/">McCormick →</a></div>
+        <h2>What a whole-home repipe costs here</h2>
+        <p>Our published typical whole-home repipe range is <strong>$3,499-$8,999</strong>. Where your home lands in that range comes down to square footage, how many fixtures are fed, how reachable the existing runs are, the material we repipe in, and how much wall and ceiling has to be opened.</p>
+        <p>We inspect the existing piping, count fixtures, review access and explain the recommended material before you approve any work. The quote lists what is included and the final price before the project begins. No hourly meter running while we work.</p>
+        <h3>When a spot repair is the better answer</h3>
+        <p>A single split fitting, a freeze break or one pinhole leak is a repair, not a repipe. We would rather fix the one failure than sell you a project you do not need. A repipe earns its cost when leaks keep showing up in different parts of the house, when corroded galvanized pipe has choked your flow down, or when the material itself has a failure history.</p>
+        <p>More on the difference, and what a single pipe repair runs: <a href="/services/pipe-repair-repiping/">pipe repair and repiping</a>.</p>
+        <h3>Where we repipe</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-blue btn-sm" href="/service-areas/abbeville-sc/">Abbeville &#8594;</a><a class="btn btn-blue btn-sm" href="/service-areas/greenwood-sc/">Greenwood &#8594;</a><a class="btn btn-blue btn-sm" href="/service-areas/mccormick-sc/">McCormick &#8594;</a></div>
       </article>
       <aside class="card" style="border:3px solid var(--green)">
-        <div style="font-family:var(--ff-head);font-size:2.5rem;font-weight:900;color:var(--green-dk);text-align:center">$250 OFF</div>
-        <h2 style="font-size:1.3rem;text-align:center;margin:8px 0 18px">Qualifying whole-home water-supply repipe</h2>
-        <ul class="check-list"><li>Agreement signed by October 31, 2026</li><li>Written flat-rate price before work</li><li>2-year warranty on our work</li><li>SC Master Plumber</li></ul>
-        <a href="/contact/?service=whole-home-repipe&amp;offer=october-250" class="btn btn-green btn-lg" style="width:100%;justify-content:center;margin-top:18px">Request Your Quote</a>
+        <div style="font-family:var(--ff-head);font-size:2rem;font-weight:900;color:var(--green-dk);text-align:center">$3,499-$8,999</div>
+        <h2 style="font-size:1.3rem;text-align:center;margin:8px 0 18px">Published range, whole-home water-supply repipe</h2>
+        <ul class="check-list"><li>Written flat-rate price before work</li><li>On-site assessment first, no phone guesses</li><li>2-year warranty on our work</li><li>SC Master Plumber, in the trade since 1996</li></ul>
+        <a href="/contact/?service=whole-home-repipe" class="btn btn-green btn-lg" style="width:100%;justify-content:center;margin-top:18px">Request Your Quote</a>
       </aside>
     </div>
   </section>
   <section class="section bg-alt">
     <div class="container" style="max-width:860px">
-      <span class="label">Promotion Terms</span>
-      <h2>Clear terms before you schedule</h2>
-      <p>Valid for one qualifying residential whole-home water-supply repipe in the listed service area. Agreement must be signed by October 31, 2026. Excludes spot repairs, drain or sewer repiping, exterior water-service lines, permits and restoration work unless specifically included in the written scope. Cannot be combined with another promotion or membership repair discount. Final price and eligibility are confirmed after an on-site assessment.</p>
+      <span class="label">How The Price Is Set</span>
+      <h2>What the written quote covers</h2>
+      <p>Your quote covers the water-supply repipe scope we list on it: the new runs, fittings, valves, connections at each fixture, pressure testing and the 2-year warranty on our work. Unless your scope specifically includes them, it does not cover drain or sewer repiping, the exterior water-service line, permits, or drywall, paint and carpentry restoration. Final price and scope are confirmed after an on-site assessment, and you see that number before we start.</p>
     </div>
   </section>
   <section class="section">
-    <div class="container" style="max-width:820px"><span class="label">Whole-Home Repipe FAQ</span><h2 style="margin-bottom:28px">Questions about the October offer</h2>{faq_html(faqs)}</div>
+    <div class="container" style="max-width:820px"><span class="label">Whole-Home Repipe FAQ</span><h2 style="margin-bottom:28px">Repiping questions Upstate homeowners ask</h2>{faq_html(faqs)}</div>
   </section>
 </main>
 """
@@ -2552,7 +2544,7 @@ def main():
     write("contact/index.html", render_contact())
     write("pricing/index.html", render_pricing())
     write("membership/index.html", render_membership())
-    write("specials/whole-home-repipe/index.html", render_repipe_promotion())
+    write("specials/whole-home-repipe/index.html", render_repipe_page())
     write("specials/winterization/index.html", render_winterization_promotion())
     write("faq/index.html", render_faq())
     write("reviews/index.html", render_reviews())
