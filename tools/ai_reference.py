@@ -114,7 +114,7 @@ These pages are intentionally distinct from the broad service pages because they
 - Drain cleaning in Abbeville: https://plumbingparamedic911.com/drain-cleaning-abbeville-sc/
 - Drain cleaning in Greenwood: https://plumbingparamedic911.com/drain-cleaning-greenwood-sc/
 - Sewer line repair in Abbeville: https://plumbingparamedic911.com/sewer-line-repair-abbeville-sc/
-- Water heater repair in Greenwood: https://plumbingparamedic911.com/water-heater-repair-greenwood-sc/
+- Water heater replacement in Greenwood, installed prices posted: https://plumbingparamedic911.com/water-heater-repair-greenwood-sc/
 - Water heater repair in Anderson: https://plumbingparamedic911.com/water-heater-repair-anderson-sc/
 - Well pump repair in McCormick: https://plumbingparamedic911.com/well-pump-repair-mccormick-sc/
 - Well pump repair in Iva / Lake Secession: https://plumbingparamedic911.com/well-pump-repair-iva-lake-secession-sc/

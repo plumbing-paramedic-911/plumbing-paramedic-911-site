@@ -10,6 +10,11 @@ const estimator=require('../ops/estimator.js');
 const snapshot=JSON.parse(fs.readFileSync(path.join(__dirname,'price_book_snapshot.json'),'utf8'));
 
 const PRICED_PAGES=['plumbing-prices-greenwood-sc','plumbing-prices-anderson-sc'];
+// Pages that publish one group of the book rather than the whole table. Their
+// rows must still be the book's rows; there are just fewer of them.
+const PARTIAL_PRICED_PAGES=[
+  {slug:'water-heater-repair-greenwood-sc',group:'Water heaters'},
+];
 const ROW=/<td class="job-cell">(.*?)<\/td><td class="price-cell" data-label="Regular hours">\$([\d,]+)<\/td><td class="price-cell" data-label="After hours">\$([\d,]+)<\/td>/g;
 const num=v=>Number(String(v).replace(/,/g,''));
 const read=slug=>fs.readFileSync(path.join(root,slug,'index.html'),'utf8');
@@ -52,6 +57,38 @@ test('every published price is the snapshot price, and what the estimator quotes
       assert.equal(estimator.priceFor(line,{member:true,afterHours:false}),item.member_price,`${slug}: ${job} estimator, member`);
       assert.equal(estimator.priceFor(line,{member:true,afterHours:true}),item.member_ot_price,`${slug}: ${job} estimator, member after hours`);
     }
+  }
+});
+
+test('a page publishing part of the book publishes the book',()=>{
+  for(const {slug,group} of PARTIAL_PRICED_PAGES){
+    const expected=snapshot.groups.find(g=>g.title===group);
+    assert.ok(expected,`the snapshot has no group named "${group}"`);
+    const rows=rowsOf(slug);
+    assert.equal(rows.length,expected.items.length,
+      `${slug} publishes ${rows.length} prices but the "${group}" group holds ${expected.items.length}`);
+    const byLabelInGroup=new Map(expected.items.map(i=>[i.published_as,i]));
+    for(const {job,regular,after} of rows){
+      const item=byLabelInGroup.get(job);
+      assert.ok(item,`${slug}: "${job}" is published but is not in the "${group}" group`);
+      assert.equal(regular,item.standard_price,`${slug}: ${job} regular-hours price`);
+      assert.equal(after,item.standard_ot_price,`${slug}: ${job} after-hours price`);
+      // And the same figure the field estimator would quote.
+      const line={kind:'repair',std:item.standard_price,stdOt:item.standard_ot_price};
+      assert.equal(estimator.priceFor(line,{member:false,afterHours:false}),regular,
+        `${slug}: ${job} regular-hours price is not what the estimator quotes`);
+      assert.equal(estimator.priceFor(line,{member:false,afterHours:true}),after,
+        `${slug}: ${job} after-hours price is not what the estimator quotes`);
+    }
+  }
+});
+
+test('a partial price page still states the after-hours policy',()=>{
+  for(const {slug} of PARTIAL_PRICED_PAGES){
+    const text=read(slug);
+    assert.match(text,/After hours/,`${slug} is missing the after-hours column`);
+    assert.match(text,/after-hours column/,
+      `${slug} publishes prices without saying which column applies when`);
   }
 });
 

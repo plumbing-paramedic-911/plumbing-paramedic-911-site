@@ -185,7 +185,7 @@ jobs:
           assert_title '/drain-cleaning-greenwood-sc/' \
             'Drain Cleaning Greenwood SC | Plumbing Paramedic 911'
           assert_title '/water-heater-repair-greenwood-sc/' \
-            'Water Heater Repair Greenwood SC | Plumbing Paramedic 911'
+            'Water Heater Replacement Greenwood SC | Plumbing Paramedic 911'
           assert_title '/water-heater-repair-anderson-sc/' \
             'Water Heater Repair Anderson SC | Plumbing Paramedic 911'
           assert_title '/emergency-plumber-abbeville-sc/' \
