@@ -1355,9 +1355,6 @@ def city_faqs(c):
 
 
 CORE_MEMBERSHIP_MARKETS = {"abbeville-sc", "greenwood-sc", "anderson-sc", "mccormick-sc"}
-# City pages that carry the full LocalBusiness/Person/WebSite sub-graph.
-# Every city page would benefit; these are the two priority markets.
-BUSINESS_SCHEMA_MARKETS = {"greenwood-sc", "anderson-sc"}
 # The seasonal slot holds one offer per city page. The October 2026 repipe
 # promotion expired on 2026-10-31, so every market that carried it now carries
 # the winter offer instead. /specials/whole-home-repipe/ remains as an
@@ -1533,11 +1530,10 @@ def render_city_page(slug: str, c: dict) -> str:
         faq_ld(city_faqs(c)),
     ]
     # The WebPage and Service nodes above point at #localbusiness and
-    # #website. On these priority markets the nodes themselves ride along, so
-    # a crawler reading only the city page resolves the business, its address,
+    # #website. The nodes themselves ride along on every city page, so a
+    # crawler reading one city page alone resolves the business, its address,
     # its hours and its owner instead of two dangling pointers.
-    if slug in BUSINESS_SCHEMA_MARKETS:
-        extra = extra + business_ld()
+    extra = extra + business_ld()
     h = head(c["title"], c["description"], path, og_image=c["og"], extra_jsonld=extra, body_page=f"city-{slug}")
     n = nav("areas")
     body = CITY_PAGE_TPL.format(
