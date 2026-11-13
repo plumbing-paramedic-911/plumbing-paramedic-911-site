@@ -613,7 +613,7 @@ SERVICES = {
             ("How long does a submersible well pump last?",
              "Average life is 10 to 15 years. Pumps that short-cycle (turn on and off constantly because of a bad pressure tank or leak) fail much sooner — often in 3 to 5 years. Properly sized and maintained, 20+ years is achievable."),
             ("Do you service wells in Calhoun Falls and McCormick?",
-             "Yes. We routinely service wells across rural Abbeville County, McCormick County (including lakefront properties near Lake Thurmond), Calhoun Falls, Iva, Donalds, Antreville, and Bradley. Most rural calls are 40 to 60 minutes from our shop in Abbeville."),
+             "Yes. We routinely service wells across rural Abbeville County, McCormick County (including lakefront properties near Lake Thurmond), Calhoun Falls, Iva, Donalds, Antreville, and Bradley. We are just a call away."),
             ("Should I get my well water tested?",
              "Yes — at least every 2 years if you've never had issues, and immediately if you've moved into a new home with well water or notice taste/smell changes. A basic test is $99 to $199 and screens for bacteria, nitrates, iron, hardness, and pH."),
         ],
@@ -713,7 +713,7 @@ SERVICES = {
 """,
         "faqs": [
             ("Do you service commercial accounts on emergency dispatch?",
-             "Yes — and we prioritize commercial emergencies because the downtime cost is so much higher than residential. Average response time for a commercial emergency in Abbeville or Greenwood is under an hour."),
+             "Yes — and we prioritize commercial emergencies because the downtime cost is so much higher than residential. We treat a commercial emergency in Abbeville or Greenwood as a drop-everything call \u2014 we are just a call away."),
             ("Do you offer property management contracts?",
              "Yes. We work with property management companies across Upstate SC on recurring maintenance contracts and tenant-call dispatch. Monthly statement billing and net-30 terms available for established accounts."),
             ("Can you handle restaurant grease traps?",
@@ -989,7 +989,7 @@ CITIES = {
         "city":"Abbeville","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/Abbeville,_South_Carolina",
         "lat":34.178172,"lng":-82.379015,
-        "response":"Call for availability",
+        "response":"Just a call away",
         "title":"Abbeville SC Plumber | Plumbing Paramedic 911",
         "description":"Local SC Master Plumber in Abbeville, SC. 24/7 emergency dispatch, flat-rate pricing, drain cleaning, water heaters, well pumps, leak detection. Based at 13 Callaway Dr — call (864) 446-8911.",
         "og":"/images/og/abbeville-1200x630.jpg",
@@ -1025,11 +1025,11 @@ CITIES = {
         "city":"Greenwood","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/Greenwood,_South_Carolina",
         "lat":34.196601,"lng":-82.161262,
-        "response":"~45 min",
+        "response":"Just a call away",
         "title":"Plumber in Greenwood, SC | 24/7 Emergency &amp; Scheduled Service | Plumbing Paramedic 911",
         "description":"Licensed SC Master Plumber serving Greenwood, SC and Greenwood County 24/7. Drain cleaning, water heaters, well pumps, slab leaks, water softeners, tankless installs. Flat-rate pricing, 2-year warranty. Call (864) 446-8911.",
         "og":"/images/og/greenwood-1200x630.jpg",
-        "intro":"Greenwood is the city we work in most after our own. We cover Greenwood city limits and the surrounding county 24/7, with a typical emergency response of about 45 minutes and no distance charge \u2014 Greenwood pays the same published flat rates as Abbeville. A licensed SC Master Plumber runs every job, from a same-day drain call to a full repipe.",
+        "intro":"Greenwood is the city we work in most after our own. We cover Greenwood city limits and the surrounding county 24/7, and we are just a call away with no distance charge \u2014 Greenwood pays the same published flat rates as Abbeville. A licensed SC Master Plumber runs every job, from a same-day drain call to a full repipe.",
         "body":"""
 <h3>Greenwood plumbing problems we see every week</h3>
 <p>Greenwood's municipal water is moderately hard, and we see the consequences on water heaters and fixtures. Scale builds up on heating elements (electric heaters) and shortens tank life from a 12-year average to 6 or 7. Faucet aerators and showerheads clog faster. Pressure-balanced shower valves develop intermittent function. The fix is usually a <a href="/services/water-filtration-softener-systems/">softener or scale-inhibiting filter</a> on the main supply line — something we install regularly in Greenwood and almost never need to install in Abbeville (which has different source water chemistry).</p>
@@ -1037,7 +1037,7 @@ CITIES = {
 <p>Out near Lake Greenwood — along SC 702 and the marina roads — homes often have well water and septic systems even though they're close to the city. We handle both, and we install <a href="/services/water-filtration-softener-systems/">well-water filtration systems</a> for the iron and sulfur issues common in that area.</p>
 <h3>Common services in Greenwood, SC</h3>
 <ul>
-  <li><strong>Same-day service across Greenwood</strong> — typical response 45 minutes</li>
+  <li><strong>Same-day service across Greenwood</strong> — we are just a call away</li>
   <li><strong>Water heater repair and replacement</strong> — our number-one Greenwood call. On city water the chlorine works through the anode rod and the elements; on the county wells it is hardness and iron</li>
   <li><strong><a href="/services/tankless-water-heater-installation-repair/">Tankless water heater installation</a></strong> — popular upgrade for Greenwood homeowners tired of running out of hot water</li>
   <li><strong><a href="/services/water-filtration-softener-systems/">Water softeners and filtration</a></strong> — to extend fixture and heater life on the harder well water around the lake and out in the county</li>
@@ -1077,7 +1077,7 @@ CITIES = {
             ("Do you cover Lake Greenwood and the rural parts of the county?",
              "Yes. Properties along SC 702 and the marina roads are often on well and septic even though they are close to town, and we service both. Well pumps, pressure tanks and pressure switches are routine calls for us out there."),
             ("How fast can you get to Greenwood in an emergency?",
-             "Typical response is about 45 minutes when a technician is available, 24 hours a day including weekends and holidays. Call for the current ETA rather than assuming — active jobs and weather change it."),
+             "We dispatch 24 hours a day including weekends and holidays, and we are just a call away. Call for the current ETA — active jobs and weather change it."),
             ("Do you do backflow testing for Greenwood CPW?",
              "Yes. We handle annual backflow testing and the compliance paperwork for irrigation, commercial and fire systems in the Greenwood CPW service area."),
         ],
@@ -1086,11 +1086,11 @@ CITIES = {
         "city":"Anderson","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/Anderson,_South_Carolina",
         "lat":34.503376,"lng":-82.650123,
-        "response":"~60 min",
+        "response":"Just a call away",
         "title":"Plumber in Anderson, SC | 24/7 Service | Plumbing Paramedic 911",
         "description":"Licensed plumber serving Anderson, SC and surrounding Anderson County 24/7. Water heaters, drain cleaning, well pumps, fixture install, leak detection. Call (864) 446-8911.",
         "og":"/images/og/anderson-1200x630.jpg",
-        "intro":"Plumbing Paramedic 911 covers Anderson 24 hours a day, with a typical emergency response of about 60 minutes and no distance charge \u2014 Anderson pays the same flat rates as our home market. We work inside the city limits, the neighborhoods along US 29 and SC 81, and the wider Anderson County area including Iva, Honea Path, Belton and Pendleton. A licensed SC Master Plumber runs every job.",
+        "intro":"Plumbing Paramedic 911 covers Anderson 24 hours a day, and we are just a call away with no distance charge \u2014 Anderson pays the same flat rates as our home market. We work inside the city limits, the neighborhoods along US 29 and SC 81, and the wider Anderson County area including Iva, Honea Path, Belton and Pendleton. A licensed SC Master Plumber runs every job.",
         "body":"""
 <h3>What plumbing in Anderson actually costs</h3>
 <p>The service / diagnostic call is <strong>$79 Monday–Friday 9 AM–5 PM</strong>, <strong>$99 after hours and weekends</strong>, and <strong>$158 after midnight or on holidays</strong>. There is no mileage or distance surcharge for Anderson. Repair work is flat-rate and quoted in writing before it starts. During regular hours, clearing a drain runs $225–$325, a drain camera inspection is $395, and a 40-gallon electric water heater installed is $1,800; evenings, weekends and holidays those same jobs are $315–$455, $553 and $2,520. Both columns are published on our <a href="/plumbing-prices-anderson-sc/">Anderson plumbing prices page</a>.</p>
@@ -1099,7 +1099,7 @@ CITIES = {
 <p><strong>Cast-iron drain stacks in mid-century homes.</strong> Decades of scale shrink the usable diameter until the line re-clogs within weeks of being cleared. Cabling opens a channel. Hydro jetting cleans the pipe wall and buys real time. Neither restores a pipe that has lost its structure — a $395 camera inspection tells you which situation you are in before you spend money on the wrong one. That is the whole reason our <a href="/drain-cleaning-anderson-sc/">Anderson drain cleaning</a> starts with diagnosis.</p>
 <h3>Common services in Anderson</h3>
 <ul>
-  <li><strong>24/7 emergency dispatch</strong> — typical response about 60 minutes</li>
+  <li><strong>24/7 emergency dispatch</strong> — we are just a call away</li>
   <li><strong><a href="/drain-cleaning-anderson-sc/">Drain cleaning, sewer clearing and hydro jetting</a></strong> — including camera inspection on repeat clogs</li>
   <li><strong>Polybutylene repipes</strong> — common in 1980s Anderson subdivisions</li>
   <li><strong>Cast-iron drain stack replacement</strong> — for mid-century homes</li>
@@ -1137,14 +1137,14 @@ CITIES = {
             ("Who treats the water in Anderson, and does it affect my plumbing?",
              "Municipal customers are generally served by Anderson Regional Joint Water System; properties outside the lines are on private wells or co-op water. Well systems are the ones that bring us the most water-quality work — iron, sulfur and sediment — and we install filtration and softening for them."),
             ("Can you get to Anderson overnight for an emergency?",
-             "Yes. Dispatch runs 24/7 and typical Anderson response is about 60 minutes when a technician is available. The after-midnight and holiday service-call rate is $158, posted before you book."),
+             "Yes. Dispatch runs 24/7 and we are just a call away. The after-midnight and holiday service-call rate is $158, posted before you book."),
         ],
     },
     "laurens-sc": {
         "city":"Laurens","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/Laurens,_South_Carolina",
         "lat":34.499264,"lng":-82.018776,
-        "response":"~60 min",
+        "response":"Just a call away",
         "title":"Plumber in Laurens, SC | 24/7 Service | Plumbing Paramedic 911",
         "description":"Licensed plumber serving Laurens, SC and Laurens County 24/7. Drain cleaning, water heaters, well pumps, leak detection, fixture install. Flat-rate. Call (864) 446-8911.",
         "og":"/images/og/laurens-1200x630.jpg",
@@ -1155,7 +1155,7 @@ CITIES = {
 <p>Laurens also has Presbyterian College in Clinton, several manufacturing employers, and a strong agricultural footprint. We handle commercial plumbing for restaurants and retail along the I-26 corridor and Highway 76, including grease traps and backflow on irrigation systems.</p>
 <h3>Common services in Laurens</h3>
 <ul>
-  <li><strong>Emergency dispatch</strong> — typical 60-minute response</li>
+  <li><strong>Emergency dispatch</strong> — we are just a call away</li>
   <li><strong>Well pump and pressure-tank replacement</strong> — heavy demand on rural properties</li>
   <li><strong>Water heater repair and replacement</strong></li>
   <li><strong>Drain cleaning, sewer line, and hydro jetting</strong></li>
@@ -1180,7 +1180,7 @@ CITIES = {
         "city":"McCormick","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/McCormick,_South_Carolina",
         "lat":33.913,"lng":-82.292,
-        "response":"~40 min",
+        "response":"Just a call away",
         "title":"Plumber in McCormick, SC | Well Pumps, Lakefront Plumbing | Plumbing Paramedic 911",
         "description":"24/7 plumber serving McCormick, SC and lakefront properties near Lake Thurmond. Well pumps, water heaters, drain cleaning, leak detection. Call (864) 446-8911.",
         "og":"/images/og/mccormick-1200x630.jpg",
@@ -1214,7 +1214,7 @@ CITIES = {
 <h3>Why McCormick homeowners call us</h3>
 <ul>
   <li>We specialize in well-and-septic systems — this isn't an after-thought for us</li>
-  <li>40-minute typical response from Abbeville</li>
+  <li>Just a call away from our Abbeville shop</li>
   <li>SC Master Plumber license</li>
   <li>2-year warranty</li>
   <li>Flat-rate pricing — no per-mile charges</li>
@@ -1225,17 +1225,17 @@ CITIES = {
         "city":"Ninety Six","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/Ninety_Six,_South_Carolina",
         "lat":34.175,"lng":-82.027,
-        "response":"~25 min",
+        "response":"Just a call away",
         "title":"Plumber in Ninety Six, SC | 24/7 Service | Plumbing Paramedic 911",
         "description":"Local plumber serving Ninety Six, SC 24/7 — water heaters, drain cleaning, well pumps, leak detection. Flat-rate pricing. Call (864) 446-8911.",
         "og":"/images/og/ninety-six-1200x630.jpg",
-        "intro":"Ninety Six sits between Greenwood and Saluda, and is about 25 minutes from our Abbeville shop — one of our fastest-response cities. We've serviced homes and businesses in Ninety Six and the surrounding Greenwood County area for years.",
+        "intro":"Ninety Six sits between Greenwood and Saluda, and we are just a call away from our Abbeville shop. We've serviced homes and businesses in Ninety Six and the surrounding Greenwood County area for years.",
         "body":"""
 <h3>Local plumbing problems specific to Ninety Six</h3>
 <p>Ninety Six is small but has a wide range of housing — from historic homes near Star Fort to newer subdivisions on the edge of town. Many of the older properties have well-and-septic systems even though they're inside town; the newer subdivisions are typically on Greenwood CPW water and city sewer. Hard water from CPW source is a common issue here, just like in Greenwood — water heaters and fixtures wear faster than they would in Abbeville's softer water.</p>
 <h3>Common services in Ninety Six</h3>
 <ul>
-  <li><strong>Same-day service</strong> — typical 25-minute response</li>
+  <li><strong>Same-day service</strong> — we are just a call away</li>
   <li><strong>Water heater repair and replacement</strong> — anode rods and elements worked through by chlorinated city water, and hardness on the wells outside town</li>
   <li><strong>Drain cleaning and sewer service</strong></li>
   <li><strong>Well pump repair</strong> — for properties on private well</li>
@@ -1248,7 +1248,7 @@ CITIES = {
 <p>Ninety Six is a town of about 2,000 in Greenwood County, named for its historic distance (in miles) from the Cherokee village of Keowee. Ninety Six National Historic Site preserves the site of the Revolutionary War siege. The town is small but tightly knit; word-of-mouth referrals are how most of our Ninety Six customers find us.</p>
 <h3>Why Ninety Six homeowners call us</h3>
 <ul>
-  <li>Fastest response of any of our outlying cities — 25 minutes typical</li>
+  <li>One of the quickest cities for us to reach — just a call away</li>
   <li>Same flat-rate pricing as Abbeville</li>
   <li>SC Master Plumber license</li>
   <li>2-year warranty on every job</li>
@@ -1260,11 +1260,11 @@ CITIES = {
         "city":"Calhoun Falls","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/Calhoun_Falls,_South_Carolina",
         "lat":34.094,"lng":-82.595,
-        "response":"~40 min",
+        "response":"Just a call away",
         "title":"Plumber in Calhoun Falls, SC | Lakefront &amp; Well Service | Plumbing Paramedic 911",
         "description":"24/7 plumber in Calhoun Falls, SC. Lakefront plumbing, well pumps, freeze protection, water heaters, leak detection on Lake Russell/Richard B. Russell Lake. Call (864) 446-8911.",
         "og":"/images/og/calhoun-falls-1200x630.jpg",
-        "intro":"Calhoun Falls is on the western edge of Abbeville County, right on Richard B. Russell Lake. It's about 40 minutes from our shop. Most of our calls here are lakefront and rural well work — pumps, freeze damage, and seasonal-home plumbing.",
+        "intro":"Calhoun Falls is on the western edge of Abbeville County, right on Richard B. Russell Lake. Most of our calls here are lakefront and rural well work — pumps, freeze damage, and seasonal-home plumbing.",
         "body":"""
 <h3>Local plumbing problems specific to Calhoun Falls</h3>
 <p>Calhoun Falls sits on Richard B. Russell Lake and is the gateway to Calhoun Falls State Park. A high proportion of homes are lakefront or near-lakefront — many of them seasonal or weekend properties. The pattern we see most:</p>
@@ -1292,7 +1292,7 @@ CITIES = {
   <li>We service Calhoun Falls regularly — we know the lakeside properties and their seasonal patterns</li>
   <li>Same SC Master Plumber license, same flat-rate pricing as Abbeville</li>
   <li>2-year warranty</li>
-  <li>40-minute typical response</li>
+  <li>Just a call away</li>
   <li>24/7 emergency dispatch — critical for unoccupied lake homes</li>
 </ul>
 """
@@ -1301,18 +1301,18 @@ CITIES = {
         "city":"Due West","state":"South Carolina","abbr":"SC",
         "wiki":"https://en.wikipedia.org/wiki/Due_West,_South_Carolina",
         "lat":34.330,"lng":-82.391,
-        "response":"~20 min",
+        "response":"Just a call away",
         "title":"Plumber in Due West, SC | 24/7 Service | Plumbing Paramedic 911",
         "description":"Local plumber serving Due West, SC and Erskine College area 24/7. Water heaters, drain cleaning, well pumps, leak detection. Flat-rate pricing. Call (864) 446-8911.",
         "og":"/images/og/due-west-1200x630.jpg",
-        "intro":"Due West is the closest town to our Abbeville shop — typically 20 minutes door-to-door. We serve Due West, Donalds, and the Erskine College area for both routine plumbing and emergency dispatch.",
+        "intro":"Due West is the closest town to our Abbeville shop, and we are just a call away. We serve Due West, Donalds, and the Erskine College area for both routine plumbing and emergency dispatch.",
         "body":"""
 <h3>Local plumbing problems specific to Due West</h3>
 <p>Due West is home to Erskine College — the oldest four-year college in South Carolina — and the town's housing reflects that: many late-1800s and early-1900s homes around campus, plus newer faculty and family housing on the outskirts. Older homes here have the same plumbing issues as Abbeville's historic district: original galvanized, early copper, and cast-iron drain stacks at the end of their service life. Newer construction is generally on city water and standard PEX or copper.</p>
 <p>Outside town limits, much of the surrounding area is rural — wells and septic predominate. We do steady well-pump work in this part of Abbeville County.</p>
 <h3>Common services in Due West</h3>
 <ul>
-  <li><strong>Same-day service</strong> — typical 20-minute response</li>
+  <li><strong>Same-day service</strong> — we are just a call away</li>
   <li><strong>Historic-home repipes</strong> — galvanized and old-copper replacement</li>
   <li><strong>Water heater repair and replacement</strong></li>
   <li><strong>Drain cleaning and main sewer line work</strong></li>
@@ -1340,7 +1340,7 @@ CITIES = {
 def city_faqs(c):
     return [
         (f"Do you offer 24/7 emergency plumbing service in {c['city']}, {c['abbr']}?",
-         f"Yes. Plumbing Paramedic 911 dispatches emergency plumbing service to {c['city']}, {c['abbr']} 24 hours a day, 365 days a year. Typical response time from our Abbeville shop is {c['response']}. Call (864) 446-8911 any time."),
+         f"Yes. Plumbing Paramedic 911 dispatches emergency plumbing service to {c['city']}, {c['abbr']} 24 hours a day, 365 days a year. We're just a call away \u2014 call (864) 446-8911 any time."),
         (f"How much do you charge to come out to {c['city']}, {c['abbr']}?",
          f"The service / diagnostic call in {c['city']} is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. There is no per-mile or distance surcharge, and repair work is priced separately and approved before it begins."),
         (f"Are you a licensed plumber for work in {c['city']}, {c['abbr']}?",
@@ -1426,7 +1426,7 @@ CITY_PAGE_TPL = """\
         <a href="/pricing/" class="btn btn-outline-white">💰 See Upfront Pricing</a>
       </div>
       <div class="city-info-bar">
-        <div class="city-info-item"><div class="city-info-icon">⚡</div><div><span class="city-info-label">Response Time</span><span class="city-info-val">{response}</span></div></div>
+        <div class="city-info-item"><div class="city-info-icon">⚡</div><div><span class="city-info-label">Availability</span><span class="city-info-val">{response}</span></div></div>
         <div class="city-info-item"><div class="city-info-icon">📞</div><div><span class="city-info-label">Emergency Line</span><span class="city-info-val">(864) 446-8911</span></div></div>
         <div class="city-info-item"><div class="city-info-icon">⏰</div><div><span class="city-info-label">Availability</span><span class="city-info-val">24/7 · 365 days</span></div></div>
         <div class="city-info-item"><div class="city-info-icon">🛡️</div><div><span class="city-info-label">Warranty</span><span class="city-info-val">2-Year on All Work</span></div></div>
@@ -1501,7 +1501,7 @@ CITY_PAGE_TPL = """\
 
   <section style="background:linear-gradient(135deg,var(--green-dk),var(--green));padding:64px 0">
     <div class="container" style="text-align:center">
-      <h2 style="color:white;margin-bottom:10px">{city} plumbing problem? We're {response} away.</h2>
+      <h2 style="color:white;margin-bottom:10px">{city} plumbing problem? We're just a call away.</h2>
       <p style="color:rgba(255,255,255,.9);margin-bottom:24px">Upfront flat-rate pricing. 2-year warranty. 24/7 dispatch.</p>
       <a href="tel:+18644468911" class="btn btn-outline-white btn-xl speakable-phone">📞 (864) 446-8911</a>
     </div>
@@ -1601,7 +1601,7 @@ def render_mccormick_well_pump_page() -> str:
         <h3>What affects your final price</h3>
         <p>Well depth and pump horsepower are only part of the job. Access to the well head, pipe and wire condition, failed check valves, damaged fittings and the size of the pressure tank can change the scope. We inspect first and put the exact price in writing before work begins.</p>
         <h3>Real local capability, not a referral directory</h3>
-        <p>Plumbing Paramedic 911 is an Abbeville-based plumbing company serving McCormick—not a contractor-matching website. Eric Callaway is a licensed South Carolina Master Plumber, and completed work carries a 2-year labor warranty. McCormick is typically about 40 minutes from our Abbeville shop.</p>
+        <p>Plumbing Paramedic 911 is an Abbeville-based plumbing company serving McCormick—not a contractor-matching website. Eric Callaway is a licensed South Carolina Master Plumber, and completed work carries a 2-year labor warranty, and we are just a call away.</p>
       </div>
       <aside>
         <div class="price-box">
@@ -1702,7 +1702,7 @@ def render_areas_hub():
     n = nav("areas")
     cards = []
     for slug,c in CITIES.items():
-        cards.append(f'<a class="nav-card" href="/service-areas/{slug}/"><h3>📍 {c["city"]}, {c["abbr"]}</h3><p>Response time: {c["response"]}.</p><span class="arrow">{c["city"]} plumber →</span></a>')
+        cards.append(f'<a class="nav-card" href="/service-areas/{slug}/"><h3>📍 {c["city"]}, {c["abbr"]}</h3><p>{c["response"]}.</p><span class="arrow">{c["city"]} plumber →</span></a>')
     body = f"""\
 <main>
   <section class="page-header">
@@ -1781,7 +1781,7 @@ def render_about():
         <h3>Where we work</h3>
         <p>We service eight cities in Upstate South Carolina from our Abbeville shop: <a href="/service-areas/abbeville-sc/">Abbeville</a>, <a href="/service-areas/greenwood-sc/">Greenwood</a>, <a href="/service-areas/anderson-sc/">Anderson</a>, <a href="/service-areas/laurens-sc/">Laurens</a>, <a href="/service-areas/mccormick-sc/">McCormick</a>, <a href="/service-areas/ninety-six-sc/">Ninety Six</a>, <a href="/service-areas/calhoun-falls-sc/">Calhoun Falls</a>, and <a href="/service-areas/due-west-sc/">Due West</a> — plus surrounding small towns and rural areas.</p>
         <h3>Want to talk?</h3>
-        <p>Call (864) 446-8911 — emergencies are 24/7. For routine inquiries, we typically respond within 30 minutes during business hours. Or <a href="/contact/">drop us a message</a> and we'll call you back.</p>
+        <p>Call (864) 446-8911 — emergencies are 24/7. For routine inquiries, we are just a call away during business hours. Or <a href="/contact/">drop us a message</a> and we'll call you back.</p>
       </article>
     </div>
   </section>
@@ -1807,7 +1807,7 @@ def render_contact():
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">{breadcrumb_html(breadcrumb_items)}</nav>
       <h1 class="speakable-headline">Contact Plumbing Paramedic 911</h1>
-      <p class="speakable-summary">Available 24 hours a day, 365 days a year for emergencies. Routine inquiries get a callback within 30 minutes during business hours.</p>
+      <p class="speakable-summary">Available 24 hours a day, 365 days a year for emergencies. Routine inquiries get a callback during business hours — we are just a call away.</p>
     </div>
   </section>
   <section class="section">
@@ -1837,7 +1837,7 @@ def render_contact():
           <div class="card">
             <h3 style="margin-bottom:14px">Send us a message</h3>
             <form class="lead-form" method="post" action="#">
-              <div class="form-success">✅ Thanks — we'll be in touch within 30 minutes during business hours.</div>
+              <div class="form-success">✅ Thanks — we'll be in touch during business hours.</div>
               <div class="form-row-2">
                 <div class="form-field"><label>Name</label><input type="text" name="name" autocomplete="name"></div>
                 <div class="form-field"><label>Phone *</label><input type="tel" name="phone" required autocomplete="tel"></div>
@@ -2431,7 +2431,7 @@ def render_faq():
         ("Do you offer military, senior, or first-responder discounts?",
          "Yes. We offer $50 off for active-duty military, honorably discharged veterans, seniors aged 65+, and active police, fire, or EMS personnel. Mention the discount when scheduling."),
         ("How fast can you get to my house?",
-         "Within Abbeville city limits, typical emergency response is 30 to 45 minutes from your call. Surrounding cities (Greenwood, Anderson, Laurens, McCormick) are 45 to 75 minutes depending on time of day and current job queue."),
+         "We are just a call away, in Abbeville and across the surrounding cities — Greenwood, Anderson, Laurens and McCormick. Call (864) 446-8911 for a current ETA; active jobs, weather and time of day all change it."),
         ("Do you handle commercial accounts?",
          "Yes. We work with property management companies, restaurants, offices, retail, and multi-family properties across Upstate SC. Monthly statement billing and net-30 terms available for established accounts."),
         ("What if you don't serve my area?",

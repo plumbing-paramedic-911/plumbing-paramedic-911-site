@@ -198,6 +198,45 @@ test('a PFAS reading above an enforceable limit is never stated without its comp
   }
 });
 
+test('no page advertises how many minutes it takes us to arrive',()=>{
+  // Owner decision, 2026-11-13: drop every published arrival/response time.
+  // "45 minutes" reads as slow, and it is a promise that active jobs, weather
+  // and the queue can break. The site says "just a call away" instead and
+  // directs people to call for a live ETA. How long the WORK takes (a tankless
+  // install is 4 to 7 hours, a backflow test is 20-30 minutes per assembly) is
+  // useful and deliberately still allowed -- these patterns match arrival only.
+  const forbidden=[
+    /typical(?:ly)?[^.<>]{0,30}response[^.<>]{0,30}\d{1,3}\s*(?:min|hour)/i,
+    /response[^.<>]{0,20}time[^.<>]{0,30}\d{1,3}\s*(?:min|hour)/i,
+    /\d{1,3}\s*(?:-|–)?\s*min(?:ute)?s?\s+(?:typical\s+)?(?:emergency\s+)?response/i,
+    /\d{1,3}\s*(?:-|–)\s*\d{1,3}\s*min\b[^.<>]{0,15}response/i,
+    /~\s*\d{1,3}\s*min(?:ute)?s?\b[^.<>]{0,25}(?:response|away|from our)/i,
+    /\d{1,3}\s*minutes?\s+(?:from|door-to-door|away from)\s+(?:our|the)\s+(?:Abbeville\s+)?shop/i,
+    /respond within \d{1,3}\s*min/i,
+    /(?:be in touch|callback|call you back)[^.<>]{0,25}within \d{1,3}\s*min/i,
+    /(?:we're|we are)\s+~?\s*\d{1,3}\s*min(?:ute)?s?\s+away/i,
+    /dispatch[^.<>]{0,40}\(~\s*\d{1,3}\s*minutes?\)/i,
+  ];
+  const offenders=[];
+  const walk=dir=>{
+    for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+      if(entry.name.startsWith('.')||entry.name==='node_modules')continue;
+      const full=path.join(dir,entry.name);
+      if(entry.isDirectory())walk(full);
+      else if(entry.name.endsWith('.html')){
+        const text=fs.readFileSync(full,'utf8');
+        for(const re of forbidden){
+          const m=text.match(re);
+          if(m)offenders.push(`${path.relative(root,full)}: ${JSON.stringify(m[0].slice(0,70))}`);
+        }
+      }
+    }
+  };
+  walk(root);
+  assert.deepEqual(offenders,[],
+    'a page advertises an arrival/response time, which the owner removed site-wide');
+});
+
 test('no page claims this service area has hard city water',()=>{
   // Owner correction, 2026-11-13: Greenwood city water comes off Lake
   // Greenwood and is not hard. What shortens heater life on it is the
