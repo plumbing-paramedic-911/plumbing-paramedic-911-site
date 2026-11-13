@@ -32,6 +32,9 @@ LASTMODS = {
     "plumbing-prices-anderson-sc": "2026-11-13",
     # Gained the after-hours repair-price answer in #47.
     "emergency-plumber-abbeville-sc": "2026-11-13",
+    # Rewritten from a 933-word repair page to a replacement page with the
+    # installed prices published.
+    "water-heater-repair-greenwood-sc": "2026-11-13",
 }
 
 SERVICE_CALL_HTML = """\
@@ -46,20 +49,35 @@ SERVICE_CALL_HTML = """\
 SNAPSHOT_FILE = ROOT / "tools" / "price_book_snapshot.json"
 
 
-def price_book_snapshot() -> list[tuple[str, list[tuple[str, int, int]]]]:
+def price_book_snapshot(only: tuple[str, ...] | None = None) -> list[tuple[str, list[tuple[str, int, int]]]]:
     """The published price table, read from the recorded price-book snapshot.
 
     Prices are never written out by hand here. tools/price_book_snapshot.json is
     a dated copy of the price_book_items rows these pages publish, and
     tools/test_published_prices.cjs checks the rendered pages back against it,
     so a typo cannot reach a customer and the page cannot drift from the book.
+
+    `only` narrows the table to named groups, for a page about one kind of
+    work. It raises on an unknown group name rather than silently publishing a
+    shorter table than the author intended.
     """
     data = json.loads(SNAPSHOT_FILE.read_text(encoding="utf-8"))
+    groups = data["groups"]
+    if only is not None:
+        wanted = list(only)
+        available = [group["title"] for group in groups]
+        missing = [title for title in wanted if title not in available]
+        if missing:
+            raise KeyError(
+                f"price_book_snapshot(only={wanted!r}): no such group(s) {missing!r}; "
+                f"the snapshot holds {available!r}"
+            )
+        groups = [group for group in groups if group["title"] in wanted]
     return [
         (group["title"],
          [(item["published_as"], item["standard_price"], item["standard_ot_price"])
           for item in group["items"]])
-        for group in data["groups"]
+        for group in groups
     ]
 
 
@@ -239,13 +257,16 @@ MONEY_PAGES = {
         ],
     },
     "water-heater-repair-greenwood-sc": {
-        "title": "Water Heater Repair Greenwood SC | Plumbing Paramedic 911",
-        "description": "Water heater repair in Greenwood SC for no hot water, leaks, pilot/ignition problems, failed elements and noisy tanks. Repair-vs-replace guidance and upfront pricing. Call (864) 446-8911.",
-        "h1": "Water Heater Repair in Greenwood, SC",
-        "badge": "● Tank, Gas, Electric & Tankless",
+        # Rewritten as a replacement-intent page. The URL keeps "repair"
+        # because it is indexed and linked; the brief confirmed the address
+        # stays the same, so no redirect is involved.
+        "title": "Water Heater Replacement Greenwood SC | Plumbing Paramedic 911",
+        "description": "Water heater replacement in Greenwood SC, installed prices posted: $1,800 for a 40-gallon electric, $2,065 for a 50-gallon, $4,495 tankless. Permit included.",
+        "h1": "Water Heater Replacement in Greenwood, SC",
+        "badge": "\u25cf Installed Prices Posted \u2014 Tank, Gas &amp; Tankless",
         "city": "Greenwood",
         "area_type": "City",
-        "service_type": "Water Heater Repair",
+        "service_type": "Water Heater Replacement",
         "parent_service": "/services/water-heater-repair-replacement/",
         "parent_service_name": "Water Heater Services",
         "city_page": "/service-areas/greenwood-sc/",
@@ -253,47 +274,73 @@ MONEY_PAGES = {
         "guide": "/guides/water-heater-buyers-guide-sc/",
         "guide_name": "SC Water Heater Buyer's Guide",
         "og": "/images/og/water-heater-1200x630.jpg",
-        "intro": "No hot water does not automatically mean you need a new heater. In Greenwood, we diagnose thermostats, elements, gas controls, ignition components, venting, leaks, sediment symptoms and tank condition first — then explain whether repair or replacement makes better financial sense.",
-        "answer": "A leaking tank body usually points toward replacement; a failed element, thermostat, igniter, thermocouple or control can often be repaired. Age matters, but the right decision comes from the failure, tank condition, safety/code requirements and the cost of the repair relative to replacement.",
+        "price_table": price_book_snapshot(only=("Water heaters",)),
+        "intro": "A 40-gallon electric water heater installed in Greenwood is $1,800. A 50-gallon is $2,065, a 40-gallon natural gas unit is $1,945, and a condensing tankless is $4,495. Real installed prices from our price book, not ranges \u2014 and we pull the City of Greenwood permit as part of the job.",
+        "answer": "A leaking tank shell means replacement; a rusted-through tank cannot be repaired safely or legally. A failed thermostat, element, igniter or gas control on a sound tank is usually worth repairing. And on a 30 to 50 gallon electric tank still inside its 6-year warranty, we swap it for $995 rather than sell you a new heater.",
+        "cta_note": "Call (864) 446-8911. The service / diagnostic call is $79 Monday through Friday, 9 AM to 5 PM, and the installation is priced separately \u2014 you approve both in writing before we start.",
         "local_context": """
-<p>Greenwood homes range from older in-town properties to newer subdivisions and Lake Greenwood houses. We see electric tanks, natural-gas units, propane installations and more tankless systems than we did a decade ago. Each has a different diagnostic path.</p>
-<p>Mineral scale and sediment can also show up as popping/rumbling, reduced hot-water capacity and shortened component life. A noisy heater is not always an emergency, but water around the base of the tank is something to address quickly.</p>
+<p>Where you live in the county changes which failure we find. In-town homes off Main and the older Montague Avenue blocks often have the heater in a tight closet, and a 50-gallon tank will not always go back where the 40 came out. Newer subdivisions usually have garage installs with room to work. Out toward Lake Greenwood we are often on well water and sometimes propane.</p>
+<p>Greenwood city water is not hard. It comes off Lake Greenwood, and the thing that kills heaters on it is the chlorine used to treat it: it works through the sacrificial anode rod, and once that rod is spent the tank shell is next in line. It goes after the elements too. Sediment settles on top of that and insulates the lower element, which is the popping or rumbling you hear.</p>
+<p>Out on the wells around the lake and in the rural county it is a different failure \u2014 genuinely hard water, often with iron or sulfur, scaling elements and shortening tank life. Either way the symptom is the same: hot water that runs out faster, then none at all.</p>
+""",
+        "deep_dive_label": "Repair, replace, and what to put in",
+        "deep_dive_heading": "Choosing between a repair, a warranty swap and a new heater",
+        "deep_dive": """
+<h3>When a repair is the right call</h3>
+<p>A heater is a tank with replaceable parts bolted to it. A thermostat is $165, both thermostats $245, an element $285, a T&amp;P valve $225. If one of those failed and the tank is sound, repair is the right answer. The question is how much life it buys: a $285 element in a four-year-old tank is good money, the same part in a thirteen-year-old tank is not.</p>
+<h3>The $995 warranty swap</h3>
+<p>This is the one that saves the most money and almost nobody asks about it. Tank heaters carry a manufacturer warranty, commonly six years. If yours fails inside that window the manufacturer supplies the tank \u2014 you pay only labour, fittings, disposal and the permit, which we do for <strong>$995</strong> on a 30 to 50 gallon electric. At five years old that is $995 against $1,800, so read us the serial number off the data plate and we will tell you which applies.</p>
+<h3>Tank, tankless or heat pump</h3>
+<p>Most Greenwood homes belong back on a tank, and that is the correct call rather than a lazy one: $1,800 for a 40-gallon or $2,065 for a 50 is the lowest cost per year of service.</p>
+<p>A condensing tankless at $4,495 earns its price if you genuinely run out of hot water on a 50-gallon tank, if the floor space is worth money, or if you want the longer service life. It needs gas volume, a dedicated vent and annual descaling \u2014 and on the harder well water around the lake that descaling is not optional.</p>
+<p>Heat-pump units are the efficiency winner on paper, and we install them, but they want roughly 700 to 1,000 cubic feet of surrounding air, a space above about 40 degrees and a condensate drain. A garage suits them; a conditioned hall closet often does not, because the unit cools the room it sits in.</p>
+<h3>Yes, we pull the permit</h3>
+<p>A water heater replacement in the City of Greenwood requires a permit and <strong>we pull it</strong>. It is included in the installed prices above, not added afterward. It also means the work gets inspected, which is a check on us, not on you. An unpermitted heater surfaces at the worst time: when a buyer's inspector flags it, or when an adjuster asks who installed it.</p>
+<h3>What the price covers</h3>
+<p>The installed price is the whole job under normal conditions: heater, permit, hauling off the old unit, new connectors and shutoff as needed, an expansion tank where code requires one, and a new T&amp;P discharge line. What moves it: an upsize that no longer fits, a fuel change, a gas resize for tankless, undersized electrical, or a closet that has to be opened. When we find one we stop and get your approval rather than discovering it on the invoice.</p>
 """,
         "symptoms": [
-            "No hot water or only lukewarm water",
-            "Hot water runs out much faster than it used to",
-            "Water around the base of the tank",
-            "Pilot will not stay lit or gas unit repeatedly faults",
-            "Electric heater trips a breaker or stops heating one/both elements",
-            "Popping, rumbling or rusty hot water",
+            "Water pooling under or around the base of the tank",
+            "Hot water runs out noticeably faster than it used to",
+            "Popping or rumbling while the heater runs",
+            "Rusty or metallic-smelling hot water",
+            "No hot water, or lukewarm at any setting",
+            "The heater is 10 years old or more",
         ],
         "checks": [
-            "Confirm fuel/power and isolate whether the problem is electrical, gas-control or tank-related",
-            "Inspect for active leaks and determine whether the tank shell itself is leaking",
-            "Test thermostats/elements or ignition/control components as appropriate",
-            "Check venting and combustion safety on gas equipment",
-            "Review age, condition and repair cost before recommending replacement",
-            "If replacing, identify code-required pan, drain, expansion, venting or connection upgrades before quoting",
+            "Decode the manufacture date, so a $995 warranty swap is not missed",
+            "Pull and read the anode rod \u2014 on city water it is usually what went first",
+            "Establish whether the leak is the tank shell or a repairable fitting or valve",
+            "Test elements, thermostats, gas controls and ignition first",
+            "Measure the space and pathway before quoting an upsize that has to fit",
+            "Confirm the circuit, gas supply and venting carry the proposed equipment",
         ],
         "price_drivers": [
-            "Repairable component failure vs a leaking/failed tank",
-            "Gas, electric, propane, heat-pump or tankless equipment",
-            "Tank size, location and access for removal/replacement",
-            "Code-required venting, expansion, drain-pan or connection upgrades",
-            "Whether the replacement is like-for-like or a fuel/type/location conversion",
+            "Warranty swap at $995 versus full replacement \u2014 decided by the manufacture date",
+            "Capacity and fuel: 40 or 50 gallon, electric, gas, propane or tankless",
+            "Whether the new unit fits the existing space",
+            "Code-required additions: expansion tank, pan and drain, discharge line, venting",
+            "Regular hours versus evenings, weekends and holidays",
         ],
         "faqs": [
-            ("How much is a water-heater service call in Greenwood?", "The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair or replacement is quoted after we identify the failed component, equipment type and any code/access requirements."),
-            ("Should I repair or replace my water heater?", "A younger heater with a failed element, thermostat, igniter or similar component can often be repaired. A leaking tank shell, severe corrosion or an older heater needing a major repair usually pushes the decision toward replacement. We show both options when both are reasonable."),
-            ("What should I do if the water heater is leaking?", "If water is actively escaping, shut off the cold-water supply to the heater if you can do so safely. For an electric unit, turn off the correct breaker; for a gas unit, follow the appliance shutoff instructions if safe. Call for service, especially if water is reaching floors or walls."),
-            ("Do you work on tankless water heaters in Greenwood?", "Yes. We diagnose tankless ignition, flow, scale and control problems and can also discuss replacement or conversion when the existing unit is not worth repairing."),
-            ("Can you replace a water heater the same day?", "Many standard tank replacements can be completed the same day when the correct equipment and code requirements are known. Availability, equipment type and any venting/gas/electrical upgrades can affect timing."),
+            ("How much does water heater replacement cost in Greenwood, SC?",
+             "A 40-gallon electric installed is $1,800 and a 50-gallon is $2,065. A 40-gallon natural gas unit is $1,945 and a 50-gallon gas is $2,095. A condensing tankless is $4,495. Flat prices Monday to Friday 9 AM to 5 PM, permit included, in writing before work starts."),
+            ("Do you pull the permit for a water heater in Greenwood?",
+             "Yes. The City of Greenwood requires a permit for a water heater replacement and we pull it as part of the job, included in the installed price, and the work gets inspected. An unpermitted heater tends to surface when you sell the house."),
+            ("My heater is 5 years old and failed. Do I need a new one?",
+             "Probably not. Tank heaters usually carry a 6-year warranty, so the manufacturer supplies the tank and you pay only labour, fittings, disposal and permit \u2014 $995 on a 30 to 50 gallon electric, against $1,800 for a full replacement."),
+            ("Is tankless worth it in Greenwood?",
+             "Sometimes. A condensing tankless at $4,495 suits a household that genuinely runs out of hot water on a 50-gallon tank, or where floor space matters. It needs gas volume, a dedicated vent and annual descaling \u2014 not optional on the harder well water around Lake Greenwood. For most Greenwood homes a tank is still the lower lifetime cost."),
+            ("Does the installed price change in the evening or at weekends?",
+             "Yes. The prices above are the regular-hours column. Evening, weekend and holiday work is priced from the after-hours column, and the service call moves from $79 to $99, or $158 after midnight and on holidays. A failed heater with the water shut off is usually safe to schedule for regular hours, and we will say so and book it cheaper."),
+            ("What size water heater do I need?",
+             "A 40-gallon electric typically covers one to three people and a 50-gallon three to five, but how you use hot water matters more than headcount."),
         ],
         "related": [
-            ("🔥", "Full Water Heater Service", "/services/water-heater-repair-replacement/", "Repair, replacement, tankless and heat-pump options."),
-            ("📍", "Greenwood Plumbing", "/service-areas/greenwood-sc/", "All Plumbing Paramedic 911 services in Greenwood."),
-            ("📕", "SC Water Heater Buyer's Guide", "/guides/water-heater-buyers-guide-sc/", "Compare tank, tankless and replacement decisions before you buy."),
-            ("💰", "Upfront Pricing", "/pricing/", "Current service-call schedule and planning ranges."),
+            ("\U0001f525", "Full Water Heater Service", "/services/water-heater-repair-replacement/", "Repair, replacement, tankless and heat-pump options."),
+            ("\U0001f4b5", "Greenwood Plumbing Prices", "/plumbing-prices-greenwood-sc/", "All 38 published flat rates, regular and after hours."),
+            ("\U0001f4cd", "Greenwood Plumbing", "/service-areas/greenwood-sc/", "All Plumbing Paramedic 911 services in Greenwood."),
+            ("\U0001f4d8", "SC Water Heater Buyer's Guide", "/guides/water-heater-buyers-guide-sc/", "Sizing, fuel type and what to ask before you buy."),
         ],
     },
     "water-heater-repair-anderson-sc": {
@@ -868,6 +915,23 @@ def render_page(build, slug: str, p: dict) -> str:
             'we stop, explain the difference and get your approval before going further. '
             'Work not listed here is quoted the same way: in writing, before it starts.</p>'
         )
+    cta_note = p.get(
+        "cta_note",
+        "Call Plumbing Paramedic 911. We will tell you the service-call charge "
+        "up front, diagnose the actual problem, and price the repair before "
+        "proceeding.",
+    )
+    deep_dive_block = ""
+    if p.get("deep_dive"):
+        deep_dive_block = (
+            '<section class="section">\n'
+            '    <div class="container" style="max-width:880px">\n'
+            f'      <span class="label">{p["deep_dive_label"]}</span>\n'
+            f'      <h2>{p["deep_dive_heading"]}</h2>\n'
+            f'      <div class="prose">{p["deep_dive"]}</div>\n'
+            '    </div>\n'
+            '  </section>'
+        )
     body = f"""\
 <main>
   <section class="page-header">
@@ -929,6 +993,7 @@ def render_page(build, slug: str, p: dict) -> str:
     </div>
   </section>
 
+  {deep_dive_block}
   <section class="section bg-alt" id="pricing">
     <div class="container">
       <span class="label">Transparent dispatch pricing</span>
@@ -959,7 +1024,7 @@ def render_page(build, slug: str, p: dict) -> str:
   <section style="background:linear-gradient(135deg,var(--blue-dk),var(--blue));padding:64px 0">
     <div class="container" style="text-align:center;max-width:760px">
       <h2 style="color:white;margin-bottom:10px">Need {p['service_type'].lower()} help in {p['city']}?</h2>
-      <p style="color:rgba(255,255,255,.9);margin-bottom:24px">Call Plumbing Paramedic 911. We will tell you the service-call charge up front, diagnose the actual problem, and price the repair before proceeding.</p>
+      <p style="color:rgba(255,255,255,.9);margin-bottom:24px">{cta_note}</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
         <a href="tel:+18644468911" class="btn btn-outline-white btn-xl speakable-phone">📞 (864) 446-8911</a>
         <a href="/contact/" class="btn btn-outline-white">Request Service Online</a>

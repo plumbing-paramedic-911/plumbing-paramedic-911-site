@@ -10,6 +10,11 @@ const estimator=require('../ops/estimator.js');
 const snapshot=JSON.parse(fs.readFileSync(path.join(__dirname,'price_book_snapshot.json'),'utf8'));
 
 const PRICED_PAGES=['plumbing-prices-greenwood-sc','plumbing-prices-anderson-sc'];
+// Pages that publish one group of the book rather than the whole table. Their
+// rows must still be the book's rows; there are just fewer of them.
+const PARTIAL_PRICED_PAGES=[
+  {slug:'water-heater-repair-greenwood-sc',group:'Water heaters'},
+];
 const ROW=/<td class="job-cell">(.*?)<\/td><td class="price-cell" data-label="Regular hours">\$([\d,]+)<\/td><td class="price-cell" data-label="After hours">\$([\d,]+)<\/td>/g;
 const num=v=>Number(String(v).replace(/,/g,''));
 const read=slug=>fs.readFileSync(path.join(root,slug,'index.html'),'utf8');
@@ -55,6 +60,38 @@ test('every published price is the snapshot price, and what the estimator quotes
   }
 });
 
+test('a page publishing part of the book publishes the book',()=>{
+  for(const {slug,group} of PARTIAL_PRICED_PAGES){
+    const expected=snapshot.groups.find(g=>g.title===group);
+    assert.ok(expected,`the snapshot has no group named "${group}"`);
+    const rows=rowsOf(slug);
+    assert.equal(rows.length,expected.items.length,
+      `${slug} publishes ${rows.length} prices but the "${group}" group holds ${expected.items.length}`);
+    const byLabelInGroup=new Map(expected.items.map(i=>[i.published_as,i]));
+    for(const {job,regular,after} of rows){
+      const item=byLabelInGroup.get(job);
+      assert.ok(item,`${slug}: "${job}" is published but is not in the "${group}" group`);
+      assert.equal(regular,item.standard_price,`${slug}: ${job} regular-hours price`);
+      assert.equal(after,item.standard_ot_price,`${slug}: ${job} after-hours price`);
+      // And the same figure the field estimator would quote.
+      const line={kind:'repair',std:item.standard_price,stdOt:item.standard_ot_price};
+      assert.equal(estimator.priceFor(line,{member:false,afterHours:false}),regular,
+        `${slug}: ${job} regular-hours price is not what the estimator quotes`);
+      assert.equal(estimator.priceFor(line,{member:false,afterHours:true}),after,
+        `${slug}: ${job} after-hours price is not what the estimator quotes`);
+    }
+  }
+});
+
+test('a partial price page still states the after-hours policy',()=>{
+  for(const {slug} of PARTIAL_PRICED_PAGES){
+    const text=read(slug);
+    assert.match(text,/After hours/,`${slug} is missing the after-hours column`);
+    assert.match(text,/after-hours column/,
+      `${slug} publishes prices without saying which column applies when`);
+  }
+});
+
 test('no page promises that the time of day leaves the repair price alone',()=>{
   const retired=['sets the service-call charge only, not the repair price','not the repair price'];
   const offenders=[];
@@ -72,6 +109,37 @@ test('no page promises that the time of day leaves the repair price alone',()=>{
   };
   walk(root);
   assert.deepEqual(offenders,[]);
+});
+
+test('no page credits, waives or discounts away the service call',()=>{
+  // README.md forbids restoring waived-service-call and free-diagnostic copy,
+  // and every price table on the site says the diagnostic call is charged
+  // separately. A page that also promises it back contradicts itself, and the
+  // customer reads whichever line suits them. This was a real regression on
+  // the Greenwood water-heater page, caught in review rather than by a test.
+  const banned=[
+    /service call fee is waived/i,
+    /\$79 (?:goes|applies|is applied|is credited)\s+to(?:ward)?s?\b/i,
+    /(?:credit|apply|waive)\w*\s+the\s+(?:\$79\s+)?(?:service|diagnostic)[^.]{0,40}\btoward/i,
+    /free diagnostic/i,
+    /no (?:service|diagnostic) (?:call|fee) when you/i,
+  ];
+  const offenders=[];
+  const walk=dir=>{
+    for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+      if(entry.name.startsWith('.')||entry.name==='node_modules')continue;
+      const full=path.join(dir,entry.name);
+      if(entry.isDirectory())walk(full);
+      else if(entry.name.endsWith('.html')){
+        const text=fs.readFileSync(full,'utf8');
+        for(const re of banned)
+          if(re.test(text))offenders.push(`${path.relative(root,full)}: ${re}`);
+      }
+    }
+  };
+  walk(root);
+  assert.deepEqual(offenders,[],
+    'a page promises the service call back, which the price tables contradict');
 });
 
 test('the pages state the after-hours policy where they quote a price',()=>{
