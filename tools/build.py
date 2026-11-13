@@ -13,7 +13,7 @@ Usage:
 Output: writes index.html into each target directory under repo root.
 """
 from __future__ import annotations
-import os, textwrap, json, sys
+import os, re, textwrap, json, sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
@@ -212,6 +212,88 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 """
+
+
+# ---------------------------------------------------------------------------
+# Business schema reused from the homepage
+#
+# The canonical LocalBusiness/Plumber node lives in the hand-authored
+# index.html. Rather than retyping it here - two copies of a NAP drift, and a
+# wrong address in schema is worse than none - these helpers read it back out
+# of index.html at build time, so there stays exactly one source of truth.
+# ---------------------------------------------------------------------------
+
+LOCALBUSINESS_ID = BASE_URL + "/#localbusiness"
+PERSON_ID = BASE_URL + "/#eric-callaway"
+WEBSITE_ID = BASE_URL + "/#website"
+
+
+def _homepage_graph() -> dict[str, dict]:
+    """Every @id-bearing node in the homepage's JSON-LD, keyed by @id."""
+    if not hasattr(_homepage_graph, "_cache"):
+        home = os.path.join(ROOT, "index.html")
+        with open(home, encoding="utf-8") as fh:
+            text = fh.read()
+        nodes: dict[str, dict] = {}
+        for block in re.findall(
+            r'<script type="application/ld\+json">(.*?)</script>', text, re.S
+        ):
+            for node in json.loads(block).get("@graph", []):
+                if node.get("@id"):
+                    nodes[node["@id"]] = node
+        if LOCALBUSINESS_ID not in nodes:
+            raise RuntimeError(
+                "index.html no longer defines the LocalBusiness node "
+                f"{LOCALBUSINESS_ID}; city-page business schema cannot be built"
+            )
+        _homepage_graph._cache = nodes
+    return _homepage_graph._cache
+
+
+def _is_bare_ref(value) -> bool:
+    return isinstance(value, dict) and set(value) == {"@id"}
+
+
+def _drop_unresolvable_refs(node: dict, present: set[str]) -> dict:
+    """Strip pointers to nodes that are not travelling with this one.
+
+    The homepage LocalBusiness node points at its OfferCatalog and eight
+    Service nodes. Copying those onto a city page would drag most of the
+    homepage graph along for no local-search gain, so a reference is kept only
+    when its target is also being emitted. Dropping a reference loses a
+    property; keeping a dangling one states a node exists that does not.
+    """
+    cleaned = {}
+    for key, value in node.items():
+        if _is_bare_ref(value):
+            if value["@id"] in present:
+                cleaned[key] = value
+            continue
+        if isinstance(value, list) and value and all(_is_bare_ref(v) for v in value):
+            kept = [v for v in value if v["@id"] in present]
+            if kept:
+                cleaned[key] = kept
+            continue
+        cleaned[key] = value
+    return cleaned
+
+
+def business_ld() -> list[dict]:
+    """The business, its owner and the site, as a self-contained sub-graph.
+
+    A city page already says provider: {"@id": .../#localbusiness} on its
+    Service node and isPartOf: {"@id": .../#website} on its WebPage node, but
+    defines neither, so a crawler reading that page alone resolves no business
+    at all. These three nodes close that gap.
+
+    The @id stays the homepage's. One business, one Abbeville address, one
+    entity - a per-city @id would assert branch offices that do not exist.
+    """
+    graph = _homepage_graph()
+    present = {LOCALBUSINESS_ID, PERSON_ID, WEBSITE_ID} & set(graph)
+    return [_drop_unresolvable_refs(graph[node_id], present)
+            for node_id in (LOCALBUSINESS_ID, PERSON_ID, WEBSITE_ID)
+            if node_id in graph]
 
 
 def breadcrumb_ld(items):
@@ -1273,6 +1355,9 @@ def city_faqs(c):
 
 
 CORE_MEMBERSHIP_MARKETS = {"abbeville-sc", "greenwood-sc", "anderson-sc", "mccormick-sc"}
+# City pages that carry the full LocalBusiness/Person/WebSite sub-graph.
+# Every city page would benefit; these are the two priority markets.
+BUSINESS_SCHEMA_MARKETS = {"greenwood-sc", "anderson-sc"}
 # The seasonal slot holds one offer per city page. The October 2026 repipe
 # promotion expired on 2026-10-31, so every market that carried it now carries
 # the winter offer instead. /specials/whole-home-repipe/ remains as an
@@ -1447,6 +1532,12 @@ def render_city_page(slug: str, c: dict) -> str:
         breadcrumb_ld(breadcrumb_items),
         faq_ld(city_faqs(c)),
     ]
+    # The WebPage and Service nodes above point at #localbusiness and
+    # #website. On these priority markets the nodes themselves ride along, so
+    # a crawler reading only the city page resolves the business, its address,
+    # its hours and its owner instead of two dangling pointers.
+    if slug in BUSINESS_SCHEMA_MARKETS:
+        extra = extra + business_ld()
     h = head(c["title"], c["description"], path, og_image=c["og"], extra_jsonld=extra, body_page=f"city-{slug}")
     n = nav("areas")
     body = CITY_PAGE_TPL.format(
@@ -2104,15 +2195,18 @@ def render_winterization_promotion():
 
 def render_pricing():
     path = "/pricing/"
-    title = "Upfront Plumbing Pricing in Abbeville SC | Plumbing Paramedic 911"
-    description = "Real flat-rate plumbing prices online — drain cleaning from $149, 40-gallon water heater replacement from $1,800, well pump replace from $799. No hourly billing. Abbeville SC. Call (864) 446-8911."
+    # This is the whole-service-area pricing hub; the city pricing pages
+    # (/plumbing-prices-greenwood-sc/, /plumbing-prices-anderson-sc/) are its
+    # spokes. Naming one city here fought both of them for the same term.
+    title = "Plumbing Prices in Upstate SC | Plumbing Paramedic 911"
+    description = "Real flat-rate plumbing prices online — drain cleaning from $149, 40-gallon water heater replacement from $1,800, well pump replace from $799. No hourly billing. Upstate SC. Call (864) 446-8911."
     breadcrumb_items = [("Home","/"),("Pricing", path)]
     extra = [
         {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":"Pricing","isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":BASE_URL+"/#localbusiness"},"inLanguage":"en-US"},
         breadcrumb_ld(breadcrumb_items),
         faq_ld([
             ("Is this price final or just an estimate?",
-             "The ranges shown are honest estimates based on typical jobs in the Abbeville area. When we arrive, we give you an exact written price before any work starts. That price doesn't change — if the job goes longer than expected, that's on us, not you."),
+             "The ranges shown are honest estimates based on typical jobs across our Upstate SC service area. When we arrive, we give you an exact written price before any work starts. That price doesn't change — if the job goes longer than expected, that's on us, not you."),
             ("What is the service / diagnostic call charge?",
              "The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repair or installation work is priced separately and approved before we proceed."),
             ("What is the after-hours service-call charge?",
