@@ -159,6 +159,45 @@ test('every page ships parseable JSON-LD',()=>{
   assert.deepEqual(bad,[]);
 });
 
+test('a PFAS reading above an enforceable limit is never stated without its compliance date',()=>{
+  // Stronger claim class than the MCLG guard above. The 2024 PFAS rule set
+  // enforceable 4 ppt limits for PFOA and PFOS, but its compliance date is
+  // April 2029 -- so a reading above the limit today is NOT a violation, and
+  // EPA's record shows zero health-based violations for Greenwood CPW.
+  // Printing the exceedance without the date and the no-violation fact
+  // accuses a named public utility of something untrue. The GenX 10 ppt
+  // limit is additionally under a proposed rescission (May 2026, not final),
+  // so a page naming GenX must say the standard is unsettled rather than
+  // present 91.1 ppt against a settled limit.
+  const pages=[];
+  const walk=dir=>{
+    for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+      if(entry.name.startsWith('.')||entry.name==='node_modules')continue;
+      const full=path.join(dir,entry.name);
+      if(entry.isDirectory())walk(full);
+      else if(entry.name.endsWith('.html'))pages.push(full);
+    }
+  };
+  walk(root);
+
+  for(const file of pages){
+    const text=fs.readFileSync(file,'utf8');
+    const rel=path.relative(root,file);
+    const namesPfas=/\bPFOA\b|\bPFOS\b/.test(text);
+    const quantified=/parts per trillion|\bppt\b/i.test(text);
+    if(!namesPfas||!quantified)continue;
+
+    assert.match(text,/2029/,
+      `${rel} reports a PFAS level without the 2029 compliance date`);
+    assert.match(text,/no health-based violations|not in violation|zero health-based violations/i,
+      `${rel} reports a PFAS level without stating the utility is not in violation`);
+
+    if(/GenX/i.test(text))
+      assert.match(text,/rescind/i,
+        `${rel} cites the GenX limit without noting EPA proposed rescinding it`);
+  }
+});
+
 test('no page claims this service area has hard city water',()=>{
   // Owner correction, 2026-11-13: Greenwood city water comes off Lake
   // Greenwood and is not hard. What shortens heater life on it is the

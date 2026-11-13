@@ -38,6 +38,7 @@ LASTMODS = {
     # New page.
     "water-quality-calhoun-falls-sc": "2026-11-13",
     "water-quality-anderson-sc": "2026-11-13",
+    "water-quality-greenwood-sc": "2026-11-13",
 }
 
 SERVICE_CALL_HTML = """\
@@ -347,6 +348,133 @@ MONEY_PAGES = {
             ("\U0001f525", "Water Heater Service", "/services/water-heater-repair-replacement/", "Anode rods, elements, repair and replacement."),
             ("\U0001f4cd", "Anderson Plumbing", "/service-areas/anderson-sc/", "All Plumbing Paramedic 911 services in Anderson."),
             ("\U0001f4b5", "Anderson Plumbing Prices", "/plumbing-prices-anderson-sc/", "All 38 published flat rates, regular and after hours."),
+        ],
+    },
+    "water-quality-greenwood-sc": {
+        # Third page in the water-quality set, and the only one so far whose
+        # readings sit above an ENFORCEABLE limit rather than only above a
+        # health goal of zero. Handled deliberately:
+        #   * PFOS 8.7 ppt and PFOA 5.9 ppt are above the 4 ppt MCL of the
+        #     2024 PFAS NPDWR, which is in force but whose compliance date is
+        #     April 2029. Greenwood CPW therefore is NOT in violation, and
+        #     EPA's record shows zero health-based violations since 2020.
+        #     Both facts are stated together everywhere the numbers appear.
+        #   * GenX 91.1 ppt is against a 10 ppt MCL that EPA PROPOSED
+        #     rescinding in May 2026 and has not finalised. Said as such.
+        #   * Figures cross-checked against two independent aggregations of
+        #     EPA UCMR 5 and against SC DES's own June 2020 Lake Greenwood
+        #     sampling, which found PFAS there years earlier.
+        #   * Chloramine attacks natural and synthetic rubber (ASTM D6284 is
+        #     the standard test method for exactly this). The vendor claim
+        #     that chloramine is WORSE than free chlorine has no data behind
+        #     it and is deliberately not made.
+        "title": "Greenwood SC Water Quality | Plumbing Paramedic 911",
+        "description": "What is in Greenwood SC tap water: PFAS findings measured against a 2029 federal limit, chloramines, soft water, and what each does to your plumbing.",
+        "h1": "Greenwood, SC Tap Water: What Is Actually In It",
+        "badge": "\u25cf PFAS, Chloramines &amp; Lake Greenwood",
+        "city": "Greenwood",
+        "area_type": "City",
+        "service_type": "Water Quality",
+        "parent_service": "/services/water-filtration-softener-systems/",
+        "parent_service_name": "Water Filtration &amp; Softeners",
+        "city_page": "/service-areas/greenwood-sc/",
+        "city_page_name": "Greenwood, SC",
+        "guide": "/guides/sc-homeowner-plumbing-survival-guide/",
+        "guide_name": "SC Homeowner\u2019s Plumbing Survival Guide",
+        "og": "/images/og/greenwood-1200x630.jpg",
+        "intro": "Greenwood CPW treats surface water from Lake Greenwood for about 49,600 people. EPA\u2019s December 2025 sampling found three PFAS compounds in it \u2014 PFOS at 8.7 parts per trillion, PFOA at 5.9 and GenX at 91.1 \u2014 alongside two disinfection byproducts measured in 2022. The water is soft, the residual disinfectant is chloramine rather than free chlorine, and EPA\u2019s record shows no health-based violations for this system since 2020.",
+        "answer": "PFOS and PFOA are above the 4 parts-per-trillion limit EPA set in 2024, but that limit\u2019s compliance date is April 2029, which is why Greenwood CPW is not in violation and EPA\u2019s record shows none. The GenX limit EPA proposed rescinding in May 2026 and has not finalised. Separately, bromodichloromethane and dichloroacetic acid sit above health goals of zero, against enforceable group limits of 80 ppb for the trihalomethanes and 60 ppb for the haloacetic acids. What we handle is the plumbing side: chloramine attacks rubber parts, and a chlorine-based disinfectant consumes your water heater\u2019s anode rod.",
+        "cta_note": "Call (864) 446-8911. The service / diagnostic call is $79 Monday through Friday, 9 AM to 5 PM. A basic water test runs $99 to $199, and we quote filtration only after we know what is in your water.",
+        "local_context": """
+<p><strong>Three water systems are listed for Greenwood, and your numbers come from whichever one bills you.</strong> <strong>Greenwood CPW</strong> (PWSID SC2410001) is the main system, serving about 49,632 people. <strong>Hyde Park S/D</strong> (SC2450001) and <strong>Avondale Mills Inc</strong> (SC0240002) each serve parts of the area and each report their own results. Nothing on this page is a city-wide average \u2014 results belong to a system, never to a ZIP code, and the first thing to do with any area water report is check the name on your bill.</p>
+<p>Greenwood CPW draws <strong>surface water from Lake Greenwood</strong>, treats it with conventional filtration and pre-oxidation with chlorine, and carries <strong>chloramine</strong> as the residual disinfectant in the distribution system. That last detail matters more to a plumber than it sounds, and it is covered below. PFAS in the lake is not a new or surprising finding: South Carolina\u2019s own environmental agency sampled Lake Greenwood in June 2020 and found PFAS compounds then, and an older 2020 sample put PFOS at 7.4 parts per trillion \u2014 close to what EPA measured five years later.</p>
+<p><strong>Greenwood water is soft.</strong> USGS sampling across Greenwood County \u2014 167 samples \u2014 puts hardness near 19.0 mg/L, about 1.1 grains per gallon. That is soft on the USGS scale and well below the range where scale is worth treating, which means <em>a water softener is not the answer to anything you are experiencing on Greenwood city water.</em> It is a county estimate rather than a measurement at your tap, but it is not close to the threshold. Out on the wells in the county it is a different question, and a test should answer it.</p>
+""",
+        "deep_dive_label": "What the numbers mean",
+        "deep_dive_heading": "Above a limit, not in violation of one \u2014 and why both are true",
+        "deep_dive": """
+<h3>The PFAS numbers, and what the rule actually requires</h3>
+<p>In April 2024 EPA set the first enforceable federal drinking-water limits for PFAS. For <strong>PFOA</strong> and <strong>PFOS</strong> the limit is <strong>4 parts per trillion</strong> each. Greenwood CPW\u2019s December 2025 results were <strong>5.9 ppt of PFOA</strong> and <strong>8.7 ppt of PFOS</strong> \u2014 roughly one and a half times, and a little over twice, those figures.</p>
+<p>Here is the part most water reports leave out. That rule gives public water systems until <strong>April 2029</strong> to come into compliance, and EPA has proposed letting systems that apply take until 2031. Until the compliance date arrives, a reading above the limit is not a violation of it. That is exactly why EPA\u2019s enforcement record shows <strong>zero health-based violations</strong> for Greenwood CPW since 2020 while these numbers sit on the same page. Greenwood CPW is in the window the rule gives every utility in the country to plan, fund and build treatment. Nothing here says otherwise, and anyone telling you your utility is breaking the law is misreading the rule.</p>
+<p><strong>GenX</strong> needs its own paragraph. The reported 91.1 ppt is measured against a 10 ppt limit \u2014 but that is one of the limits <strong>EPA proposed rescinding in May 2026</strong>, along with those for PFHxS, PFNA and the hazard-index mixtures. As of this writing that proposal has not been finalised and the 2024 rule stands as written, with litigation still running. So the honest statement is: a high reading against a limit whose future is genuinely unsettled. We are not going to pretend that is simpler than it is.</p>
+<h3>The two numbers people mix up</h3>
+<p>EPA publishes two figures per contaminant. The <strong>MCLG</strong> (Maximum Contaminant Level Goal) is the level with no known or expected health risk, and for compounds treated as possible carcinogens over a lifetime it is simply set at <strong>zero</strong> \u2014 a goal, not a rule. The <strong>MCL</strong> (Maximum Contaminant Level) is the enforceable limit. A report that only tells you something is "above EPA guidelines" is usually telling you it was detected at all.</p>
+<p>That is the case for Greenwood\u2019s two disinfection byproducts. <strong>Bromodichloromethane at 3.7 ppb</strong> and <strong>dichloroacetic acid at 14.5 ppb</strong> (0.0145 ppm) both carry an MCLG of zero, so any detection reads as "above guidelines". Neither is regulated on its own. Bromodichloromethane counts toward <strong>total trihalomethanes, limit 80 ppb</strong>; dichloroacetic acid counts toward <strong>the five haloacetic acids, limit 60 ppb</strong>, each as a running annual average of the group. So 3.7 against 80, and 14.5 against 60. The second of those is about a quarter of its group limit, which is a larger share than the neighbouring systems we have looked at \u2014 worth knowing, still inside the limit, and a number that belongs to the utility\u2019s own running average rather than to us. Those averages are published every year in Greenwood CPW\u2019s <strong>Consumer Confidence Report</strong>, which is free and is the document to read before buying anything.</p>
+<p>We are plumbers, not a testing laboratory or a health authority. On what is in the water and what it means for your health, Greenwood CPW and SCDPH are the sources. What we can speak to is what this water does to pipework and appliances, because we pull them out of Greenwood houses.</p>
+<h3>What chloramine does to rubber parts</h3>
+<p>Greenwood CPW uses <strong>chloramine</strong>, not free chlorine, as the disinfectant that stays in the water all the way to your house. Chloramine attacks natural and synthetic rubber. This is well enough established that there is a standard test method for it \u2014 <strong>ASTM D6284</strong>, written specifically to measure what chlorinated and chloraminated water do to rubber \u2014 and a federal appeals court upheld a manufacturer\u2019s liability in 2017 over chloramine degradation of the rubber components in its valves.</p>
+<p>In a house, the rubber is in the parts that fail first: <strong>toilet flapper valves</strong> that go soft and let the tank seep, <strong>supply-line and washing-machine hose gaskets</strong>, <strong>faucet and valve washers</strong>, <strong>flex connector linings</strong>, and the seals in fill valves. When these harden, swell or crack years earlier than the spec sheet suggests, the water chemistry is a reasonable suspect. A toilet that runs intermittently at night in a Greenwood house is very often a flapper the water has been working on.</p>
+<p>You will see vendors claim chloramine is definitively worse for rubber than free chlorine. We have looked for the data behind that and could not find it \u2014 the claim is plausible and widely repeated, but the head-to-head testing is not public. So we will say the part that is solid: chloramine degrades elastomers, it is in Greenwood\u2019s water by design, and it shows up in the parts we replace.</p>
+<h3>What chlorine-based disinfectant does to your water heater</h3>
+<p>Every tank heater has a <strong>sacrificial anode rod</strong> \u2014 magnesium or aluminium \u2014 whose entire job is to corrode <em>instead of</em> the steel tank. A chlorine-based disinfectant consumes it faster. Once the rod is gone, nothing stands between the water and the tank shell, and the clock on the tank starts running. It works on the elements too.</p>
+<p>This is the single most common cause we find behind a Greenwood water heater that failed earlier than it should have. Pulling that rod and replacing it when it is more than about half gone costs a fraction of a tank. On this water that is a two-to-three-year conversation, not a once-a-decade one.</p>
+<h3>What actually removes each of these</h3>
+<p>Different contaminants, different equipment \u2014 and in one case, no home equipment at all.</p>
+<ul>
+<li><strong>PFOA and PFOS \u2014 carbon or reverse osmosis.</strong> Granular activated carbon certified to <strong>NSF/ANSI 53</strong> adsorbs long-chain PFAS like these well, and reverse osmosis certified to <strong>NSF/ANSI 58</strong> also works. Carbon has a real limitation: it loads up and breaks through over time, so the filter schedule is not optional.</li>
+<li><strong>GenX \u2014 reverse osmosis is the more reliable route.</strong> GenX is a different kind of molecule from PFOA and PFOS, and the certified-carbon performance claims do not extend cleanly to it. If GenX is your concern, RO at the point of use is the answer we would stand behind.</li>
+<li><strong>Chlorine, chloramine, taste and odour \u2014 carbon, and not RO.</strong> Activated carbon is the correct and far cheaper medium. Chloramine specifically needs adequate contact time, so a correctly sized carbon unit matters more here than with free chlorine. Buying RO to fix a taste problem is paying for capability you will not use \u2014 and RO at the kitchen sink does nothing for the heater in the garage.</li>
+<li><strong>Dichloroacetic acid and the other haloacetic acids \u2014 no certified home filter exists.</strong> We would rather tell you that than sell you something. No point-of-use product on the market carries a certification for HAA5 reduction. EPA\u2019s designated treatment for it is plant-scale. Any company quoting you a filter that "handles" this one is overselling.</li>
+<li><strong>Hardness \u2014 nothing, because you do not have any.</strong> At 1.1 grains per gallon a softener treats a problem Greenwood city water does not have.</li>
+</ul>
+<h3>Lead, fluoride and the rest of the record</h3>
+<p>EPA\u2019s lead-and-copper record for Greenwood CPW lists a <strong>90th-percentile lead result of 4 ppb</strong> for the 2021\u20132023 monitoring period, below the 15 ppb action level. Worth two caveats: EPA\u2019s health goal for lead is zero, and a 90th percentile describes the sampled taps, not yours \u2014 if your house has lead solder or a lead service line, your tap is its own question and we can tell you what you have by looking at it. Fluoride was reported at 0.67 mg/L, just under the 0.7 mg/L federal recommendation. The system tested for 148 contaminants and found nothing detectable in 128 of them, which is a detail the alarming summaries tend to skip.</p>
+<h3>Start with a test, or with the report you already paid for</h3>
+<p>On Greenwood city water, start with Greenwood CPW\u2019s <strong>Consumer Confidence Report</strong>. It is free, you have already paid for it, and it reports what they measure. If you want numbers for your own tap \u2014 because of a lead service line, a long-standing taste problem, or a PFAS decision you want to make on data \u2014 a basic test runs <strong>$99 to $199</strong>. On a private well in the county there is no report at all, and a test is the only honest starting point.</p>
+<p>We quote filtration after a test, never from a brochure. If the numbers say you do not need equipment, we will tell you that, and the $79 visit will have saved you a few thousand dollars.</p>
+""",
+        "symptoms": [
+            "You read a PFAS report about Greenwood and want to know what is true",
+            "Toilets that run or seep intermittently, and flappers that keep failing",
+            "Supply-line gaskets, washers or flex connectors failing early",
+            "Chlorine or chemical smell and taste at the tap",
+            "A water heater that failed earlier than it should have",
+            "You have never had the anode rod in your tank looked at",
+            "You are on a well in Greenwood County and have never tested",
+        ],
+        "checks": [
+            "Establish which of the three systems actually serves your address",
+            "Pull and read the anode rod, and say how much of it is left",
+            "Inspect flappers, washers, gaskets and flex connectors for chloramine damage",
+            "Check the tank shell, fittings and T&amp;P valve for early corrosion",
+            "Identify the service line and solder where lead is the question",
+            "Test the water when the decision needs numbers rather than a county average",
+        ],
+        "price_drivers": [
+            "Whether a test is needed first, at $99 to $199",
+            "Carbon at one tap versus carbon on the whole house",
+            "Carbon versus reverse osmosis \u2014 driven by which contaminant you are targeting",
+            "Anode rod replacement versus a tank already past saving",
+            "City water or a private well \u2014 completely different equipment",
+            "Access to the heater, the main line and a drain for a backwash system",
+        ],
+        "faqs": [
+            ("Is Greenwood SC tap water safe to drink?",
+             "That is Greenwood CPW\u2019s and SCDPH\u2019s determination, not ours, and their Consumer Confidence Report is the document to read. What the public record shows: PFOS at 8.7 and PFOA at 5.9 parts per trillion against a 4 ppt federal limit whose compliance date is April 2029, so the system is not in violation and EPA\u2019s record shows no health-based violations since 2020. Two disinfection byproducts are above health goals of zero while sitting inside enforceable group limits of 80 ppb for trihalomethanes and 60 ppb for haloacetic acids. Several people read exactly the same numbers and reasonably reach different decisions about filtration."),
+            ("Does Greenwood have PFAS in its water?",
+             "Yes. EPA\u2019s December 2025 sampling of Greenwood CPW reported PFOS at 8.7 parts per trillion, PFOA at 5.9 and GenX at 91.1. It is not a new finding \u2014 South Carolina\u2019s environmental agency sampled Lake Greenwood in June 2020 and found PFAS then too. The source is surface water from the lake, which is also why the disinfection byproducts show up."),
+            ("Is Greenwood CPW breaking the law or in violation?",
+             "No. EPA set the 4 parts-per-trillion PFOA and PFOS limits in 2024 but gave public water systems until April 2029 to comply, and has proposed letting systems that apply take until 2031. A reading above a limit before its compliance date is not a violation of it, and EPA\u2019s enforcement record shows zero health-based violations for this system since 2020. Anyone telling you otherwise is misreading the rule."),
+            ("What is GenX and why is its number so high?",
+             "GenX is a PFAS compound, reported at 91.1 parts per trillion against a 10 ppt limit. That limit is one EPA proposed rescinding in May 2026, together with those for PFHxS, PFNA and the hazard-index mixtures, and that proposal has not been finalised. So it is a high reading against a standard whose future is genuinely unsettled. If GenX is what concerns you, reverse osmosis at the point of use is the removal method we would stand behind."),
+            ("Will a filter remove PFAS from my Greenwood water?",
+             "For PFOA and PFOS, yes \u2014 granular activated carbon certified to NSF/ANSI 53 or reverse osmosis certified to NSF/ANSI 58. Carbon loads up and breaks through over time, so replacing cartridges on schedule is part of the job rather than an afterthought. For GenX specifically, reverse osmosis is the more reliable route, because certified carbon claims do not extend cleanly to that molecule."),
+            ("Can a home filter remove the haloacetic acids?",
+             "No, and we would rather say so. No point-of-use product on the market carries a certification for HAA5 reduction, and EPA\u2019s designated treatment for it is plant-scale, not something that goes under a sink. Carbon does adsorb these compounds but breaks through as the bed loads, with no certified performance to point at. If a company quotes you a filter that handles this one, they are overselling."),
+            ("Do I need a water softener in Greenwood?",
+             "On city water, no. USGS sampling across Greenwood County \u2014 167 samples \u2014 puts hardness near 19.0 mg/L, about 1.1 grains per gallon, which is soft and well below the point where scale is worth treating. A softener removes hardness you do not have. On a private well in the county it is a different question and a test should answer it."),
+            ("Why do my toilet flappers and gaskets keep failing?",
+             "Greenwood CPW uses chloramine as its residual disinfectant, and chloramine attacks natural and synthetic rubber. There is a standard test method written for exactly this, ASTM D6284, and a federal appeals court upheld a manufacturer\u2019s liability in 2017 over chloramine degradation of rubber valve components. In a house it shows up first in flappers, supply-line and hose gaskets, washers and flex connector linings. A toilet that runs intermittently at night is very often a flapper the water has been working on."),
+            ("Does the chlorine shorten the life of my water heater?",
+             "It consumes the sacrificial anode rod faster, and that rod is the only thing protecting the steel tank from corroding. Once it is gone, the tank is next. It works on the elements too. This is the most common cause we find behind a Greenwood heater that failed earlier than it should have, and inspecting the rod costs a fraction of a tank."),
+            ("How much does a water test cost?",
+             "A basic test runs $99 to $199 and covers bacteria, nitrates, iron, hardness and pH. On city water, start with Greenwood CPW\u2019s Consumer Confidence Report, which is free and reports what they measure. PFAS is a specialist test and is not part of a basic panel."),
+        ],
+        "related": [
+            ("\U0001f6b0", "Water Filtration &amp; Softeners", "/services/water-filtration-softener-systems/", "Carbon filtration, reverse osmosis, and testing first."),
+            ("\U0001f525", "Water Heater Service", "/services/water-heater-repair-replacement/", "Anode rods, elements, repair and replacement."),
+            ("\U0001f4cd", "Greenwood Plumbing", "/service-areas/greenwood-sc/", "All Plumbing Paramedic 911 services in Greenwood."),
+            ("\U0001f4b5", "Greenwood Plumbing Prices", "/plumbing-prices-greenwood-sc/", "All 38 published flat rates, regular and after hours."),
         ],
     },
     "water-quality-calhoun-falls-sc": {
@@ -955,12 +1083,12 @@ LINK_TARGETS = {
     "services/24-7-emergency-plumbing/index.html": ["emergency-plumber-abbeville-sc", "emergency-plumber-anderson-sc"],
     "service-areas/mccormick-sc/index.html": ["well-pump-repair-mccormick-sc"],
     "service-areas/iva-lake-secession-sc/index.html": ["well-pump-repair-iva-lake-secession-sc"],
-    "service-areas/greenwood-sc/index.html": ["drain-cleaning-greenwood-sc", "water-heater-repair-greenwood-sc", "plumbing-prices-greenwood-sc"],
+    "service-areas/greenwood-sc/index.html": ["drain-cleaning-greenwood-sc", "water-heater-repair-greenwood-sc", "plumbing-prices-greenwood-sc", "water-quality-greenwood-sc"],
     "service-areas/anderson-sc/index.html": ["water-heater-repair-anderson-sc", "emergency-plumber-anderson-sc", "drain-cleaning-anderson-sc", "plumbing-prices-anderson-sc", "water-quality-anderson-sc"],
     "service-areas/abbeville-sc/index.html": ["emergency-plumber-abbeville-sc", "drain-cleaning-abbeville-sc", "water-heater-repair-abbeville-sc", "sewer-line-repair-abbeville-sc"],
     "pricing/index.html": ["plumbing-prices-greenwood-sc", "plumbing-prices-anderson-sc"],
     "service-areas/calhoun-falls-sc/index.html": ["water-quality-calhoun-falls-sc"],
-    "services/water-filtration-softener-systems/index.html": ["water-quality-calhoun-falls-sc", "water-quality-anderson-sc"],
+    "services/water-filtration-softener-systems/index.html": ["water-quality-calhoun-falls-sc", "water-quality-anderson-sc", "water-quality-greenwood-sc"],
     "services/index.html": list(MONEY_PAGES.keys()),
 }
 
