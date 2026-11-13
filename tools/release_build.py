@@ -59,6 +59,7 @@ CRITICAL_TITLE_PATHS = {
     "emergency-plumber-abbeville-sc/index.html", "drain-cleaning-abbeville-sc/index.html",
     "emergency-plumber-anderson-sc/index.html", "drain-cleaning-anderson-sc/index.html",
     "plumbing-prices-greenwood-sc/index.html", "plumbing-prices-anderson-sc/index.html",
+    "specials/winterization/index.html",
     "sewer-line-repair-abbeville-sc/index.html", "emergency-plumber-greenwood-sc/index.html",
 }
 LAKE_AREA_LINKS = ('<a href="/service-areas/iva-lake-secession-sc/">📍 Iva &amp; Lake Secession, SC</a>' '<a href="/service-areas/savannah-lakes-village-sc/">📍 Savannah Lakes Village, SC</a>')
@@ -143,6 +144,7 @@ def ensure_sitemap() -> None:
         "https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/": "2026-08-13",
         "https://plumbingparamedic911.com/service-areas/savannah-lakes-village-sc/": "2026-08-13",
         "https://plumbingparamedic911.com/specials/whole-home-repipe/": "2026-10-03",
+        "https://plumbingparamedic911.com/specials/winterization/": "2026-11-12",
     }
     for url, lastmod in urls.items():
         if url not in text: text = text.replace("</urlset>", f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>\n</urlset>")

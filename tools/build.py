@@ -1274,6 +1274,33 @@ def city_faqs(c):
 
 CORE_MEMBERSHIP_MARKETS = {"abbeville-sc", "greenwood-sc", "anderson-sc", "mccormick-sc"}
 REPIPE_PROMO_MARKETS = {"abbeville-sc", "greenwood-sc", "mccormick-sc"}
+# The seasonal slot holds one offer per city page. These are the markets whose
+# page is not already carrying the repipe promotion.
+WINTERIZATION_PROMO_MARKETS = {"anderson-sc", "laurens-sc", "ninety-six-sc", "calhoun-falls-sc", "due-west-sc"}
+
+
+def city_winterization_promo(slug: str, city: str) -> str:
+    if slug not in WINTERIZATION_PROMO_MARKETS:
+        return ""
+    return f"""
+  <section class="section" style="padding-top:34px;padding-bottom:34px">
+    <div class="container">
+      <div style="background:linear-gradient(135deg,#0D47A1,#1565C0);border:3px solid var(--green);border-radius:var(--r2);padding:30px;color:white">
+        <div class="grid-2" style="gap:34px;align-items:center">
+          <div>
+            <span class="chip" style="background:var(--green);color:white;margin-bottom:12px">Winter 2026 Offer</span>
+            <h2 style="color:white;margin-bottom:10px">Save $50 winterizing your {city} home</h2>
+            <p style="color:rgba(255,255,255,.9);font-size:1.02rem;line-height:1.65;margin-bottom:0">Lake house, second home or a rental sitting empty? Published flat rates start at $225 for a half-bath home and $345 for two baths. $50 off any residential winterization completed by December 31, 2026.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+            <a href="/specials/winterization/" class="btn btn-green btn-lg">View Offer &amp; Rates →</a>
+            <a href="/contact/?service=winterization&amp;offer=winter-50" class="btn btn-outline-white btn-lg">Schedule Winterization</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
 
 
 def city_repipe_promo(slug: str, city: str) -> str:
@@ -1450,7 +1477,7 @@ def render_city_page(slug: str, c: dict) -> str:
         city_map=map_embed(f"https://maps.google.com/maps?q={c['city'].replace(' ','+')}%2C+{c['abbr']}&amp;z=12&amp;output=embed", f"Map of {c['city']}, {c['abbr']} — Plumbing Paramedic 911 service area", 260),
         gbp_url=GBP_MAPS_URL,
         faqs_html=faq_html(city_faqs(c)),
-        repipe_promo=city_repipe_promo(slug, c["city"]),
+        repipe_promo=city_repipe_promo(slug, c["city"]) + city_winterization_promo(slug, c["city"]),
         membership_promo=city_membership_promo(slug, c["city"]),
     )
     return h + n + body + FOOTER_HTML + "</body>\n</html>\n"
@@ -1932,6 +1959,157 @@ def render_repipe_promotion():
     return h + nav() + body + FOOTER_HTML + "</body>\n</html>\n"
 
 
+def render_winterization_promotion():
+    path = "/specials/winterization/"
+    title = "$50 Off Home Winterization SC | Plumbing Paramedic 911"
+    description = "Save $50 on home winterization in Upstate SC, booked by December 31, 2026. Lake houses, second homes and vacant rentals. Flat rates from $225. Call (864) 446-8911."
+    faqs = [
+        ("How much does it cost to winterize a house in South Carolina?",
+         "Our published flat rates are $225 for a half-bath home, $295 for one bath, $345 for two baths, $395 for three baths and $595 for four baths. With the current $50 offer a two-bath home is $295. A hydronic heating system is winterized separately at $295 for up to three zones or $395 for up to five."),
+        ("What does winterizing actually include?",
+         "We shut off and drain the water supply, drain the water heater, blow out the supply lines, drain and treat the traps so sewer gas cannot come back up, handle the toilets and tanks, and deal with outside hose bibs and any exposed or crawlspace piping. You get a written note of what was shut off and what has to happen before the water goes back on."),
+        ("Who actually needs this?",
+         "Anyone leaving a house without heat through a freeze: lake houses and second homes closed for the season, vacant rentals between tenants, a property listed over the winter, an estate nobody is living in, and homeowners travelling for several weeks. If the house stays heated and occupied, you do not need full winterization \u2014 you need the outdoor faucets and crawlspace lines handled, which is a much smaller job."),
+        ("What happens if I skip it and a pipe freezes?",
+         "Thawing a frozen line starts at $165 for a minor thaw and runs $285 per hour for the rest. That is before any repair, and before whatever the water did to the floors, ceilings and belongings while nobody was in the house. Winterizing a two-bath home at $295 is the cheaper side of that bet."),
+        ("Do you come back in the spring to turn it on?",
+         "Yes. De-winterization is a separate visit and a separate flat rate \u2014 $165 for a half-bath home, $225 for one bath, $425 for three baths, $595 for four. We re-pressurize the system, check every fixture and connection under pressure, refill and restart the water heater, and look for anything that let go over the winter before you find it the hard way."),
+        ("How does the $50 offer work?",
+         "It comes off the written flat-rate price of a residential winterization scheduled and completed by December 31, 2026, anywhere in our normal service area. One per property. It does not combine with another promotion or a membership discount on the same visit."),
+        ("Can you stop this from being an annual expense?",
+         "Sometimes. If the same outdoor faucets freeze every year, a 14-inch frost-proof faucet is $345 installed and ends that problem permanently. Exposed runs in a crawlspace can be insulated at $125 per six feet. We will tell you which of those is worth doing on your house and which is not."),
+    ]
+    breadcrumb_items = [("Home", "/"), ("Winterization Offer", path)]
+    service_id = BASE_URL + path + "#service"
+    extra = [
+        {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":title,"isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":service_id},"inLanguage":"en-US",
+         "speakable":{"@type":"SpeakableSpecification","cssSelector":[".speakable-headline",".speakable-summary",".speakable-phone"]}},
+        {"@type":"Service","@id":service_id,"name":"Home Winterization","serviceType":"Residential plumbing winterization and de-winterization",
+         "provider":{"@id":BASE_URL+"/#localbusiness"},
+         "areaServed":[{"@type":"City","name":city+", South Carolina"} for city in ["Abbeville","Greenwood","Anderson","Laurens","McCormick","Ninety Six","Calhoun Falls","Due West"]],
+         "offers":{"@type":"Offer","name":"Winter 2026 Home Winterization Promotion","description":"$50 off a residential home winterization completed by December 31, 2026","priceCurrency":"USD","priceValidUntil":"2026-12-31","url":BASE_URL+path},
+         "hasOfferCatalog":{"@type":"OfferCatalog","@id":BASE_URL+path+"#prices","name":"Published winterization flat rates","itemListElement":[
+             {"@type":"Offer","itemOffered":{"@type":"Service","name":name},
+              "priceSpecification":{"@type":"UnitPriceSpecification","price":str(price),"priceCurrency":"USD","valueAddedTaxIncluded":False},
+              "seller":{"@id":BASE_URL+"/#localbusiness"}}
+             for name, price in [
+                 ("Winterization for a half-bath home",225),("Winterization for a 1-bath home",295),
+                 ("Winterization for a 2-bath home",345),("Winterization for a 3-bath home",395),
+                 ("Winterization for a 4-bath home",595),("Winterize a hydronic system up to 3 zones",295),
+                 ("Winterize a hydronic system up to 5 zones",395),
+                 ("De-winterization for a half-bath home",165),("De-winterization for a 1-bath home",225),
+                 ("De-winterization for a 3-bath home",425),("De-winterization for a 4-bath home",595),
+                 ("Thaw frozen pipes, minor",165),("Install a 14-inch frost-proof faucet",345),
+             ]]}},
+        breadcrumb_ld(breadcrumb_items),
+        faq_ld(faqs),
+    ]
+    h = head(title, description, path, extra_jsonld=extra, body_page="winterization-promotion")
+    rows = [
+        ("Half-bath home", 225, 191), ("1-bath home", 295, 251), ("2-bath home", 345, 293),
+        ("3-bath home", 395, 336), ("4-bath home", 595, 506),
+        ("Hydronic heating system, up to 3 zones", 295, 251),
+        ("Hydronic heating system, up to 5 zones", 395, 336),
+    ]
+    spring = [
+        ("Half-bath home", 165, 140), ("1-bath home", 225, 191),
+        ("3-bath home", 425, 361), ("4-bath home", 595, 506),
+    ]
+    def table(caption, data):
+        body = "".join(
+            f'<tr><td class="job-cell">{name}</td>'
+            f'<td class="price-cell" data-label="Flat rate">${std:,}</td>'
+            f'<td class="price-cell" data-label="Member">${mem:,}</td></tr>'
+            for name, std, mem in data)
+        return (f'<h3 style="margin:26px 0 10px">{caption}</h3>'
+                f'<div class="table-wrap"><table class="price-table">'
+                f'<thead><tr><th scope="col">Property</th><th scope="col">Flat-rate price</th>'
+                f'<th scope="col">VIP Diamond member</th></tr></thead><tbody>{body}</tbody></table></div>')
+    body = f"""\
+<main>
+  <section class="service-hero">
+    <div class="container">
+      <nav class="city-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>Winterization Offer</span></nav>
+      <div class="chip chip-live" style="margin-bottom:14px">Book by December 31, 2026</div>
+      <h1 class="speakable-headline" style="color:white">Save $50 Winterizing Your Home</h1>
+      <p class="lead lead-white speakable-summary" style="max-width:720px;margin-bottom:26px">Closing up a lake house, a second home or a rental for the winter? We drain it down properly so you are not meeting a burst pipe in February. $50 off any residential winterization completed by December 31, 2026, anywhere we normally serve.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a href="/contact/?service=winterization&amp;offer=winter-50" class="btn btn-green btn-xl">Schedule Winterization</a><a href="tel:+18644468911" class="btn btn-outline-white btn-xl speakable-phone">📞 (864) 446-8911</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid-2" style="gap:48px;align-items:start">
+      <article class="prose">
+        <span class="label">Why it matters here</span>
+        <h2>An empty house is the one that floods</h2>
+        <p>Upstate South Carolina does not freeze all winter — it freezes for three days in January, hard, and then warms back up. That pattern is worse for an unoccupied house than a steady cold winter, because nobody is there when the line lets go and nobody notices until the water has been running for a week.</p>
+        <p>Lake properties around Thurmond, Secession, Greenwood and Russell are the clearest case: closed for the season, power often down to a trickle, heat off. Vacant rentals between tenants and homes sitting on the market are the same risk with no one checking on them.</p>
+        <h3>What we actually do</h3>
+        <ul class="check-list">
+          <li>Shut off and drain the supply, then blow out the lines</li>
+          <li>Drain the water heater and shut down its power or gas</li>
+          <li>Drain and treat the traps so sewer gas cannot come back up</li>
+          <li>Handle toilets, tanks and any appliance holding water</li>
+          <li>Deal with hose bibs and exposed or crawlspace runs</li>
+          <li>Leave you a written note of what is off and what has to happen before the water goes back on</li>
+        </ul>
+      </article>
+      <aside class="card" style="border:3px solid var(--green)">
+        <div style="font-family:var(--ff-head);font-size:2.5rem;font-weight:900;color:var(--green-dk);text-align:center">$50 OFF</div>
+        <h2 style="font-size:1.3rem;text-align:center;margin:8px 0 18px">Any residential winterization</h2>
+        <ul class="check-list"><li>Completed by December 31, 2026</li><li>Written flat-rate price before we start</li><li>One per property</li><li>SC Master Plumber on the job</li></ul>
+        <a href="/contact/?service=winterization&amp;offer=winter-50" class="btn btn-green btn-lg" style="width:100%;justify-content:center;margin-top:18px">Schedule Winterization</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="container">
+      <span class="label">Published flat rates</span>
+      <h2>What it costs before the $50 comes off</h2>
+      <p class="lead">Priced by the number of bathrooms, because that is what decides how many fixtures, traps and supply runs have to be drained. These are flat rates for the job, not estimates.</p>
+      {table("Winterizing, this fall", rows)}
+      {table("Turning it back on in the spring", spring)}
+      <p style="font-size:.88rem;color:var(--ink3);margin-top:16px">De-winterization is a separate visit in the spring and is not discounted by this offer. Prices assume normal access to the shutoff, water heater and crawlspace. VIP Diamond Plan members pay the member column; the $50 offer does not stack on top of the member price.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:900px">
+      <span class="label">The other side of the math</span>
+      <h2>What skipping it costs</h2>
+      <p>A minor thaw on a frozen line is <strong>$165</strong>. Past that it is <strong>$285 per hour</strong>, and that is only to get the ice out — the repair, and whatever the water did while the house was empty, is separate. Winterizing a two-bath home is <strong>$345</strong>, or <strong>$295</strong> with this offer.</p>
+      <p>If the same outdoor faucet freezes every year, stop renting the problem: a 14-inch frost-proof faucet is <strong>$345</strong> installed and ends it. Exposed crawlspace runs can be insulated at <strong>$125</strong> per six feet. We will tell you which of those is worth doing on your house and which is not.</p>
+    </div>
+  </section>
+
+  <section class="section bg-alt">
+    <div class="container" style="max-width:860px">
+      <span class="label">Offer terms</span>
+      <h2>Clear terms before you schedule</h2>
+      <p>Valid on one residential winterization per property, scheduled and completed by December 31, 2026, within the service area we normally cover. The $50 comes off the written flat-rate price. It does not apply to de-winterization, thawing a frozen line, repairs found during the visit, or commercial property. It cannot be combined with another promotion or a membership discount on the same visit. Final price and eligibility are confirmed on site before any work starts.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:820px"><span class="label">Winterization FAQ</span><h2 style="margin-bottom:28px">Questions before you close the house up</h2>{faq_html(faqs)}</div>
+  </section>
+
+  <section style="background:linear-gradient(135deg,var(--blue-dk),var(--blue));padding:64px 0">
+    <div class="container" style="text-align:center;max-width:760px">
+      <h2 style="color:white;margin-bottom:10px">Closing the house up this year?</h2>
+      <p style="color:rgba(255,255,255,.9);margin-bottom:24px">Get it drained down before the first hard freeze, not after it. Call and we will give you the flat rate for your bathroom count on the phone.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="tel:+18644468911" class="btn btn-outline-white btn-xl speakable-phone">📞 (864) 446-8911</a>
+        <a href="/contact/?service=winterization&amp;offer=winter-50" class="btn btn-outline-white">Schedule Online</a>
+      </div>
+    </div>
+  </section>
+</main>
+"""
+    return h + nav() + body + FOOTER_HTML + "</body>\n</html>\n"
+
+
 def render_pricing():
     path = "/pricing/"
     title = "Upfront Plumbing Pricing in Abbeville SC | Plumbing Paramedic 911"
@@ -2375,6 +2553,7 @@ def main():
     write("pricing/index.html", render_pricing())
     write("membership/index.html", render_membership())
     write("specials/whole-home-repipe/index.html", render_repipe_promotion())
+    write("specials/winterization/index.html", render_winterization_promotion())
     write("faq/index.html", render_faq())
     write("reviews/index.html", render_reviews())
     write("financing/index.html", render_financing())
