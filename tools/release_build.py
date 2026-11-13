@@ -143,7 +143,7 @@ def ensure_sitemap() -> None:
     urls = {
         "https://plumbingparamedic911.com/service-areas/iva-lake-secession-sc/": "2026-08-13",
         "https://plumbingparamedic911.com/service-areas/savannah-lakes-village-sc/": "2026-08-13",
-        "https://plumbingparamedic911.com/specials/whole-home-repipe/": "2026-10-03",
+        "https://plumbingparamedic911.com/specials/whole-home-repipe/": "2026-11-13",
         "https://plumbingparamedic911.com/specials/winterization/": "2026-11-12",
     }
     for url, lastmod in urls.items():
