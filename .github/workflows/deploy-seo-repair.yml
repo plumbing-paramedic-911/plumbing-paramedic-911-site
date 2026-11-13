@@ -145,13 +145,23 @@ jobs:
           assert_redirect '/sitemap_index.xml' \
             'https://plumbingparamedic911.com/sitemap.xml'
 
-          # Verify each updated priority market is present in the published XML.
+          # Verify each priority market is present in the published XML carrying
+          # the same lastmod as the sitemap this run just built and uploaded.
+          # The expected date is read from the repo rather than hardcoded here,
+          # so refreshing a page's lastmod never fails this step for being out
+          # of step with the workflow.
           sitemap="$(fetch "${BASE_URL}/sitemap.xml?deploy=${GITHUB_SHA}")"
           for city in abbeville-sc greenwood-sc anderson-sc; do
-            printf '%s' "$sitemap" | grep -Fq "<loc>${BASE_URL}/service-areas/${city}/</loc><lastmod>2026-11-04</lastmod>" || {
-              echo "Priority market sitemap entry missing or stale: ${city}"
+            entry="$(grep -oE "<loc>${BASE_URL}/service-areas/${city}/</loc><lastmod>[0-9]{4}-[0-9]{2}-[0-9]{2}</lastmod>" sitemap.xml | head -n 1)"
+            if [ -z "$entry" ]; then
+              echo "Priority market missing from the built sitemap: ${city}"
+              exit 1
+            fi
+            printf '%s' "$sitemap" | grep -Fq "$entry" || {
+              echo "Published sitemap does not carry the deployed entry for ${city}: ${entry}"
               exit 1
             }
+            echo "Verified sitemap entry: ${entry}"
           done
           echo 'Verified priority market sitemap freshness.'
 
