@@ -111,6 +111,37 @@ test('no page promises that the time of day leaves the repair price alone',()=>{
   assert.deepEqual(offenders,[]);
 });
 
+test('no page credits, waives or discounts away the service call',()=>{
+  // README.md forbids restoring waived-service-call and free-diagnostic copy,
+  // and every price table on the site says the diagnostic call is charged
+  // separately. A page that also promises it back contradicts itself, and the
+  // customer reads whichever line suits them. This was a real regression on
+  // the Greenwood water-heater page, caught in review rather than by a test.
+  const banned=[
+    /service call fee is waived/i,
+    /\$79 (?:goes|applies|is applied|is credited)\s+to(?:ward)?s?\b/i,
+    /(?:credit|apply|waive)\w*\s+the\s+(?:\$79\s+)?(?:service|diagnostic)[^.]{0,40}\btoward/i,
+    /free diagnostic/i,
+    /no (?:service|diagnostic) (?:call|fee) when you/i,
+  ];
+  const offenders=[];
+  const walk=dir=>{
+    for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+      if(entry.name.startsWith('.')||entry.name==='node_modules')continue;
+      const full=path.join(dir,entry.name);
+      if(entry.isDirectory())walk(full);
+      else if(entry.name.endsWith('.html')){
+        const text=fs.readFileSync(full,'utf8');
+        for(const re of banned)
+          if(re.test(text))offenders.push(`${path.relative(root,full)}: ${re}`);
+      }
+    }
+  };
+  walk(root);
+  assert.deepEqual(offenders,[],
+    'a page promises the service call back, which the price tables contradict');
+});
+
 test('the pages state the after-hours policy where they quote a price',()=>{
   for(const slug of PRICED_PAGES){
     const text=read(slug);
