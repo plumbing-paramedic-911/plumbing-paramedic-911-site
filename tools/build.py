@@ -747,7 +747,7 @@ SERVICES = {
 <ul>
   <li><strong>New tankless water heater installation</strong> — gas or electric, whole-house or point-of-use</li>
   <li><strong>Tankless repair</strong> — no hot water, error codes, flow sensor issues, ignition failure, temperature fluctuation</li>
-  <li><strong>Annual descaling and flushing</strong> — removes mineral buildup and keeps your unit running at peak efficiency, especially important in Greenwood and other hard-water areas</li>
+  <li><strong>Annual descaling and flushing</strong> — removes mineral buildup and keeps your unit running at peak efficiency, especially on the harder well water outside the city limits</li>
   <li><strong>Tank-to-tankless conversion</strong> — replacing an old tank-style heater with a tankless system, including any gas line, venting, or electrical upgrades needed</li>
 </ul>
 <h3>Where we install</h3>
@@ -761,7 +761,7 @@ SERVICES = {
             ("Is a tankless water heater worth it?",
              "For most households, yes. You'll save 20 to 40 percent on water-heating energy costs, never run out of hot water, and the unit lasts about twice as long as a tank. The upfront cost is higher, but the lifetime cost is usually lower."),
             ("Do tankless water heaters need maintenance?",
-             "Yes — annual descaling (flushing with vinegar solution) is recommended, especially in hard-water areas like Greenwood. Without it, mineral buildup reduces efficiency and can trigger error codes. We offer annual maintenance service."),
+             "Yes — annual descaling (flushing with vinegar solution) is recommended, especially on the harder well water common outside the city limits. Without it, mineral buildup reduces efficiency and can trigger error codes. We offer annual maintenance service."),
             ("Can you convert my tank water heater to tankless?",
              "Yes. We handle the full conversion — removing the old tank, installing the tankless unit, and upgrading gas lines, venting, or electrical as needed. We'll quote the complete job upfront so there are no surprises."),
             ("What brands of tankless water heaters do you install?",
@@ -1038,9 +1038,9 @@ CITIES = {
 <h3>Common services in Greenwood, SC</h3>
 <ul>
   <li><strong>Same-day service across Greenwood</strong> — typical response 45 minutes</li>
-  <li><strong>Water heater repair and replacement</strong> — hard-water-related failures are our #1 Greenwood call</li>
+  <li><strong>Water heater repair and replacement</strong> — our number-one Greenwood call. On city water the chlorine works through the anode rod and the elements; on the county wells it is hardness and iron</li>
   <li><strong><a href="/services/tankless-water-heater-installation-repair/">Tankless water heater installation</a></strong> — popular upgrade for Greenwood homeowners tired of running out of hot water</li>
-  <li><strong><a href="/services/water-filtration-softener-systems/">Water softeners and filtration</a></strong> — to extend fixture and heater life in Greenwood's hard water</li>
+  <li><strong><a href="/services/water-filtration-softener-systems/">Water softeners and filtration</a></strong> — to extend fixture and heater life on the harder well water around the lake and out in the county</li>
   <li><strong><a href="/services/drain-cleaning/">Drain cleaning and sewer service</a></strong> — including main line clearing for Uptown, Montague, and older Greenwood neighborhoods</li>
   <li><strong><a href="/services/slab-leak-repair/">Slab leak detection and repair</a></strong> — for newer Greenwood subdivisions on slab foundations</li>
   <li><strong><a href="/services/leak-detection/">Leak detection</a></strong> — acoustic, thermal, and slab leak locating</li>

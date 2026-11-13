@@ -279,24 +279,25 @@ MONEY_PAGES = {
         "answer": "A leaking tank shell means replacement; a rusted-through tank cannot be repaired safely or legally. A failed thermostat, element, igniter or gas control on a sound tank is usually worth repairing. And on a 30 to 50 gallon electric tank still inside its 6-year warranty, we swap it for $995 rather than sell you a new heater.",
         "cta_note": "Call (864) 446-8911. The service / diagnostic call is $79 Monday through Friday, 9 AM to 5 PM, and the installation is priced separately \u2014 you approve both in writing before we start.",
         "local_context": """
-<p>Where you live in the county changes which failure we find. In-town homes off Main and the older Montague Avenue blocks often have the heater in a tight closet, and a 50-gallon tank will not always go back where the 40 came out. Newer subdivisions usually have garage installations with room to work. Out toward Lake Greenwood, along SC 702 and the marina roads, we are often on well water and sometimes propane.</p>
-<p>On heaters that die early, the cause is usually sediment or scale. Greenwood CPW water comes off Lake Greenwood, where settled sediment is the common problem \u2014 it insulates the lower element and you hear it as popping or rumbling. On the wells around the lake and in the rural county it is genuinely hard water, often with iron or sulfur, which scales elements and shortens tank life. Either way the symptom is the same: hot water that runs out faster, then none at all.</p>
+<p>Where you live in the county changes which failure we find. In-town homes off Main and the older Montague Avenue blocks often have the heater in a tight closet, and a 50-gallon tank will not always go back where the 40 came out. Newer subdivisions usually have garage installs with room to work. Out toward Lake Greenwood we are often on well water and sometimes propane.</p>
+<p>Greenwood city water is not hard. It comes off Lake Greenwood, and the thing that kills heaters on it is the chlorine used to treat it: it works through the sacrificial anode rod, and once that rod is spent the tank shell is next in line. It goes after the elements too. Sediment settles on top of that and insulates the lower element, which is the popping or rumbling you hear.</p>
+<p>Out on the wells around the lake and in the rural county it is a different failure \u2014 genuinely hard water, often with iron or sulfur, scaling elements and shortening tank life. Either way the symptom is the same: hot water that runs out faster, then none at all.</p>
 """,
         "deep_dive_label": "Repair, replace, and what to put in",
         "deep_dive_heading": "Choosing between a repair, a warranty swap and a new heater",
         "deep_dive": """
 <h3>When a repair is the right call</h3>
-<p>A heater is a tank with replaceable parts bolted to it. A thermostat is $165, both thermostats $245, an element $285, a T&amp;P valve $225. If one of those failed and the tank is sound, repair is the right answer and we will say so standing next to a heater we could have sold you. The question is how much life it buys: a $285 element in a four-year-old tank is good money, and the same part in a thirteen-year-old tank is not.</p>
+<p>A heater is a tank with replaceable parts bolted to it. A thermostat is $165, both thermostats $245, an element $285, a T&amp;P valve $225. If one of those failed and the tank is sound, repair is the right answer. The question is how much life it buys: a $285 element in a four-year-old tank is good money, the same part in a thirteen-year-old tank is not.</p>
 <h3>The $995 warranty swap</h3>
 <p>This is the one that saves the most money and almost nobody asks about it. Tank heaters carry a manufacturer warranty, commonly six years. If yours fails inside that window the manufacturer supplies the tank \u2014 you pay only labour, fittings, disposal and the permit, which we do for <strong>$995</strong> on a 30 to 50 gallon electric. At five years old that is $995 against $1,800, so read us the serial number off the data plate and we will tell you which applies.</p>
 <h3>Tank, tankless or heat pump</h3>
-<p>Most Greenwood homes belong back on a tank, and that is the correct call rather than a lazy one: $1,800 for a 40-gallon or $2,065 for a 50 is the lowest cost per year of service, and any plumber in the county can work on it in ten years.</p>
+<p>Most Greenwood homes belong back on a tank, and that is the correct call rather than a lazy one: $1,800 for a 40-gallon or $2,065 for a 50 is the lowest cost per year of service.</p>
 <p>A condensing tankless at $4,495 earns its price if you genuinely run out of hot water on a 50-gallon tank, if the floor space is worth money, or if you want the longer service life. It needs gas volume, a dedicated vent and annual descaling \u2014 and on the harder well water around the lake that descaling is not optional.</p>
-<p>Heat-pump units are the efficiency winner on paper, and we install them, but they want roughly 700 to 1,000 cubic feet of surrounding air, a space above about 40 degrees and a condensate drain. A garage suits them; a conditioned hall closet often does not, because the unit cools the room it sits in. We quote these on site.</p>
+<p>Heat-pump units are the efficiency winner on paper, and we install them, but they want roughly 700 to 1,000 cubic feet of surrounding air, a space above about 40 degrees and a condensate drain. A garage suits them; a conditioned hall closet often does not, because the unit cools the room it sits in.</p>
 <h3>Yes, we pull the permit</h3>
 <p>A water heater replacement in the City of Greenwood requires a permit and <strong>we pull it</strong>. It is included in the installed prices above, not added afterward. It also means the work gets inspected, which is a check on us, not on you. An unpermitted heater surfaces at the worst time: when a buyer's inspector flags it, or when an adjuster asks who installed it.</p>
 <h3>What the price covers</h3>
-<p>The installed price is the whole job under normal conditions: heater, permit, hauling off the old unit, new connectors and shutoff as needed, an expansion tank where code requires one, and a new T&amp;P discharge line. What moves it: an upsize that no longer fits, a fuel change, a gas resize for tankless, undersized electrical, or a closet that has to be opened to get the old tank out. When we find one we stop and get your approval rather than discovering it on the invoice.</p>
+<p>The installed price is the whole job under normal conditions: heater, permit, hauling off the old unit, new connectors and shutoff as needed, an expansion tank where code requires one, and a new T&amp;P discharge line. What moves it: an upsize that no longer fits, a fuel change, a gas resize for tankless, undersized electrical, or a closet that has to be opened. When we find one we stop and get your approval rather than discovering it on the invoice.</p>
 """,
         "symptoms": [
             "Water pooling under or around the base of the tank",
@@ -308,9 +309,10 @@ MONEY_PAGES = {
         ],
         "checks": [
             "Decode the manufacture date, so a $995 warranty swap is not missed",
+            "Pull and read the anode rod \u2014 on city water it is usually what went first",
             "Establish whether the leak is the tank shell or a repairable fitting or valve",
             "Test elements, thermostats, gas controls and ignition first",
-            "Measure the space, door and pathway before quoting an upsize that has to fit",
+            "Measure the space and pathway before quoting an upsize that has to fit",
             "Confirm the circuit, gas supply and venting carry the proposed equipment",
         ],
         "price_drivers": [
@@ -332,7 +334,7 @@ MONEY_PAGES = {
             ("Does the installed price change in the evening or at weekends?",
              "Yes. The prices above are the regular-hours column. Evening, weekend and holiday work is priced from the after-hours column, and the service call moves from $79 to $99, or $158 after midnight and on holidays. A failed heater with the water shut off is usually safe to schedule for regular hours, and we will say so and book it cheaper."),
             ("What size water heater do I need?",
-             "A 40-gallon electric typically covers one to three people and a 50-gallon three to five, but how you use hot water matters more than headcount \u2014 back-to-back showers or a large soaking tub change the answer."),
+             "A 40-gallon electric typically covers one to three people and a 50-gallon three to five, but how you use hot water matters more than headcount."),
         ],
         "related": [
             ("\U0001f525", "Full Water Heater Service", "/services/water-heater-repair-replacement/", "Repair, replacement, tankless and heat-pump options."),

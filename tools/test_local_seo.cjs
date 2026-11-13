@@ -149,6 +149,37 @@ test('every page ships parseable JSON-LD',()=>{
   assert.deepEqual(bad,[]);
 });
 
+test('no page claims Greenwood city water is hard',()=>{
+  // Owner correction, 2026-11-13: Greenwood city water comes off Lake
+  // Greenwood and is not hard. What shortens heater life on it is the
+  // chlorine used to treat it, which consumes the sacrificial anode rod and
+  // works on the elements. Real hardness, with iron and sulfur, is on the
+  // wells outside the city. Four pages asserted hardness as plain fact.
+  // Hardness claims about the county wells are correct and not matched here.
+  const wrong=[
+    /Greenwood'?s hard[- ]water/i,
+    /hard[- ]water areas? like Greenwood/i,
+    /Greenwood and other hard[- ]water/i,
+    /hard[- ]water[^.]{0,30}\bin Greenwood\b/i,
+  ];
+  const offenders=[];
+  const walk=dir=>{
+    for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+      if(entry.name.startsWith('.')||entry.name==='node_modules')continue;
+      const full=path.join(dir,entry.name);
+      if(entry.isDirectory())walk(full);
+      else if(entry.name.endsWith('.html')){
+        const text=fs.readFileSync(full,'utf8');
+        for(const re of wrong)
+          if(re.test(text))offenders.push(`${path.relative(root,full)}: ${re}`);
+      }
+    }
+  };
+  walk(root);
+  assert.deepEqual(offenders,[],
+    'a page states Greenwood city water is hard, which the owner corrected');
+});
+
 test('no sitemap entry claims a date in the future',()=>{
   const today=new Date().toISOString().slice(0,10);
   const future=[];
