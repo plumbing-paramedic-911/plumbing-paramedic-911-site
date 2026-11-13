@@ -14,7 +14,25 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://plumbingparamedic911.com"
+# Default sitemap date for the money pages, used by any page that has not
+# changed since the batch was first published. A page that changes gets its own
+# "lastmod" key in its MONEY_PAGES entry; see LASTMODS below. A single shared
+# constant told Google that pages rewritten in November were last touched in
+# August, which is the opposite of what a freshness signal is for.
 LASTMOD = "2026-08-13"
+
+# Per-page override, newest real change date. Verified by rebuilding the site
+# at the commit before these pages were touched and diffing each page, so a
+# date here means the rendered page actually changed.
+LASTMODS = {
+    # Added 2026-11-12 (#45), then corrected for after-hours pricing (#47).
+    "emergency-plumber-anderson-sc": "2026-11-13",
+    "drain-cleaning-anderson-sc": "2026-11-13",
+    "plumbing-prices-greenwood-sc": "2026-11-13",
+    "plumbing-prices-anderson-sc": "2026-11-13",
+    # Gained the after-hours repair-price answer in #47.
+    "emergency-plumber-abbeville-sc": "2026-11-13",
+}
 
 SERVICE_CALL_HTML = """\
 <div class="grid-3" style="margin-top:18px">
@@ -999,10 +1017,19 @@ def update_sitemap() -> None:
     text = file.read_text(encoding="utf-8")
     for slug in MONEY_PAGES:
         url = f"{BASE_URL}/{slug}/"
+        lastmod = LASTMODS.get(slug, LASTMOD)
         if url not in text:
             text = text.replace(
                 "</urlset>",
-                f"  <url><loc>{url}</loc><lastmod>{LASTMOD}</lastmod></url>\n</urlset>",
+                f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>\n</urlset>",
+            )
+        else:
+            # The URL is already listed: refresh its date in place so an
+            # updated page stops reporting the date it was first published.
+            text = re.sub(
+                r"(<loc>" + re.escape(url) + r"</loc><lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)",
+                r"\g<1>" + lastmod + r"\g<2>",
+                text,
             )
     file.write_text(text, encoding="utf-8")
 
