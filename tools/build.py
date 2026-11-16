@@ -338,15 +338,15 @@ def breadcrumb_html(items):
 SERVICES = {
     "drain-cleaning": {
         "title": "Drain Cleaning &amp; Hydro Jetting in Abbeville, SC | Plumbing Paramedic 911",
-        "description": "Clogged drains and main sewer lines cleared fast in Abbeville, Greenwood, Anderson, Laurens &amp; McCormick. Hydro jetting, augering, camera inspection. Flat-rate from $149. Call (864) 446-8911.",
+        "description": "Clogged drains and main sewer lines cleared fast in Abbeville, Greenwood, Anderson, Laurens &amp; McCormick. Hydro jetting, augering, camera inspection. Flat-rate from $199. Call (864) 446-8911.",
         "h1": "Drain Cleaning in Abbeville &amp; Upstate SC",
         "badge": "● Same-Day Service Available",
         "intro": "Slow sinks, gurgling toilets, sewer smells, water backing up in the shower — most clogs are not random. They are buildup that's been forming for months and finally chose today to announce itself. We clear them quickly, identify what caused the clog, and tell you whether you have a deeper sewer problem before it floods your floor.",
         "schema_id": "https://plumbingparamedic911.com/#service-draincleaning",
         "service_type": "Drain Cleaning",
         "schema_desc": "Hydro-jetting, augering, and rooter service to clear clogged sinks, tubs, toilets, and main sewer lines across Abbeville, Greenwood, Anderson, Laurens, and McCormick counties.",
-        "price_range": "$149 – $699",
-        "price_note": "Single drain from $149. Hydro jetting from $399. Sewer camera $199.",
+        "price_range": "$199 – $699",
+        "price_note": "Single drain $199–$349. Hydro jetting from $399. Sewer camera $199.",
         "og": "/images/og/drain-cleaning-1200x630.jpg",
         "body": """
 <h3>What we clear, and how</h3>
@@ -372,7 +372,7 @@ SERVICES = {
 <h3>Why drains in Upstate SC clog the way they do</h3>
 <p>Abbeville and Greenwood have a lot of older housing stock — pre-1960 homes still on galvanized supply and cast-iron drain stacks. As cast iron ages, its inside surface gets rougher; everything that goes down a drain catches on it. That's why a 70-year-old house seems to clog twice a year and a brand-new build never does. Out in rural Abbeville and McCormick counties, septic systems mean that a clog can also be a full tank — we'll tell you before you spend on a snake.</p>
 <h3>How much does drain cleaning cost?</h3>
-<p>A single drain clear (sink, tub, shower, or toilet) starts at $149 with our flat-rate pricing. Main sewer line cleaning runs $249 to $449 depending on access and severity. Hydro jetting for stubborn grease or root intrusion is $399 to $699. You get the exact price in writing before we start — see our <a href="/pricing/">pricing page</a> for more detail.</p>
+<p>A single drain clear (sink, tub, shower, or toilet) runs $199 to $349 with our flat-rate pricing, depending on how stubborn the grease or root blockage is. Main sewer line cleaning runs $249 to $449 depending on access and severity. Hydro jetting for stubborn grease or root intrusion is $399 to $699. You get the exact price in writing before we start — see our <a href="/pricing/">pricing page</a> for more detail.</p>
 <h3>What causes a clogged drain?</h3>
 <p>The cause depends on which drain is clogged. Kitchen sinks clog from grease and food particles that coat the inside of the pipe over months. Bathroom sinks and showers clog from hair and soap residue. Toilets clog from excessive paper, wipes marketed as "flushable" (they aren't), or foreign objects. Main sewer lines clog from tree roots that infiltrate pipe joints — especially in older clay or Orangeburg pipes — or from accumulated grease that hardens along the line.</p>
 <h3>Signs you need a plumber vs. a DIY fix</h3>
@@ -390,7 +390,7 @@ SERVICES = {
 """,
         "faqs": [
             ("How much does drain cleaning cost in Abbeville SC?",
-             "A single drain clear starts at $149 with our flat-rate pricing. Main sewer line cleaning is $249 to $449. Hydro jetting for grease or roots is $399 to $699. The exact quote is given in writing before any work begins."),
+             "A single drain clear runs $199 to $349 with our flat-rate pricing. Main sewer line cleaning is $249 to $449. Hydro jetting for grease or roots is $399 to $699. The exact quote is given in writing before any work begins."),
             ("What's the difference between snaking and hydro jetting?",
              "Snaking (augering) pokes a hole through the clog and pulls debris back. Hydro jetting scrubs the entire inner wall of the pipe with high-pressure water. Snaking is faster and cheaper; hydro jetting is the only fix for grease coating or root intrusion."),
             ("Will Drano damage my pipes?",
@@ -521,13 +521,13 @@ SERVICES = {
         "service_type": "Plumbing Fixture Installation",
         "schema_desc": "Install and repair faucets, toilets, sinks, garbage disposals, showers, outdoor spigots, washing-machine valves, and other plumbing fixtures across Abbeville, Greenwood, Anderson, Laurens, and McCormick counties.",
         "price_range": "$89 – $1,999",
-        "price_note": "Toilet repair from $89. Faucet install $129–$199. Sink install $149–$349. Shower install $599–$1,499.",
+        "price_note": "Toilet repair from $89. Faucet install $249–$429. Sink install $149–$349. Shower install $599–$1,499.",
         "og": "/images/og/fixtures-1200x630.jpg",
         "body": """
 <h3>Fixtures we install and repair</h3>
 <ul>
-  <li><strong>Toilets</strong> — fill valves, flappers, supply lines, wax rings, and full bowl/tank replacement. Standard install $249–$449; high-efficiency or wall-hung models on request.</li>
-  <li><strong>Faucets</strong> — bath, kitchen, laundry, outdoor. Install supplied faucet $129–$199; faucet repair $89–$169.</li>
+  <li><strong>Toilets</strong> — fill valves, flappers, supply lines, wax rings, and full bowl/tank replacement. Standard install $349–$599; high-efficiency or wall-hung models on request.</li>
+  <li><strong>Faucets</strong> — bath, kitchen, laundry, outdoor. Install supplied faucet $249–$429; faucet repair $89–$169.</li>
   <li><strong>Sinks</strong> — drop-in, undermount, farmhouse, vessel. $149–$349 for a like-for-like swap; more for new countertop work.</li>
   <li><strong>Garbage disposals</strong> — Insinkerator, Waste King, KitchenAid. Install $149–$299; jam-clearing $89.</li>
   <li><strong>Showers and tub valves</strong> — single-handle, dual-handle, pressure-balanced, thermostatic. Valve replacement $349–$699 in finished walls; new shower install $599–$1,499.</li>
@@ -550,9 +550,9 @@ SERVICES = {
 """,
         "faqs": [
             ("How much does it cost to replace a kitchen faucet?",
-             "Installation of a customer-supplied kitchen faucet is $129 to $199 flat-rate. If you'd like us to supply the faucet, mid-range models add $99 to $299 depending on brand and style."),
+             "Installation of a customer-supplied kitchen faucet is $249 to $429 flat-rate. If you'd like us to supply the faucet, mid-range models add $99 to $299 depending on brand and style."),
             ("How much does it cost to install a toilet?",
-             "Like-for-like toilet replacement is $249 to $449 installed. That includes the new bowl/tank assembly (standard height or comfort height), new wax ring, new supply line, new fill valve, and disposal of the old toilet."),
+             "Like-for-like toilet replacement is $349 to $599 installed. That includes the new bowl/tank assembly (standard height or comfort height), new wax ring, new supply line, new fill valve, and disposal of the old toilet."),
             ("Why does my toilet rock?",
              "A rocking toilet means the toilet isn't sitting flush on the floor — usually because the closet flange is broken or set too low. Left long enough, water will leak under the toilet, rotting the subfloor. The fix is to lift the toilet, repair the flange, and reset on a new wax ring."),
             ("Can you install a customer-supplied fixture?",
@@ -573,8 +573,8 @@ SERVICES = {
         "schema_id": "https://plumbingparamedic911.com/#service-wellpump",
         "service_type": "Well Pump Service",
         "schema_desc": "Submersible and jet pump repair, pressure tank replacement, pressure-switch troubleshooting, well water testing, and well water filtration across rural Upstate South Carolina.",
-        "price_range": "$349 – $1,599",
-        "price_note": "Pump repair from $349. Pump replacement $799–$1,599. Pressure tank $499–$899. Water test $99–$199.",
+        "price_range": "$349 – $2,299+",
+        "price_note": "Pump repair from $349. Pump replacement $1,499–$2,299 up to 200 ft; deeper wells from $2,299. Pressure tank $499–$899. Water test $99–$199.",
         "og": "/images/og/well-pump-1200x630.jpg",
         "body": """
 <h3>What kind of well pump do you have?</h3>
@@ -607,7 +607,7 @@ SERVICES = {
             ("Why does my well pump keep running?",
              "Three common reasons: a leak somewhere on the supply system, a failed check valve letting water drain back, or a pressure tank that has lost its air charge. Constant running burns out pumps quickly — call before the motor fails."),
             ("How much does it cost to replace a well pump in Upstate SC?",
-             "Submersible pump replacement runs $799 to $1,599 installed, depending on well depth and pump horsepower. Jet pump replacement is $499 to $999. Both include the new pump, pull and reinstall labor, and 2-year warranty."),
+             "Submersible pump replacement runs $1,499 to $2,299 installed for most wells up to 200 feet, depending on pump horsepower. Wells deeper than 200 feet start at $2,299 and are quoted on measured depth, because extra drop pipe, wire and hoist labor add real cost. Jet pump replacement is $499 to $999. Both include the new pump, pull and reinstall labor, and 2-year warranty."),
             ("My water has a sulfur smell — is the pump bad?",
              "No — that's hydrogen sulfide gas, common in Upstate SC well water. It's a water-quality issue, not a pump issue. Aeration or activated-carbon filtration eliminates it. We can recommend a system after a basic water test."),
             ("How long does a submersible well pump last?",
@@ -1556,7 +1556,7 @@ def render_mccormick_well_pump_page() -> str:
     title = "Well Pump &amp; Pressure Tank Repair in McCormick, SC | Plumbing Paramedic 911"
     description = "McCormick, SC well pump repair, pressure tank replacement and no-water diagnostics. Upfront price ranges, 24/7 dispatch and a 2-year warranty. Call (864) 446-8911."
     faqs = [
-        ("How much does well pump repair cost in McCormick, SC?", "A diagnostic or smaller well-system repair typically starts at $349. Jet pump replacement is $499–$999, submersible pump replacement is $799–$1,599, and pressure tank replacement is $499–$899. Well depth, horsepower, access, pipe and wiring condition affect the written quote."),
+        ("How much does well pump repair cost in McCormick, SC?", "A diagnostic or smaller well-system repair typically starts at $349. Jet pump replacement is $499–$999, submersible pump replacement is $1,499–$2,299 for most wells up to 200 feet (deeper wells from $2,299), and pressure tank replacement is $499–$899. Well depth, horsepower, access, pipe and wiring condition affect the written quote."),
         ("Do you charge extra to travel to McCormick?", "No per-mile or distance surcharge is added for McCormick service. We give you a written flat-rate quote before work starts."),
         ("Can you service a 360-foot well?", "Yes. We diagnose and replace deep-well submersible pump systems, including wells around 360 feet. The final equipment and price depend on measured depth, pump horsepower, pipe, wire and site access."),
         ("Do you provide emergency no-water service?", "Yes. No-water calls in McCormick and surrounding McCormick County can be dispatched 24/7. Call (864) 446-8911 for the fastest response."),
@@ -1606,12 +1606,13 @@ def render_mccormick_well_pump_page() -> str:
       <aside>
         <div class="price-box">
           <div class="price-label">Published McCormick price ranges</div>
-          <div class="price-big">$349–$1,599</div>
+          <div class="price-big">$349–$2,299+</div>
           <p style="font-size:.9rem;margin:8px 0 16px">Written flat-rate quote before work. No per-mile McCormick surcharge.</p>
           <ul style="font-size:.88rem;margin-bottom:18px">
             <li>Well-system repair: from $349</li>
             <li>Jet pump replacement: $499–$999</li>
-            <li>Submersible pump: $799–$1,599</li>
+            <li>Submersible pump, up to 200 ft: $1,499–$2,299</li>
+            <li>Submersible pump, 200 ft+: from $2,299</li>
             <li>Pressure tank: $499–$899</li>
           </ul>
           <a href="/pricing/" class="btn btn-blue" style="width:100%;justify-content:center">See Pricing Details →</a>
@@ -2195,7 +2196,7 @@ def render_pricing():
     # (/plumbing-prices-greenwood-sc/, /plumbing-prices-anderson-sc/) are its
     # spokes. Naming one city here fought both of them for the same term.
     title = "Plumbing Prices in Upstate SC | Plumbing Paramedic 911"
-    description = "Real flat-rate plumbing prices online — drain cleaning from $149, 40-gallon water heater replacement from $1,800, well pump replace from $799. No hourly billing. Upstate SC. Call (864) 446-8911."
+    description = "Real flat-rate plumbing prices online — drain cleaning from $199, 40-gallon water heater replacement from $1,800, well pump replace from $1,499. No hourly billing. Upstate SC. Call (864) 446-8911."
     breadcrumb_items = [("Home","/"),("Pricing", path)]
     extra = [
         {"@type":"WebPage","@id":BASE_URL+path+"#webpage","url":BASE_URL+path,"name":"Pricing","isPartOf":{"@id":BASE_URL+"/#website"},"about":{"@id":BASE_URL+"/#localbusiness"},"inLanguage":"en-US"},
@@ -2271,9 +2272,9 @@ def render_pricing():
             <h3 style="margin-bottom:16px;font-size:1rem">Select the service</h3>
             <div class="calc-service-grid">
               <button class="calc-service-btn selected" onclick="selectService(this,'Toilet Repair',89,149)"><span class="icon">🚽</span><span class="name">Toilet Repair</span><span class="range">$89 – $149</span></button>
-              <button class="calc-service-btn" onclick="selectService(this,'Toilet Replace',249,449)"><span class="icon">🚽</span><span class="name">Toilet Replace</span><span class="range">$249 – $449</span></button>
+              <button class="calc-service-btn" onclick="selectService(this,'Toilet Replace',349,599)"><span class="icon">🚽</span><span class="name">Toilet Replace</span><span class="range">$349 – $599</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Faucet Repair',89,169)"><span class="icon">🚰</span><span class="name">Faucet Repair</span><span class="range">$89 – $169</span></button>
-              <button class="calc-service-btn" onclick="selectService(this,'Faucet Install',129,199)"><span class="icon">🚰</span><span class="name">Faucet Install</span><span class="range">$129 – $199</span></button>
+              <button class="calc-service-btn" onclick="selectService(this,'Faucet Install',249,429)"><span class="icon">🚰</span><span class="name">Faucet Install</span><span class="range">$249 – $429</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Garbage Disposal',149,299)"><span class="icon">🔩</span><span class="name">Disposal Install</span><span class="range">$149 – $299</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Pipe Leak Repair',149,399)"><span class="icon">💦</span><span class="name">Pipe Leak Repair</span><span class="range">$149 – $399</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Burst Pipe Emergency',349,699)"><span class="icon">🚨</span><span class="name">Burst Pipe (Emergency)</span><span class="range">$349 – $699</span></button>
@@ -2295,7 +2296,7 @@ def render_pricing():
           <div id="calc-drain" class="calc-tab-content" style="display:none">
             <h3 style="margin-bottom:16px;font-size:1rem">Select drain / sewer service</h3>
             <div class="calc-service-grid">
-              <button class="calc-service-btn" onclick="selectService(this,'Drain Clean (1 drain)',149,249)"><span class="icon">🚿</span><span class="name">Single Drain Clean</span><span class="range">$149 – $249</span></button>
+              <button class="calc-service-btn" onclick="selectService(this,'Drain Clean (1 drain)',199,349)"><span class="icon">🚿</span><span class="name">Single Drain Clean</span><span class="range">$199 – $349</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Main Line Clean',249,449)"><span class="icon">🌊</span><span class="name">Main Line Clean</span><span class="range">$249 – $449</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Hydro Jetting',399,699)"><span class="icon">💪</span><span class="name">Hydro Jetting</span><span class="range">$399 – $699</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Sewer Inspection',199,299)"><span class="icon">🔍</span><span class="name">Sewer Camera Inspect</span><span class="range">$199 – $299</span></button>
@@ -2307,7 +2308,8 @@ def render_pricing():
             <h3 style="margin-bottom:16px;font-size:1rem">Select well / pump service</h3>
             <div class="calc-service-grid">
               <button class="calc-service-btn" onclick="selectService(this,'Well Pump Repair',349,699)"><span class="icon">🔧</span><span class="name">Well Pump Repair</span><span class="range">$349 – $699</span></button>
-              <button class="calc-service-btn" onclick="selectService(this,'Well Pump Replace',799,1599)"><span class="icon">💧</span><span class="name">Well Pump Replace</span><span class="range">$799 – $1,599</span></button>
+              <button class="calc-service-btn" onclick="selectService(this,'Well Pump Replace',1499,2299)"><span class="icon">💧</span><span class="name">Well Pump Replace (to 200 ft)</span><span class="range">$1,499 – $2,299</span></button>
+              <button class="calc-service-btn" onclick="selectService(this,'Well Pump Replace (200 ft+)',2299,null)"><span class="icon">🕳️</span><span class="name">Deep Well Pump (200 ft+)</span><span class="range">From $2,299</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Pressure Tank',499,899)"><span class="icon">⚙️</span><span class="name">Pressure Tank Replace</span><span class="range">$499 – $899</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Water Test',99,199)"><span class="icon">🧪</span><span class="name">Water Quality Test</span><span class="range">$99 – $199</span></button>
               <button class="calc-service-btn" onclick="selectService(this,'Water Filtration',599,1499)"><span class="icon">🌿</span><span class="name">Filtration System</span><span class="range">$599 – $1,499</span></button>
@@ -2386,6 +2388,19 @@ def render_pricing():
             <div class="calc-trust-item"><div class="calc-trust-icon">🏦</div><span class="calc-trust-label">In-House Financing</span><span class="calc-trust-sub">Jobs $500+ · any credit</span></div>
           </div>
         </div>
+      </div>
+
+      <div style="margin-top:56px;max-width:900px">
+        <span class="label">Flat Rate vs. the Hourly Clock</span>
+        <h2 style="margin-bottom:12px">Why our price is the price</h2>
+        <p style="color:var(--ink2);line-height:1.75;margin-bottom:20px">Many plumbing companies bill by the hour, often with a separate trip fee and higher emergency hourly rates, so you don't know the total until the job is done. We work from a flat-rate price book instead. You approve the repair price before we start, and it doesn't change because a job runs long.</p>
+        <div class="calc-trust">
+          <div class="calc-trust-item"><div class="calc-trust-icon">⏱️</div><span class="calc-trust-label">No Hourly Billing</span><span class="calc-trust-sub">Repair price approved before work begins</span></div>
+          <div class="calc-trust-item"><div class="calc-trust-icon">🛡️</div><span class="calc-trust-label">2-Year Parts &amp; Labor Warranty</span><span class="calc-trust-sub">Many contractors only cover labor for 30–90 days</span></div>
+          <div class="calc-trust-item"><div class="calc-trust-icon">🏦</div><span class="calc-trust-label">Financing Over $500</span><span class="calc-trust-sub">Replace it right instead of patching it</span></div>
+          <div class="calc-trust-item"><div class="calc-trust-icon">🎖️</div><span class="calc-trust-label">SC Master Plumber</span><span class="calc-trust-sub">In the trade since 1996</span></div>
+        </div>
+        <p style="font-size:.85rem;color:var(--ink3);margin-top:14px">Service / diagnostic call: $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, $158 after midnight or on holidays.</p>
       </div>
 
       <div style="margin-top:56px;max-width:760px">
@@ -2641,7 +2656,7 @@ def render_financing():
           <li>Water heater replacement — starts around $1,800 (40 gallon), $2,065 (50 gallon), or $3,100 (tankless)</li>
           <li>Whole-house repipe — $3,499 to $8,999</li>
           <li>Sewer line repair or replacement — $899 to $5,999</li>
-          <li>Well pump replacement — $799 to $1,599</li>
+          <li>Well pump replacement — $1,499 to $2,299 (deeper than 200 ft from $2,299)</li>
           <li>Full bath remodel (plumbing) — $1,499 to $3,999</li>
           <li>Backflow assembly replacement — $399 to $599</li>
         </ul>

@@ -104,7 +104,7 @@ SERVICE_ADDITIONS = {
         "service_type": "Toilet Repair and Installation",
         "schema_desc": "Toilet repair, flange and wax seal repair, clog diagnosis, and toilet replacement for homes and businesses in Upstate South Carolina.",
         "price_range": "$89 – $449",
-        "price_note": "Current planning ranges: toilet repair $89–$149 and toilet replacement $249–$449. Flange, drain or floor damage can change the written quote.",
+        "price_note": "Current planning ranges: toilet repair $89–$149 and toilet replacement $349–$599. Flange, drain or floor damage can change the written quote.",
         "og": "/images/og/toilet-1200x630.jpg",
         "body": """
 <h3>Common toilet problems we repair</h3>
@@ -122,7 +122,7 @@ SERVICE_ADDITIONS = {
 <p>Tank components and seals are often repairable. A cracked bowl or tank, badly damaged fixture, repeated performance problem or major remodel can make replacement the better value. We explain both options when both are reasonable.</p>
 """,
         "faqs": [
-            ("How much does toilet repair cost?", "Our current planning range is $89–$149 for common toilet repairs. A standard replacement is typically $249–$449. Flange damage, drain problems or unusual installation conditions can change the written quote."),
+            ("How much does toilet repair cost?", "Our current planning range is $89–$149 for common toilet repairs. A standard replacement is typically $349–$599. Flange damage, drain problems or unusual installation conditions can change the written quote."),
             ("Why does my toilet keep running?", "Common causes include a worn flapper or seal, a fill-valve problem, an incorrect water level or a tank component that is not shutting off correctly."),
             ("Why is my toilet rocking?", "A loose mount, uneven support, damaged flange or failed seal can let the toilet move. It should be inspected before water damages the floor."),
             ("Can you install a customer-supplied toilet?", "Yes, provided the fixture is compatible with the existing rough-in and installation. We verify the condition of the flange, shutoff and connection before setting it."),
