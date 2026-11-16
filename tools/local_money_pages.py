@@ -783,7 +783,7 @@ MONEY_PAGES = {
         "guide": "/guides/sc-homeowner-plumbing-survival-guide/",
         "guide_name": "SC Homeowner Plumbing Survival Guide",
         "og": "/images/og/emergency-plumbing-1200x630.jpg",
-        "intro": "Plumbing Paramedic 911 is based in Abbeville, so a local burst pipe, sewer backup, leaking water heater or no-water emergency starts from our home market instead of a dispatch center in another county. Typical Abbeville response is about 30–45 minutes when a technician is available.",
+        "intro": "Plumbing Paramedic 911 is based in Abbeville, so a local burst pipe, sewer backup, leaking water heater or no-water emergency starts from our home market instead of a dispatch center in another county. We are just a call away.",
         "answer": "If water is actively damaging the home, shut off the closest fixture valve or the main water supply if you can do so safely, then call. If sewage is backing up, stop using toilets, sinks, showers and appliances until the blockage is controlled. If you smell gas, leave the building and contact the gas utility or 911 from a safe location before arranging plumbing repair.",
         "local_context": """
 <p>Our shop is on Callaway Drive in Abbeville. That makes the city and nearby Abbeville County our closest emergency territory. We routinely deal with older-home supply piping, failed shutoff valves, sewer backups, water-heater leaks and rural no-water calls.</p>
@@ -813,7 +813,7 @@ MONEY_PAGES = {
             "Whether water extraction, sewer cleanup or follow-up replacement work is required",
         ],
         "faqs": [
-            ("How fast can an emergency plumber get to Abbeville, SC?", "Because Plumbing Paramedic 911 is based in Abbeville, our published typical response for Abbeville is about 30–45 minutes when a technician is available. Active calls, weather and job conditions can change response time, so call for the current ETA."),
+            ("How fast can an emergency plumber get to Abbeville, SC?", "Because Plumbing Paramedic 911 is based in Abbeville, we are just a call away. Active calls, weather and job conditions all change the actual arrival time, so call (864) 446-8911 for the current ETA."),
             ("How much is an emergency plumbing service call?", "The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. The repair itself is quoted separately after the emergency is diagnosed."),
             ("What should I do while a burst pipe is leaking?", "If you can safely reach the main water shutoff, turn it off. Then open a lower faucet to relieve pressure and move valuables away from the water. Avoid electrical panels, outlets or energized equipment in wet areas."),
             ("Is a sewer backup an emergency?", "Yes when sewage is entering occupied space or multiple fixtures are backing up. Stop using water and call. Continuing to flush or run appliances can push more sewage into the building."),
@@ -841,7 +841,7 @@ MONEY_PAGES = {
         "guide": "/guides/sc-homeowner-plumbing-survival-guide/",
         "guide_name": "SC Homeowner Plumbing Survival Guide",
         "og": "/images/og/emergency-plumbing-1200x630.jpg",
-        "intro": "Plumbing Paramedic 911 dispatches to Anderson 24 hours a day, every day of the year. Typical response is about 60 minutes when a technician is available. The service / diagnostic call is $79 weekdays 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays \u2014 with no distance or per-mile surcharge for Anderson.",
+        "intro": "Plumbing Paramedic 911 dispatches to Anderson 24 hours a day, every day of the year, and we are just a call away. The service / diagnostic call is $79 weekdays 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays \u2014 with no distance or per-mile surcharge for Anderson.",
         "answer": "If water is actively damaging the home, close the fixture shutoff or the main water valve if you can reach it safely, then call. If sewage is backing up, stop using every toilet, sink, shower and appliance until the blockage is controlled \u2014 each additional flush pushes more sewage inside. If you smell gas, leave the building first and call the gas utility or 911 from outside before arranging plumbing repair.",
         "local_context": """
 <p>Anderson is the largest city we serve, and the emergencies here follow the housing stock. In 1980s subdivisions we see polybutylene supply lines fail without warning \u2014 the gray plastic pipe was installed widely across the South and a lot of it is now past its service life. Those failures tend to be sudden, full-pressure leaks rather than slow drips, which is exactly the call that cannot wait for a scheduled appointment.</p>
@@ -871,7 +871,7 @@ MONEY_PAGES = {
             "Whether follow-up work (repipe, drain replacement, water extraction) is needed afterward",
         ],
         "faqs": [
-            ("How fast can an emergency plumber get to Anderson, SC?", "Our published typical response for Anderson is about 60 minutes from the Abbeville shop when a technician is available. Active calls, weather and traffic change that, so call for the current ETA rather than assuming."),
+            ("How fast can an emergency plumber get to Anderson, SC?", "We are just a call away. Active calls, weather and traffic all change the actual arrival time, so call (864) 446-8911 for the current ETA rather than assuming."),
             ("Do you charge extra to drive to Anderson?", "No. There is no distance or per-mile surcharge for Anderson. The service / diagnostic call is $79 Monday\u2013Friday 9 AM\u20135 PM, $99 after hours and weekends, and $158 after midnight or on holidays \u2014 the same schedule we charge in Abbeville."),
             ("Does the repair itself cost more at night?", "Yes, and we publish both numbers rather than surprise you with one. Evening, weekend and holiday repairs are priced from the after-hours column of our price book \u2014 clearing a drain, for example, is $245 during regular hours and $343 after hours. Every figure is on our Anderson plumbing prices page, and you approve the written price before any work starts. If the problem can safely wait for regular hours, we will say so."),
             ("My gray plastic water line burst. Can you fix it tonight?", "Usually yes, at least to stop the damage. Polybutylene is repairable in the short term, but a failure in one spot often means the rest of the line is near the end of its life. We stabilize the emergency first and then give you a written price for a permanent repair or repipe."),
