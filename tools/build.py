@@ -417,6 +417,11 @@ SERVICES = {
         "price_note": "Repair from $149. Replacement starts around $1,800 for 40 gallons, $2,065 for 50 gallons and $3,100 for tankless. Equipment, access and installation requirements affect the written quote.",
         "og": "/images/og/water-heater-1200x630.jpg",
         "body": """
+<h3>Water heater repair vs. replacement: what we check first</h3>
+<p>Before recommending a replacement, we identify the heater's fuel type, capacity, age and manufacturer warranty status. We check whether the leak is from the tank shell or a repairable fitting, drain valve, T&amp;P relief valve or connection. For an electric heater we test thermostats and elements; for gas or tankless equipment we evaluate the controls and applicable venting or combustion requirements.</p>
+<p><strong>Usually repairable:</strong> a sound tank with one failed electric heating element, thermostat, accessible valve or connection. <strong>Usually replacement:</strong> a leaking tank shell, serious corrosion or an unsafe installation that cannot be reasonably corrected. A heater's age alone is not a diagnosis.</p>
+<p><strong>Ask about warranty before replacing:</strong> the data plate's model and serial number help establish equipment age, and the manufacturer's written coverage may affect the decision. A warranty-covered tank can still require paid labor, materials and code-related work. We quote those separately.</p>
+<p>Our recorded price-book examples include a single thermostat replacement at $165 (SKU 23-03), a heating element replacement at $285 (SKU 23-01), 40-gallon electric tank installation at $1,800 (SKU 24-03), and 50-gallon electric tank installation at $2,065 (SKU 24-06) during regular hours. Final prices depend on the actual work; the service / diagnostic call is separate. <a href="/pricing/">See how our upfront pricing works</a>.</p>
 <h3>Repair or replace?</h3>
 <p>The rule of thumb: if your heater is under 8 years old, repair almost always makes sense. Common repairs include thermocouple/igniter on a gas unit (under $200), heating element on an electric unit (under $250), or T&P relief valve and anode rod ($149–$199). Past 10 years, replacement is usually the smarter spend — efficiency, warranty, and reliability all tilt toward a new unit.</p>
 <h3>Tank vs tankless</h3>
@@ -847,16 +852,33 @@ SERVICES = {
   <li><strong>Reverse osmosis (under-sink)</strong> — for drinking-water quality at a single tap</li>
   <li><strong>Repair and maintenance of existing systems</strong> — resin replacement, media change, valve repair, salt delivery setup</li>
 </ul>
+<h3>Which water treatment solves which problem?</h3>
+<p>A water softener is not the same thing as a drinking-water filter. Start with the water source and an actual test instead of assuming that every home in one town has the same water.</p>
+<ul>
+  <li><strong>White scale on showerheads or heater fittings:</strong> confirm hardness in grains per gallon; an ion-exchange softener is worth considering only when the measured hardness justifies it.</li>
+  <li><strong>Chlorine taste or odor on municipal water:</strong> check the utility's annual Consumer Confidence Report; appropriately sized activated-carbon filtration may address taste and odor.</li>
+  <li><strong>Orange staining or sediment on a private well:</strong> test iron, manganese, pH and sediment before selecting filtration or backwashing equipment.</li>
+  <li><strong>Rotten-egg smell:</strong> determine whether it occurs in hot water only or at every tap. A water-heater anode reaction and a well-water problem call for different solutions.</li>
+  <li><strong>Concern about specific drinking-water contaminants:</strong> choose a system with a verified contaminant-reduction claim for the substance found; reverse osmosis is not a universal answer.</li>
+</ul>
+<h3>What the visit and estimate include</h3>
+<p>Tell us whether your home uses municipal water or a private well, which fixtures show symptoms, and whether you have recent test results. We check the space available at the main water entry, valve and drain connections, service access, maintenance requirements and any electrical needs. We'll explain options such as a point-of-use filter, carbon, softening, sediment filtration or a combined system only when they address a measured concern.</p>
+<p>The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, or $158 after midnight or on holidays. Equipment and installation are priced separately and require approval before work begins. See our <a href="/pricing/">upfront service-call and repair pricing</a>.</p>
+<h3>Anderson and Upstate SC service areas</h3>
+<p>We work on city-water and private-well properties in <a href="/service-areas/anderson-sc/">Anderson</a>, <a href="/service-areas/greenwood-sc/">Greenwood</a>, <a href="/service-areas/abbeville-sc/">Abbeville</a>, <a href="/service-areas/mccormick-sc/">McCormick</a> and nearby communities. Anderson households can also review our <a href="/water-quality-anderson-sc/">water-quality guide</a>; the utility serving the specific address determines the relevant water report, and private wells need their own tests.</p>
+<h3>Independent testing and product certifications</h3>
+<p>The CDC recommends annual private-well tests for total coliform bacteria, nitrates, total dissolved solids and pH, plus additional tests based on local risks. Product certification must match the problem: NSF/ANSI 42 addresses certain aesthetic effects; NSF/ANSI 53 covers specific health-related reduction claims; NSF/ANSI 58 addresses reverse osmosis system performance. Certification to a standard does not mean a device treats every contaminant.</p>
+<p>References: <a href="https://www.cdc.gov/drinking-water/safety/guidelines-for-testing-well-water.html" rel="noopener noreferrer">CDC private well testing guidance</a> and <a href="https://www.nsf.org/consumer-resources/articles/standards-water-treatment-systems" rel="noopener noreferrer">NSF water treatment standards</a>.</p>
 <h3>Where we install</h3>
 <p>We install and service water filtration and softener systems for homes on both city water and private wells throughout Abbeville, Greenwood, Anderson, Laurens, McCormick, Ninety Six, Calhoun Falls, and Due West.</p>
 <h3>No-pressure approach</h3>
-<p>We'll walk your water quality concerns through with you honestly — test your water if you'd like, explain what's actually in it and what (if anything) needs treatment. You'll get a flat-rate price and a 2-year warranty on the install, no pressure. Not every home needs a system, and we'll tell you that too.</p>
+<p>We'll walk your water quality concerns through with you honestly — test your water if you'd like, explain what's actually in it and what (if anything) needs treatment. You'll receive an equipment and installation quote with the applicable written warranty, not a blanket promise. Not every home needs a system, and we'll tell you when test results don't justify one.</p>
 """,
         "faqs": [
             ("How much does a water softener cost to install?",
              "A basic whole-house water softener installation runs $899 to $1,800 depending on the unit capacity and your home's plumbing. A combination softener + filtration system for well water runs $1,800 to $3,500+. We provide a flat-rate written quote before any work begins."),
             ("Do I need a water softener in Greenwood, SC?",
-             "Greenwood's municipal water is moderately hard. We see significantly more water heater element failures, faucet aerator clogs, and fixture scale in Greenwood than in areas with softer water. A softener is a good investment if you want to protect your appliances and fixtures."),
+             "Not automatically. Check your utility's Consumer Confidence Report and test the water at your specific home. Hardness varies by water source; a softener targets hardness minerals, not chlorine taste or every drinking-water concern. Private wells require their own test."),
             ("What's the difference between a water softener and a water filter?",
              "A softener removes hardness minerals (calcium and magnesium) using ion exchange. A filter removes sediment, chlorine, iron, sulfur, or other contaminants using physical or chemical media. Many well-water homes need both."),
             ("How often does a water softener need maintenance?",
@@ -864,7 +886,11 @@ SERVICES = {
             ("Can you treat well water with a sulfur smell?",
              "Yes. Sulfur smell (rotten-egg odor) in well water is caused by hydrogen sulfide gas. An oxidizing iron/sulfur filter or an aeration system removes it effectively. We'll test your water to determine the right approach."),
             ("Will a water softener affect my septic system?",
-             "Modern high-efficiency water softeners produce minimal brine discharge and are generally considered safe for septic systems. If you have concerns about your specific septic system, we'll discuss options during the quote."),
+             "A softener adds regeneration water and brine to a drain. Suitability depends on system sizing, discharge routing and the condition of your septic system. We review those details instead of promising every setup is safe."),
+            ("Do you install water softeners in Anderson, SC?",
+             "Yes. We serve Anderson and nearby Upstate communities, but we test or review water data first. Municipal water and private wells may need different equipment; a softener is only for demonstrated hardness."),
+            ("Can carbon filtration replace a softener?",
+             "Not for hard water. Carbon can help with certain taste and odor concerns; ion-exchange softening reduces hardness minerals. We select equipment according to the actual test and the product's certified treatment claims."),
         ],
     },
 }
