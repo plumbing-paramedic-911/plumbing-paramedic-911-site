@@ -108,7 +108,7 @@ FOOTER_HTML = """\
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px"><svg width="36" height="36" viewBox="0 0 42 42" fill="none" aria-hidden="true"><polygon points="21,1 27,8 36,8 36,17 42,21 36,25 36,34 27,34 21,41 15,34 6,34 6,25 0,21 6,17 6,8 15,8" fill="#1565C0"/><rect x="18" y="10" width="6" height="22" rx="1.5" fill="white"/><rect x="10" y="18" width="22" height="6" rx="1.5" fill="white"/></svg><strong style="color:white;font-family:var(--ff-head);font-size:1.05rem">PLUMBING PARAMEDIC 911</strong></div>
-        <p class="footer-brand-desc">SC Master Plumber serving Abbeville, Greenwood, Anderson &amp; Upstate South Carolina since 2015. In the trade since 1996. 24/7 emergency dispatch, upfront flat-rate pricing, 2-year warranty on all work.</p>
+        <p class="footer-brand-desc">SC Master Plumber serving Abbeville, Greenwood, Anderson &amp; Upstate South Carolina since 2015. In the trade since 1996. 24/7 emergency dispatch, upfront flat-rate pricing and job-specific written warranty terms.</p>
         <div class="footer-phone"><a href="tel:+18644468911">📞 (864) 446-8911</a></div>
         <div class="footer-tagline">When emergencies happen, we respond.</div>
         <address class="footer-addr">13 Callaway Dr<br>Abbeville, SC 29620<br><a href="mailto:plumbingparamedic911@gmail.com" style="color:rgba(255,255,255,.6)">plumbingparamedic911@gmail.com</a></address>
@@ -350,8 +350,8 @@ SERVICES = {
         "og": "/images/og/drain-cleaning-1200x630.jpg",
         "body": """
 <h3>What we clear, and how</h3>
-<p>A clogged drain is a symptom. Hair and soap film build up in shower drains. Grease and food waste line kitchen drains. Wipes and "flushable" products absolutely do not flush — they catch on every pipe joint in your main line. Tree roots find old clay sewer lines from the outside in. Our job is figuring out which of those is causing your specific problem and clearing it without making it worse.</p>
-<p>For most household drains — sinks, tubs, showers, toilets — a hand or power auger ("snake") clears the obstruction in 15 to 30 minutes. For a main sewer line, we typically pull a heavier machine. For lines that re-clog repeatedly, hydro jetting (high-pressure water) scrubs the inside of the pipe back to its original diameter and is the only thing that truly clears grease buildup or root intrusion.</p>
+<p>Where the water backs up helps us narrow down the problem. Hair and soap film build up in shower drains. Grease and food waste line kitchen drains. Wipes and "flushable" products absolutely do not flush — they catch on every pipe joint in your main line. Tree roots find old clay sewer lines from the outside in. Our job is figuring out which of those is causing your specific problem and clearing it without making it worse.</p>
+<p>For many household drains — sinks, tubs, showers, toilets — a hand or power auger ("snake") can clear a local obstruction. For a main sewer line, we typically pull a heavier machine. For lines that re-clog repeatedly, hydro jetting (high-pressure water) scrubs the inside of the pipe back to its original diameter and is the only thing that truly clears grease buildup or root intrusion.</p>
 <h3>When to call a plumber instead of pouring a chemical</h3>
 <ul>
   <li>If a chemical drain cleaner didn't fix it the first time, stop — repeated chemicals corrode old galvanized and cast-iron pipes from the inside</li>
@@ -441,8 +441,8 @@ SERVICES = {
   <li>Pilot light won't stay lit (thermocouple — usually repairable)</li>
   <li>Heater is older than 10 years</li>
 </ul>
-<h3>What this won't cost you</h3>
-<p>Diagnostic is included in the repair price. No separate "trip fee" added on after. The quoted price is the final price. If your install requires a new gas line, vent, or electrical circuit, we'll tell you in writing before we start — never as a surprise on the invoice.</p>
+<h3>How our diagnosis and written price work</h3>
+<p>The service / diagnostic call is $79 Monday–Friday 9 AM–5 PM, $99 after hours and weekends, and $158 after midnight or on holidays. Repairs and installations are priced separately. After checking the heater, we explain the problem and provide a written repair or replacement quote for approval. Gas-line, venting, access or electrical changes are discussed before additional work begins.</p>
 """,
         "faqs": [
             ("How much does it cost to replace a water heater in Abbeville SC?",
@@ -581,11 +581,11 @@ SERVICES = {
 <p>Two basic types: submersible (the pump is at the bottom of the well, underwater) and jet (the pump is on the surface, suction-pulling water up). Most Upstate SC wells drilled in the last 30 years are submersible — they last longer and push water from any depth. Older shallow wells (under 25 feet) often have jet pumps. The repair cost and process is different for each; we identify which you have on arrival.</p>
 <h3>Common well-water problems we fix</h3>
 <ul>
-  <li><strong>No water at any tap</strong> — pump has failed, pressure switch is bad, breaker is tripped, or pressure tank is waterlogged. We diagnose in under 30 minutes.</li>
-  <li><strong>Water pressure too low</strong> — pressure switch set wrong, bladder in pressure tank failed, or pump worn. Cheap fix in most cases.</li>
+  <li><strong>No water at any tap</strong> — pump has failed, pressure switch is bad, breaker is tripped, or pressure tank is waterlogged. We check the power supply, pressure switch, tank pressure and pump performance to narrow down the cause before recommending a repair.</li>
+  <li><strong>Water pressure too low</strong> — pressure switch set wrong, bladder in pressure tank failed, or pump worn. A switch adjustment may be simple; a failed tank or pump can cost more. We test before quoting.</li>
   <li><strong>Pump runs constantly</strong> — leak somewhere on the system, check valve failed, or pressure tank lost its air charge. Cycling like this kills pumps in months.</li>
   <li><strong>Air spitting from faucets</strong> — drawing air into the system, usually from a low water table or a leaking suction line on jet pumps.</li>
-  <li><strong>Dirty, cloudy, or sandy water</strong> — well casing may be silting in, or you need a sediment filter. We can test the water and recommend filtration.</li>
+  <li><strong>Dirty, cloudy, or sandy water</strong> — sediment may come from the well, pump disturbance, or household piping. We investigate the source and discuss testing before suggesting a filter.</li>
   <li><strong>Iron or sulfur (rotten egg) smell</strong> — common in Upstate SC well water; treatable with appropriate filtration or aeration.</li>
 </ul>
 <h3>What's included in a pump replacement</h3>
@@ -834,9 +834,9 @@ SERVICES = {
         "price_note": "Basic softener install from $899. Softener + filtration combo from $1,800. Well-water treatment systems quoted on-site.",
         "og": "/images/og/water-filtration-1200x630.jpg",
         "body": """
-<h3>Why your water matters</h3>
-<p>Greenwood's municipal water is moderately hard — we replace water heater elements there twice as often as in Abbeville. Hard water also shortens the life of dishwashers, washing machines, and ice makers by coating their internal parts with mineral scale. On private wells across Abbeville, McCormick, and Laurens counties, we see iron staining, sulfur smell, sediment, and low pH — all fixable with the right filtration.</p>
-<p>A whole-house system treats water at the point of entry so every tap, shower, and appliance in your home gets clean, softened water. No more white film on shower doors, no more scale in the coffee maker, and your water heater lasts years longer.</p>
+<h3>Start with the symptoms and a water test</h3>
+<p>Scale on a showerhead, orange staining in a sink, sulfur odor or sediment in a faucet can come from different water-quality problems. Municipal water and individual wells are not interchangeable: hardness, iron, pH and other conditions should be tested at the property before selecting equipment.</p>
+<p>A whole-house treatment system can address specific concerns at the point where water enters the home. A softener targets hardness; sediment and iron may need different equipment. We'll explain test results, maintenance and installation requirements before recommending a system.</p>
 <h3>What we install and service</h3>
 <ul>
   <li><strong>Whole-house water softener</strong> — removes calcium and magnesium (hardness) from city or well water, protecting fixtures and appliances</li>
@@ -1666,7 +1666,7 @@ def render_services_hub():
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">{breadcrumb_html(breadcrumb_items)}</nav>
       <h1 class="speakable-headline">Plumbing Services in Abbeville &amp; Upstate SC</h1>
-      <p class="speakable-summary">Every plumbing service homes and businesses need — handled by an SC Master Plumber with 30 years in the trade. Flat-rate pricing, 24/7 dispatch, 2-year warranty.</p>
+      <p class="speakable-summary">Need drain cleaning, a water heater repaired, a well pump diagnosed, or a leaking pipe fixed? Choose a service below to see what the visit involves, common causes, and our upfront pricing process.</p>
     </div>
   </section>
   <section class="section">
@@ -1680,7 +1680,7 @@ def render_services_hub():
     <div class="container" style="text-align:center;max-width:680px">
       <span class="label">Not sure which service you need?</span>
       <h2>Call us and describe what you're seeing.</h2>
-      <p class="lead" style="margin:14px auto 24px">We'll diagnose over the phone in most cases and give you a flat-rate quote range before we even leave the shop.</p>
+      <p class="lead" style="margin:14px auto 24px">Tell us which fixtures are affected, when the problem started, and whether water is still running. We'll explain the next step and the service-call price; a technician will confirm the repair quote after diagnosis.</p>
       <a href="tel:+18644468911" class="btn btn-green btn-lg speakable-phone">📞 (864) 446-8911</a>
     </div>
   </section>
