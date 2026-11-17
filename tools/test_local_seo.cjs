@@ -105,7 +105,7 @@ test('the pricing hub is not scoped to one city',()=>{
     'the pricing hub meta description still narrows the page to Abbeville');
 });
 
-test('every city page carries the business, with the real NAP',()=>{
+test('every city page carries the service-area business without publishing a residential street',()=>{
   for(const city of SCHEMA_CITIES){
     const nodes=graphOf(`service-areas/${city}/index.html`);
     const lb=nodes.find(n=>[].concat(n['@type']||[]).includes('LocalBusiness'));
@@ -113,12 +113,13 @@ test('every city page carries the business, with the real NAP',()=>{
     assert.ok([].concat(lb['@type']).includes('Plumber'),`${city}: LocalBusiness is not also a Plumber`);
     assert.equal(lb.name,NAP.name,`${city}: business name`);
     assert.equal(lb.telephone,NAP.telephone,`${city}: telephone`);
-    assert.equal(lb.address.streetAddress,NAP.streetAddress,`${city}: street`);
+    assert.equal(lb.address.streetAddress,undefined,`${city}: residential street should not be published`);
     assert.equal(lb.address.addressLocality,NAP.addressLocality,`${city}: locality`);
     assert.equal(lb.address.addressRegion,NAP.addressRegion,`${city}: region`);
     assert.equal(lb.address.postalCode,NAP.postalCode,`${city}: postal code`);
-    assert.ok(lb.geo&&lb.geo.latitude&&lb.geo.longitude,`${city}: missing geo coordinates`);
+    assert.equal(lb.geo,undefined,`${city}: exact residential coordinates should not be published`);
     assert.ok(lb.openingHoursSpecification,`${city}: missing opening hours`);
+    assert.ok(!read(`service-areas/${city}/index.html`).includes(NAP.streetAddress),`${city}: private street address leaked into the public page`);
   }
 });
 
