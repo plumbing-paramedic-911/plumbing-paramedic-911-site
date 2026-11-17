@@ -325,6 +325,7 @@ def main() -> None:
     super_site.generate_guides(build)
     pricing_policy.apply()
     load_module(LOCAL_AI_CLEANUP_FILE, "pp911_local_ai_cleanup").apply()
+    load_module(ROOT / "tools" / "address_privacy_pricebook.py", "pp911_privacy_pricebook").apply()
     ensure_sitemap()
     super_site.ensure_metadata()
     super_site.validate_migration()
