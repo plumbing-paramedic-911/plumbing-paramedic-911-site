@@ -1132,6 +1132,7 @@ CITIES = {
   <li><strong><a href="/water-heater-repair-anderson-sc/">Water heater repair and replacement</a></strong> — tank and tankless</li>
   <li><strong><a href="/services/leak-detection/">Leak detection</a></strong> — acoustic, thermal and slab</li>
   <li><strong><a href="/services/well-pump-repair/">Well pumps and pressure tanks</a></strong> — for rural Anderson County properties</li>
+  <li><strong><a href="/services/water-filtration-softener-systems/">Water filtration and softeners in Anderson</a></strong> — first identify the utility or private well, test the specific water concern, then choose carbon, sediment filtration, softening or other appropriate equipment</li>
   <li><strong><a href="/services/backflow-prevention-testing/">Backflow testing</a></strong> — annual compliance for Anderson Regional Joint Water System</li>
   <li><strong><a href="/services/commercial-plumbing/">Commercial plumbing</a></strong> — restaurants, offices, retail and multi-family</li>
 </ul>
@@ -1144,7 +1145,7 @@ CITIES = {
   <li>SC Master Plumber on every job — Eric Callaway personally on most calls</li>
   <li>Flat-rate pricing, published in advance, with no distance markup to Anderson</li>
   <li>24/7 emergency dispatch, including nights, weekends and holidays</li>
-  <li>2-year warranty on all parts and labor</li>
+  <li>Warranty terms documented for the specific work and equipment</li>
   <li>In-house financing on larger jobs</li>
   <li>BBB A+ rating</li>
 </ul>
@@ -1161,7 +1162,9 @@ CITIES = {
             ("Why does my Anderson drain keep clogging in the same spot?",
              "In mid-century Anderson homes that is almost always internal scale in an original cast-iron stack. The pipe's usable diameter has shrunk, so it re-blocks quickly after each clearing. A $395 camera inspection shows whether hydro jetting will buy you years or whether that section needs replacing."),
             ("Who treats the water in Anderson, and does it affect my plumbing?",
-             "Municipal customers are generally served by Anderson Regional Joint Water System; properties outside the lines are on private wells or co-op water. Well systems are the ones that bring us the most water-quality work — iron, sulfur and sediment — and we install filtration and softening for them."),
+             "Anderson addresses may be supplied by different water utilities or by private wells. Check the name on the bill or test your individual well; don't assume one city-wide water report or one treatment system fits every address. We explain filtration and water softening options after checking the actual water."),
+            ("Do you install water softeners and filters in Anderson?",
+             "Yes. We offer whole-house water filtration, sediment filters, softeners, iron and sulfur treatment and under-sink systems in Anderson. We first check whether the issue is measurable hardness, taste/odor, sediment or a specific contaminant. A softener is not a substitute for a filter and may be unnecessary on soft water."),
             ("Can you get to Anderson overnight for an emergency?",
              "Yes. Dispatch runs 24/7 and we are just a call away. The after-midnight and holiday service-call rate is $158, posted before you book."),
         ],
