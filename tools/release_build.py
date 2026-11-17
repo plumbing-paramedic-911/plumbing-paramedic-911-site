@@ -25,6 +25,7 @@ BUILD_FILE = ROOT / "tools" / "build.py"
 MONEY_FILE = ROOT / "tools" / "local_money_pages.py"
 PRICING_POLICY_FILE = ROOT / "tools" / "current_pricing_overrides.py"
 SUPER_SITE_FILE = ROOT / "tools" / "super_site_content.py"
+LOCAL_AI_CLEANUP_FILE = ROOT / "tools" / "local_ai_visibility_cleanup.py"
 BASE_URL = "https://plumbingparamedic911.com"
 
 TITLE_OVERRIDES = {
@@ -323,6 +324,7 @@ def main() -> None:
     inject_homepage_local_directory(money)
     super_site.generate_guides(build)
     pricing_policy.apply()
+    load_module(LOCAL_AI_CLEANUP_FILE, "pp911_local_ai_cleanup").apply()
     ensure_sitemap()
     super_site.ensure_metadata()
     super_site.validate_migration()
