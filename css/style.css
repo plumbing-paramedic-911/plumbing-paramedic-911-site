@@ -209,7 +209,7 @@ nav.site-nav{background:var(--white);box-shadow:var(--sh);position:sticky;top:0;
 .city-info-val{font-family:var(--ff-head);font-weight:800;font-size:1rem;color:var(--ink)}
 
 .service-hero{padding:72px 0 60px;background:linear-gradient(135deg,#0a1e50 0%,var(--blue-dk) 100%);color:var(--white);position:relative;overflow:hidden}
-.service-hero::before{content:'';position:absolute;right:-100px;top:-100px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.03)}
+.service-hero::before{content:'';position:absolute;right:-100px;top:-100px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
 .service-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(67,160,71,.2);border:1px solid var(--green);padding:6px 14px;border-radius:20px;font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green-lt);margin-bottom:16px}
 
 .faq-item{border:1.5px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:12px;background:var(--white)}
