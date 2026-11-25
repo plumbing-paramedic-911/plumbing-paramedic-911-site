@@ -346,3 +346,25 @@ footer h4{font-family:var(--ff-head);font-weight:800;font-size:.88rem;letter-spa
 .link-list a{display:block;padding:9px 0;color:var(--blue,#1565C0);text-decoration:none;font-weight:600;font-size:.97rem}
 .link-list a:hover,.link-list a:focus{text-decoration:underline}
 .link-list a::after{content:" \2192";color:var(--ink3,#6b7280);font-weight:400}
+
+.customer-paths{margin-top:24px}
+.customer-paths .nav-card p{font-size:1rem;margin-top:6px}
+.customer-paths .nav-card:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.customer-paths-reviews,.well-checklist-link{margin-top:20px}
+.well-help-grid{align-items:start}
+.well-help-grid h2{margin-bottom:14px}
+.well-help-grid ol{padding-left:1.4rem}
+.well-help-grid li,.well-help-grid p{margin-bottom:12px}
+#request-well-service{scroll-margin-top:8rem}
+#print-well-checklist[hidden]{display:none}
+
+@media print {
+  body[data-page="well-no-water"] > :not(main),
+  #well-help .service-hero,
+  #request-well-service,
+  #well-checklist .well-checklist-link,
+  #print-well-checklist{display:none!important}
+  #well-help .section-sm{padding:0}
+  #well-help .well-help-grid{display:block;width:100%;max-width:none;margin:0;padding:0}
+  #well-checklist{border:0;box-shadow:none}
+}
