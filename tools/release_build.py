@@ -203,6 +203,7 @@ def ensure_sitemap() -> None:
         "https://plumbingparamedic911.com/service-areas/savannah-lakes-village-sc/": "2026-11-13",
         "https://plumbingparamedic911.com/specials/whole-home-repipe/": "2026-11-13",
         "https://plumbingparamedic911.com/specials/winterization/": "2026-11-12",
+        "https://plumbingparamedic911.com/no-water-from-well/": "2026-11-25",
     }
     for url, lastmod in urls.items():
         if url not in text: text = text.replace("</urlset>", f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>\n</urlset>")
@@ -323,6 +324,7 @@ def main() -> None:
     money.generate(build)
     inject_homepage_local_directory(money)
     super_site.generate_guides(build)
+    load_module(ROOT / "tools" / "customer_paths.py", "pp911_customer_paths").generate(build)
     pricing_policy.apply()
     load_module(LOCAL_AI_CLEANUP_FILE, "pp911_local_ai_cleanup").apply()
     load_module(ROOT / "tools" / "address_privacy_pricebook.py", "pp911_privacy_pricebook").apply()

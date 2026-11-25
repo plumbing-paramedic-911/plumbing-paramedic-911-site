@@ -361,10 +361,10 @@ gtag('config', 'G-54J49X5XJP');
           </div>
         </div>
         <div class="hero-card">
-          <h3>Get a Fast Quote</h3>
-          <p>We are just a call away during business hours. For emergencies, call now.</p>
+          <h3>Request Plumbing Service</h3>
+          <p>Tell us what’s happening and the office will call to confirm availability. For emergencies, call us directly.</p>
           <form class="lead-form" id="heroForm" method="post" action="#">
-            <div class="form-success">✅ Got it! We'll call you back shortly. For emergencies: <a href="tel:+18644468911" style="color:var(--green-dk)">(864) 446-8911</a></div>
+            <div class="form-success" role="status">Request received. The office will contact you to confirm availability. For emergencies, call <a href="tel:+18644468911" style="color:var(--green-dk)">(864) 446-8911</a>.</div>
             <div class="form-row-2">
               <div class="form-field"><label for="hn">Name</label><input id="hn" name="name" type="text" placeholder="John Smith" autocomplete="name"></div>
               <div class="form-field"><label for="hp">Phone *</label><input id="hp" name="phone" type="tel" required placeholder="(864) 000-0000" autocomplete="tel"></div>
@@ -401,6 +401,39 @@ gtag('config', 'G-54J49X5XJP');
       </div>
     </div>
   </aside>
+
+  <section class="section-sm bg-alt" aria-labelledby="home-start-heading">
+    <div class="container">
+      <h2 id="home-start-heading">What can we help you with?</h2>
+      <div class="grid-3 customer-paths">
+        <a class="nav-card" href="/no-water-from-well/" data-customer-path="well_no_water">
+          <h3>No water from your well?</h3>
+          <p>Use the no-water checklist and request well pump service.</p>
+        </a>
+        <a class="nav-card" href="/services/water-heater-repair-replacement/" data-customer-path="water_heater">
+          <h3>No hot water?</h3>
+          <p>See water heater repair and replacement options.</p>
+        </a>
+        <a class="nav-card" href="/services/drain-cleaning/" data-customer-path="drain_cleaning">
+          <h3>Drains backing up?</h3>
+          <p>Find drain cleaning and main-line service.</p>
+        </a>
+        <a class="nav-card" href="/pricing/" data-customer-path="pricing">
+          <h3>Checking prices?</h3>
+          <p>See service-call fees and plan your repair budget.</p>
+        </a>
+        <a class="nav-card" href="/guides/" data-customer-path="guides">
+          <h3>Want to understand your plumbing?</h3>
+          <p>Explore homeowner guides on wells, drains, and water heaters.</p>
+        </a>
+        <a class="nav-card" href="/membership/" data-customer-path="membership">
+          <h3>Planning regular maintenance?</h3>
+          <p>See what the annual plumbing inspection and membership include.</p>
+        </a>
+      </div>
+      <p class="customer-paths-reviews"><a href="/reviews/" data-customer-path="reviews">Read customer reviews</a></p>
+    </div>
+  </section>
 
   <section class="section" aria-labelledby="local-plumbing-heading">
     <div class="container" style="max-width:900px">
@@ -720,5 +753,6 @@ gtag('config', 'G-54J49X5XJP');
 </footer>
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 <script src="/js/app.js" defer></script>
+<script src="/js/customer-paths.js" defer></script>
 </body>
 </html>
