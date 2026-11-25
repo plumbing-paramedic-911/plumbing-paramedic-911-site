@@ -351,7 +351,9 @@ footer h4{font-family:var(--ff-head);font-weight:800;font-size:.88rem;letter-spa
 .customer-paths .nav-card p{font-size:1rem;margin-top:6px}
 .customer-paths .nav-card:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .customer-paths-reviews,.well-checklist-link{margin-top:20px}
+.customer-paths-reviews a,.well-checklist-link a,.well-help-grid p a{color:var(--blue-dk);text-decoration:underline}
 .well-help-grid{align-items:start}
+.well-help-grid > .card{min-width:0}
 .well-help-grid h2{margin-bottom:14px}
 .well-help-grid ol{padding-left:1.4rem}
 .well-help-grid li,.well-help-grid p{margin-bottom:12px}
